@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First Paycheck — Compound Interest Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="logo">First Paycheck</span>
+    <nav class="nav-capsule">
+      <a href="#" class="nav-link active">Calculator</a>
+      <a href="#" class="nav-link">Recommend</a>
+      <a href="#" class="nav-link">Jargon</a>
+      <a href="#" class="nav-link">Credit</a>
+      <a href="#" class="nav-link">Family Split</a>
+    </nav>
+    <button class="lang-toggle" id="langToggle">
+      <span class="lang-option active" data-lang="en">EN</span>
+      <span class="lang-divider">|</span>
+      <span class="lang-option" data-lang="vi">VI</span>
+    </button>
+  </div>
+</header>
+
+<main class="page">
+  <section class="hero">
+    <h1 class="hero-title">
+      See your money grow.
+      <span class="hero-subtitle-stack">
+        <span class="en">Watch your savings compound over time.</span>
+        <span class="vi">Theo dõi tiền tiết kiệm của bạn tăng theo thời gian.</span>
+      </span>
+    </h1>
+    <button class="info-btn" id="infoBtn" aria-haspopup="dialog" aria-controls="infoModal">
+      <span aria-hidden="true">ⓘ</span>
+      <span class="en">How compound interest works</span>
+      <span class="vi">Lãi suất kép hoạt động như thế nào</span>
+    </button>
+  </section>
+
+  <section class="calculator">
+    <div class="card inputs-card">
+      <h2 class="card-title">Your inputs</h2>
+
+      <div class="field">
+        <label class="field-label">
+          <span class="en">Starting amount</span>
+          <span class="vi">Số tiền ban đầu</span>
+        </label>
+        <div class="input-wrap">
+          <span class="prefix">$</span>
+          <input type="number" id="initial" value="500" min="0" step="50">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">
+          <span class="en">Monthly contribution</span>
+          <span class="vi">Đóng góp hàng tháng</span>
+        </label>
+        <div class="input-wrap">
+          <span class="prefix">$</span>
+          <input type="number" id="monthly" value="100" min="0" step="10">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">
+          <span class="en">Annual interest rate</span>
+          <span class="vi">Lãi suất hàng năm</span>
+        </label>
+        <div class="input-wrap">
+          <input type="number" id="rate" value="7" min="0" max="30" step="0.1">
+          <span class="suffix">%</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">
+          <span class="en">Time horizon</span>
+          <span class="vi">Khung thời gian</span>
+        </label>
+        <div class="input-wrap">
+          <input type="number" id="years" value="10" min="1" max="50" step="1">
+          <span class="suffix">years</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card graph-card">
+      <div class="graph-card-header">
+        <h2 class="card-title">Projected growth</h2>
+        <div class="result-stack">
+          <span class="result-label">
+            <span class="en">Final balance</span>
+            <span class="vi">Số dư cuối cùng</span>
+          </span>
+          <span class="result-value" id="finalBalance">$0</span>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="growthChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-row">
+    <div class="card stat-card" data-watermark="$">
+      <span class="field-label">
+        <span class="en">Total contributed</span>
+        <span class="vi">Tổng số tiền đã đóng góp</span>
+      </span>
+      <span class="stat-value" id="statContributed">$0</span>
+    </div>
+    <div class="card stat-card" data-watermark="%">
+      <span class="field-label">
+        <span class="en">Interest earned</span>
+        <span class="vi">Lãi đã kiếm được</span>
+      </span>
+      <span class="stat-value accent" id="statInterest">$0</span>
+    </div>
+    <div class="card stat-card" data-watermark="&times;">
+      <span class="field-label">
+        <span class="en">Growth multiplier</span>
+        <span class="vi">Hệ số tăng trưởng</span>
+      </span>
+      <span class="stat-value" id="statMultiplier">0×</span>
+    </div>
+  </section>
+
+  <section class="card breakdown-card">
+    <h2 class="card-title">
+      <span class="en">Year-by-year breakdown</span>
+      <span class="vi">Phân tích theo từng năm</span>
+    </h2>
+    <div class="breakdown-table-wrap">
+      <table class="breakdown-table">
+        <thead>
+          <tr>
+            <th><span class="en">Year</span><span class="vi">Năm</span></th>
+            <th><span class="en">Contributed</span><span class="vi">Đã đóng góp</span></th>
+            <th><span class="en">Interest earned</span><span class="vi">Lãi đã kiếm được</span></th>
+            <th><span class="en">Balance</span><span class="vi">Số dư</span></th>
+          </tr>
+        </thead>
+        <tbody id="breakdownBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="disclaimer">
+    <span class="en">Educational tool only — not licensed financial advice.</span>
+    <span class="vi">Chỉ là công cụ giáo dục — không phải lời khuyên tài chính được cấp phép.</span>
+  </p>
+</main>
+
+<div class="modal-backdrop" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle" hidden>
+  <div class="modal-card">
+    <button class="modal-close" id="infoModalClose" aria-label="Close">&times;</button>
+    <h2 class="modal-title" id="infoModalTitle">
+      <span class="en">How compound interest works</span>
+      <span class="vi">Lãi suất kép hoạt động như thế nào</span>
+    </h2>
+    <p class="modal-text">
+      <span class="en">Compound interest means you earn returns not just on the money you put in, but on the interest that money has already earned. Each year's gains get added to your balance, then start earning their own returns the next year — so growth speeds up the longer you leave it.</span>
+      <span class="vi">Lãi suất kép có nghĩa là bạn kiếm được lợi nhuận không chỉ trên số tiền bạn bỏ vào, mà còn trên phần lãi mà số tiền đó đã kiếm được. Lợi nhuận mỗi năm sẽ được cộng vào số dư của bạn, sau đó tự nó tiếp tục sinh lãi vào năm sau — vì vậy mức tăng trưởng sẽ nhanh hơn theo thời gian.</span>
+    </p>
+    <p class="modal-text">
+      <span class="en">That's why starting early matters more than starting big: time is doing most of the work in the chart above.</span>
+      <span class="vi">Đó là lý do bắt đầu sớm quan trọng hơn bắt đầu với số tiền lớn: thời gian là yếu tố làm nên phần lớn sự tăng trưởng trong biểu đồ trên.</span>
+    </p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="js/calculator.js"></script>
+</body>
+</html>

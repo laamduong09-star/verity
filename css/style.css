@@ -1,0 +1,608 @@
+:root {
+  --paper: #e7e6e2;
+  --card: #faf9f7;
+  --ink: #11151f;
+  --marigold: #e3962a;
+  --marigold-soft: rgba(227, 150, 42, 0.14);
+  --teal: #0b5a55;
+  --slate: #5d5f68;
+  --border: #d5d3cd;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  position: relative;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-2%, 3%) scale(1.05); }
+}
+
+@keyframes countPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- Decorative background grid ---------- */
+/* Faint graph-paper grid across the full canvas, reinforcing the
+   analytical/mathematical feel instead of literal finance icons. Fixed,
+   behind everything, fades out toward the edges so it reads as atmosphere
+   rather than a flat texture. */
+.bg-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--ink) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--ink) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.05;
+  mask-image: radial-gradient(ellipse 90% 1400px at 50% 10%, black 50%, transparent 100%);
+}
+
+/* ---------- Cursor glow ---------- */
+/* A soft light that follows the pointer, fixed to the viewport (not the
+   page) so it stays under the cursor while scrolling. Position is driven
+   by JS via --mx/--my; purely decorative, never blocks clicks. */
+.cursor-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 260px at var(--mx, 50%) var(--my, 50%),
+    rgba(47, 90, 191, 0.1),
+    transparent 100%
+  );
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.cursor-glow.active {
+  opacity: 1;
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+  padding: 20px 32px 0;
+}
+
+.topbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+
+.nav-capsule {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 200px;
+  padding: 6px;
+  display: flex;
+  gap: 2px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--slate);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 200px;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  display: inline-block;
+}
+
+.nav-link.active {
+  background: var(--ink);
+  color: #fff;
+}
+
+.nav-link:hover:not(.active) {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.nav-link:active {
+  transform: scale(0.96);
+}
+
+.lang-toggle {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 200px;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.lang-toggle:hover {
+  border-color: #2f5abf;
+  box-shadow: 0 0 0 3px rgba(47, 90, 191, 0.1);
+}
+
+.lang-toggle:active {
+  transform: scale(0.95);
+}
+
+.lang-option { color: var(--slate); transition: color 0.15s ease; }
+.lang-option.active { color: var(--ink); }
+.lang-divider { color: var(--border); }
+
+/* ---------- Hero ---------- */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px 64px;
+}
+
+.hero {
+  position: relative;
+  padding: 56px 0 40px;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: -80px;
+  width: 460px;
+  height: 460px;
+  background: radial-gradient(circle at 40% 40%, rgba(47, 90, 191, 0.18), transparent 65%);
+  filter: blur(40px);
+  z-index: -1;
+  animation: drift 14s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0;
+  animation: fadeUp 0.6s ease-out both;
+}
+
+.hero-subtitle-stack {
+  display: block;
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+.hero-subtitle-stack .en,
+.hero-subtitle-stack .vi {
+  color: var(--slate);
+}
+
+/* ---------- Info button + modal ---------- */
+.info-btn {
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 200px;
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.info-btn span[aria-hidden] {
+  font-size: 14px;
+  color: var(--teal);
+}
+
+.info-btn:hover {
+  border-color: var(--teal);
+  color: var(--ink);
+}
+
+.info-btn:active {
+  transform: scale(0.97);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 21, 31, 0.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+  animation: fadeUp 0.2s ease-out both;
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+.modal-card {
+  position: relative;
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  max-width: 520px;
+  width: 100%;
+  padding: 32px;
+  box-shadow: 0 24px 48px rgba(17, 21, 31, 0.18);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--paper);
+  color: var(--slate);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.modal-close:hover {
+  color: var(--ink);
+  border-color: var(--teal);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  padding-right: 24px;
+}
+
+.modal-text {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--slate);
+  margin: 0 0 14px;
+}
+
+.modal-text:last-child {
+  margin-bottom: 0;
+}
+
+.hero-subtitle-stack .en {
+  display: block;
+}
+
+/* ---------- Calculator layout ---------- */
+.calculator {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 800px) {
+  .calculator { grid-template-columns: 1fr; }
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 1px 2px rgba(28, 35, 48, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  animation: fadeUp 0.6s ease-out both;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #2348ad;
+  opacity: 0.5;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #2348ad;
+  box-shadow: 0 12px 24px rgba(28, 35, 48, 0.08);
+}
+
+.inputs-card { animation-delay: 0.05s; }
+.graph-card { animation-delay: 0.15s; }
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 20px;
+}
+
+/* ---------- Inputs ---------- */
+.field {
+  margin-bottom: 20px;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.field-label .en,
+.field-label .vi {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.field-label .en {
+  display: block;
+}
+
+.input-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0 14px;
+  background: var(--paper);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.input-wrap:hover {
+  border-color: #c9cfd6;
+}
+
+.input-wrap:focus-within {
+  border-color: #2f5abf;
+  background: var(--card);
+  box-shadow: 0 0 0 3px rgba(47, 90, 191, 0.14);
+}
+
+.input-wrap input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  padding: 11px 6px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.prefix, .suffix {
+  color: var(--slate);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ---------- Graph card ---------- */
+.graph-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.graph-card-header .card-title { margin: 0; }
+
+.result-stack {
+  text-align: right;
+}
+
+.result-label {
+  display: block;
+}
+
+.result-label .en,
+.result-label .vi {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--slate);
+}
+
+.result-label .en {
+  display: block;
+}
+
+.result-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--teal);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.result-value.pop {
+  animation: countPop 0.3s ease-out;
+}
+
+.chart-wrap {
+  margin-top: 16px;
+  height: 320px;
+}
+
+/* ---------- Stats row ---------- */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+@media (max-width: 800px) {
+  .stats-row { grid-template-columns: 1fr; }
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 28px;
+}
+
+.stat-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-value.accent {
+  color: var(--teal);
+}
+
+.stat-card::after {
+  content: attr(data-watermark);
+  position: absolute;
+  bottom: -18px;
+  right: -6px;
+  font-family: var(--font-display);
+  font-size: 96px;
+  font-weight: 700;
+  color: var(--ink);
+  opacity: 0.05;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* ---------- Breakdown table ---------- */
+.breakdown-card {
+  margin-top: 24px;
+}
+
+.breakdown-table-wrap {
+  max-height: 280px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.breakdown-table th,
+.breakdown-table td {
+  padding: 10px 16px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.breakdown-table th:first-child,
+.breakdown-table td:first-child {
+  text-align: left;
+}
+
+.breakdown-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--slate);
+}
+
+.breakdown-table thead th .en {
+  display: block;
+}
+
+.breakdown-table tbody tr:not(:last-child) td {
+  border-bottom: 1px solid var(--border);
+}
+
+.breakdown-table tbody td {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ---------- Disclaimer ---------- */
+.disclaimer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+.disclaimer .en {
+  display: block;
+}
+
+/* ---------- Language toggle state ---------- */
+/* Default: only English is shown. Toggling to VI hides English and reveals
+   the Vietnamese line in its place. Each .vi rule above already matches its
+   sibling .en's font-size/weight/color, so the swap only changes the text. */
+.vi {
+  display: none;
+}
+
+body.lang-vi-primary .en {
+  display: none;
+}
+
+body.lang-vi-primary .vi {
+  display: block;
+}
