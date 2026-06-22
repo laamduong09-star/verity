@@ -12,7 +12,8 @@
 <body>
 
 <div class="bg-grid" aria-hidden="true"></div>
-<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
 <header class="topbar">
   <div class="topbar-inner">
@@ -33,7 +34,20 @@
 </header>
 
 <main class="page">
-  <section class="hero">
+  <section class="hero" id="heroSection">
+    <div class="hero-decor" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span>
+    </div>
     <h1 class="hero-title">
       See your money grow.
       <span class="hero-subtitle-stack">
@@ -115,21 +129,42 @@
   </section>
 
   <section class="stats-row">
-    <div class="card stat-card" data-watermark="$">
+    <div class="card stat-card">
+      <span class="stat-icon icon-blue" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v11"/>
+          <path d="M7.5 10.5 12 15l4.5-4.5"/>
+          <rect x="5" y="18" width="14" height="3" rx="1.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </span>
       <span class="field-label">
         <span class="en">Total contributed</span>
         <span class="vi">Tổng số tiền đã đóng góp</span>
       </span>
       <span class="stat-value" id="statContributed">$0</span>
     </div>
-    <div class="card stat-card" data-watermark="%">
+    <div class="card stat-card">
+      <span class="stat-icon icon-teal" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <rect x="3" y="13" width="4" height="8" rx="1.3"/>
+          <rect x="10" y="9" width="4" height="12" rx="1.3"/>
+          <rect x="17" y="5" width="4" height="16" rx="1.3"/>
+        </svg>
+      </span>
       <span class="field-label">
         <span class="en">Interest earned</span>
         <span class="vi">Lãi đã kiếm được</span>
       </span>
       <span class="stat-value accent" id="statInterest">$0</span>
     </div>
-    <div class="card stat-card" data-watermark="&times;">
+    <div class="card stat-card">
+      <span class="stat-icon icon-amber" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <rect x="4" y="4" width="16" height="4.2" rx="2.1"/>
+          <rect x="4" y="9.9" width="16" height="4.2" rx="2.1"/>
+          <rect x="4" y="15.8" width="16" height="4.2" rx="2.1"/>
+        </svg>
+      </span>
       <span class="field-label">
         <span class="en">Growth multiplier</span>
         <span class="vi">Hệ số tăng trưởng</span>
@@ -163,6 +198,7 @@
     <span class="vi">Chỉ là công cụ giáo dục — không phải lời khuyên tài chính được cấp phép.</span>
   </p>
 </main>
+
 
 <div class="modal-backdrop" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle" hidden>
   <div class="modal-card">

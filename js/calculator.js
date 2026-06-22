@@ -38,31 +38,45 @@ function projectGrowth(initial, monthlyContribution, annualRatePercent, years) {
 }
 
 const ctx = document.getElementById('growthChart');
+let chartRows = [];
 
-// Single-accent gradient fill (blue fading to transparent) so the line
-// and fill read as one cohesive color story instead of two competing accents.
-const fillGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 320);
-fillGradient.addColorStop(0, 'rgba(35, 72, 173, 0.4)');
-fillGradient.addColorStop(1, 'rgba(35, 72, 173, 0)');
-
+// Stacked-area chart: "Total interest" stacks on top of "Total principal" so
+// the top edge traces the total balance, while the tooltip still reports
+// each layer's raw (non-cumulative) value as a breakdown.
 const chart = new Chart(ctx, {
   type: 'line',
   data: {
     labels: [],
-    datasets: [{
-      label: 'Projected balance',
-      data: [],
-      borderColor: '#2348ad',
-      backgroundColor: fillGradient,
-      borderWidth: 2.5,
-      pointRadius: 0,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: '#e3962a',
-      pointHoverBorderColor: '#ffffff',
-      pointHoverBorderWidth: 2,
-      fill: true,
-      tension: 0.25,
-    }],
+    datasets: [
+      {
+        label: 'Total principal',
+        data: [],
+        borderColor: '#2348ad',
+        backgroundColor: 'rgba(35, 72, 173, 0.18)',
+        borderWidth: 2,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: '#2348ad',
+        pointHoverBorderColor: '#ffffff',
+        pointHoverBorderWidth: 2,
+        fill: 'origin',
+        tension: 0.15,
+      },
+      {
+        label: 'Total interest',
+        data: [],
+        borderColor: '#0e7a72',
+        backgroundColor: 'rgba(14, 122, 114, 0.18)',
+        borderWidth: 2,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: '#0e7a72',
+        pointHoverBorderColor: '#ffffff',
+        pointHoverBorderWidth: 2,
+        fill: '-1',
+        tension: 0.15,
+      },
+    ],
   },
   options: {
     responsive: true,
@@ -79,7 +93,12 @@ const chart = new Chart(ctx, {
       legend: { display: false },
       tooltip: {
         callbacks: {
-          label: (item) => formatCurrency(item.parsed.y),
+          title: (items) => `Year ${chartRows[items[0].dataIndex]?.year ?? ''}`,
+          beforeBody: (items) => {
+            const row = chartRows[items[0].dataIndex];
+            return row ? `Total balance   ${formatCurrency(row.balance)}` : '';
+          },
+          label: (item) => ` ${item.dataset.label}   ${formatCurrency(item.parsed.y)}`,
         },
       },
     },
@@ -89,6 +108,7 @@ const chart = new Chart(ctx, {
         ticks: { color: '#5d5f68', font: { family: 'Inter', size: 12 } },
       },
       y: {
+        stacked: true,
         grid: { color: '#d5d3cd' },
         ticks: {
           color: '#5d5f68',
@@ -117,8 +137,10 @@ function update() {
   const rows = projectGrowth(initial, monthly, rate, years);
   const final = rows[rows.length - 1];
 
+  chartRows = rows;
   chart.data.labels = rows.map((row) => `Year ${row.year}`);
-  chart.data.datasets[0].data = rows.map((row) => row.balance);
+  chart.data.datasets[0].data = rows.map((row) => row.contributed);
+  chart.data.datasets[1].data = rows.map((row) => row.interest);
   chart.update();
 
   finalBalanceEl.textContent = formatCurrency(final.balance);
@@ -150,16 +172,44 @@ function update() {
 
 update();
 
-// Cursor glow: a soft light that tracks the pointer across the page.
-const cursorGlow = document.getElementById('cursorGlow');
+// Custom cursor: a dot that tracks the pointer closely and a ring that
+// trails slightly looser (lerp-smoothed), expanding over clickable elements.
+const cursorDot = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+const ringPos = { x: mouse.x, y: mouse.y };
+
+function lerp(start, end, factor) {
+  return start + (end - start) * factor;
+}
+
 document.addEventListener('mousemove', (event) => {
-  cursorGlow.style.setProperty('--mx', `${event.clientX}px`);
-  cursorGlow.style.setProperty('--my', `${event.clientY}px`);
-  cursorGlow.classList.add('active');
+  mouse.x = event.clientX;
+  mouse.y = event.clientY;
+  cursorDot.classList.add('active');
+  cursorRing.classList.add('active');
 });
+
 document.addEventListener('mouseleave', () => {
-  cursorGlow.classList.remove('active');
+  cursorDot.classList.remove('active');
+  cursorRing.classList.remove('active');
 });
+
+document.querySelectorAll('a, button, input, .card').forEach((el) => {
+  el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
+});
+
+function animateCursor() {
+  cursorDot.style.transform = `translate(${mouse.x}px, ${mouse.y}px) translate(-50%, -50%)`;
+
+  ringPos.x = lerp(ringPos.x, mouse.x, 0.2);
+  ringPos.y = lerp(ringPos.y, mouse.y, 0.2);
+  cursorRing.style.transform = `translate(${ringPos.x}px, ${ringPos.y}px) translate(-50%, -50%)`;
+
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
 
 // Info modal: explains compound interest, respects whatever language is
 // currently toggled since it reuses the same .en/.vi spans.
