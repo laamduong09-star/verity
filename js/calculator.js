@@ -2,11 +2,34 @@ const initialInput = document.getElementById('initial');
 const monthlyInput = document.getElementById('monthly');
 const rateInput = document.getElementById('rate');
 const yearsInput = document.getElementById('years');
+const initialClampNoteEl = document.getElementById('initialClampNote');
+const monthlyClampNoteEl = document.getElementById('monthlyClampNote');
+const rateClampNoteEl = document.getElementById('rateClampNote');
+const yearsClampNoteEl = document.getElementById('yearsClampNote');
 const finalBalanceEl = document.getElementById('finalBalance');
 const statContributedEl = document.getElementById('statContributed');
 const statInterestEl = document.getElementById('statInterest');
 const statMultiplierEl = document.getElementById('statMultiplier');
 const breakdownBodyEl = document.getElementById('breakdownBody');
+const compareYearsEnEl = document.getElementById('compareYearsEn');
+const compareYearsViEl = document.getElementById('compareYearsVi');
+const compareFillYouEl = document.getElementById('compareFillYou');
+const compareFillHysaEl = document.getElementById('compareFillHysa');
+const compareFillCheckingEl = document.getElementById('compareFillChecking');
+const compareValueYouEl = document.getElementById('compareValueYou');
+const compareValueHysaEl = document.getElementById('compareValueHysa');
+const compareValueCheckingEl = document.getElementById('compareValueChecking');
+const compareGapEnEl = document.getElementById('compareGapEn');
+const compareGapViEl = document.getElementById('compareGapVi');
+const compareBehindEnEl = document.getElementById('compareBehindEn');
+const compareBehindViEl = document.getElementById('compareBehindVi');
+const calloutAheadEl = document.getElementById('calloutAhead');
+const calloutBehindEl = document.getElementById('calloutBehind');
+
+// Reference rates for the two "just saving" alternatives, used only to size
+// the "what compounding buys you" comparison against this plan's growth rate.
+const HYSA_RATE = 4;
+const CHECKING_ACCOUNT_RATE = 0.5;
 
 function formatCurrency(amount) {
   return amount.toLocaleString('en-US', {
@@ -19,8 +42,15 @@ function formatCurrency(amount) {
 // Compound interest with regular monthly contributions, compounded monthly.
 // Returns one row per year: balance, total contributed so far, and the
 // interest earned so far (balance minus what was actually put in).
+//
+// The monthly rate is the geometric (not simple-division) equivalent of the
+// entered annual rate, i.e. (1 + annualRate)^(1/12) - 1. Dividing the annual
+// rate by 12 would compound to an effective annual return higher than what
+// was entered (7% input -> 7.23% effective) since compounding amplifies a
+// nominal rate; the geometric root keeps the entered rate exact.
 function projectGrowth(initial, monthlyContribution, annualRatePercent, years) {
-  const monthlyRate = annualRatePercent / 100 / 12;
+  const annualRate = annualRatePercent / 100;
+  const monthlyRate = Math.pow(1 + annualRate, 1 / 12) - 1;
   const totalMonths = years * 12;
 
   let balance = initial;
@@ -39,6 +69,17 @@ function projectGrowth(initial, monthlyContribution, annualRatePercent, years) {
 
 const ctx = document.getElementById('growthChart');
 let chartRows = [];
+
+// Chart text isn't markup, so it can't use the .en/.vi sibling-span pattern —
+// these strings are picked live from document.body's lang-vi-primary class
+// instead, the same toggle state everything else reads.
+const isViPrimary = () => document.body.classList.contains('lang-vi-primary');
+const CHART_STRINGS = {
+  year: { en: 'Year', vi: 'Năm' },
+  principal: { en: 'Total principal', vi: 'Tổng tiền gốc' },
+  interest: { en: 'Total interest', vi: 'Tổng tiền lãi' },
+  balance: { en: 'Total balance', vi: 'Tổng số dư' },
+};
 
 // Stacked-area chart: "Total interest" stacks on top of "Total principal" so
 // the top edge traces the total balance, while the tooltip still reports
@@ -93,26 +134,34 @@ const chart = new Chart(ctx, {
       legend: { display: false },
       tooltip: {
         callbacks: {
-          title: (items) => `Year ${chartRows[items[0].dataIndex]?.year ?? ''}`,
+          title: (items) => {
+            const lang = isViPrimary() ? 'vi' : 'en';
+            return `${CHART_STRINGS.year[lang]} ${chartRows[items[0].dataIndex]?.year ?? ''}`;
+          },
           beforeBody: (items) => {
             const row = chartRows[items[0].dataIndex];
-            return row ? `Total balance   ${formatCurrency(row.balance)}` : '';
+            const lang = isViPrimary() ? 'vi' : 'en';
+            return row ? `${CHART_STRINGS.balance[lang]}   ${formatCurrency(row.balance)}` : '';
           },
-          label: (item) => ` ${item.dataset.label}   ${formatCurrency(item.parsed.y)}`,
+          label: (item) => {
+            const lang = isViPrimary() ? 'vi' : 'en';
+            const key = item.datasetIndex === 0 ? 'principal' : 'interest';
+            return ` ${CHART_STRINGS[key][lang]}   ${formatCurrency(item.parsed.y)}`;
+          },
         },
       },
     },
     scales: {
       x: {
         grid: { display: false },
-        ticks: { color: '#5d5f68', font: { family: 'Inter', size: 12 } },
+        ticks: { color: '#5d5f68', font: { family: 'Be Vietnam Pro', size: 12 } },
       },
       y: {
         stacked: true,
         grid: { color: '#d5d3cd' },
         ticks: {
           color: '#5d5f68',
-          font: { family: 'Inter', size: 12 },
+          font: { family: 'Be Vietnam Pro', size: 12 },
           callback: (value) => formatCurrency(value),
         },
       },
@@ -128,20 +177,60 @@ function popValue(el) {
   el.classList.add('pop');
 }
 
+// Clamp a parsed value to an input's own min/max attributes, then write the
+// clamped value back so out-of-range entries (negative amounts, 9999 years)
+// can't silently produce a nonsensical chart. When the raw typed value
+// actually exceeded the range, surface the clamp-note next to the field
+// instead of just rewriting the input with no explanation.
+function clampToInput(input, value, noteEl) {
+  const min = input.min !== '' ? Number(input.min) : -Infinity;
+  const max = input.max !== '' ? Number(input.max) : Infinity;
+  const clamped = Math.min(Math.max(value, min), max);
+  if (String(clamped) !== input.value) input.value = clamped;
+  if (noteEl) {
+    noteEl.classList.toggle('is-active', value !== clamped);
+    noteEl.querySelectorAll('.clamp-note-value').forEach((el) => {
+      el.textContent = clamped;
+    });
+  }
+  return clamped;
+}
+
 function update() {
-  const initial = parseFloat(initialInput.value) || 0;
-  const monthly = parseFloat(monthlyInput.value) || 0;
-  const rate = parseFloat(rateInput.value) || 0;
-  const years = parseInt(yearsInput.value, 10) || 0;
+  const initial = clampToInput(initialInput, parseFloat(initialInput.value) || 0, initialClampNoteEl);
+  const monthly = clampToInput(monthlyInput, parseFloat(monthlyInput.value) || 0, monthlyClampNoteEl);
+  const rate = clampToInput(rateInput, parseFloat(rateInput.value) || 0, rateClampNoteEl);
+  const years = clampToInput(yearsInput, parseInt(yearsInput.value, 10) || 0, yearsClampNoteEl);
 
   const rows = projectGrowth(initial, monthly, rate, years);
   const final = rows[rows.length - 1];
 
   chartRows = rows;
-  chart.data.labels = rows.map((row) => `Year ${row.year}`);
+  const chartLang = isViPrimary() ? 'vi' : 'en';
+  chart.data.labels = rows.map((row) => `${CHART_STRINGS.year[chartLang]} ${row.year}`);
+  chart.data.datasets[0].label = CHART_STRINGS.principal[chartLang];
+  chart.data.datasets[1].label = CHART_STRINGS.interest[chartLang];
   chart.data.datasets[0].data = rows.map((row) => row.contributed);
   chart.data.datasets[1].data = rows.map((row) => row.interest);
+
+  // A cleared field (a routine mid-edit state, not a contrived edge case)
+  // makes every row's balance 0. Chart.js can't derive a "nice" axis step
+  // from an all-zero dataset and autoscales to something like
+  // "$1, $0, $0, -$0, -$1" — force a sane fixed range instead of letting
+  // it improvise one. Reset to undefined (autoscale) the rest of the time.
+  const isFlatZero = rows.every((row) => row.balance === 0);
+  chart.options.scales.y.min = isFlatZero ? 0 : undefined;
+  chart.options.scales.y.max = isFlatZero ? 100 : undefined;
+
   chart.update();
+  ctx.setAttribute(
+    'aria-label',
+    isViPrimary()
+      ? `Biểu đồ số dư dự kiến trong ${years} năm, đạt ${formatCurrency(final.balance)}: ` +
+          `${formatCurrency(final.contributed)} tiền gốc cộng ${formatCurrency(final.interest)} tiền lãi.`
+      : `Chart of projected balance over ${years} years, reaching ${formatCurrency(final.balance)}: ` +
+          `${formatCurrency(final.contributed)} principal plus ${formatCurrency(final.interest)} interest.`
+  );
 
   finalBalanceEl.textContent = formatCurrency(final.balance);
   popValue(finalBalanceEl);
@@ -153,21 +242,64 @@ function update() {
   popValue(statInterestEl);
   popValue(statMultiplierEl);
 
+  const hysaFinal = projectGrowth(initial, monthly, HYSA_RATE, years).at(-1);
+  const checkingFinal = projectGrowth(initial, monthly, CHECKING_ACCOUNT_RATE, years).at(-1);
+  const maxBalance = Math.max(final.balance, hysaFinal.balance, checkingFinal.balance) || 1;
+
+  compareYearsEnEl.textContent = years;
+  compareYearsViEl.textContent = years;
+  compareFillYouEl.style.transform = `scaleX(${final.balance / maxBalance})`;
+  compareFillHysaEl.style.transform = `scaleX(${hysaFinal.balance / maxBalance})`;
+  compareFillCheckingEl.style.transform = `scaleX(${checkingFinal.balance / maxBalance})`;
+  compareValueYouEl.textContent = formatCurrency(final.balance);
+  compareValueHysaEl.textContent = formatCurrency(hysaFinal.balance);
+  compareValueCheckingEl.textContent = formatCurrency(checkingFinal.balance);
+  // Branch the callout copy on which side of the HYSA line this plan lands:
+  // flooring the gap at $0 and always saying "more" would tell a user whose
+  // plan is actually behind a savings account that they're winning by "$0".
+  // An exact tie reuses the "ahead" copy (literally true at $0) but is
+  // colored neutral gray below — a $0 gap is neither a win nor a loss.
+  const isAhead = final.balance >= hysaFinal.balance;
+  calloutAheadEl.classList.toggle('is-active', isAhead);
+  calloutAheadEl.classList.toggle('is-tied', final.balance === hysaFinal.balance);
+  calloutBehindEl.classList.toggle('is-active', !isAhead);
+  if (isAhead) {
+    const compareGap = formatCurrency(final.balance - hysaFinal.balance);
+    compareGapEnEl.textContent = compareGap;
+    compareGapViEl.textContent = compareGap;
+  } else {
+    const compareBehind = formatCurrency(hysaFinal.balance - final.balance);
+    compareBehindEnEl.textContent = compareBehind;
+    compareBehindViEl.textContent = compareBehind;
+  }
+
   breakdownBodyEl.innerHTML = rows
     .filter((row) => row.year > 0)
-    .map((row) => `
+    .map(
+      (row) => `
       <tr>
         <td>${row.year}</td>
         <td>${formatCurrency(row.contributed)}</td>
-        <td>${formatCurrency(row.interest)}</td>
-        <td>${formatCurrency(row.balance)}</td>
+        <td class="interest-value">${formatCurrency(row.interest)}</td>
+        <td class="balance-value">${formatCurrency(row.balance)}</td>
       </tr>
-    `)
+    `
+    )
     .join('');
 }
 
+function debounce(fn, delay) {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn(...args), delay);
+  };
+}
+
+const debouncedUpdate = debounce(update, 150);
+
 [initialInput, monthlyInput, rateInput, yearsInput].forEach((input) => {
-  input.addEventListener('input', update);
+  input.addEventListener('input', debouncedUpdate);
 });
 
 update();
@@ -200,12 +332,32 @@ document.querySelectorAll('a, button, input, .card').forEach((el) => {
   el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
 });
 
+// .cursor-ring is sized at its largest (hovering) state in CSS; resting size
+// is a scale-down of that, so the hover "grow" only ever animates transform.
+// The scale is lerped here in JS (not via a CSS transition) since a CSS
+// transition on `transform` would also catch the position translate that's
+// rewritten every frame, doubling up with this lerp and making it sluggish.
+const RING_REST_SCALE = 0.75;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let ringScale = RING_REST_SCALE;
+
 function animateCursor() {
   cursorDot.style.transform = `translate(${mouse.x}px, ${mouse.y}px) translate(-50%, -50%)`;
 
-  ringPos.x = lerp(ringPos.x, mouse.x, 0.2);
-  ringPos.y = lerp(ringPos.y, mouse.y, 0.2);
-  cursorRing.style.transform = `translate(${ringPos.x}px, ${ringPos.y}px) translate(-50%, -50%)`;
+  const targetScale = cursorRing.classList.contains('hovering') ? 1 : RING_REST_SCALE;
+
+  // With reduced motion, snap the ring straight to the pointer/size instead
+  // of lerp-trailing behind it — the trailing lag is the perceptible motion.
+  if (prefersReducedMotion) {
+    ringPos.x = mouse.x;
+    ringPos.y = mouse.y;
+    ringScale = targetScale;
+  } else {
+    ringPos.x = lerp(ringPos.x, mouse.x, 0.2);
+    ringPos.y = lerp(ringPos.y, mouse.y, 0.2);
+    ringScale = lerp(ringScale, targetScale, 0.2);
+  }
+  cursorRing.style.transform = `translate(${ringPos.x}px, ${ringPos.y}px) translate(-50%, -50%) scale(${ringScale})`;
 
   requestAnimationFrame(animateCursor);
 }
@@ -217,21 +369,54 @@ const infoBtn = document.getElementById('infoBtn');
 const infoModal = document.getElementById('infoModal');
 const infoModalClose = document.getElementById('infoModalClose');
 
+let infoModalTrigger = null;
+
+function getFocusableModalElements() {
+  return infoModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+}
+
 function openInfoModal() {
+  infoModalTrigger = document.activeElement;
   infoModal.hidden = false;
+  infoModalClose.focus();
 }
 
 function closeInfoModal() {
   infoModal.hidden = true;
+  if (infoModalTrigger) infoModalTrigger.focus();
 }
 
 infoBtn.addEventListener('click', openInfoModal);
+
+// Roadmapped nav items are real anchors (so screen readers still announce
+// them as present) but have nothing to navigate to yet — block the
+// href="#" jump-to-top instead of letting a dead click look like a bug.
+document.querySelectorAll('.nav-link[aria-disabled="true"]').forEach((link) => {
+  link.addEventListener('click', (event) => event.preventDefault());
+});
 infoModalClose.addEventListener('click', closeInfoModal);
 infoModal.addEventListener('click', (event) => {
   if (event.target === infoModal) closeInfoModal();
 });
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && !infoModal.hidden) closeInfoModal();
+  if (infoModal.hidden) return;
+  if (event.key === 'Escape') {
+    closeInfoModal();
+    return;
+  }
+  if (event.key !== 'Tab') return;
+
+  // Trap Tab focus within the modal while it's open.
+  const focusable = getFocusableModalElements();
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
 });
 
 // Language toggle: switches which bilingual line is visually primary.
@@ -239,4 +424,8 @@ const langToggle = document.getElementById('langToggle');
 langToggle.addEventListener('click', () => {
   document.body.classList.toggle('lang-vi-primary');
   langToggle.querySelectorAll('.lang-option').forEach((el) => el.classList.toggle('active'));
+  // infoBtn has no visible label (icon-only), so its aria-label needs to be
+  // kept in sync with the language toggle manually instead of via .en/.vi.
+  infoBtn.setAttribute('aria-label', isViPrimary() ? 'Cách hoạt động' : 'How it works');
+  update();
 });

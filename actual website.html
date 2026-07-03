@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verity: Compound Interest Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="bg-mesh" aria-hidden="true">
+  <span class="mesh-blob mesh-blob--1"></span>
+  <span class="mesh-blob mesh-blob--2"></span>
+  <span class="mesh-blob mesh-blob--3"></span>
+  <span class="mesh-blob mesh-blob--4"></span>
+  <span class="mesh-blob mesh-blob--5"></span>
+</div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="logo">Verity</span>
+    <nav class="nav-capsule">
+      <a href="#" class="nav-link active">Calculator</a>
+      <a href="#" class="nav-link" aria-disabled="true">
+        Recommend
+        <span class="soon-badge">
+          <span class="en">soon</span>
+          <span class="vi">sắp có</span>
+        </span>
+      </a>
+      <a href="#" class="nav-link" aria-disabled="true">
+        Jargon
+        <span class="soon-badge">
+          <span class="en">soon</span>
+          <span class="vi">sắp có</span>
+        </span>
+      </a>
+      <a href="#" class="nav-link" aria-disabled="true">
+        Credit
+        <span class="soon-badge">
+          <span class="en">soon</span>
+          <span class="vi">sắp có</span>
+        </span>
+      </a>
+      <a href="#" class="nav-link" aria-disabled="true">
+        Family Split
+        <span class="soon-badge">
+          <span class="en">soon</span>
+          <span class="vi">sắp có</span>
+        </span>
+      </a>
+    </nav>
+    <button class="lang-toggle" id="langToggle">
+      <span class="lang-option active" data-lang="en">EN</span>
+      <span class="lang-divider">|</span>
+      <span class="lang-option" data-lang="vi">VI</span>
+    </button>
+  </div>
+</header>
+
+<main class="page">
+  <section class="hero" id="heroSection">
+    <div class="hero-decor" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span>
+    </div>
+    <h1 class="hero-title">
+      <span class="en">Small deposits. Big difference.</span>
+      <span class="vi">Một khoản nhỏ. Khác biệt lớn.</span>
+      <span class="hero-subtitle-stack">
+        <span class="en">Compound interest means your savings earn money, and that money earns more. See it for yourself below.</span>
+        <span class="vi">Lãi suất kép nghĩa là tiền tiết kiệm của bạn sẽ sinh lời, và số tiền đó lại tiếp tục sinh lời thêm. Hãy tự kiểm tra bên dưới.</span>
+      </span>
+    </h1>
+  </section>
+
+  <section class="calculator">
+    <div class="card inputs-card">
+      <div class="inputs-card-header">
+        <h2 class="card-title">
+          <span class="en">Your inputs</span>
+          <span class="vi">Thông tin của bạn</span>
+        </h2>
+        <button class="info-btn" id="infoBtn" aria-haspopup="dialog" aria-controls="infoModal" aria-label="How it works">
+          <span aria-hidden="true">ⓘ</span>
+        </button>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="initial">
+          <span class="en">Starting amount</span>
+          <span class="vi">Số tiền ban đầu</span>
+        </label>
+        <div class="input-wrap">
+          <span class="prefix">$</span>
+          <input type="number" id="initial" value="500" min="0" max="1000000" step="50">
+        </div>
+        <p class="clamp-note" id="initialClampNote">
+          <span class="en">Capped at <span class="clamp-note-value"></span></span>
+          <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span></span>
+        </p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="monthly">
+          <span class="en">Monthly contribution</span>
+          <span class="vi">Đóng góp hàng tháng</span>
+        </label>
+        <div class="input-wrap">
+          <span class="prefix">$</span>
+          <input type="number" id="monthly" value="100" min="0" max="50000" step="10">
+        </div>
+        <p class="clamp-note" id="monthlyClampNote">
+          <span class="en">Capped at <span class="clamp-note-value"></span></span>
+          <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span></span>
+        </p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="rate">
+          <span class="en">Annual growth rate</span>
+          <span class="vi">Tỷ lệ tăng trưởng hàng năm</span>
+        </label>
+        <div class="input-wrap">
+          <input type="number" id="rate" value="7" min="0" max="30" step="0.1">
+          <span class="suffix">%</span>
+        </div>
+        <p class="clamp-note" id="rateClampNote">
+          <span class="en">Capped at <span class="clamp-note-value"></span>%</span>
+          <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span>%</span>
+        </p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="years">
+          <span class="en">Time horizon</span>
+          <span class="vi">Khung thời gian</span>
+        </label>
+        <div class="input-wrap">
+          <input type="number" id="years" value="10" min="1" max="60" step="1">
+          <span class="suffix">
+            <span class="en">years</span>
+            <span class="vi">năm</span>
+          </span>
+        </div>
+        <p class="clamp-note" id="yearsClampNote">
+          <span class="en">Capped at <span class="clamp-note-value"></span> years</span>
+          <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span> năm</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="card graph-card">
+      <div class="graph-card-header">
+        <h2 class="card-title">
+          <span class="en">Projected growth</span>
+          <span class="vi">Tăng trưởng dự kiến</span>
+        </h2>
+        <div class="result-stack">
+          <span class="result-label">
+            <span class="en">Final balance</span>
+            <span class="vi">Số dư cuối cùng</span>
+          </span>
+          <span class="result-value" id="finalBalance">$0</span>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="growthChart" role="img" aria-label="Chart of projected balance over time, split into principal and interest." aria-describedby="breakdownBody"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-row">
+    <div class="card stat-card tint-blue">
+      <span class="stat-icon icon-blue" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v11"/>
+          <path d="M7.5 10.5 12 15l4.5-4.5"/>
+          <rect x="5" y="18" width="14" height="3" rx="1.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </span>
+      <span class="field-label">
+        <span class="en">Total contributed</span>
+        <span class="vi">Tổng số tiền đã đóng góp</span>
+      </span>
+      <span class="stat-value" id="statContributed">$0</span>
+    </div>
+    <div class="card stat-card tint-teal">
+      <span class="stat-icon icon-teal" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <rect x="3" y="13" width="4" height="8" rx="1.3"/>
+          <rect x="10" y="9" width="4" height="12" rx="1.3"/>
+          <rect x="17" y="5" width="4" height="16" rx="1.3"/>
+        </svg>
+      </span>
+      <span class="field-label">
+        <span class="en">Interest earned</span>
+        <span class="vi">Lãi đã kiếm được</span>
+      </span>
+      <span class="stat-value accent" id="statInterest">$0</span>
+    </div>
+    <div class="card stat-card tint-amber">
+      <span class="stat-icon icon-amber" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <rect x="4" y="4" width="16" height="4.2" rx="2.1"/>
+          <rect x="4" y="9.9" width="16" height="4.2" rx="2.1"/>
+          <rect x="4" y="15.8" width="16" height="4.2" rx="2.1"/>
+        </svg>
+      </span>
+      <span class="field-label">
+        <span class="en">Growth multiplier</span>
+        <span class="vi">Hệ số tăng trưởng</span>
+      </span>
+      <span class="stat-value" id="statMultiplier">0×</span>
+    </div>
+  </section>
+
+  <section class="breakdown-grid">
+    <div class="card breakdown-card">
+      <h2 class="card-title">
+        <span class="en">Year-by-year breakdown</span>
+        <span class="vi">Phân tích theo từng năm</span>
+      </h2>
+      <div class="breakdown-table-wrap">
+        <table class="breakdown-table">
+          <thead>
+            <tr>
+              <th><span class="en">Year</span><span class="vi">Năm</span></th>
+              <th><span class="en">Contributed</span><span class="vi">Đã đóng góp</span></th>
+              <th><span class="en">Interest earned</span><span class="vi">Lãi đã kiếm được</span></th>
+              <th><span class="en">Balance</span><span class="vi">Số dư</span></th>
+            </tr>
+          </thead>
+          <tbody id="breakdownBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card compare-card">
+      <h2 class="card-title">
+        <span class="en">What compounding buys you</span>
+        <span class="vi">Lợi ích từ lãi suất kép</span>
+      </h2>
+      <p class="compare-note">
+        <span class="en">Same monthly contributions, over <span id="compareYearsEn"></span> years</span>
+        <span class="vi">Cùng mức đóng góp hàng tháng, trong <span id="compareYearsVi"></span> năm</span>
+      </p>
+      <div class="compare-bars">
+        <div class="compare-row">
+          <span class="compare-label">
+            <span class="en">This plan</span>
+            <span class="vi">Kế hoạch này</span>
+          </span>
+          <div class="compare-track"><div class="compare-fill you" id="compareFillYou"></div></div>
+          <span class="compare-value" id="compareValueYou"></span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">
+            <span class="en">High-yield savings</span>
+            <span class="vi">Tiết kiệm lãi suất cao</span>
+          </span>
+          <div class="compare-track"><div class="compare-fill hysa" id="compareFillHysa"></div></div>
+          <span class="compare-value" id="compareValueHysa"></span>
+        </div>
+        <div class="compare-row">
+          <span class="compare-label">
+            <span class="en">Checking account</span>
+            <span class="vi">Tài khoản thanh toán</span>
+          </span>
+          <div class="compare-track"><div class="compare-fill checking" id="compareFillChecking"></div></div>
+          <span class="compare-value" id="compareValueChecking"></span>
+        </div>
+      </div>
+      <p class="compare-callout">
+        <span class="callout-variant" id="calloutAhead">
+          <span class="en">Investing instead of just saving puts <strong id="compareGapEn"></strong> more in your pocket than a high-yield savings account.</span>
+          <span class="vi">Đầu tư thay vì chỉ gửi tiết kiệm giúp bạn có thêm <strong id="compareGapVi"></strong> so với tài khoản tiết kiệm lãi suất cao.</span>
+        </span>
+        <span class="callout-variant" id="calloutBehind">
+          <span class="en">At this rate, this plan is projected to end up <strong id="compareBehindEn"></strong> behind a high-yield savings account.</span>
+          <span class="vi">Với tỷ lệ này, kế hoạch này dự kiến sẽ kém hơn tài khoản tiết kiệm lãi suất cao <strong id="compareBehindVi"></strong>.</span>
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <p class="disclaimer">
+    <span class="en">Educational tool only. Not licensed financial advice.</span>
+    <span class="vi">Chỉ là công cụ giáo dục. Không phải lời khuyên tài chính được cấp phép.</span>
+  </p>
+</main>
+
+
+<div class="modal-backdrop" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle" hidden>
+  <div class="modal-card">
+    <button class="modal-close" id="infoModalClose" aria-label="Close">&times;</button>
+    <h2 class="modal-title" id="infoModalTitle">
+      <span class="en">How compound interest works</span>
+      <span class="vi">Lãi suất kép hoạt động như thế nào</span>
+    </h2>
+    <p class="modal-text">
+      <span class="en">Compound interest means you earn returns not just on the money you put in, but on the interest that money has already earned. Each year's gains get added to your balance, then start earning their own returns the next year, so growth speeds up the longer you leave it.</span>
+      <span class="vi">Lãi suất kép có nghĩa là bạn kiếm được lợi nhuận không chỉ trên số tiền bạn bỏ vào, mà còn trên phần lãi mà số tiền đó đã kiếm được. Lợi nhuận mỗi năm sẽ được cộng vào số dư của bạn, sau đó tự nó tiếp tục sinh lãi vào năm sau, vì vậy mức tăng trưởng sẽ nhanh hơn theo thời gian.</span>
+    </p>
+    <p class="modal-text">
+      <span class="en">That's why starting early matters more than starting big: time is doing most of the work in the chart above.</span>
+      <span class="vi">Đó là lý do bắt đầu sớm quan trọng hơn bắt đầu với số tiền lớn: thời gian là yếu tố làm nên phần lớn sự tăng trưởng trong biểu đồ trên.</span>
+    </p>
+    <dl class="modal-glossary">
+      <dt>
+        <span class="en">Starting amount</span>
+        <span class="vi">Số tiền ban đầu</span>
+      </dt>
+      <dd>
+        <span class="en">What you're putting in today, before any contributions or growth are added.</span>
+        <span class="vi">Số tiền bạn bỏ vào ngay hôm nay, trước khi có thêm đóng góp hoặc lãi suất.</span>
+      </dd>
+      <dt>
+        <span class="en">Monthly contribution</span>
+        <span class="vi">Đóng góp hàng tháng</span>
+      </dt>
+      <dd>
+        <span class="en">The amount you add at the end of each month, on top of whatever the balance already grew to.</span>
+        <span class="vi">Số tiền bạn thêm vào cuối mỗi tháng, cộng thêm vào số dư đã tăng trưởng từ trước.</span>
+      </dd>
+      <dt>
+        <span class="en">Annual growth rate</span>
+        <span class="vi">Tỷ lệ tăng trưởng hàng năm</span>
+      </dt>
+      <dd>
+        <span class="en">The yearly rate of return you expect. It's applied monthly behind the scenes, but scaled so the balance still lands on exactly this rate over a full year.</span>
+        <span class="vi">Tỷ lệ lợi nhuận hàng năm bạn kỳ vọng. Tỷ lệ này được áp dụng theo từng tháng, nhưng được tính toán để số dư đạt đúng tỷ lệ này sau một năm.</span>
+      </dd>
+      <dt>
+        <span class="en">Time horizon</span>
+        <span class="vi">Khung thời gian</span>
+      </dt>
+      <dd>
+        <span class="en">How many years you leave the money to sit and grow before you'd need to use it.</span>
+        <span class="vi">Số năm bạn để tiền tăng trưởng trước khi cần dùng đến.</span>
+      </dd>
+    </dl>
+    <p class="modal-text">
+      <span class="en">This calculator models an <strong>ordinary annuity</strong>: each month's contribution is added at the end of that month, after that month's growth has already been applied (not at the start). This is the standard, slightly more conservative way contributions are usually modeled.</span>
+      <span class="vi">Công cụ này tính toán theo mô hình <strong>niên kim thường</strong>: khoản đóng góp mỗi tháng được thêm vào cuối tháng đó, sau khi lãi suất của tháng đó đã được áp dụng (không phải vào đầu tháng). Đây là cách tính phổ biến và hơi thận trọng hơn.</span>
+    </p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="js/calculator.js"></script>
+</body>
+</html>

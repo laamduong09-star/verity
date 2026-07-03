@@ -10,6 +10,12 @@ current animated WebGL liquid-noise shader (`initBgCanvas` in
 staying entirely within our existing "Graph Paper Calm" palette rather
 than introducing new pastel hues.
 
+Initially implemented as a multi-hue mesh (teal/blue/rose, per the
+Composition section below) to most closely match the reference. After
+shipping, a follow-up request restricted the palette to blue-only — see
+the updated Composition section, which now documents what's actually
+live rather than the original multi-hue exploration.
+
 ## Placement
 
 A single wrapper, `<div class="bg-mesh" aria-hidden="true">`, replacing
@@ -23,13 +29,27 @@ regardless of scroll offset.
 
 ## Composition
 
-5–6 plain `<span class="mesh-blob mesh-blob--N">` children inside the
-wrapper. Each is a large circle (`border-radius: 50%`, roughly
-300–500px), heavily blurred (`filter: blur(60–100px)`), at low opacity
-(~12–18%) so body text stays comfortably readable everywhere on the page.
+**Shipped (blue-only):** 5 plain `<span class="mesh-blob mesh-blob--N">`
+children inside the wrapper, each a circle 320–480px across, blurred
+`filter: blur(80px)`, `mix-blend-mode: multiply`, opacity 0.16–0.26.
+Colors alternate between only `--blue` and `--blue-focus` — no teal or
+rose — at varying opacity/size to create depth without introducing a
+second hue:
+1. `--blue`, 480px, top-left (`top: -8%; left: -6%`), opacity 0.26
+2. `--blue-focus`, 420px, top-right (`top: 6%; right: -8%`), opacity 0.22
+3. `--blue`, 380px, bottom-left (`bottom: 4%; left: 8%`), opacity 0.16
+4. `--blue-focus`, 320px, bottom-right (`bottom: -6%; right: 12%`),
+   opacity 0.2
+5. `--blue`, 340px, center (`top: 30%; left: 38%`), opacity 0.18
 
-Colors, using only existing tokens, tinted toward `--paper`/white for
-pastel softness (no new color tokens):
+Positioned asymmetrically by percentage offsets, not grid-aligned, echoing
+the reference's scattered-but-balanced feel.
+
+<details>
+<summary>Original multi-hue exploration (not shipped)</summary>
+
+The first version used 5–6 blobs across three hues, tinted toward
+`--paper`/white for pastel softness:
 1. `--teal-bright` — large, upper-left
 2. `--blue` — large, mid-right
 3. `--rose-soft` — medium, lower-left (already a pastel tint, used as-is)
@@ -37,10 +57,10 @@ pastel softness (no new color tokens):
 5. `--blue` (smaller variant) — upper-center, optional 6th blob if the
    5-blob layout reads too sparse once implemented
 
-Positioned asymmetrically by percentage offsets, not grid-aligned, echoing
-the reference's scattered-but-balanced feel. Fewer, larger blobs than the
-earlier liquid-gradient spec's four — calmer reads with fewer shapes.
-`mix-blend-mode: multiply` so overlaps stay soft rather than muddy.
+A follow-up request replaced teal/rose with blue-only variants (see
+above) for a calmer, single-hue look.
+
+</details>
 
 ## Motion
 

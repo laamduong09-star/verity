@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-22T00:00:00Z",
+  "title": "Design System: First Paycheck",
+  "extensions": {
+    "colorMeta": {
+      "teal": { "role": "primary", "displayName": "Deep Teal", "canonical": "oklch(40% 0.05 173)", "tonalRamp": ["#04201d", "#073c37", "#0b5a55", "#0e7a72", "#22a89c", "#5cc6bc", "#9ee0d8", "#dff5f2"] },
+      "blue": { "role": "secondary", "displayName": "Constellation Blue", "canonical": "oklch(40% 0.18 270)", "tonalRamp": ["#0d1c4a", "#162d77", "#2348ad", "#2f5abf", "#5478d4", "#8aa3e6", "#bccaf2", "#e7ecfb"] },
+      "marigold": { "role": "tertiary", "displayName": "Marigold (reserved)", "canonical": "oklch(72% 0.14 65)", "tonalRamp": ["#5c3a0d", "#8a5814", "#b6731c", "#e3962a", "#ecaf5c", "#f3c889", "#f9e0b8", "#fdf1e0"] },
+      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "oklch(91% 0.005 95)" },
+      "card": { "role": "neutral", "displayName": "Card", "canonical": "oklch(97% 0.004 95)" },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "oklch(18% 0.02 260)" },
+      "slate": { "role": "neutral", "displayName": "Slate", "canonical": "oklch(44% 0.01 260)" },
+      "border": { "role": "neutral", "displayName": "Border", "canonical": "oklch(85% 0.005 95)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Hero Display", "purpose": "Hero headline only." },
+      "title": { "displayName": "Card Title", "purpose": "Card titles, modal title, logo." },
+      "data": { "displayName": "Result Data", "purpose": "Calculated values: final balance, stat values, breakdown numbers. Always tabular-nums." },
+      "body": { "displayName": "Body", "purpose": "Sentence-length copy: hero subtitle, modal paragraphs." },
+      "label": { "displayName": "Label", "purpose": "Field labels, result labels, table headers." }
+    },
+    "shadows": [
+      { "name": "ambient", "value": "0 1px 2px rgba(28, 35, 48, 0.04)", "purpose": "Resting state for every card." },
+      { "name": "lifted", "value": "0 12px 24px rgba(28, 35, 48, 0.08)", "purpose": "Card hover state, paired with -3px translateY and blue border." },
+      { "name": "modal", "value": "0 24px 48px rgba(17, 21, 31, 0.18)", "purpose": "Info modal, the one deliberately heavy shadow in the system." },
+      { "name": "focus-ring", "value": "0 0 0 3px rgba(47, 90, 191, 0.14)", "purpose": "Input focus and language-toggle hover." }
+    ],
+    "motion": [
+      { "name": "fade-up", "value": "0.6s ease-out, translateY(14px) to 0", "purpose": "Default entrance for hero title and cards, staggered via animation-delay." },
+      { "name": "count-pop", "value": "0.3s ease-out, scale(1) to 1.06 to 1", "purpose": "Brief emphasis when a calculated value updates. Modest, not celebratory." },
+      { "name": "dot-float", "value": "5s ease-in-out infinite, translateY(0 to -12px) + opacity pulse", "purpose": "Hero background dot constellation drift." }
+    ],
+    "breakpoints": [
+      { "name": "stack", "value": "800px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Nav Pill",
+      "kind": "nav",
+      "refersTo": "button-pill-active",
+      "description": "Active nav link inside the rounded nav capsule.",
+      "html": "<nav class=\"ds-nav-capsule\"><a class=\"ds-nav-link ds-nav-link--active\" href=\"#\">Calculator</a><a class=\"ds-nav-link\" href=\"#\">Recommend</a></nav>",
+      "css": ".ds-nav-capsule { background: #faf9f7; border: 1px solid #d5d3cd; border-radius: 200px; padding: 6px; display: flex; gap: 2px; } .ds-nav-link { text-decoration: none; color: #5d5f68; font-family: Inter, sans-serif; font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 200px; display: inline-block; transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease; } .ds-nav-link--active { background: #11151f; color: #fff; } .ds-nav-link:hover:not(.ds-nav-link--active) { color: #11151f; background: #e7e6e2; } .ds-nav-link:active { transform: scale(0.96); }"
+    },
+    {
+      "name": "Card Surface",
+      "kind": "card",
+      "refersTo": "card-surface",
+      "description": "Standard content card with the signature top-edge hairline and earned-depth hover.",
+      "html": "<div class=\"ds-card\"><h2 class=\"ds-card-title\">Your inputs</h2><p>Card content goes here.</p></div>",
+      "css": ".ds-card { position: relative; overflow: hidden; background: #faf9f7; border: 1px solid #d5d3cd; border-radius: 16px; padding: 28px; box-shadow: 0 1px 2px rgba(28, 35, 48, 0.04); transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; } .ds-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #2348ad; opacity: 0.5; } .ds-card:hover { transform: translateY(-3px); border-color: #2348ad; box-shadow: 0 12px 24px rgba(28, 35, 48, 0.08); } .ds-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600; margin: 0 0 20px; color: #11151f; }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Numeric input with optional prefix/suffix, used for all calculator fields.",
+      "html": "<div class=\"ds-input-wrap\"><span class=\"ds-input-prefix\">$</span><input class=\"ds-input\" type=\"number\" value=\"500\" /></div>",
+      "css": ".ds-input-wrap { display: flex; align-items: center; border: 1px solid #d5d3cd; border-radius: 10px; padding: 0 14px; background: #e7e6e2; transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease; } .ds-input-wrap:hover { border-color: #c9cfd6; } .ds-input-wrap:focus-within { border-color: #2f5abf; background: #faf9f7; box-shadow: 0 0 0 3px rgba(47, 90, 191, 0.14); } .ds-input { border: none; background: transparent; outline: none; width: 100%; padding: 11px 6px; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; color: #11151f; font-variant-numeric: tabular-nums; } .ds-input-prefix { color: #5d5f68; font-size: 14px; font-weight: 500; }"
+    },
+    {
+      "name": "Result Value",
+      "kind": "custom",
+      "refersTo": "data",
+      "description": "The display-weight numeric output (final balance, stat values) with a brief pop on update.",
+      "html": "<span class=\"ds-result-value\">$12,480</span>",
+      "css": ".ds-result-value { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; color: #0b5a55; font-variant-numeric: tabular-nums; } .ds-result-value.ds-pop { animation: dsCountPop 0.3s ease-out; } @keyframes dsCountPop { 0% { transform: scale(1); } 40% { transform: scale(1.06); } 100% { transform: scale(1); } } @media (prefers-reduced-motion: reduce) { .ds-result-value.ds-pop { animation: none; } }"
+    },
+    {
+      "name": "Stat Icon",
+      "kind": "custom",
+      "refersTo": "stat-icon",
+      "description": "56px gradient-filled rounded square holding a white SVG glyph, one of three gradient variants (blue/teal/amber).",
+      "html": "<span class=\"ds-stat-icon ds-stat-icon--teal\"><svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><rect x=\"3\" y=\"13\" width=\"4\" height=\"8\" rx=\"1.3\"/><rect x=\"10\" y=\"9\" width=\"4\" height=\"12\" rx=\"1.3\"/><rect x=\"17\" y=\"5\" width=\"4\" height=\"16\" rx=\"1.3\"/></svg></span>",
+      "css": ".ds-stat-icon { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 16px; color: #ffffff; } .ds-stat-icon svg { width: 26px; height: 26px; } .ds-stat-icon--blue { background: linear-gradient(135deg, #3a5fd9, #1d3a8f); } .ds-stat-icon--teal { background: linear-gradient(135deg, #129b8f, #0a4842); } .ds-stat-icon--amber { background: linear-gradient(135deg, #eba83f, #b06d18); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Graph Paper Calm",
+    "overview": "The system reads as math worked out on graph paper, not a banking dashboard. A faint grid sits behind every screen at 5% opacity, reinforcing an analytical, exploratory feel before a single number is shown. A loose constellation of floating dots drifts behind the hero -- closer to a scatter plot warming up than decoration for its own sake. Surfaces are warm off-white paper and card tones, never cold navy-and-gray; text leans toward near-black ink rather than washed-out gray, so the whole thing stays legible and calm rather than corporate or clinical. This system explicitly rejects the stiff corporate banking dashboard (cold navy/gray, dense unexplained tables, jargon with no definitions) and the gamified fintech app (confetti, hype-driven number pop, casino urgency). Where a number does animate (the countPop on result values), it's a brief, modest emphasis -- not a celebration.",
+    "keyCharacteristics": [
+      "Warm paper/card surfaces, never cold gray-blue",
+      "Graph-paper grid + drifting dot field as the system's signature atmosphere",
+      "Two real accent colors (teal, blue), each with a clear job",
+      "Rounded-pill shapes for chrome; 16px-radius cards for content",
+      "Flat at rest, lifts only in response to interaction"
+    ],
+    "rules": [
+      { "name": "The Two-Accent Rule", "body": "Only teal and blue do real color work on any given screen. Teal means a result/positive outcome. Blue means interactive/decorative. Marigold is reserved, not a third generic accent.", "section": "colors" },
+      { "name": "The Warm-Never-Cold Rule", "body": "Surfaces are warm off-white (paper/card), never blue-gray or pure white.", "section": "colors" },
+      { "name": "The Numbers-Are-Display Rule", "body": "Any value derived from the calculator uses tabular-nums and the display font, even at small sizes.", "section": "typography" },
+      { "name": "The Earned-Depth Rule", "body": "Nothing ships with a heavy shadow at rest. Depth shows up only as a response to hover, focus, or the modal's deliberate elevation.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep page and input-resting surfaces warm off-white -- never shift toward blue-gray or pure white.",
+      "Do use tabular-nums + Space Grotesk for every number derived from user input or calculation, no matter how small.",
+      "Do let depth (shadow + lift) be a response to hover/focus only; cards and inputs are flat at rest.",
+      "Do keep teal for result/positive outcome and blue for interactive/decorative -- two accents, each with one job.",
+      "Do write every English string with a .vi sibling of equal visual weight; never let Vietnamese feel like a translated afterthought.",
+      "Do respect prefers-reduced-motion for the custom cursor, drifting dots, fadeUp entrances, and count-pop."
+    ],
+    "donts": [
+      "Don't introduce a cold navy/gray dashboard palette, dense unexplained tables, or unexplained jargon.",
+      "Don't add confetti, hype-driven number celebrations, or casino-style urgency cues.",
+      "Don't spend marigold decoratively -- it's reserved for a warning/highlight role.",
+      "Don't use border-left/border-right as a colored stripe accent anywhere.",
+      "Don't add a static drop shadow to a card or input at rest.",
+      "Don't ship plain-language copy with undefined financial jargon -- define terms inline."
+    ]
+  }
+}
