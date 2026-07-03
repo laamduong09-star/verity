@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verity: Logo Mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #e7e6e2;
+    --card: #faf9f7;
+    --ink: #11151f;
+    --slate: #5d5f68;
+    --border: #d5d3cd;
+    --blue: #2348ad;
+    --blue-start: #3a5fd9;
+    --blue-end: #1d3a8f;
+    --font-display: 'Lexend', sans-serif;
+    --font-body: 'Be Vietnam Pro', sans-serif;
+  }
+
+  body {
+    background: var(--paper);
+    font-family: var(--font-body);
+    color: var(--ink);
+    padding: 48px 32px;
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 40px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 1280px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .card-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  /* ── Topbar preview ── */
+  .topbar-preview {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-mark {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .logo-text {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  /* ── Large display ── */
+  .display-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 0 16px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .display-text {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  /* ── Small sizes row ── */
+  .sizes-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .size-label {
+    font-size: 10px;
+    color: var(--slate);
+    font-family: var(--font-body);
+  }
+
+  /* ── Option letter ── */
+  .option-letter {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .option-name {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 2px;
+  }
+
+  .option-desc {
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+
+  /* ── Recommended badge ── */
+  .badge {
+    display: inline-block;
+    background: var(--blue);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 200px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<h1>Verity: Logo Options</h1>
+
+<div class="grid">
+
+  <!-- ── A: Rising Bars ── -->
+  <div class="card">
+    <div>
+      <span class="option-letter">A</span>
+      <div class="option-name">Rising Bars <span class="badge">Recommended</span></div>
+      <div class="option-desc">Three vertical bars of increasing height, directly mapping compound growth over time. Most legible at favicon size.</div>
+    </div>
+
+    <div>
+      <div class="card-label" style="margin-bottom:10px">Topbar</div>
+      <div class="topbar-preview">
+        <div class="logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad-a-sm" x1="2" y1="0" x2="18" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3a5fd9"/>
+                <stop offset="100%" stop-color="#1d3a8f"/>
+              </linearGradient>
+            </defs>
+            <rect x="2"  y="12" width="4" height="8" rx="1.5" fill="url(#grad-a-sm)"/>
+            <rect x="8"  y="6"  width="4" height="14" rx="1.5" fill="url(#grad-a-sm)"/>
+            <rect x="14" y="0"  width="4" height="20" rx="1.5" fill="url(#grad-a-sm)"/>
+          </svg>
+          <span class="logo-text">Verity</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card-label" style="margin-bottom:12px">Display</div>
+      <div class="display-row">
+        <svg width="36" height="36" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="grad-a-lg" x1="2" y1="0" x2="18" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#3a5fd9"/>
+              <stop offset="100%" stop-color="#1d3a8f"/>
+            </linearGradient>
+          </defs>
+          <rect x="2"  y="12" width="4" height="8" rx="1.5" fill="url(#grad-a-lg)"/>
+          <rect x="8"  y="6"  width="4" height="14" rx="1.5" fill="url(#grad-a-lg)"/>
+          <rect x="14" y="0"  width="4" height="20" rx="1.5" fill="url(#grad-a-lg)"/>
+        </svg>
+        <span class="display-text">Verity</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="card-label" style="margin-bottom:10px">Sizes</div>
+      <div class="sizes-row">
+        <div class="size-item">
+          <svg width="32" height="32" viewBox="0 0 20 20" fill="none">
+            <defs>
+              <linearGradient id="grad-a-32" x1="2" y1="0" x2="18" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3a5fd9"/><stop offset="100%" stop-color="#1d3a8f"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="12" width="4" height="8" rx="1.5" fill="url(#grad-a-32)"/>
+            <rect x="8" y="6"  width="4" height="14" rx="1.5" fill="url(#grad-a-32)"/>
+            <rect x="14" y="0" width="4" height="20" rx="1.5" fill="url(#grad-a-32)"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <defs>
+              <linearGradient id="grad-a-20" x1="2" y1="0" x2="18" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3a5fd9"/><stop offset="100%" stop-color="#1d3a8f"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="12" width="4" height="8" rx="1.5" fill="url(#grad-a-20)"/>
+            <rect x="8" y="6"  width="4" height="14" rx="1.5" fill="url(#grad-a-20)"/>
+            <rect x="14" y="0" width="4" height="20" rx="1.5" fill="url(#grad-a-20)"/>
+          </svg>
+          <span class="size-label">20px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+            <defs>
+              <linearGradient id="grad-a-16" x1="2" y1="0" x2="18" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#3a5fd9"/><stop offset="100%" stop-color="#1d3a8f"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="12" width="4" height="8" rx="1.5" fill="url(#grad-a-16)"/>
+            <rect x="8" y="6"  width="4" height="14" rx="1.5" fill="url(#grad-a-16)"/>
+            <rect x="14" y="0" width="4" height="20" rx="1.5" fill="url(#grad-a-16)"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── B: Horizontal Layers ── -->
+  <div class="card">
+    <div>
+      <span class="option-letter">B</span>
+      <div class="option-name">Horizontal Layers</div>
+      <div class="option-desc">Three stacked horizontal bars reading as data layers or a literal stack. More abstract and logo-like, less chart-like.</div>
+    </div>
+
+    <div>
+      <div class="card-label" style="margin-bottom:10px">Topbar</div>
+      <div class="topbar-preview">
+        <div class="logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad-b-sm" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3a5fd9"/>
+                <stop offset="100%" stop-color="#1d3a8f"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="1"  width="20" height="5" rx="2" fill="url(#grad-b-sm)"/>
+            <rect x="0" y="8"  width="20" height="5" rx="2" fill="url(#grad-b-sm)"/>
+            <rect x="0" y="15" width="20" height="5" rx="2" fill="url(#grad-b-sm)"/>
+          </svg>
+          <span class="logo-text">Verity</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card-label" style="margin-bottom:12px">Display</div>
+      <div class="display-row">
+        <svg width="36" height="36" viewBox="0 0 20 20" fill="none">
+          <defs>
+            <linearGradient id="grad-b-lg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3a5fd9"/>
+              <stop offset="100%" stop-color="#1d3a8f"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="1"  width="20" height="5" rx="2" fill="url(#grad-b-lg)"/>
+          <rect x="0" y="8"  width="20" height="5" rx="2" fill="url(#grad-b-lg)"/>
+          <rect x="0" y="15" width="20" height="5" rx="2" fill="url(#grad-b-lg)"/>
+        </svg>
+        <span class="display-text">Verity</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="card-label" style="margin-bottom:10px">Sizes</div>
+      <div class="sizes-row">
+        <div class="size-item">
+          <svg width="32" height="32" viewBox="0 0 20 20" fill="none">
+            <defs>
+              <linearGradient id="grad-b-32" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3a5fd9"/><stop offset="100%" stop-color="#1d3a8f"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="1"  width="20" height="5" rx="2" fill="url(#grad-b-32)"/>
+            <rect x="0" y="8"  width="20" height="5" rx="2" fill="url(#grad-b-32)"/>
+            <rect x="0" y="15" width="20" height="5" rx="2" fill="url(#grad-b-32)"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <defs>
+              <linearGradient id="grad-b-20" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3a5fd9"/><stop offset="100%" stop-color="#1d3a8f"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="1"  width="20" height="5" rx="2" fill="url(#grad-b-20)"/>
+            <rect x="0" y="8"  width="20" height="5" rx="2" fill="url(#grad-b-20)"/>
+            <rect x="0" y="15" width="20" height="5" rx="2" fill="url(#grad-b-20)"/>
+          </svg>
+          <span class="size-label">20px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+            <defs>
+              <linearGradient id="grad-b-16" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3a5fd9"/><stop offset="100%" stop-color="#1d3a8f"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="1"  width="20" height="5" rx="2" fill="url(#grad-b-16)"/>
+            <rect x="0" y="8"  width="20" height="5" rx="2" fill="url(#grad-b-16)"/>
+            <rect x="0" y="15" width="20" height="5" rx="2" fill="url(#grad-b-16)"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── C: Ascending Steps ── -->
+  <div class="card">
+    <div>
+      <span class="option-letter">C</span>
+      <div class="option-name">Ascending Steps</div>
+      <div class="option-desc">Three equal squares stepping diagonally up-right, reading as building blocks or a growth staircase. Most playful of the three.</div>
+    </div>
+
+    <div>
+      <div class="card-label" style="margin-bottom:10px">Topbar</div>
+      <div class="topbar-preview">
+        <div class="logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad-c-sm" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#1d3a8f"/>
+                <stop offset="100%" stop-color="#3a5fd9"/>
+              </linearGradient>
+            </defs>
+            <rect x="0"  y="14" width="6" height="6" rx="1.5" fill="url(#grad-c-sm)"/>
+            <rect x="7"  y="7"  width="6" height="6" rx="1.5" fill="url(#grad-c-sm)"/>
+            <rect x="14" y="0"  width="6" height="6" rx="1.5" fill="url(#grad-c-sm)"/>
+          </svg>
+          <span class="logo-text">Verity</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card-label" style="margin-bottom:12px">Display</div>
+      <div class="display-row">
+        <svg width="36" height="36" viewBox="0 0 20 20" fill="none">
+          <defs>
+            <linearGradient id="grad-c-lg" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stop-color="#1d3a8f"/>
+              <stop offset="100%" stop-color="#3a5fd9"/>
+            </linearGradient>
+          </defs>
+          <rect x="0"  y="14" width="6" height="6" rx="1.5" fill="url(#grad-c-lg)"/>
+          <rect x="7"  y="7"  width="6" height="6" rx="1.5" fill="url(#grad-c-lg)"/>
+          <rect x="14" y="0"  width="6" height="6" rx="1.5" fill="url(#grad-c-lg)"/>
+        </svg>
+        <span class="display-text">Verity</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="card-label" style="margin-bottom:10px">Sizes</div>
+      <div class="sizes-row">
+        <div class="size-item">
+          <svg width="32" height="32" viewBox="0 0 20 20" fill="none">
+            <defs>
+              <linearGradient id="grad-c-32" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#1d3a8f"/><stop offset="100%" stop-color="#3a5fd9"/>
+              </linearGradient>
+            </defs>
+            <rect x="0"  y="14" width="6" height="6" rx="1.5" fill="url(#grad-c-32)"/>
+            <rect x="7"  y="7"  width="6" height="6" rx="1.5" fill="url(#grad-c-32)"/>
+            <rect x="14" y="0"  width="6" height="6" rx="1.5" fill="url(#grad-c-32)"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <defs>
+              <linearGradient id="grad-c-20" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#1d3a8f"/><stop offset="100%" stop-color="#3a5fd9"/>
+              </linearGradient>
+            </defs>
+            <rect x="0"  y="14" width="6" height="6" rx="1.5" fill="url(#grad-c-20)"/>
+            <rect x="7"  y="7"  width="6" height="6" rx="1.5" fill="url(#grad-c-20)"/>
+            <rect x="14" y="0"  width="6" height="6" rx="1.5" fill="url(#grad-c-20)"/>
+          </svg>
+          <span class="size-label">20px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+            <defs>
+              <linearGradient id="grad-c-16" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#1d3a8f"/><stop offset="100%" stop-color="#3a5fd9"/>
+              </linearGradient>
+            </defs>
+            <rect x="0"  y="14" width="6" height="6" rx="1.5" fill="url(#grad-c-16)"/>
+            <rect x="7"  y="7"  width="6" height="6" rx="1.5" fill="url(#grad-c-16)"/>
+            <rect x="14" y="0"  width="6" height="6" rx="1.5" fill="url(#grad-c-16)"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── D: Converging Paths ── -->
+  <div class="card">
+    <div>
+      <span class="option-letter">D</span>
+      <div class="option-name">Converging Paths <span class="badge">New</span></div>
+      <div class="option-desc">Two elegant curves meeting at a point. Symbolizes bilingual convergence (EN/VI) and upward growth clarity. Minimal, modern, distinctive.</div>
+    </div>
+
+    <div>
+      <div class="card-label" style="margin-bottom:10px">Topbar</div>
+      <div class="topbar-preview">
+        <div class="logo-mark">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad-d-sm" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#3a5fd9"/>
+                <stop offset="100%" stop-color="#1d3a8f"/>
+              </linearGradient>
+            </defs>
+            <path d="M 2 2 L 10 18" stroke="url(#grad-d-sm)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M 18 2 L 10 18" stroke="url(#grad-d-sm)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M 6 7 L 10 14" stroke="url(#grad-d-sm)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+            <path d="M 14 7 L 10 14" stroke="url(#grad-d-sm)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span class="logo-text">Verity</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card-label" style="margin-bottom:12px">Display</div>
+      <div class="display-row">
+        <svg width="36" height="36" viewBox="0 0 20 20" fill="none">
+          <defs>
+            <linearGradient id="grad-d-lg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#3a5fd9"/>
+              <stop offset="100%" stop-color="#1d3a8f"/>
+            </linearGradient>
+          </defs>
+          <path d="M 2 2 L 10 18" stroke="url(#grad-d-lg)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M 18 2 L 10 18" stroke="url(#grad-d-lg)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M 6 7 L 10 14" stroke="url(#grad-d-lg)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+          <path d="M 14 7 L 10 14" stroke="url(#grad-d-lg)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="display-text">Verity</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="card-label" style="margin-bottom:10px">Sizes</div>
+      <div class="sizes-row">
+        <div class="size-item">
+          <svg width="32" height="32" viewBox="0 0 20 20" fill="none">
+            <defs>
+              <linearGradient id="grad-d-32" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#3a5fd9"/><stop offset="100%" stop-color="#1d3a8f"/>
+              </linearGradient>
+            </defs>
+            <path d="M 2 2 L 10 18" stroke="url(#grad-d-32)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M 18 2 L 10 18" stroke="url(#grad-d-32)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M 6 7 L 10 14" stroke="url(#grad-d-32)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+            <path d="M 14 7 L 10 14" stroke="url(#grad-d-32)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <defs>
+              <linearGradient id="grad-d-20" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#3a5fd9"/><stop offset="100%" stop-color="#1d3a8f"/>
+              </linearGradient>
+            </defs>
+            <path d="M 2 2 L 10 18" stroke="url(#grad-d-20)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M 18 2 L 10 18" stroke="url(#grad-d-20)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M 6 7 L 10 14" stroke="url(#grad-d-20)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+            <path d="M 14 7 L 10 14" stroke="url(#grad-d-20)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span class="size-label">20px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+            <defs>
+              <linearGradient id="grad-d-16" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#3a5fd9"/><stop offset="100%" stop-color="#1d3a8f"/>
+              </linearGradient>
+            </defs>
+            <path d="M 2 2 L 10 18" stroke="url(#grad-d-16)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M 18 2 L 10 18" stroke="url(#grad-d-16)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M 6 7 L 10 14" stroke="url(#grad-d-16)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+            <path d="M 14 7 L 10 14" stroke="url(#grad-d-16)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
