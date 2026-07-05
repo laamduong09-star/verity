@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verity: Jargon</title>
+<meta name="description" content="Financial terms translated twice: into plain English and into tiếng Việt. APR, APY, Roth IRA, index funds, credit utilization, and more — with examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div class="bg-mesh" aria-hidden="true">
+  <span class="mesh-blob mesh-blob--1"></span>
+  <span class="mesh-blob mesh-blob--2"></span>
+  <span class="mesh-blob mesh-blob--3"></span>
+  <span class="mesh-blob mesh-blob--4"></span>
+  <span class="mesh-blob mesh-blob--5"></span>
+</div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="logo" href="index.html">
+      <svg class="logo-mark" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="0" y="0" width="20" height="20" rx="4" fill="#11151f"/>
+        <g transform="translate(3,3.478) scale(0.014168) translate(-425.333,-611.012)">
+          <path fill="#ffffff" d="M 452.5,611.5 C 533.834,611.333 615.167,611.5 696.5,612C 711.229,615.063 720.396,623.896 724,638.5C 724.333,789.167 724.667,939.833 725,1090.5C 882.221,933.279 1039.39,776.113 1196.5,619C 1200.01,616.746 1203.67,614.746 1207.5,613C 1266.11,611.345 1324.78,611.012 1383.5,612C 1398.66,614.822 1408.49,623.655 1413,638.5C 1413.67,702.167 1413.67,765.833 1413,829.5C 1411.77,834.518 1409.77,839.185 1407,843.5C 1178.83,1071.67 950.667,1299.83 722.5,1528C 720.043,1529.56 717.376,1530.56 714.5,1531C 627.5,1531.67 540.5,1531.67 453.5,1531C 439.009,1527.18 429.842,1518.01 426,1503.5C 425.333,1215.17 425.333,926.833 426,638.5C 430.351,624.984 439.184,615.984 452.5,611.5 Z"/>
+        </g>
+      </svg>
+      <span class="logo-text">verity</span>
+    </a>
+    <nav class="nav-capsule">
+      <a href="actual%20website.html" class="nav-link">Calculator</a>
+      <a href="recommend.html" class="nav-link">Recommend</a>
+      <a href="jargon.html" class="nav-link active">Jargon</a>
+      <a href="credit.html" class="nav-link">Credit</a>
+      <a href="family-split.html" class="nav-link">Family Split</a>
+    </nav>
+    <button class="lang-toggle" id="langToggle">
+      <span class="lang-option active" data-lang="en">EN</span>
+      <span class="lang-divider">|</span>
+      <span class="lang-option" data-lang="vi">VI</span>
+    </button>
+  </div>
+</header>
+
+<main class="page">
+
+  <section class="page-hero">
+    <h1 class="hero-title">
+      <span class="en">Financial words, translated twice</span>
+      <span class="vi">Thuật ngữ tài chính, dịch hai lần</span>
+    </h1>
+    <p class="page-hero-sub">
+      <span class="en">Once into plain English, once into tiếng Việt. Bank statements and apps will use the English term, so each card keeps both names side by side — with an example you can check with real numbers.</span>
+      <span class="vi">Một lần sang tiếng Anh đơn giản, một lần sang tiếng Việt. Sao kê ngân hàng và ứng dụng sẽ dùng thuật ngữ tiếng Anh, nên mỗi thẻ giữ cả hai tên cạnh nhau — kèm ví dụ với con số thật.</span>
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="jargon-search-wrap">
+      <div class="input-wrap">
+        <input type="search" id="jargonSearch" placeholder="Search in English or tiếng Việt… (e.g. APR, lãi suất)" aria-label="Search terms">
+      </div>
+    </div>
+
+    <div class="jargon-group">
+      <h2 class="jargon-group-title">
+        <span class="en">Earning &amp; saving</span>
+        <span class="vi">Thu nhập &amp; tiết kiệm</span>
+      </h2>
+      <div class="term-grid">
+
+        <div class="card term-card">
+          <h3 class="term-name">Gross vs. net pay</h3>
+          <span class="term-vi-name">Lương gộp vs. lương thực nhận</span>
+          <p class="term-def">
+            <span class="en">Gross pay is what the job offer says. Net pay is what actually lands in your account after taxes and deductions. Budget with net, never gross.</span>
+            <span class="vi">Lương gộp là con số trong thư mời làm việc. Lương thực nhận là số tiền thật sự vào tài khoản sau thuế và các khoản khấu trừ. Luôn chi tiêu theo lương thực nhận, đừng theo lương gộp.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">"$17/hour" can arrive as roughly $14.50/hour after taxes.</span>
+            <span class="vi">"$17/giờ" có thể chỉ còn khoảng $14.50/giờ sau thuế.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Tax withholding (W-4 / W-2)</h3>
+          <span class="term-vi-name">Khấu trừ thuế</span>
+          <p class="term-def">
+            <span class="en">Your employer sends part of each paycheck to the IRS for you, based on the W-4 form you filled out. The W-2 you get each January summarizes it for your tax return.</span>
+            <span class="vi">Công ty tự động gửi một phần lương của bạn cho sở thuế (IRS), dựa trên tờ khai W-4 bạn điền. Tờ W-2 nhận vào tháng 1 hàng năm tổng kết lại để bạn khai thuế.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">A tax refund isn't a bonus — it's your own over-withheld money coming back.</span>
+            <span class="vi">Tiền hoàn thuế không phải quà thưởng — đó là tiền của bạn bị khấu trừ dư được trả lại.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Emergency fund</h3>
+          <span class="term-vi-name">Quỹ khẩn cấp</span>
+          <p class="term-def">
+            <span class="en">One to three months of expenses kept in savings, whose only job is absorbing surprises — a car repair, a lost shift — so they don't become debt.</span>
+            <span class="vi">Một đến ba tháng chi tiêu để trong tài khoản tiết kiệm, với nhiệm vụ duy nhất là đỡ những bất ngờ — sửa xe, mất ca làm — để chúng không biến thành nợ.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">Spend $1,000/month? First target: $1,000 saved. Full target: $3,000.</span>
+            <span class="vi">Chi $1,000/tháng? Mục tiêu đầu: để dành $1,000. Mục tiêu đủ: $3,000.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">HYSA</h3>
+          <span class="term-vi-name">Tài khoản tiết kiệm lãi suất cao</span>
+          <p class="term-def">
+            <span class="en">High-Yield Savings Account: a normal savings account, usually at an online bank, paying around 4% instead of the near-0% big banks pay. Same insurance, same access.</span>
+            <span class="vi">Tài khoản tiết kiệm lãi suất cao: một tài khoản tiết kiệm bình thường, thường ở ngân hàng online, trả khoảng 4% thay vì gần 0% như ngân hàng lớn. Bảo hiểm như nhau, rút tiền như nhau.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">$3,000 sitting for a year: ~$120 in a HYSA vs. ~$3 in a typical checking account.</span>
+            <span class="vi">$3,000 để yên một năm: ~$120 trong HYSA so với ~$3 trong tài khoản thanh toán thường.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">FDIC insurance</h3>
+          <span class="term-vi-name">Bảo hiểm tiền gửi liên bang</span>
+          <p class="term-def">
+            <span class="en">US government insurance on bank deposits, up to $250,000 per person per bank. If the bank fails, you get your money back. Crypto platforms and investment accounts don't have this.</span>
+            <span class="vi">Bảo hiểm của chính phủ Mỹ cho tiền gửi ngân hàng, tới $250,000 mỗi người mỗi ngân hàng. Ngân hàng sập, bạn vẫn lấy lại tiền. Sàn crypto và tài khoản đầu tư không có bảo hiểm này.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">Look for "Member FDIC" before opening any bank account.</span>
+            <span class="vi">Tìm dòng "Member FDIC" trước khi mở bất kỳ tài khoản ngân hàng nào.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">APY</h3>
+          <span class="term-vi-name">Lãi suất thực nhận mỗi năm (đã tính kép)</span>
+          <p class="term-def">
+            <span class="en">Annual Percentage Yield: what your savings actually earn in a year, with compounding included. It's the number to compare savings accounts by — higher is better for you.</span>
+            <span class="vi">Annual Percentage Yield: mức tiền tiết kiệm của bạn thực sự sinh ra trong một năm, đã bao gồm lãi kép. Đây là con số để so sánh các tài khoản tiết kiệm — càng cao càng tốt cho bạn.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">4.00% APY on $1,000 = $40 after one year, guaranteed by the rate.</span>
+            <span class="vi">APY 4.00% trên $1,000 = $40 sau một năm, đảm bảo theo mức lãi.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Inflation</h3>
+          <span class="term-vi-name">Lạm phát</span>
+          <p class="term-def">
+            <span class="en">Prices rising over time, which quietly shrinks what each dollar buys. It's why money "safely" sitting in cash actually loses value, and why long-term money needs to grow faster than ~3%.</span>
+            <span class="vi">Giá cả tăng theo thời gian, âm thầm làm mỗi đồng đô mua được ít hơn. Đó là lý do tiền nằm "an toàn" dưới dạng tiền mặt thực chất đang mất giá trị, và tiền dài hạn cần tăng trưởng nhanh hơn ~3%.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">At 3% inflation, today's $100 buys about $74 worth of stuff in 10 years.</span>
+            <span class="vi">Với lạm phát 3%, $100 hôm nay chỉ mua được lượng hàng trị giá khoảng $74 sau 10 năm.</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="jargon-group">
+      <h2 class="jargon-group-title">
+        <span class="en">Credit &amp; borrowing</span>
+        <span class="vi">Tín dụng &amp; vay mượn</span>
+      </h2>
+      <div class="term-grid">
+
+        <div class="card term-card">
+          <h3 class="term-name">Credit score</h3>
+          <span class="term-vi-name">Điểm tín dụng</span>
+          <p class="term-def">
+            <span class="en">A 300–850 number summarizing how reliably you've repaid borrowed money. Landlords, lenders, and some employers check it. 670+ is generally "good," 740+ opens the best rates.</span>
+            <span class="vi">Con số từ 300–850 tóm tắt mức độ đáng tin của bạn khi trả nợ. Chủ nhà, bên cho vay, và một số nhà tuyển dụng sẽ xem nó. Từ 670 là "tốt," từ 740 mở ra mức lãi vay tốt nhất.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">The full breakdown lives in our Credit module.</span>
+            <span class="vi">Phân tích đầy đủ nằm trong mục Credit của Verity.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Credit report</h3>
+          <span class="term-vi-name">Báo cáo tín dụng</span>
+          <p class="term-def">
+            <span class="en">The history behind the score: every card, loan, and payment, kept by three bureaus (Equifax, Experian, TransUnion). You can check it free — checking never hurts your score.</span>
+            <span class="vi">Lịch sử đằng sau điểm số: mọi thẻ, khoản vay, và lần thanh toán, do ba cơ quan lưu trữ (Equifax, Experian, TransUnion). Bạn được xem miễn phí — tự kiểm tra không bao giờ làm giảm điểm.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">AnnualCreditReport.com is the official free source — weekly, from all three bureaus.</span>
+            <span class="vi">AnnualCreditReport.com là nguồn miễn phí chính thức — hàng tuần, từ cả ba cơ quan.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">APR</h3>
+          <span class="term-vi-name">Lãi suất phải trả mỗi năm</span>
+          <p class="term-def">
+            <span class="en">Annual Percentage Rate: the yearly cost of borrowing. The mirror image of APY — APY is interest paid to you, APR is interest charged to you. Credit cards commonly run 20–28%.</span>
+            <span class="vi">Annual Percentage Rate: chi phí vay tính theo năm. Ngược lại với APY — APY là lãi trả cho bạn, APR là lãi tính vào bạn. Thẻ tín dụng thường ở mức 20–28%.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">Carry a $1,000 card balance at 24% APR and do nothing: ~$240/year just in interest.</span>
+            <span class="vi">Giữ dư nợ thẻ $1,000 với APR 24% mà không trả: mất ~$240/năm chỉ riêng tiền lãi.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Credit utilization</h3>
+          <span class="term-vi-name">Tỷ lệ dùng hạn mức tín dụng</span>
+          <p class="term-def">
+            <span class="en">How much of your credit limit you're using, as a percentage. Scores like it under 30%, love it under 10% — even if you pay in full every month.</span>
+            <span class="vi">Phần trăm hạn mức tín dụng bạn đang dùng. Điểm tín dụng thích mức dưới 30%, rất thích dưới 10% — kể cả khi bạn trả đủ hàng tháng.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">$500 limit? Keep the statement balance under $150, ideally under $50.</span>
+            <span class="vi">Hạn mức $500? Giữ dư nợ sao kê dưới $150, lý tưởng là dưới $50.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Minimum payment</h3>
+          <span class="term-vi-name">Khoản thanh toán tối thiểu</span>
+          <p class="term-def">
+            <span class="en">The smallest amount the card lets you pay without a late fee — designed to keep you in debt as long as possible. Paying only the minimum means interest compounds against you.</span>
+            <span class="vi">Số tiền nhỏ nhất thẻ cho phép trả để không bị phí trễ hạn — được thiết kế để giữ bạn trong nợ càng lâu càng tốt. Chỉ trả tối thiểu nghĩa là lãi kép đang chống lại bạn.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">$1,000 at 24% APR, paying $25 minimums: about 5 years and ~$660 extra in interest.</span>
+            <span class="vi">$1,000 với APR 24%, chỉ trả tối thiểu $25: mất khoảng 5 năm và ~$660 tiền lãi phát sinh.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Grace period</h3>
+          <span class="term-vi-name">Thời gian ân hạn</span>
+          <p class="term-def">
+            <span class="en">The window (usually ~21–25 days after your statement) where paying the full balance means zero interest. Pay in full inside it every month and a credit card costs you nothing.</span>
+            <span class="vi">Khoảng thời gian (thường ~21–25 ngày sau sao kê) mà nếu trả đủ toàn bộ dư nợ thì không mất đồng lãi nào. Trả đủ trong khoảng này hàng tháng thì thẻ tín dụng hoàn toàn miễn phí.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">This is the entire trick to using credit cards safely: full balance, every month, on autopay.</span>
+            <span class="vi">Đây là toàn bộ bí quyết dùng thẻ tín dụng an toàn: trả đủ, hàng tháng, bằng thanh toán tự động.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Secured credit card</h3>
+          <span class="term-vi-name">Thẻ tín dụng ký quỹ</span>
+          <p class="term-def">
+            <span class="en">A starter credit card backed by your own refundable deposit (often $200), which becomes your limit. It exists specifically for people with no credit history — the training wheels of credit.</span>
+            <span class="vi">Thẻ tín dụng khởi đầu được đảm bảo bằng tiền ký quỹ hoàn lại của chính bạn (thường $200), số đó thành hạn mức. Nó sinh ra dành riêng cho người chưa có lịch sử tín dụng — như bánh xe phụ khi tập xe.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">Use it for one small subscription, autopay in full, and upgrade in 6–12 months.</span>
+            <span class="vi">Dùng nó cho một gói đăng ký nhỏ, tự động trả đủ, và nâng cấp sau 6–12 tháng.</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="jargon-group">
+      <h2 class="jargon-group-title">
+        <span class="en">Investing &amp; retirement</span>
+        <span class="vi">Đầu tư &amp; hưu trí</span>
+      </h2>
+      <div class="term-grid">
+
+        <div class="card term-card">
+          <h3 class="term-name">Compound interest</h3>
+          <span class="term-vi-name">Lãi kép</span>
+          <p class="term-def">
+            <span class="en">Earning returns on your returns: each year's growth joins the balance and starts growing too, so the curve bends upward the longer you wait. Works against you on debt.</span>
+            <span class="vi">Lãi sinh ra lãi: phần tăng trưởng mỗi năm nhập vào số dư rồi tự nó tiếp tục sinh lời, nên đường cong càng để lâu càng cong lên. Với nợ, nó vận hành ngược lại — chống lại bạn.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">This is the entire point of our calculator — go watch it bend.</span>
+            <span class="vi">Đây chính là điều máy tính của Verity minh họa — hãy xem đường cong tự uốn lên.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Stock</h3>
+          <span class="term-vi-name">Cổ phiếu</span>
+          <p class="term-def">
+            <span class="en">A tiny ownership slice of one company. Its value rises and falls with that company's results and the market's mood — which is why owning just one or two is risky.</span>
+            <span class="vi">Một phần sở hữu nhỏ của một công ty. Giá trị của nó lên xuống theo kết quả kinh doanh của công ty đó và tâm lý thị trường — vì vậy chỉ nắm một hai cổ phiếu là rủi ro.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">One share of a company at $180 makes you a (very small) co-owner of it.</span>
+            <span class="vi">Một cổ phiếu giá $180 khiến bạn thành đồng sở hữu (rất nhỏ) của công ty đó.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Bond</h3>
+          <span class="term-vi-name">Trái phiếu</span>
+          <p class="term-def">
+            <span class="en">A loan you make to a government or company, which pays you fixed interest and returns the money on a set date. Steadier than stocks, grows slower — the seatbelt of a portfolio.</span>
+            <span class="vi">Khoản tiền bạn cho chính phủ hoặc công ty vay, họ trả lãi cố định và hoàn vốn vào ngày định trước. Ổn định hơn cổ phiếu, tăng chậm hơn — như dây an toàn của danh mục đầu tư.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">Young investors usually hold mostly stocks — decades of time absorbs the swings.</span>
+            <span class="vi">Người đầu tư trẻ thường nắm chủ yếu cổ phiếu — hàng chục năm phía trước đủ hấp thụ các đợt biến động.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Index fund / ETF</h3>
+          <span class="term-vi-name">Quỹ chỉ số</span>
+          <p class="term-def">
+            <span class="en">One purchase that buys hundreds of companies at once, automatically tracking a list ("index") like the S&amp;P 500. No manager to pay, no winners to pick — the default answer for long-term investing.</span>
+            <span class="vi">Một lần mua sở hữu hàng trăm công ty cùng lúc, tự động bám theo một danh sách ("chỉ số") như S&amp;P 500. Không phải trả phí quản lý cao, không phải chọn công ty thắng — câu trả lời mặc định cho đầu tư dài hạn.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">An ETF is just an index fund you can trade like a stock — for beginners, the difference barely matters.</span>
+            <span class="vi">ETF chỉ là quỹ chỉ số giao dịch được như cổ phiếu — với người mới, khác biệt gần như không đáng kể.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">S&amp;P 500</h3>
+          <span class="term-vi-name">Chỉ số 500 công ty lớn nhất Mỹ</span>
+          <p class="term-def">
+            <span class="en">The list of ~500 largest US companies, used as shorthand for "the stock market." Funds tracking it have averaged roughly 10% a year over long periods — including crashes along the way.</span>
+            <span class="vi">Danh sách ~500 công ty lớn nhất nước Mỹ, thường được dùng thay cho cụm "thị trường chứng khoán." Các quỹ bám theo nó đạt trung bình khoảng 10%/năm trong dài hạn — đã tính cả những đợt sụp đổ giữa chừng.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">"Average 10%" includes years like -37% (2008) and +31% (2019). Long horizons only.</span>
+            <span class="vi">"Trung bình 10%" bao gồm cả những năm như -37% (2008) và +31% (2019). Chỉ dành cho mục tiêu dài hạn.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Expense ratio</h3>
+          <span class="term-vi-name">Tỷ lệ phí quỹ</span>
+          <p class="term-def">
+            <span class="en">The yearly fee a fund quietly takes, as a percentage of your money. It compounds against you forever, which is why 0.03% vs 1% matters enormously over decades.</span>
+            <span class="vi">Khoản phí hàng năm quỹ âm thầm thu, tính theo phần trăm tiền của bạn. Nó "lãi kép ngược" mãi mãi, nên 0.03% so với 1% tạo khác biệt khổng lồ qua nhiều thập kỷ.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">$10,000 growing 40 years at 7%: a 1% fee eats ~$45,000 of the final amount.</span>
+            <span class="vi">$10,000 tăng trưởng 40 năm với 7%: mức phí 1% ăn mất ~$45,000 của số tiền cuối cùng.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Diversification</h3>
+          <span class="term-vi-name">Đa dạng hóa</span>
+          <p class="term-def">
+            <span class="en">Spreading money across many companies (and kinds of assets) so no single failure can sink you. Index funds give you this automatically in one purchase.</span>
+            <span class="vi">Dàn trải tiền vào nhiều công ty (và nhiều loại tài sản) để không một thất bại đơn lẻ nào nhấn chìm bạn. Quỹ chỉ số tự động mang lại điều này trong một lần mua.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">"Don't put all your eggs in one basket" — as an investment product.</span>
+            <span class="vi">"Đừng bỏ hết trứng vào một giỏ" — dưới dạng một sản phẩm đầu tư.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Roth IRA</h3>
+          <span class="term-vi-name">Tài khoản hưu trí đóng thuế trước</span>
+          <p class="term-def">
+            <span class="en">A retirement account funded with already-taxed money; all growth comes out tax-free after 59½. Needs earned income to contribute ($7,000/year limit as of 2025); contributions can be withdrawn anytime.</span>
+            <span class="vi">Tài khoản hưu trí nạp bằng tiền đã đóng thuế; toàn bộ phần tăng trưởng được rút miễn thuế sau tuổi 59½. Cần thu nhập từ việc làm để đóng góp (hạn mức $7,000/năm tính đến 2025); tiền gốc rút được bất cứ lúc nào.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">Taxed at ~12% now vs. potentially much more at 60 — that's the whole bet, and it favors the young.</span>
+            <span class="vi">Đóng thuế ~12% bây giờ thay vì có thể cao hơn nhiều ở tuổi 60 — đó là toàn bộ ván cược, và nó nghiêng về người trẻ.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">401(k) &amp; employer match</h3>
+          <span class="term-vi-name">Quỹ hưu trí qua công ty &amp; khoản đối ứng</span>
+          <p class="term-def">
+            <span class="en">A retirement account through your job, funded from your paycheck before taxes. Many employers add matching money when you contribute — a guaranteed instant return no investment can beat.</span>
+            <span class="vi">Tài khoản hưu trí qua công ty, trích từ lương trước thuế. Nhiều công ty góp thêm tiền đối ứng khi bạn đóng — mức lợi nhuận tức thì được đảm bảo mà không khoản đầu tư nào sánh nổi.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">"100% match up to 4%" on a $40,000 salary = $1,600/year of free money.</span>
+            <span class="vi">"Đối ứng 100% tới 4%" trên lương $40,000 = $1,600/năm tiền cho không.</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <p class="jargon-empty" id="jargonEmpty">
+      <span class="en">No terms match that search. Try a shorter word — or tell us what's missing.</span>
+      <span class="vi">Không có thuật ngữ nào khớp. Thử từ ngắn hơn — hoặc cho chúng tôi biết còn thiếu gì.</span>
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="next-links">
+      <a class="btn btn-ghost" href="actual%20website.html">
+        <span class="en">See compound interest in action →</span>
+        <span class="vi">Xem lãi kép vận hành →</span>
+      </a>
+      <a class="btn btn-ghost" href="recommend.html">
+        <span class="en">Ready to act? Open Recommend →</span>
+        <span class="vi">Sẵn sàng hành động? Mở Recommend →</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span class="footer-motto">
+      <span class="en">verity — money made easy</span>
+      <span class="vi">verity — tiền bạc, dễ hiểu</span>
+    </span>
+    <nav class="footer-links">
+      <a href="actual%20website.html">Calculator</a>
+      <a href="recommend.html">Recommend</a>
+      <a href="jargon.html">Jargon</a>
+      <a href="credit.html">Credit</a>
+      <a href="family-split.html">Family Split</a>
+    </nav>
+    <p class="footer-note">
+      <span class="en">Educational only — not licensed financial advice. Example rates are approximate as of 2025.</span>
+      <span class="vi">Chỉ mang tính giáo dục — không phải lời khuyên tài chính được cấp phép. Các mức lãi trong ví dụ là gần đúng tính đến 2025.</span>
+    </p>
+  </div>
+</footer>
+
+<script src="js/site.js"></script>
+<script src="js/jargon.js"></script>
+</body>
+</html>

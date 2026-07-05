@@ -304,64 +304,8 @@ const debouncedUpdate = debounce(update, 150);
 
 update();
 
-// Custom cursor: a dot that tracks the pointer closely and a ring that
-// trails slightly looser (lerp-smoothed), expanding over clickable elements.
-const cursorDot = document.getElementById('cursorDot');
-const cursorRing = document.getElementById('cursorRing');
-const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-const ringPos = { x: mouse.x, y: mouse.y };
-
-function lerp(start, end, factor) {
-  return start + (end - start) * factor;
-}
-
-document.addEventListener('mousemove', (event) => {
-  mouse.x = event.clientX;
-  mouse.y = event.clientY;
-  cursorDot.classList.add('active');
-  cursorRing.classList.add('active');
-});
-
-document.addEventListener('mouseleave', () => {
-  cursorDot.classList.remove('active');
-  cursorRing.classList.remove('active');
-});
-
-document.querySelectorAll('a, button, input, .card').forEach((el) => {
-  el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
-  el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
-});
-
-// .cursor-ring is sized at its largest (hovering) state in CSS; resting size
-// is a scale-down of that, so the hover "grow" only ever animates transform.
-// The scale is lerped here in JS (not via a CSS transition) since a CSS
-// transition on `transform` would also catch the position translate that's
-// rewritten every frame, doubling up with this lerp and making it sluggish.
-const RING_REST_SCALE = 0.75;
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-let ringScale = RING_REST_SCALE;
-
-function animateCursor() {
-  cursorDot.style.transform = `translate(${mouse.x}px, ${mouse.y}px) translate(-50%, -50%)`;
-
-  const targetScale = cursorRing.classList.contains('hovering') ? 1 : RING_REST_SCALE;
-
-  // With reduced motion, snap the ring straight to the pointer/size instead
-  // of lerp-trailing behind it — the trailing lag is the perceptible motion.
-  if (prefersReducedMotion) {
-    ringPos.x = mouse.x;
-    ringPos.y = mouse.y;
-    ringScale = targetScale;
-  } else {
-    ringPos.x = lerp(ringPos.x, mouse.x, 0.2);
-    ringPos.y = lerp(ringPos.y, mouse.y, 0.2);
-    ringScale = lerp(ringScale, targetScale, 0.2);
-  }
-  cursorRing.style.transform = `translate(${ringPos.x}px, ${ringPos.y}px) translate(-50%, -50%) scale(${ringScale})`;
-
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
+// The custom cursor, language toggle, and compacting topbar are shared
+// site chrome and live in js/site.js (loaded before this file).
 
 // Info modal: explains compound interest, respects whatever language is
 // currently toggled since it reuses the same .en/.vi spans.
@@ -387,13 +331,6 @@ function closeInfoModal() {
 }
 
 infoBtn.addEventListener('click', openInfoModal);
-
-// Roadmapped nav items are real anchors (so screen readers still announce
-// them as present) but have nothing to navigate to yet — block the
-// href="#" jump-to-top instead of letting a dead click look like a bug.
-document.querySelectorAll('.nav-link[aria-disabled="true"]').forEach((link) => {
-  link.addEventListener('click', (event) => event.preventDefault());
-});
 infoModalClose.addEventListener('click', closeInfoModal);
 infoModal.addEventListener('click', (event) => {
   if (event.target === infoModal) closeInfoModal();
@@ -419,13 +356,16 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-// Language toggle: switches which bilingual line is visually primary.
-const langToggle = document.getElementById('langToggle');
-langToggle.addEventListener('click', () => {
-  document.body.classList.toggle('lang-vi-primary');
-  langToggle.querySelectorAll('.lang-option').forEach((el) => el.classList.toggle('active'));
-  // infoBtn has no visible label (icon-only), so its aria-label needs to be
-  // kept in sync with the language toggle manually instead of via .en/.vi.
+// Language switching itself is handled by js/site.js (shared across all
+// pages, persisted in localStorage). The calculator only reacts: refresh
+// the Chart.js labels/tooltips and the icon-only info button's aria-label
+// (which can't use the .en/.vi span pattern) whenever the language flips.
+function syncLangDependentUi() {
   infoBtn.setAttribute('aria-label', isViPrimary() ? 'Cách hoạt động' : 'How it works');
+}
+
+document.addEventListener('verity:langchange', () => {
+  syncLangDependentUi();
   update();
 });
+syncLangDependentUi();

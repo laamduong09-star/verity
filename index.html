@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verity: Money Made Easy</title>
+<meta name="description" content="Verity is a free, bilingual (English + Tiếng Việt) financial literacy toolset for first-time earners: compound interest calculator, plain-language jargon guide, credit education, and family money planning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+<div class="bg-mesh" aria-hidden="true">
+  <span class="mesh-blob mesh-blob--1"></span>
+  <span class="mesh-blob mesh-blob--2"></span>
+  <span class="mesh-blob mesh-blob--3"></span>
+  <span class="mesh-blob mesh-blob--4"></span>
+  <span class="mesh-blob mesh-blob--5"></span>
+</div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="logo" href="index.html">
+      <svg class="logo-mark" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="0" y="0" width="20" height="20" rx="4" fill="#11151f"/>
+        <g transform="translate(3,3.478) scale(0.014168) translate(-425.333,-611.012)">
+          <path fill="#ffffff" d="M 452.5,611.5 C 533.834,611.333 615.167,611.5 696.5,612C 711.229,615.063 720.396,623.896 724,638.5C 724.333,789.167 724.667,939.833 725,1090.5C 882.221,933.279 1039.39,776.113 1196.5,619C 1200.01,616.746 1203.67,614.746 1207.5,613C 1266.11,611.345 1324.78,611.012 1383.5,612C 1398.66,614.822 1408.49,623.655 1413,638.5C 1413.67,702.167 1413.67,765.833 1413,829.5C 1411.77,834.518 1409.77,839.185 1407,843.5C 1178.83,1071.67 950.667,1299.83 722.5,1528C 720.043,1529.56 717.376,1530.56 714.5,1531C 627.5,1531.67 540.5,1531.67 453.5,1531C 439.009,1527.18 429.842,1518.01 426,1503.5C 425.333,1215.17 425.333,926.833 426,638.5C 430.351,624.984 439.184,615.984 452.5,611.5 Z"/>
+        </g>
+      </svg>
+      <span class="logo-text">verity</span>
+    </a>
+    <nav class="nav-capsule">
+      <a href="actual%20website.html" class="nav-link">Calculator</a>
+      <a href="recommend.html" class="nav-link">Recommend</a>
+      <a href="jargon.html" class="nav-link">Jargon</a>
+      <a href="credit.html" class="nav-link">Credit</a>
+      <a href="family-split.html" class="nav-link">Family Split</a>
+    </nav>
+    <button class="lang-toggle" id="langToggle">
+      <span class="lang-option active" data-lang="en">EN</span>
+      <span class="lang-divider">|</span>
+      <span class="lang-option" data-lang="vi">VI</span>
+    </button>
+  </div>
+</header>
+
+<main class="page">
+
+  <section class="hero">
+    <div class="hero-decor" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span>
+    </div>
+    <h1 class="hero-title">
+      <span class="en">Money made easy.</span>
+      <span class="vi">Tiền bạc, dễ hiểu.</span>
+      <span class="hero-subtitle-stack">
+        <span class="en">Verity is a free, bilingual toolset that explains how money actually works — built for first-time earners, in English and tiếng Việt.</span>
+        <span class="vi">Verity là bộ công cụ song ngữ miễn phí giải thích cách tiền bạc thực sự vận hành — dành cho người mới đi làm, bằng tiếng Anh và tiếng Việt.</span>
+      </span>
+    </h1>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="actual%20website.html">
+        <span class="en">Try the calculator</span>
+        <span class="vi">Dùng thử máy tính</span>
+      </a>
+      <a class="btn btn-ghost" href="#modules">
+        <span class="en">See what's inside</span>
+        <span class="vi">Xem có gì bên trong</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="modules">
+    <div class="section-head">
+      <p class="eyebrow">
+        <span class="en">What's inside</span>
+        <span class="vi">Có gì bên trong</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">Five tools, one goal: understand your money</span>
+        <span class="vi">Năm công cụ, một mục tiêu: hiểu tiền của bạn</span>
+      </h2>
+      <p class="section-sub">
+        <span class="en">Every module explains the why behind the number, in plain language, in both languages.</span>
+        <span class="vi">Mỗi công cụ đều giải thích lý do đằng sau con số, bằng ngôn ngữ đơn giản, bằng cả hai thứ tiếng.</span>
+      </p>
+    </div>
+
+    <div class="module-grid">
+      <a class="card module-card" href="actual%20website.html">
+        <span class="stat-icon icon-blue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <rect x="3" y="13" width="4" height="8" rx="1.3"/>
+            <rect x="10" y="9" width="4" height="12" rx="1.3"/>
+            <rect x="17" y="5" width="4" height="16" rx="1.3"/>
+          </svg>
+        </span>
+        <h3 class="module-title">Calculator</h3>
+        <p class="module-desc">
+          <span class="en">Watch compound interest turn small monthly deposits into real money — year by year, with every number explained.</span>
+          <span class="vi">Xem lãi suất kép biến những khoản gửi nhỏ hàng tháng thành số tiền lớn — theo từng năm, mọi con số đều được giải thích.</span>
+        </p>
+        <span class="module-open">
+          <span class="en">Open →</span>
+          <span class="vi">Mở →</span>
+        </span>
+      </a>
+
+      <a class="card module-card" href="recommend.html">
+        <span class="stat-icon icon-teal" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12.5 9.5 18 20 6.5"/>
+          </svg>
+        </span>
+        <h3 class="module-title">Recommend</h3>
+        <p class="module-desc">
+          <span class="en">Where to put your first dollars, in order — Roth IRA, index funds, 401(k) match — and what to stay away from.</span>
+          <span class="vi">Nên đặt những đồng tiền đầu tiên ở đâu, theo thứ tự — Roth IRA, quỹ chỉ số, 401(k) match — và nên tránh xa những gì.</span>
+        </p>
+        <span class="module-open">
+          <span class="en">Open →</span>
+          <span class="vi">Mở →</span>
+        </span>
+      </a>
+
+      <a class="card module-card" href="jargon.html">
+        <span class="stat-icon icon-blue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9a1.5 1.5 0 0 1-1.5 1.5H12l-4.5 4v-4H5.5A1.5 1.5 0 0 1 4 14.5v-9Z"/>
+            <path d="M8.5 9h7"/>
+            <path d="M8.5 12h4.5"/>
+          </svg>
+        </span>
+        <h3 class="module-title">Jargon</h3>
+        <p class="module-desc">
+          <span class="en">APR, APY, expense ratio… every confusing term translated twice: into plain English, and into tiếng Việt.</span>
+          <span class="vi">APR, APY, expense ratio… mọi thuật ngữ khó hiểu được dịch hai lần: sang tiếng Anh đơn giản, và sang tiếng Việt.</span>
+        </p>
+        <span class="module-open">
+          <span class="en">Open →</span>
+          <span class="vi">Mở →</span>
+        </span>
+      </a>
+
+      <a class="card module-card" href="credit.html">
+        <span class="stat-icon icon-teal" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="6" width="18" height="13" rx="2.5"/>
+            <path d="M3 10.5h18"/>
+            <path d="M7 15h4"/>
+          </svg>
+        </span>
+        <h3 class="module-title">Credit</h3>
+        <p class="module-desc">
+          <span class="en">How credit scores actually work, and how to start building yours early — responsibly, without debt traps.</span>
+          <span class="vi">Điểm tín dụng thực sự hoạt động ra sao, và cách bắt đầu xây dựng điểm từ sớm — có trách nhiệm, không rơi vào bẫy nợ.</span>
+        </p>
+        <span class="module-open">
+          <span class="en">Open →</span>
+          <span class="vi">Mở →</span>
+        </span>
+      </a>
+
+      <a class="card module-card" href="family-split.html">
+        <span class="stat-icon icon-blue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4v6"/>
+            <path d="M12 10 5.5 16"/>
+            <path d="M12 10l6.5 6"/>
+            <circle cx="12" cy="4" r="1.6" fill="currentColor" stroke="none"/>
+            <circle cx="5.5" cy="17.5" r="2.1"/>
+            <circle cx="18.5" cy="17.5" r="2.1"/>
+          </svg>
+        </span>
+        <h3 class="module-title">Family Split</h3>
+        <p class="module-desc">
+          <span class="en">Plan how one paycheck supports your family, your future, and your present — with a split you choose, not guilt.</span>
+          <span class="vi">Lên kế hoạch để một kỳ lương vừa lo cho gia đình, tương lai, và hiện tại của bạn — theo tỷ lệ bạn chọn, không phải vì áy náy.</span>
+        </p>
+        <span class="module-open">
+          <span class="en">Open →</span>
+          <span class="vi">Mở →</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-head">
+      <p class="eyebrow">
+        <span class="en">Why Verity exists</span>
+        <span class="vi">Vì sao có Verity</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">Built for access, not profit</span>
+        <span class="vi">Tạo ra để tiếp cận, không phải để kiếm lời</span>
+      </h2>
+    </div>
+    <div class="card mission-card">
+      <p class="mission-text">
+        <span class="en">Verity started with a simple observation: the people who most need clear financial explanations are the least likely to get them. First-generation earners often translate money decisions for their whole family — in two languages, with no finance background, and no one to ask.</span>
+        <span class="vi">Verity bắt đầu từ một quan sát đơn giản: những người cần lời giải thích tài chính rõ ràng nhất lại là những người ít có cơ hội nhận được nhất. Người đi làm thế hệ đầu thường phải "phiên dịch" các quyết định tiền bạc cho cả gia đình — bằng hai thứ tiếng, không có nền tảng tài chính, và không biết hỏi ai.</span>
+      </p>
+      <p class="mission-text">
+        <span class="en">So everything here is free, bilingual, and explained from zero. No ads, no accounts, no upsells, and nothing to buy — the only goal is that you leave understanding why a number changed, not just seeing that it did.</span>
+        <span class="vi">Vì vậy mọi thứ ở đây đều miễn phí, song ngữ, và được giải thích từ con số không. Không quảng cáo, không tài khoản, không chào bán gì thêm — mục tiêu duy nhất là bạn rời đi với sự hiểu biết vì sao con số thay đổi, chứ không chỉ nhìn thấy nó thay đổi.</span>
+      </p>
+      <div class="fact-chips">
+        <span class="fact-chip">
+          <span class="en">100% free</span>
+          <span class="vi">Miễn phí 100%</span>
+        </span>
+        <span class="fact-chip">
+          <span class="en">No ads, no accounts</span>
+          <span class="vi">Không quảng cáo, không tài khoản</span>
+        </span>
+        <span class="fact-chip">English + Tiếng Việt</span>
+        <span class="fact-chip">
+          <span class="en">Nothing for sale</span>
+          <span class="vi">Không bán gì cả</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="principles">
+    <div class="section-head">
+      <p class="eyebrow">
+        <span class="en">How we explain</span>
+        <span class="vi">Cách chúng tôi giải thích</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">Four rules every page follows</span>
+        <span class="vi">Bốn nguyên tắc mọi trang đều tuân theo</span>
+      </h2>
+    </div>
+    <div class="value-grid">
+      <div class="card value-card">
+        <h3 class="value-name">
+          <span class="en">Explain, don't impress</span>
+          <span class="vi">Giải thích, không phô trương</span>
+        </h3>
+        <p class="value-desc">
+          <span class="en">Every number and chart earns a plain-language "why" right next to it.</span>
+          <span class="vi">Mỗi con số và biểu đồ đều có lời giải thích "vì sao" đơn giản ngay bên cạnh.</span>
+        </p>
+      </div>
+      <div class="card value-card">
+        <h3 class="value-name">
+          <span class="en">Plain language first</span>
+          <span class="vi">Ngôn ngữ đơn giản trước</span>
+        </h3>
+        <p class="value-desc">
+          <span class="en">Financial terms get defined the moment they appear — never assumed.</span>
+          <span class="vi">Thuật ngữ tài chính được định nghĩa ngay khi xuất hiện — không bao giờ mặc định bạn đã biết.</span>
+        </p>
+      </div>
+      <div class="card value-card">
+        <h3 class="value-name">
+          <span class="en">Bilingual parity</span>
+          <span class="vi">Song ngữ bình đẳng</span>
+        </h3>
+        <p class="value-desc">
+          <span class="en">English and tiếng Việt get equal care — never a translated afterthought.</span>
+          <span class="vi">Tiếng Anh và tiếng Việt được chăm chút như nhau — không bao giờ là bản dịch qua loa.</span>
+        </p>
+      </div>
+      <div class="card value-card">
+        <h3 class="value-name">
+          <span class="en">Show the mechanism</span>
+          <span class="vi">Cho thấy cơ chế</span>
+        </h3>
+        <p class="value-desc">
+          <span class="en">We visualize how money grows, not just what it grows to.</span>
+          <span class="vi">Chúng tôi cho bạn thấy tiền tăng trưởng như thế nào, không chỉ tăng đến bao nhiêu.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span class="footer-motto">
+      <span class="en">verity — money made easy</span>
+      <span class="vi">verity — tiền bạc, dễ hiểu</span>
+    </span>
+    <nav class="footer-links">
+      <a href="actual%20website.html">Calculator</a>
+      <a href="recommend.html">Recommend</a>
+      <a href="jargon.html">Jargon</a>
+      <a href="credit.html">Credit</a>
+      <a href="family-split.html">Family Split</a>
+    </nav>
+    <p class="footer-note">
+      <span class="en">Verity is a free educational passion project, not a company. Nothing here is licensed financial advice — it's a starting point for your own decisions and conversations.</span>
+      <span class="vi">Verity là một dự án giáo dục miễn phí làm từ đam mê, không phải một công ty. Không có gì ở đây là lời khuyên tài chính được cấp phép — đây là điểm khởi đầu cho quyết định và những cuộc trò chuyện của chính bạn.</span>
+    </p>
+  </div>
+</footer>
+
+<script src="js/site.js"></script>
+</body>
+</html>
