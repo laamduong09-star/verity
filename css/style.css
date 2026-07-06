@@ -277,7 +277,7 @@ body {
   font-size: 14px;
   font-weight: 500;
   padding: 12px 16px;
-  border-radius: 200px;
+  border-radius: 10px;
   transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
   display: inline-flex;
   align-items: center;
@@ -1176,8 +1176,8 @@ a.logo {
 }
 
 .topbar.is-compact .topbar-inner {
-  max-width: 920px;
-  padding: 6px 14px;
+  max-width: 720px;
+  padding: 6px 12px;
   background: rgba(250, 249, 247, 0.88);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
@@ -2204,6 +2204,406 @@ a.logo {
   }
 
   .app-window {
+    transition: none;
+  }
+}
+
+/* ==================================================================
+   Landing makeover: pull-quote band, ink spotlight band, module
+   accordion (Amplemarket-inspired structure on Verity tokens)
+   ================================================================== */
+
+/* ---------- Pull-quote band ---------- */
+.quote-band {
+  max-width: 860px;
+  margin: 104px auto 0;
+}
+
+.quote-text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.6vw, 40px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.quote-squiggle {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+.quote-attr {
+  margin: 16px 0 0;
+  font-size: 14px;
+  color: var(--slate);
+}
+
+.quote-band .fact-chips {
+  justify-content: flex-start;
+  margin-top: 24px;
+}
+
+/* ---------- Ink spotlight band ---------- */
+/* Amplemarket-style dark band, rendered as a large rounded panel inside
+   the page column (avoids 100vw scrollbar-width seams). Deliberately
+   uses the system's own ink (a warm near-black, not a foreign navy) so
+   the Warm-Never-Cold rule bends rather than breaks. */
+.ink-band {
+  margin: 104px 0 0;
+  padding: 84px 32px 92px;
+  background: var(--ink);
+  border-radius: 24px;
+  text-align: center;
+}
+
+.ink-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px 6px 6px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 200px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ink-pill-tag {
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 200px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.ink-title {
+  max-width: 720px;
+  margin: 26px auto 0;
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.6vw, 52px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--white);
+}
+
+.ink-title em {
+  font-style: italic;
+}
+
+.ink-sub {
+  max-width: 540px;
+  margin: 18px auto 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.ink-cta {
+  margin-top: 30px;
+}
+
+.btn-ghost-dark {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.28);
+  color: var(--white);
+}
+
+.btn-ghost-dark:hover {
+  border-color: var(--white);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Floating fact chips — the "signals" rows. Boxy corners on purpose. */
+.chip-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.signal-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.signal-dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+}
+
+/* Lighter siblings of the system accents so the dots stay legible
+   against ink. */
+.signal-dot.dot-blue { background: #7b96ea; }
+.signal-dot.dot-teal { background: #35b3a7; }
+.signal-dot.dot-amber { background: var(--amber-bright); }
+.signal-dot.dot-rose { background: #e4638f; }
+
+/* ---------- Module accordion (stacked tabs) ---------- */
+.acc {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.acc-item {
+  position: relative;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: border-color 0.2s ease;
+}
+
+.acc-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--blue);
+  opacity: 0.5;
+}
+
+.acc-item:hover {
+  border-color: var(--blue);
+}
+
+.acc-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 19px 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.acc-head:active {
+  transform: scale(0.995);
+}
+
+.acc-dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.acc-dot.dot-blue { background: var(--blue); }
+.acc-dot.dot-teal { background: var(--teal); }
+.acc-dot.dot-amber { background: var(--amber); }
+.acc-dot.dot-rose { background: var(--rose); }
+
+.acc-icon {
+  margin-left: auto;
+  color: var(--slate);
+  font-size: 20px;
+  line-height: 1;
+  transition: transform 0.25s var(--ease-out-strong);
+}
+
+.acc-item.is-open .acc-icon {
+  transform: rotate(45deg);
+}
+
+/* Height animation via the grid-rows 0fr -> 1fr trick: transform-free,
+   interruptible, and no hardcoded max-heights to go stale. */
+.acc-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s var(--ease-out-strong);
+}
+
+.acc-item.is-open .acc-panel {
+  grid-template-rows: 1fr;
+}
+
+.acc-panel-clip {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.acc-panel-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  padding: 4px 24px 26px;
+}
+
+@media (max-width: 760px) {
+  .acc-panel-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+.acc-title {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.acc-desc {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--slate);
+}
+
+.acc-open-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.acc-open-link:hover {
+  text-decoration: underline;
+}
+
+/* Mini product visuals inside accordion panels */
+.acc-mini {
+  align-self: start;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.acc-mini svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mini-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  font-size: 13.5px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mini-row:first-child {
+  padding-top: 0;
+}
+
+.mini-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.mini-num {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--blue);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mini-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.mini-value.accent {
+  color: var(--teal);
+}
+
+.mini-term {
+  font-weight: 600;
+}
+
+.mini-term-vi {
+  color: var(--teal);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.mini-bar-track {
+  flex: 1;
+  height: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 200px;
+  overflow: hidden;
+}
+
+.mini-bar-fill {
+  height: 100%;
+  background: var(--blue);
+  opacity: 0.85;
+  border-radius: 200px;
+}
+
+.mini-label-sm {
+  flex: none;
+  width: 118px;
+  font-size: 12.5px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.mini-pct {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .acc-panel,
+  .acc-icon {
     transition: none;
   }
 }
