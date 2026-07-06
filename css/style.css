@@ -320,7 +320,7 @@ body {
 .lang-toggle {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 200px;
+  border-radius: 10px;
   padding: 8px 16px;
   min-height: 44px;
   font-family: var(--font-body);
@@ -1161,7 +1161,7 @@ a.logo {
 
 .topbar-inner {
   border: 1px solid transparent;
-  border-radius: 200px;
+  border-radius: 16px;
   padding: 6px 0;
   transition:
     max-width 0.3s var(--ease-out-strong),
@@ -1177,7 +1177,7 @@ a.logo {
 
 .topbar.is-compact .topbar-inner {
   max-width: 720px;
-  padding: 6px 12px;
+  padding: 6px 14px 6px 20px;
   background: rgba(250, 249, 247, 0.88);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
@@ -1215,9 +1215,8 @@ a.logo {
 }
 
 @media (max-width: 700px) {
-  /* Two-row topbar on small screens: the capsule can't be a 200px pill. */
   .topbar.is-compact .topbar-inner {
-    border-radius: 20px;
+    border-radius: 16px;
   }
 }
 
@@ -2605,5 +2604,103 @@ a.logo {
   .acc-panel,
   .acc-icon {
     transition: none;
+  }
+}
+
+/* ==================================================================
+   Module-page iconography (GIC-inspired glyph pass)
+   ================================================================== */
+
+/* A small centered line glyph above each module page's hero title —
+   the page's "mark", not decoration repeated anywhere else. */
+.page-hero-glyph {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--blue);
+  animation: fadeUp 0.6s ease-out both;
+}
+
+.page-hero-glyph svg {
+  width: 34px;
+  height: 34px;
+}
+
+/* Tinted icon tiles for card headers: soft accent-colored square with a
+   stroke glyph, one size smaller than the stat icons (a label, not a
+   hero element). */
+.icon-tile {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.icon-tile svg {
+  width: 22px;
+  height: 22px;
+}
+
+.tile-blue { background: rgba(35, 72, 173, 0.1); color: var(--blue); }
+.tile-teal { background: var(--teal-soft); color: var(--teal); }
+.tile-amber { background: rgba(194, 126, 10, 0.12); color: var(--amber); }
+.tile-rose { background: var(--rose-soft); color: var(--rose); }
+
+/* Title rows that pair an icon tile with an existing heading. */
+.ladder-title-row,
+.card-title-row,
+.plan-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ladder-title-row {
+  margin-bottom: 2px;
+}
+
+.ladder-title-row .ladder-title {
+  margin: 0;
+}
+
+.card-title-row {
+  margin-bottom: 20px;
+}
+
+.card-title-row .card-title {
+  margin: 0;
+}
+
+.plan-head {
+  margin-bottom: 10px;
+}
+
+.plan-head .plan-title {
+  margin: 0;
+}
+
+.avoid-card .icon-tile {
+  margin-bottom: 12px;
+}
+
+/* Small centered glyph above jargon group titles. */
+.group-glyph {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  color: var(--blue);
+}
+
+.group-glyph svg {
+  width: 26px;
+  height: 26px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-hero-glyph {
+    animation: none;
   }
 }

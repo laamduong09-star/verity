@@ -53,6 +53,7 @@ rounded:
   lg: "16px"
   md: "10px"
   sm: "8px"
+  box: "10px"
 spacing:
   xs: "8px"
   sm: "16px"
@@ -60,15 +61,15 @@ spacing:
   lg: "28px"
   xl: "32px"
 components:
-  button-pill:
+  button-chip:
     backgroundColor: "{colors.card}"
     textColor: "{colors.slate}"
-    rounded: "{rounded.pill}"
+    rounded: "{rounded.box}"
     padding: "8px 16px"
-  button-pill-active:
+  button-chip-active:
     backgroundColor: "{colors.ink}"
     textColor: "#ffffff"
-    rounded: "{rounded.pill}"
+    rounded: "{rounded.box}"
     padding: "8px 16px"
   card-surface:
     backgroundColor: "{colors.card}"
@@ -96,7 +97,7 @@ This system explicitly rejects the stiff corporate banking dashboard (cold navy/
 - Warm paper/card surfaces, never cold gray-blue
 - Slow-drifting pastel blue gradient-mesh as the system's signature atmosphere
 - Two real accent colors (teal, blue), each with a clear job — not a rainbow of equally-weighted color
-- Rounded-pill shapes for anything you click in chrome (nav, toggles, info button); 16px-radius cards for content
+- Boxy 10px chips for anything you click in chrome (nav links, language toggle), held inside 16px-radius containers; 16px-radius cards for content. The pill radius survives only on small tags/badges (fact chips, "soon"-style badges), never on primary chrome.
 - Flat at rest, lifts only in response to interaction
 
 ## 2. Colors
@@ -123,6 +124,8 @@ The palette is warm-neutral surfaces carrying two purposeful accents, plus a thi
 **The Two-Accent Rule.** Only teal and blue do real color work on any given screen. Teal means "this is a result/positive outcome." Blue means "this is interactive or decorative." Don't reach for a third saturated color without a defined role first — that's what rose is reserved for (caution/highlight only).
 
 **The Warm-Never-Cold Rule.** Surfaces are warm off-white (paper/card), never blue-gray or pure white. This is the single biggest thing separating this from a banking dashboard.
+
+**The Ink-Band Exception.** The landing page carries one sanctioned dark surface: a large 24px-radius panel filled with the system's own ink (`#11151f`) that stages the calculator spotlight. It works because it's the palette's own warm near-black — not a foreign navy — and because there is exactly one. Don't add a second dark surface without the same level of justification.
 
 ## 3. Typography
 
@@ -157,7 +160,7 @@ Flat at rest, lifts only in response to interaction — depth is earned, not dec
 ## 5. Components
 
 ### Buttons
-- **Shape:** rounded-pill (`200px` radius) for every clickable chrome element — nav links, language toggle, info button.
+- **Shape:** boxy rounded-rect (`10px` radius) for labeled chrome chips — nav links, language toggle. Their containers (topbar capsule `16px`, cards `16px`) stay a size rounder so chips read as content within chrome. Icon-only circular controls (info button, modal close) remain circles — they're glyphs, not labels. Hero-scale CTAs (`.btn`) keep the 200px pill as the one deliberately softer shape.
 - **Primary (active nav state):** ink background, white text, `8px 16px` padding.
 - **Default/Ghost (info button, inactive nav):** card-colored background, 1px border, slate text; hovers to ink text with a teal (info button) or paper (nav) background shift.
 - **Hover / Focus:** subtle transform-scale on `:active` (0.95-0.97) for tactile click feedback; border-color and color transition over 0.1-0.15s.
@@ -174,15 +177,25 @@ Flat at rest, lifts only in response to interaction — depth is earned, not dec
 - **Hover:** border lightens toward a neutral gray-blue (`#c9cfd6`).
 - **Focus:** border shifts to Focus Blue, background lifts to Card, plus the focus-ring shadow.
 
-### Navigation
-- **Style:** a single rounded-pill capsule (`--card` background, 1px border) containing inline pill links with 4px gaps, centered in the topbar via a 3-column grid (logo / nav / language toggle) so it stays optically centered regardless of the other two items' widths. Active link gets a solid Constellation Blue fill (the "interactive" accent, not ink — ink reads as inert text elsewhere in the system); inactive links go transparent-to-paper on hover. Typography is Be Vietnam Pro 14px/500.
-- **Roadmapped items:** nav links for modules that don't exist yet (per PRODUCT.md's roadmap) ship with `aria-disabled="true"`, ~55% opacity, a small "soon" badge, and a blocked click handler — visible and focusable so users know the module exists, but clearly not interactive.
-- **Mobile treatment:** the nav capsule drops to its own full-width row below the logo/toggle row under 700px.
+### Navigation (compacting topbar)
+- **Rest state:** plain text links sitting directly on the page — no capsule chrome — in a 3-column grid (logo / nav / language toggle) so the nav stays optically centered. Active link gets a solid Constellation Blue boxy chip (`10px`); inactive links go transparent-to-paper on hover. Typography is Be Vietnam Pro 14px/500.
+- **Compact state:** on scroll (enter at 56px, exit at 8px — hysteresis so it can't flicker), `js/site.js` adds `.is-compact` and the inner grid tightens into a floating 720px, 16px-radius capsule: translucent card background with backdrop blur, hairline border, lifted shadow, 20px left padding so the logo doesn't touch the edge, and the wordmark collapses to just the V glyph. Transitions run 300ms on a strong ease-out; `prefers-reduced-motion` gets instant swaps.
+- **Logo:** a bare ink V glyph plus lowercase wordmark, linking to `./` (the landing page) on every page. No badge box in the topbar — the badge survives only in the favicon, where a bare glyph would vanish.
+- **Mobile treatment:** the nav drops to its own full-width row below the logo/toggle row under 700px; the compact capsule keeps its 16px radius.
 
 ### Stat Icons (signature component)
 52×52px squares (8px radius, sharper than the 16px card radius — a deliberately smaller-scale shape language for "a tile within a card"), solid-filled in the stat's own accent color, white 24px icon glyph. Carries the same top-edge-hairline signature every `.card` carries (see Elevation), scaled down — but since the fill itself is already the accent color, the hairline switches to that accent's lighter sibling tone (Focus Blue on a Constellation Blue fill, Bright Teal on a Deep Teal fill, Bright Amber on an Amber fill) so it still reads as an edge highlight instead of disappearing into a flat color.
 
 Total Contributed uses blue, Total Interest uses teal (both follow the Two-Accent Rule's own meanings). Growth Multiplier uses **Amber** (`#c27e0a`, hairline `#efaa34`) — a deliberate, user-requested exception to the Two-Accent Rule: a fourth color chosen as blue's actual color-wheel complement (hue ~38° against blue's ~224°), picked over reusing rose specifically so rose's reserved caution/highlight role stays uncontaminated. Treat this as the one earned exception, not a precedent for a rainbow of stat icons — don't add a fifth.
+
+### Icon tiles & page glyphs (module iconography)
+Each module page opens with a single small line glyph (34px, Constellation Blue stroke) centered above the hero title — the page's "mark," used once. Card headers across module pages pair their heading with a 40px, 10px-radius **icon tile**: a soft accent-tinted square (`.tile-blue/.tile-teal/.tile-amber/.tile-rose`) holding a 22px stroke glyph in that accent. Rose tiles appear only on caution content, keeping the reserved role intact. Glyphs are simple 2–3 path line drawings, stroke `currentColor`, never emoji and never filled illustrations.
+
+### Landing bands (landing page only)
+The landing page is deliberately not another module page. Its three signature patterns:
+- **Quote band:** an oversized left-aligned Lexend pull-quote with a thin hand-drawn SVG squiggle underline (blue at ~55% opacity) and a slate attribution line.
+- **Ink spotlight band:** see The Ink-Band Exception. Contains a tag pill, an italic-accent headline (Lexend italic 600), a ghost-on-dark CTA, and rows of boxy "signal chips" (12px radius, translucent white on ink) whose 9px square-ish dots use lighter siblings of the accents so they stay legible on dark.
+- **Module accordion:** stacked full-width tabs (16px radius, colored 10px dots, `+` rotating to `×`), one open at a time, animated via the CSS `grid-template-rows: 0fr -> 1fr` trick. Each panel pairs short copy with a mini product visual on paper background.
 
 ## 6. Do's and Don'ts
 
