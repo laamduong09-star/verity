@@ -1946,3 +1946,264 @@ a.logo {
   gap: 12px;
   justify-content: center;
 }
+
+/* ==================================================================
+   Topbar rest state + landing hero (Amplemarket-style pass)
+   ================================================================== */
+
+/* At rest the nav sits directly on the page — no capsule chrome. The
+   capsule look now belongs exclusively to the compacted floating pill
+   (drawn by .topbar-inner), so the two states read as one bar changing
+   weight instead of a pill inside a pill. */
+.nav-capsule {
+  background: transparent;
+  border-color: transparent;
+}
+
+/* Spacing pass: the old links were chunky (44px tall pills with tight
+   16px side padding), which read as buttons fighting for attention.
+   Rest state wants quiet text links with generous air between them. */
+.topbar {
+  padding: 18px 32px 10px;
+}
+
+.nav-link {
+  padding: 9px 18px;
+  min-height: 0;
+}
+
+/* ---------- Landing hero ---------- */
+.landing-hero {
+  padding: 72px 0 32px;
+}
+
+.landing-hero .hero-title {
+  max-width: 860px;
+  font-size: clamp(44px, 6.2vw, 66px);
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+}
+
+.landing-hero .hero-title em {
+  font-style: italic;
+  font-weight: 600;
+}
+
+.landing-hero .hero-subtitle-stack {
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* Announcement pill above the headline. */
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 200px;
+  padding: 6px 16px 6px 6px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  animation: fadeUp 0.6s ease-out both;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+
+.hero-pill:hover {
+  border-color: var(--blue);
+}
+
+.hero-pill:active {
+  transform: scale(0.97);
+}
+
+.hero-pill-tag {
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 200px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Ink primary button — DESIGN.md's button-pill-active recipe at hero
+   scale, for the one highest-emphasis action on the page. */
+.btn-ink {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.btn-ink:hover {
+  background: #232939;
+}
+
+/* Quiet trust line under the CTAs (the "social proof row" slot). */
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  justify-content: center;
+  margin-top: 22px;
+  font-size: 13px;
+  color: var(--slate);
+  animation: fadeUp 0.6s ease-out both;
+  animation-delay: 0.15s;
+}
+
+/* ---------- Landing: app-window mockup ---------- */
+/* The hero's product shot: a framed "window" showing the calculator's
+   real anatomy (inputs, stacked growth chart, final balance). The whole
+   thing is a link into the actual calculator. */
+.app-window {
+  display: block;
+  position: relative;
+  max-width: 960px;
+  margin: 56px auto 0;
+  text-align: left;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 24px 48px rgba(17, 21, 31, 0.1);
+  animation: fadeUp 0.7s ease-out both;
+  animation-delay: 0.2s;
+  transition: transform 0.2s var(--ease-out-strong), box-shadow 0.2s var(--ease-out-strong),
+    border-color 0.2s var(--ease-out-strong);
+}
+
+.app-window:hover {
+  transform: translateY(-3px);
+  border-color: var(--blue);
+  box-shadow: 0 28px 56px rgba(17, 21, 31, 0.13);
+}
+
+.window-chrome {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+}
+
+.window-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.window-address {
+  margin-left: 10px;
+  font-size: 12px;
+  color: var(--slate);
+  font-family: var(--font-body);
+}
+
+.app-window-body {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 28px;
+  padding: 26px 28px 28px;
+}
+
+@media (max-width: 760px) {
+  .app-window-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mock-field {
+  margin-bottom: 14px;
+}
+
+.mock-field:last-child {
+  margin-bottom: 0;
+}
+
+.mock-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--slate);
+}
+
+.mock-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.mock-input .prefix,
+.mock-input .suffix {
+  font-size: 12.5px;
+}
+
+.mock-chart-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.mock-chart-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.mock-result-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--slate);
+  text-align: right;
+}
+
+.mock-result-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--teal);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.mock-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-pill,
+  .hero-trust,
+  .app-window {
+    animation: none;
+  }
+
+  .app-window {
+    transition: none;
+  }
+}
