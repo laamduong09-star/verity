@@ -1959,17 +1959,48 @@ a.logo {
   border-color: transparent;
 }
 
-/* Spacing pass: the old links were chunky (44px tall pills with tight
-   16px side padding), which read as buttons fighting for attention.
-   Rest state wants quiet text links with generous air between them,
-   sitting close to the page's top edge rather than floating below it. */
+/* Amplemarket-height bar: a short band hugging the top edge, total
+   height ~58px. The hover box (the link's own padding box) still fills
+   most of that height — the bar is short because the chrome around the
+   links is thin, not because the links are. */
 .topbar {
-  padding: 8px 32px 10px;
+  padding: 6px 32px;
+}
+
+.topbar-inner {
+  padding: 2px 0;
+}
+
+/* At rest the nav packs left next to the logo (logo | nav | toggle)
+   instead of floating optically centered. Desktop only — the sub-700px
+   layout keeps the nav on its own full-width row. */
+@media (min-width: 701px) {
+  .topbar-inner {
+    grid-template-columns: auto 1fr auto;
+    column-gap: 20px;
+  }
+
+  .nav-capsule {
+    justify-self: start;
+  }
 }
 
 .nav-link {
-  padding: 12px 18px;
+  padding: 10px 16px;
   min-height: 0;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* The capsule's old 8px inner padding and the toggle's 44px tap-target
+   floor were silently propping the bar up past 70px. */
+.nav-capsule {
+  padding: 2px;
+}
+
+.lang-toggle {
+  min-height: 0;
+  padding: 9px 14px;
 }
 
 /* Hover draws a tall opaque box behind the link (card-white against the
