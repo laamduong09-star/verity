@@ -1188,7 +1188,7 @@ a.logo {
 /* Inside the compact capsule the nav's own capsule chrome goes quiet so
    it doesn't read as a pill floating inside a pill. */
 .nav-capsule {
-  transition: background-color 0.3s var(--ease-out-strong), border-color 0.3s var(--ease-out-strong);
+  transition: background-color 0.3s var(--ease-out-strong), border-color 0.3s var(--ease-out-strong), transform 0.3s var(--ease-out-strong);
 }
 
 .topbar.is-compact .nav-capsule {
@@ -1673,9 +1673,23 @@ a.logo {
 }
 
 /* ---------- Jargon ---------- */
+/* The search bar is the page's main tool — the term list hides behind
+   it (see js/jargon.js) — so it gets hero-adjacent scale. */
 .jargon-search-wrap {
-  max-width: 520px;
+  max-width: 560px;
   margin: 0 auto 8px;
+}
+
+.jargon-search-wrap input {
+  font-size: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.jargon-reveal-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .jargon-group {
@@ -1982,6 +1996,16 @@ a.logo {
 
   .nav-capsule {
     justify-self: start;
+    /* Grid centering leaves the 14px nav text riding 2.5px above the
+       18px wordmark's baseline, which reads as floating. Nudge the
+       capsule down to sit the two text bottoms level; the compact
+       state undoes it — the wordmark is collapsed there and pure
+       centering against the bare glyph is correct. */
+    transform: translateY(2.5px);
+  }
+
+  .topbar.is-compact .nav-capsule {
+    transform: translateY(0);
   }
 }
 
@@ -1993,9 +2017,12 @@ a.logo {
 }
 
 /* The capsule's old 8px inner padding and the toggle's 44px tap-target
-   floor were silently propping the bar up past 70px. */
+   floor were silently propping the bar up past 70px. The 12px gap
+   (was 4px) keeps the module names from reading as one run-on phrase,
+   resting and compact alike. */
 .nav-capsule {
   padding: 2px;
+  gap: 12px;
 }
 
 .lang-toggle {
@@ -2009,6 +2036,15 @@ a.logo {
    paper there. */
 .topbar.is-compact .nav-link:hover:not(.active) {
   background: var(--paper);
+}
+
+/* The 12px gaps push the compact capsule's content ~13px past its
+   720px cap; slimmer side padding reclaims it (38px text-to-text vs
+   44px at rest — visually the same rhythm) with ~10px slack so a
+   pixel of font-rendering drift can't overflow the capsule. */
+.topbar.is-compact .nav-link {
+  padding-left: 13px;
+  padding-right: 13px;
 }
 
 /* ---------- Landing hero ---------- */
