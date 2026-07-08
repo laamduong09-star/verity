@@ -71,7 +71,19 @@
   <section class="section">
     <div class="jargon-search-wrap">
       <div class="input-wrap">
-        <input type="search" id="jargonSearch" placeholder="Search in English or tiếng Việt… (e.g. APR, lãi suất)" aria-label="Search terms">
+        <input type="search" id="jargonSearch" placeholder="Search in English or tiếng Việt… (e.g. APR, lãi suất)" aria-label="Search terms"
+               role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="jargonSuggest">
+      </div>
+      <!-- Suggestion dropdown (adapted from the reference "action search
+           bar" component): rows are built by js/jargon.js from the term
+           cards themselves, so names, Vietnamese names, and group tags
+           can never drift from the real content. -->
+      <div class="search-suggest" id="jargonSuggest">
+        <ul class="suggest-list" id="jargonSuggestList" role="listbox" aria-label="Term suggestions"></ul>
+        <div class="suggest-hint" aria-hidden="true">
+          <span class="en">↑↓ navigate · Enter opens · Esc closes</span>
+          <span class="vi">↑↓ di chuyển · Enter mở · Esc đóng</span>
+        </div>
       </div>
     </div>
 
