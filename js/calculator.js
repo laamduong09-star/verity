@@ -302,6 +302,24 @@ const debouncedUpdate = debounce(update, 150);
   input.addEventListener('input', debouncedUpdate);
 });
 
+// The "Run it in the calculator" links on recommend.html prefill a scenario
+// with params matching the input ids (#initial=0&monthly=100&rate=4&years=1).
+// They ride in the hash rather than the query string because clean-URL
+// servers 301 ".html" to the extensionless path and drop the query string in
+// that redirect, while browsers re-attach the fragment. Query-string params
+// are honored too for anyone hand-editing a URL on a plain static host.
+// A missing or non-numeric param leaves that input's default alone; anything
+// out of range goes through the same clampToInput path as typed values, so
+// the clamp-note explains it instead of silently rewriting.
+const searchParams = new URLSearchParams(window.location.search);
+const hashParams = new URLSearchParams(window.location.hash.slice(1));
+[initialInput, monthlyInput, rateInput, yearsInput].forEach((input) => {
+  const raw = searchParams.get(input.id) ?? hashParams.get(input.id);
+  if (raw !== null && raw.trim() !== '' && Number.isFinite(Number(raw))) {
+    input.value = raw.trim();
+  }
+});
+
 update();
 
 // The custom cursor, language toggle, and compacting topbar are shared
