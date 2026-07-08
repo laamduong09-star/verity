@@ -1953,6 +1953,13 @@ a.logo {
 }
 
 /* ---------- Cross-page "next module" links ---------- */
+/* These footer links don't open a new topic the way a real section does,
+   so the default 72px section gap above them reads as a dead zone. Pull
+   the containing section in closer. */
+.section:has(.next-links) {
+  margin-top: 36px;
+}
+
 .next-links {
   display: flex;
   flex-wrap: wrap;
@@ -1973,12 +1980,12 @@ a.logo {
   border-color: transparent;
 }
 
-/* Amplemarket-height bar: a short band hugging the top edge, total
-   height ~58px. The hover box (the link's own padding box) still fills
-   most of that height — the bar is short because the chrome around the
-   links is thin, not because the links are. */
+/* Amplemarket-height bar: a short band whose chrome around the links is
+   thin (the bar is short because the chrome is thin, not the links). A
+   little more headroom up top so the logo/nav don't crowd the very edge
+   of the viewport, while the bottom stays tight to keep the bar compact. */
 .topbar {
-  padding: 6px 32px;
+  padding: 14px 32px 6px;
 }
 
 .topbar-inner {
