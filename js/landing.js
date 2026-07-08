@@ -44,6 +44,9 @@
   var svg = document.createElementNS(SVG_NS, 'svg');
   svg.setAttribute('viewBox', '0 0 696 316');
   svg.setAttribute('fill', 'none');
+  // Fill the container edge-to-edge (no letterbox seams); the CSS mask
+  // fades the overflow so nothing hard-cuts.
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
 
   [1, -1].forEach(function (position) {
     for (var i = 0; i < PER_SIDE; i++) {
@@ -64,11 +67,13 @@
       // stroke width through the viewBox scale so lines stay hairline-thin.
       path.setAttribute('pathLength', '1');
       path.setAttribute('vector-effect', 'non-scaling-stroke');
-      // Base opacity ramps with i (0.10 -> 0.51); duration cycles 20-30s;
-      // negative delays desync the flow so it never pulses in unison.
+      // Base opacity ramps with i (0.10 -> 0.51).
       path.style.setProperty('--o', (0.10 + i * 0.018).toFixed(3));
-      path.style.setProperty('--dur', (20 + (i % 6) * 2) + 's');
-      path.style.setProperty('--delay', -(i * 1.3).toFixed(2) + 's');
+      // Static, staggered dash offset so the half-drawn segments don't all
+      // begin at the same point (which would read as a seam). Motion comes
+      // from the container drift in CSS, not per-path paint.
+      var off = (i * 0.17 + (position < 0 ? 0.37 : 0)) % 1;
+      path.style.setProperty('--off', off.toFixed(3));
       svg.appendChild(path);
     }
   });
