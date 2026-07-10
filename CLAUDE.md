@@ -73,9 +73,10 @@ Numbers never need translation, only copy. Strings that get built dynamically in
 
 `PRODUCT.md` (audience, brand personality, anti-references) and `DESIGN.md` (color/type/spacing tokens, named rules) are the source of truth for visual decisions — maintained by the "impeccable" Claude Code skill. Before changing colors, typography, spacing, or motion, check these first. Key named rules actually enforced in the CSS:
 
-- **Two-Accent Rule**: only teal (`--teal`, "result/positive outcome") and blue (`--blue`, "interactive/decorative") carry real meaning. Rose (`--rose`) is reserved for a caution/warning role (used today only by `.clamp-note`) — don't spend it decoratively.
-- **Warm-Never-Cold Rule**: surfaces stay warm off-white (`--paper`/`--card`); never shift toward navy/gray, which is this product's explicit anti-reference (a "stiff corporate banking dashboard").
-- Spacing follows a 4px grid (documented in DESIGN.md's `spacing` tokens); pill-shaped controls (nav links, language toggle, info button) intentionally share the same padding rhythm.
+- **Pastel-Taxonomy Rule**: five flat pastels color-code the five modules (declared per page as `--module-pastel` via a `<body class="module-…">` hook); flat fills only — never gradients, hovers, or text color.
+- **Two-Accent-in-Data-UI Rule**: teal ("result/positive outcome") and blue ("interactive") keep their meanings but only inside data UI (chart, results, meters, links, focus rings). Rose stays reserved for caution.
+- **Hairline-Not-Shadow Rule**: white cards on the white canvas separate via 1px `rgba(17,17,17,0.08)` borders, not shadows or tones.
+- Shape language is exactly 8px (buttons/chips) / 12px (cards/inputs/capsule) / 9999px (badges); spacing follows a 4px grid (see DESIGN.md).
 
 `.impeccable/` holds that skill's own tooling artifacts (critique snapshots, hook config) — not hand-maintained content.
 

@@ -2,32 +2,51 @@
 name: Verity
 description: A bilingual EN/VI financial literacy toolset, starting with a compound interest calculator
 colors:
-  paper: "#e7e6e2"
-  card: "#faf9f7"
-  ink: "#11151f"
+  canvas: "#ffffff"
+  paper: "#f6f5f3"
+  pearl: "#ecebea"
+  card: "#ffffff"
+  ink: "#111111"
+  charcoal: "#272625"
+  slate: "#6d6c6b"
+  stone: "#b1b1af"
+  border: "rgba(17, 17, 17, 0.08)"
   teal: "#0b5a55"
   teal-bright: "#0e7a72"
   blue: "#2348ad"
   blue-focus: "#2f5abf"
   rose: "#c2255c"
   rose-soft: "rgba(194, 37, 92, 0.14)"
-  slate: "#5d5f68"
-  border: "#d5d3cd"
-  icon-blue-start: "#3a5fd9"
-  icon-blue-end: "#1d3a8f"
-  icon-teal-start: "#129b8f"
-  icon-teal-end: "#0a4842"
+  amber: "#c27e0a"
+  pastel-calc: "#b7efb2"
+  pastel-recommend: "#e2ddfd"
+  pastel-jargon: "#ffef99"
+  pastel-credit: "#ffd7f0"
+  pastel-family: "#99fff9"
 typography:
-  display:
+  poster:
+    fontFamily: "Lexend, sans-serif"
+    fontSize: "clamp(46px, 7vw, 84px)"
+    fontWeight: 900
+    lineHeight: 1.1
+    letterSpacing: "-0.03em"
+    textTransform: "uppercase"
+  heading:
     fontFamily: "Lexend, sans-serif"
     fontSize: "44px"
-    fontWeight: 600
-    lineHeight: 1.05
-    letterSpacing: "-0.01em"
+    fontWeight: 400
+    lineHeight: 1.1
+    letterSpacing: "-0.04em"
+  heading-sm:
+    fontFamily: "Lexend, sans-serif"
+    fontSize: "36px"
+    fontWeight: 400
+    lineHeight: 1.1
+    letterSpacing: "-0.03em"
   title:
     fontFamily: "Lexend, sans-serif"
     fontSize: "18px"
-    fontWeight: 600
+    fontWeight: 500
     lineHeight: 1.3
     letterSpacing: "normal"
   body:
@@ -49,168 +68,162 @@ typography:
     lineHeight: 1.1
     letterSpacing: "normal"
 rounded:
-  pill: "200px"
-  lg: "16px"
-  md: "10px"
-  sm: "8px"
-  box: "10px"
+  badge: "9999px"
+  card: "12px"
+  input: "12px"
+  button: "8px"
+  small: "4px"
 spacing:
   xs: "8px"
   sm: "16px"
   md: "24px"
   lg: "28px"
   xl: "32px"
+  band: "80-120px"
 components:
   button-chip:
-    backgroundColor: "{colors.card}"
-    textColor: "{colors.slate}"
-    rounded: "{rounded.box}"
-    padding: "8px 16px"
+    backgroundColor: "transparent"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.button}"
+    padding: "10px 16px"
   button-chip-active:
     backgroundColor: "{colors.ink}"
     textColor: "#ffffff"
-    rounded: "{rounded.box}"
-    padding: "8px 16px"
+    rounded: "{rounded.button}"
+    padding: "10px 16px"
   card-surface:
     backgroundColor: "{colors.card}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.lg}"
+    rounded: "{rounded.card}"
     padding: "28px"
   input-field:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.md}"
-    padding: "11px 14px"
+    rounded: "{rounded.input}"
+    padding: "13px 14px"
 ---
 
 # Design System: Verity
 
 ## 1. Overview
 
-**Creative North Star: "Graph Paper Calm"**
+**Creative North Star: "Sunlit Editorial Calm"**
 
-The system reads as math worked out on graph paper, not a banking dashboard. A soft pastel gradient-mesh runs behind the whole page: blurred, low-opacity CSS blobs in a single blue hue (`--blue`/`--blue-focus`), drifting slowly and asymmetrically. Fixed to the viewport so it's visible behind every card all the way down the page, not just the hero. That mesh is the only ambient background motion — the hero itself carries no separate decorative backdrop (an earlier floating-dot constellation and a flowing-SVG-paths experiment were both tried and removed; the dots read as busy and the animated paths flickered against the custom cursor). Surfaces are warm off-white paper and card tones, never cold navy-and-gray; text leans toward near-black ink rather than washed-out gray, so the whole thing stays legible and calm rather than corporate or clinical.
+This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket style reference and merged with the elements of Verity worth keeping. The page reads as a light, airy editorial product: white canvas, cream-wash bands, near-black warm ink type at whisper weights, and a five-pastel taxonomy that color-codes the five modules. It still explicitly rejects the stiff corporate banking dashboard (cold navy/gray, dense unexplained tables) and the gamified fintech app (confetti, casino urgency) — money here is calm, explained, and bilingual.
 
-This system explicitly rejects the stiff corporate banking dashboard (cold navy/gray, dense unexplained tables, jargon with no definitions) and the gamified fintech app (confetti, hype-driven number pop, casino urgency). Where a number does animate (the `countPop` on result values), it's a brief, modest emphasis — not a celebration.
+**Provenance — kept from Verity, on purpose:**
+- **Lexend + Be Vietnam Pro.** Be Vietnam Pro is a Vietnamese-designed body face with native diacritics; the bilingual mission outranks typeface mimicry. Amplemarket's *typography philosophy* was adopted instead of its font.
+- **The data-color meanings.** Teal = "result/positive outcome", blue = "interactive", rose = caution, amber = the one earned stat exception. These survive **inside data UI only** (chart, results, meters, focus rings, links) — chrome and decoration no longer use them.
+- **The custom cursor** (blue dot + trailing ring) — a personality piece with no Amplemarket equivalent.
+- **The bilingual `.en`/`.vi` span system** — structural, untouchable.
 
-**Key Characteristics:**
-- Warm paper/card surfaces, never cold gray-blue
-- Slow-drifting pastel blue gradient-mesh as the system's signature atmosphere
-- Two real accent colors (teal, blue), each with a clear job — not a rainbow of equally-weighted color
-- Boxy 10px chips for anything you click in chrome (nav links, language toggle), held inside 16px-radius containers; 16px-radius cards for content. The pill radius survives only on small tags/badges (fact chips, "soon"-style badges), never on primary chrome.
-- Flat at rest, lifts only in response to interaction
+**Dropped:** the gradient mesh background, the 3px blue card hairline, the 200px CTA pills, Verity's darker paper canvas, and Amplemarket's phoenix orange (no role here).
 
 ## 2. Colors
 
-The palette is warm-neutral surfaces carrying two purposeful accents, plus a third (rose) reserved for the caution/highlight role.
+### Surfaces
+- **Canvas** (`#ffffff`): the page. Flat — no mesh, no gradients.
+- **Cream Wash / paper** (`#f6f5f3`): light section bands (quote band), resting input fill, example-box tints inside cards. (`--paper` points here so every legacy paper-tint stays a tint.)
+- **Pearl** (`#ecebea`): hover fill for ghost controls and nav chips.
+- **Card** (`#ffffff`): card surfaces — separated from canvas by the hairline border, not by tone or shadow.
+- **Charcoal** (`#272625`): the one dark surface (landing spotlight band). Warm near-black, never navy.
+- **Ink** (`#111111`): primary text and filled primary buttons. Never `#000`.
+- **Slate/ash** (`#6d6c6b`) secondary text · **Stone** (`#b1b1af`) strong dividers and fills that were borders · **Hairline** (`rgba(17,17,17,0.08)`) all borders.
 
-### Primary
-- **Deep Teal** (`#0b5a55`): the "growth" color. Used for the final-balance result value, the info-button icon, and the interest-area line/fill on the chart. Appears wherever the interface is telling the user something positive is happening with their money.
+### Module Pastel Taxonomy
+One flat pastel per module, used identically on the landing accordion chip, the page-hero glyph tile, card icon tiles, and the jargon suggestion glyphs. Declared once per page on `<body class="module-…">` as `--module-pastel`.
 
-### Secondary
-- **Constellation Blue** (`#2348ad`): the interactive/decorative accent. Drives the custom cursor, the card top-edge hairline, the principal-area line/fill on the chart, and the hover border + lift on cards. A focus-state variant, **Focus Blue** (`#2f5abf`), governs input focus rings and the language-toggle hover glow — close to Constellation Blue but distinct enough to read as "you're now interacting with this," not "this is decorative."
+| Module | Pastel | Value |
+|--------|--------|-------|
+| Calculator | Mint | `#b7efb2` |
+| Recommend | Soft Violet | `#e2ddfd` |
+| Jargon | Canary | `#ffef99` |
+| Credit | Petal Pink | `#ffd7f0` |
+| Family Split | Aqua | `#99fff9` |
 
-### Tertiary (reserved)
-- **Rose** (`#c2255c`, soft fill `rgba(194, 37, 92, 0.14)`): the caution/highlight color. Currently wired into the input clamp-notes (the message that appears when a rate/years value gets capped). Reserved beyond that for a future "recommended" badge in the planned Recommend module — not a color to spend on decoration. Replaced marigold this session: marigold tested worse as an accessible text color (fails 4.5:1 against both paper and card) and read as a duller, dated amber; rose hits 4.5:1+ against every surface in the palette and reads as a deliberate, vivid pop against the cool teal/blue duo.
+**The Pastel-Taxonomy Rule.** Pastels are flat fills only — never gradients, never hover states, never accent text, never shadowed. The flat color IS the elevation and the differentiation. Glyphs on pastel are always ink.
 
-### Neutral
-- **Paper** (`#e7e6e2`): page background and input-field resting fill.
-- **Card** (`#faf9f7`): card and modal surfaces, nav capsule, lang toggle.
-- **Ink** (`#11151f`): primary text, active nav state, stat values.
-- **Slate** (`#5d5f68`): secondary/label text, chart axis labels.
-- **Border** (`#d5d3cd`): all hairline borders and dividers.
+### Data accents
+- **Teal** (`#0b5a55`): result/positive-outcome numbers (final balance, interest column, VI term names, payoff lines).
+- **Blue** (`#2348ad`): interactive — cursor, text links, focus rings (`#2f5abf`), chart principal series, meters. Not chrome, not decoration.
+- **Rose** (`#c2255c`): reserved caution (clamp notes, myth tags, caution tiles/borders).
+- **Amber** (`#c27e0a`): the one earned exception, the multiplier stat icon only.
 
-### Named Rules
-**The Two-Accent Rule.** Only teal and blue do real color work on any given screen. Teal means "this is a result/positive outcome." Blue means "this is interactive or decorative." Don't reach for a third saturated color without a defined role first — that's what rose is reserved for (caution/highlight only).
+**The Two-Accent-in-Data-UI Rule.** Teal and blue keep their old jobs, but their territory shrank to data UI. If a surface or chrome element wants color, it gets a module pastel or nothing.
 
-**The Warm-Never-Cold Rule.** Surfaces are warm off-white (paper/card), never blue-gray or pure white. This is the single biggest thing separating this from a banking dashboard.
-
-**The Ink-Band Exception.** The landing page carries one sanctioned dark surface: a large 24px-radius panel filled with the system's own ink (`#11151f`) that stages the calculator spotlight. It works because it's the palette's own warm near-black — not a foreign navy — and because there is exactly one. Don't add a second dark surface without the same level of justification.
+**The Charcoal-Band Rule.** Exactly one dark surface per page maximum, always charcoal `#272625`, rendered as an inset 12px panel (100vw full-bleed seams against the scrollbar — measured, not theoretical).
 
 ## 3. Typography
 
-**Display Font:** Lexend (with sans-serif fallback)
-**Body Font:** Be Vietnam Pro (with sans-serif fallback)
+**Display Font:** Lexend · **Body Font:** Be Vietnam Pro (Vietnamese-native diacritics; see Provenance).
 
-**Character:** Lexend was designed around reading-proficiency research, with rounded, deliberate letterforms — its numerals in particular read as confident and considered, which is why it carries every headline and number on the page. Be Vietnam Pro is a Vietnamese-designed typeface with full native diacritic support; it carries everything a user reads as sentence-length text (and all field/stat labels), so the bilingual EN/VI body of the page has an authentic, non-generic foundation rather than a retrofitted Latin-only body font.
+**Weight philosophy (adopted):** headings are weight **400** with aggressively negative tracking — authority through restraint. Weight 900 uppercase exists for exactly one poster moment: the landing "MONEY MADE EASY." hero. Card titles are 500. Nothing between 500 and 900 appears at heading sizes.
 
-### Hierarchy
-- **Display** (600, 44px, line-height 1.05, letter-spacing -0.01em): hero title only.
-- **Title** (600, 18-22px, line-height 1.3): card titles, modal title, logo.
-- **Data** (700, 26-28px, tabular-nums): the numbers that matter — final balance, stat values. Lexend, not Be Vietnam Pro, even though it's a "body" context: numbers are treated as headline-weight information.
-- **Body** (400, 15-17px, line-height 1.4-1.55): hero subtitle, modal paragraph text. Cap at ~70ch.
-- **Label** (500, 12-14px): field labels, result labels, breakdown table headers, stat labels.
+### Scale
+- **Poster** (900, clamp 46–84px, uppercase, -0.03em, lh 1.1): landing hero only. Line-height stays 1.1 — the reference's 0.8 clips uppercase Vietnamese stacked diacritics.
+- **Heading** (400, 44px, -0.04em): calculator hero.
+- **Heading-sm** (400, 36px, -0.03em): section titles, module page heroes.
+- **Subheading** (400, 28px, -0.017em): jargon group titles.
+- **Title** (500, 17–22px): card/modal/accordion titles.
+- **Body** (400, 14–16px, Be Vietnam Pro): all sentence text. Cap ~70ch.
+- **Label** (500, 12–14px) · **Eyebrow** (600, 11px, +0.08em, uppercase, slate).
 
-### Named Rules
-**The Numbers-Are-Display Rule.** Any value derived from the calculator (final balance, stat values, breakdown rows) uses `font-variant-numeric: tabular-nums` and the display font, even at small sizes. Numbers in this product are never an afterthought of body text.
+**The Numbers-Are-Display Rule (kept).** Any value derived from user input or calculation uses Lexend at 600–700 with `tabular-nums`, even at small sizes. The weight-restraint philosophy applies to headings, not to money.
 
 ## 4. Elevation
 
-Flat at rest, lifts only in response to interaction — depth is earned, not decorative. Cards carry a near-invisible ambient shadow at rest (`0 1px 2px rgba(28, 35, 48, 0.04)`) and a 3px Constellation Blue hairline at 50% opacity along the top edge as a quiet signature, not a stripe accent. On hover, the card rises 3px and the shadow deepens.
+**The Hairline-Not-Shadow Rule.** Cards and inputs carry no shadow at rest — the 1px hairline border is the separation. Hover earns a 2px lift and a darkened hairline (`rgba(17,17,17,0.18)`), nothing glows. Pastel tiles get neither border nor shadow.
 
-### Shadow Vocabulary
-- **Ambient** (`box-shadow: 0 1px 2px rgba(28, 35, 48, 0.04)`): resting state for every card.
-- **Lifted** (`box-shadow: 0 12px 24px rgba(28, 35, 48, 0.08)`, paired with `transform: translateY(-3px)` and a Constellation Blue border): hover state for cards.
-- **Modal** (`box-shadow: 0 24px 48px rgba(17, 21, 31, 0.18)`): the one deliberately heavier shadow in the system, reserved for the info modal floating above a blurred backdrop.
-- **Focus ring** (`box-shadow: 0 0 0 3px rgba(47, 90, 191, 0.14)`, paired with a Focus Blue border): input fields and the language toggle on focus/hover.
-
-### Named Rules
-**The Earned-Depth Rule.** Nothing ships with a heavy shadow at rest. Depth shows up only as a response to hover, focus, or the modal's deliberate elevation above the page.
+Exceptions, deliberately short list:
+- **App-window mockup** (landing hero product shot): the featured-xl shadow (`0 26px 60px -6px rgba(17,17,17,0.12)` stack).
+- **Info modal**: `0 24px 48px rgba(17,17,17,0.18)` above a blurred backdrop.
+- **Compact topbar capsule**: soft `0 12px 24px rgba(17,17,17,0.06)` under frosted blur(16px) white.
 
 ## 5. Components
 
-### Buttons
-- **Shape:** boxy rounded-rect (`10px` radius) for labeled chrome chips — nav links, language toggle. Their containers (topbar capsule `16px`, cards `16px`) stay a size rounder so chips read as content within chrome. Icon-only circular controls (info button, modal close) remain circles — they're glyphs, not labels. Hero-scale CTAs (`.btn`) keep the 200px pill as the one deliberately softer shape.
-- **Primary (active nav state):** ink background, white text, `8px 16px` padding.
-- **Default/Ghost (info button, inactive nav):** card-colored background, 1px border, slate text; hovers to ink text with a teal (info button) or paper (nav) background shift.
-- **Hover / Focus:** subtle transform-scale on `:active` (0.95-0.97) for tactile click feedback; border-color and color transition over 0.1-0.15s.
-
-### Cards / Containers
-- **Corner Style:** 16px radius.
-- **Background:** Card (`#faf9f7`).
-- **Shadow Strategy:** see Elevation — ambient at rest, lifted on hover, with the 3px Constellation Blue top-edge hairline as a constant signature regardless of state.
-- **Border:** 1px Border color at rest; shifts to Constellation Blue on hover.
-- **Internal Padding:** 28px (24px for stat cards' tighter layout).
-
-### Inputs / Fields
-- **Style:** Paper-filled, 10px radius, 1px border, prefix/suffix (`$`, `%`, `years`) in slate inline with the value.
-- **Hover:** border lightens toward a neutral gray-blue (`#c9cfd6`).
-- **Focus:** border shifts to Focus Blue, background lifts to Card, plus the focus-ring shadow.
-
 ### Navigation (compacting topbar)
-- **Rest state:** an Amplemarket-height band (~62px total) hugging the top edge: logo, then the nav packed immediately left of it (`auto 1fr auto` grid, 20px column gap, desktop only — mobile keeps the nav on its own row), language toggle on the right. No capsule chrome at rest. The nav rides a 2.5px translateY so its 14px text bottoms sit level with the 18px wordmark's (grid centering alone leaves it looking afloat); the compact state resets the nudge since the wordmark is collapsed there. Links sit 12px apart. Active link gets a solid Constellation Blue boxy chip (`10px`); inactive links are ink-colored 14px/600 (slate at 500 read too faint) and hover to a tall opaque card-white box (10px vertical padding) — flipping to paper and slimming to 13px side padding inside the compact capsule, whose card-toned background would otherwise swallow the hover and whose 720px cap the full-width padding would overflow.
-- **Compact state:** on scroll (enter at 56px, exit at 8px — hysteresis so it can't flicker), `js/site.js` adds `.is-compact` and the inner grid tightens into a floating 720px, 16px-radius capsule: translucent card background with backdrop blur, hairline border, lifted shadow, 20px left padding so the logo doesn't touch the edge, and the wordmark collapses to just the V glyph. Transitions run 300ms on a strong ease-out; `prefers-reduced-motion` gets instant swaps.
-- **Logo:** a bare ink V glyph plus lowercase wordmark, linking to `./` (the landing page) on every page. No badge box in the topbar — the badge survives only in the favicon, where a bare glyph would vanish.
-- **Mobile treatment:** the nav drops to its own full-width row below the logo/toggle row under 700px; the compact capsule keeps its 16px radius.
+- **Rest:** ~62px band on the canvas, logo + left-packed nav (`auto 1fr auto`, 20px gap, 2.5px baseline nudge), EN|VI toggle right. Active chip = **ink** fill, 8px radius; inactive links ink 14px/600; hover = pearl box.
+- **Compact (scroll):** 720px frosted-white capsule, 12px radius, hairline, blur(16px); wordmark collapses to the V glyph; nav side-padding slims to 13px. Hysteresis 56/8px in `js/site.js`.
 
-### Stat Icons (signature component)
-52×52px squares (8px radius, sharper than the 16px card radius — a deliberately smaller-scale shape language for "a tile within a card"), solid-filled in the stat's own accent color, white 24px icon glyph. Carries the same top-edge-hairline signature every `.card` carries (see Elevation), scaled down — but since the fill itself is already the accent color, the hairline switches to that accent's lighter sibling tone (Focus Blue on a Constellation Blue fill, Bright Teal on a Deep Teal fill, Bright Amber on an Amber fill) so it still reads as an edge highlight instead of disappearing into a flat color.
+### Buttons & badges
+- **Shape language: 8px buttons, 12px cards/inputs, 9999px badges. Nothing else.**
+- **Primary** (`.btn-ink`): ink fill, white text, hovers charcoal.
+- **Ghost** (`.btn-ghost`): white + hairline, hovers pearl.
+- **Badges** (NEW tag, soon-badge, fact chips, myth/truth tags, ink-band pill): true pills.
 
-Total Contributed uses blue, Total Interest uses teal (both follow the Two-Accent Rule's own meanings). Growth Multiplier uses **Amber** (`#c27e0a`, hairline `#efaa34`) — a deliberate, user-requested exception to the Two-Accent Rule: a fourth color chosen as blue's actual color-wheel complement (hue ~38° against blue's ~224°), picked over reusing rose specifically so rose's reserved caution/highlight role stays uncontaminated. Treat this as the one earned exception, not a precedent for a rainbow of stat icons — don't add a fifth.
+### Inputs
+Cream resting fill, hairline border, 12px radius, ~48px tall, slate prefix/suffix. Focus keeps the blue ring + card-white lift (interactive = blue). Hover border stone.
 
-### Icon tiles & page glyphs (module iconography)
-Each module page opens with a single small line glyph (34px, Constellation Blue stroke) centered above the hero title — the page's "mark," used once. Card headers across module pages pair their heading with a 40px, 10px-radius **icon tile**: a soft accent-tinted square (`.tile-blue/.tile-teal/.tile-amber/.tile-rose`) holding a 22px stroke glyph in that accent. Rose tiles appear only on caution content, keeping the reserved role intact. Glyphs are simple 2–3 path line drawings, stroke `currentColor`, never emoji and never filled illustrations.
+### Cards
+White, hairline, 12px, 28px padding. No top-edge accent (the old 3px blue hairline is gone). Caution cards hover rose.
 
-### Landing bands (landing page only)
-The landing page is deliberately not another module page. Its three signature patterns:
-- **Quote band:** an oversized left-aligned Lexend pull-quote with a thin hand-drawn SVG squiggle underline (blue at ~55% opacity) and a slate attribution line.
-- **Ink spotlight band:** see The Ink-Band Exception. Contains a tag pill, an italic-accent headline (Lexend italic 600), a ghost-on-dark CTA, and rows of boxy "signal chips" (12px radius, translucent white on ink) whose 9px square-ish dots use lighter siblings of the accents so they stay legible on dark.
-- **Module accordion:** stacked full-width tabs (16px radius, colored 10px dots, `+` rotating to `×`), one open at a time, animated via the CSS `grid-template-rows: 0fr -> 1fr` trick. Each panel pairs short copy with a mini product visual on paper background.
+### Icon tiles & page glyphs
+- **Page-hero glyph:** 60px module-pastel tile, 12px radius, ink line glyph — the page's mark.
+- **Card icon tiles:** 40px module-pastel tiles, 8px radius, ink glyphs. `tile-rose` keeps rose for caution content only.
+- **Stat icons (calculator):** unchanged data trio — blue/teal solid fills with lighter-sibling top hairlines, amber for the multiplier. Recommend's ladder step numbers are pastel tiles with ink numerals.
+
+### Landing bands
+- **Quote band:** cream-wash inset panel (12px, ~76px vertical padding), left-aligned weight-400 pull-quote, ink squiggle underline, white fact-chip pills.
+- **Charcoal spotlight band:** see Charcoal-Band Rule. White weight-400 headline, ash secondary, ghost-on-dark CTA, pill tag, boxy signal chips whose small dots keep lighter data-accent siblings (they state data facts).
+- **Module accordion:** 12px tabs, 16px flat pastel taxonomy chips (hairline so canary/aqua read on white), `+`→`×`, grid-rows 0fr→1fr animation.
+
+### Jargon search + suggestion dropdown
+White 12px panel, hairline, composited-only open animation; rows = module-pastel glyph tile, EN name 600, VI name slate, bilingual group tag.
 
 ## 6. Do's and Don'ts
 
 ### Do:
-- **Do** keep page and input-resting surfaces warm off-white (`#e7e6e2` paper, `#faf9f7` card) — never shift toward blue-gray or pure white.
-- **Do** use tabular-nums + Lexend for every number derived from user input or calculation, no matter how small.
-- **Do** let depth (shadow + lift) be a response to hover/focus only; cards and inputs are flat at rest.
-- **Do** keep teal for "result/positive outcome" and blue for "interactive/decorative" — two accents, each with one job.
-- **Do** write every English string with a `.vi` sibling of equal visual weight; never let Vietnamese feel like a translated afterthought.
-- **Do** respect `prefers-reduced-motion` for the custom cursor, mesh drift, fadeUp entrances, and count-pop — provide an instant/crossfade fallback.
+- **Do** keep headings weight 400 with size-proportional negative tracking; reserve 900-uppercase for the landing poster only.
+- **Do** use tabular-nums + Lexend 600–700 for every calculated number, no matter how small.
+- **Do** use module pastels as flat fills for taxonomy — the same module always gets the same pastel, on every page.
+- **Do** keep teal/blue/rose/amber confined to data UI and their reserved roles.
+- **Do** write every English string with a `.vi` sibling of equal visual weight; check uppercase/tight-leading treatments against Vietnamese stacked diacritics before shipping them.
+- **Do** respect `prefers-reduced-motion` for the cursor, entrances, count-pop, and dropdown (instant swaps).
 
 ### Don't:
-- **Don't** introduce a cold navy/gray dashboard palette, dense unexplained tables, or unexplained jargon — that's the explicit anti-reference.
-- **Don't** add confetti, hype-driven number celebrations, or casino-style urgency cues (countdowns, "act now" framing) — financial decisions here are calm, not thrilling.
-- **Don't** spend rose decoratively. It's reserved for a caution/highlight role; using it as a third generic accent dilutes the Two-Accent Rule.
-- **Don't** use `border-left`/`border-right` as a colored stripe accent anywhere; the system's one deliberate accent border is the full-width 3px top hairline on cards.
-- **Don't** add a static drop shadow to a card or input at rest — depth must be earned through interaction, per the Earned-Depth Rule.
-- **Don't** ship plain-language copy with undefined financial jargon — define terms inline (the info-modal pattern is the model to reuse, not skip).
+- **Don't** shadow a card, input, or pastel tile at rest — the hairline (or the flat color) is the elevation.
+- **Don't** use pastels as gradients, hover states, or text color; don't give two modules the same pastel.
+- **Don't** set radii outside 8/12/9999 (+4px for tiny inner squares) — two shape values define the chrome.
+- **Don't** use pure `#000` for text or a second dark surface color; ink `#111111` and charcoal `#272625` are the only darks.
+- **Don't** add confetti, hype-driven number celebrations, or casino urgency cues — calm is the brand.
+- **Don't** ship copy with undefined financial jargon — define terms inline (the info-modal pattern is the model).
