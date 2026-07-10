@@ -115,14 +115,15 @@ This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket 
 - **Lexend + Be Vietnam Pro.** Be Vietnam Pro is a Vietnamese-designed body face with native diacritics; the bilingual mission outranks typeface mimicry. Amplemarket's *typography philosophy* was adopted instead of its font.
 - **The data-color meanings.** Teal = "result/positive outcome", blue = "interactive", rose = caution, amber = the one earned stat exception. These survive **inside data UI only** (chart, results, meters, focus rings, links) — chrome and decoration no longer use them.
 - **The custom cursor** (blue dot + trailing ring) — a personality piece with no Amplemarket equivalent.
+- **The blue gradient mesh** (`.bg-mesh`) — slow-drifting single-hue blue blobs behind every page. Removed during the initial merge, then restored by user request: it's the "theme is blue" signature, and blue's one sanctioned ambient/decorative use.
 - **The bilingual `.en`/`.vi` span system** — structural, untouchable.
 
-**Dropped:** the gradient mesh background, the 3px blue card hairline, the 200px CTA pills, Verity's darker paper canvas, and Amplemarket's phoenix orange (no role here).
+**Dropped:** the 3px blue card hairline, the 200px CTA pills, Verity's darker paper canvas, and Amplemarket's phoenix orange (no role here).
 
 ## 2. Colors
 
 ### Surfaces
-- **Canvas** (`#ffffff`): the page. Flat — no mesh, no gradients.
+- **Canvas** (`#ffffff`): the page, washed by the blue gradient mesh (see Provenance) — the mesh is the only thing allowed between canvas and content.
 - **Cream Wash / paper** (`#f6f5f3`): light section bands (quote band), resting input fill, example-box tints inside cards. (`--paper` points here so every legacy paper-tint stays a tint.)
 - **Pearl** (`#ecebea`): hover fill for ghost controls and nav chips.
 - **Card** (`#ffffff`): card surfaces — separated from canvas by the hairline border, not by tone or shadow.
@@ -145,7 +146,7 @@ One flat pastel per module, used identically on the landing accordion chip, the 
 
 ### Data accents
 - **Teal** (`#0b5a55`): result/positive-outcome numbers (final balance, interest column, VI term names, payoff lines).
-- **Blue** (`#2348ad`): interactive — cursor, text links, focus rings (`#2f5abf`), chart principal series, meters. Not chrome, not decoration.
+- **Blue** (`#2348ad`): interactive — cursor, text links, focus rings (`#2f5abf`), chart principal series, meters. Its one ambient/decorative use is the site-wide gradient mesh; otherwise not chrome, not decoration.
 - **Rose** (`#c2255c`): reserved caution (clamp notes, myth tags, caution tiles/borders).
 - **Amber** (`#c27e0a`): the one earned exception, the multiplier stat icon only.
 
@@ -218,7 +219,7 @@ White 12px panel, hairline, composited-only open animation; rows = module-pastel
 - **Do** use module pastels as flat fills for taxonomy — the same module always gets the same pastel, on every page.
 - **Do** keep teal/blue/rose/amber confined to data UI and their reserved roles.
 - **Do** write every English string with a `.vi` sibling of equal visual weight; check uppercase/tight-leading treatments against Vietnamese stacked diacritics before shipping them.
-- **Do** respect `prefers-reduced-motion` for the cursor, entrances, count-pop, and dropdown (instant swaps).
+- **Do** respect `prefers-reduced-motion` for the cursor, mesh drift, entrances, count-pop, and dropdown (instant swaps / frozen rest positions).
 
 ### Don't:
 - **Don't** shadow a card, input, or pastel tile at rest — the hairline (or the flat color) is the elevation.
