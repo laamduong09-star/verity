@@ -686,6 +686,17 @@ body {
 .stat-icon.icon-blue { background: var(--blue); }
 .stat-icon.icon-blue::before { background: var(--blue-focus); }
 
+/* Recommend's ladder step numbers: module pastel with an ink numeral —
+   taxonomy wayfinding, not a data accent. Flat fill, no edge highlight. */
+.stat-icon.step-num {
+  background: var(--module-pastel, var(--paper));
+  color: var(--ink);
+}
+
+.stat-icon.step-num::before {
+  display: none;
+}
+
 .stat-icon.icon-teal { background: var(--teal); }
 .stat-icon.icon-teal::before { background: var(--teal-bright); }
 
@@ -1583,8 +1594,8 @@ a.logo {
   width: 28px;
   height: 28px;
   border-radius: 8px;
-  background: rgba(35, 72, 173, 0.08);
-  color: var(--blue);
+  background: var(--module-pastel, var(--paper));
+  color: var(--ink);
 }
 
 .suggest-glyph svg {
@@ -2578,7 +2589,7 @@ a.logo {
   width: 22px;
   height: 22px;
   border-radius: 4px;
-  background: var(--blue);
+  background: var(--ink);
   color: var(--white);
   font-family: var(--font-display);
   font-size: 12px;
@@ -2645,27 +2656,42 @@ a.logo {
 }
 
 /* ==================================================================
-   Module-page iconography (GIC-inspired glyph pass)
+   Module-page iconography + pastel identity
    ================================================================== */
 
-/* A small centered line glyph above each module page's hero title —
-   the page's "mark", not decoration repeated anywhere else. */
+/* Each module page declares its taxonomy pastel once on <body>; every
+   tile below inherits it. The landing accordion chips use the same
+   five pastels, so the color-coding carries across pages. */
+.module-calc { --module-pastel: var(--pastel-calc); }
+.module-rec { --module-pastel: var(--pastel-recommend); }
+.module-jar { --module-pastel: var(--pastel-jargon); }
+.module-cred { --module-pastel: var(--pastel-credit); }
+.module-fam { --module-pastel: var(--pastel-family); }
+
+/* The page's "mark" above the hero title: an ink line glyph on the
+   module's flat pastel tile. */
 .page-hero-glyph {
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
-  color: var(--blue);
+  margin-bottom: 18px;
+  color: var(--ink);
   animation: fadeUp 0.6s ease-out both;
 }
 
 .page-hero-glyph svg {
-  width: 34px;
-  height: 34px;
+  width: 60px;
+  height: 60px;
+  padding: 13px;
+  box-sizing: border-box;
+  background: var(--module-pastel, var(--paper));
+  border-radius: 12px;
 }
 
-/* Tinted icon tiles for card headers: soft accent-colored square with a
-   stroke glyph, one size smaller than the stat icons (a label, not a
-   hero element). */
+/* Icon tiles for card headers: the module's flat pastel with an ink
+   stroke glyph — taxonomy color, not per-card accents. No shadow, no
+   border: the flat color is the elevation (their rule). The legacy
+   tile-blue/teal/amber classes all resolve to the module pastel now;
+   tile-rose keeps the reserved caution role. */
 .icon-tile {
   flex: none;
   display: inline-flex;
@@ -2673,7 +2699,7 @@ a.logo {
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .icon-tile svg {
@@ -2681,9 +2707,13 @@ a.logo {
   height: 22px;
 }
 
-.tile-blue { background: rgba(35, 72, 173, 0.1); color: var(--blue); }
-.tile-teal { background: var(--teal-soft); color: var(--teal); }
-.tile-amber { background: rgba(194, 126, 10, 0.12); color: var(--amber); }
+.tile-blue,
+.tile-teal,
+.tile-amber {
+  background: var(--module-pastel, var(--paper));
+  color: var(--ink);
+}
+
 .tile-rose { background: var(--rose-soft); color: var(--rose); }
 
 /* Title rows that pair an icon tile with an existing heading. */
@@ -2728,7 +2758,7 @@ a.logo {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
-  color: var(--blue);
+  color: var(--ink);
 }
 
 .group-glyph svg {
