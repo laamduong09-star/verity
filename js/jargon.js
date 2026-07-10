@@ -1,11 +1,11 @@
-// Live filter for the jargon glossary. Matching is diacritic-insensitive
+// Live filter for the jargon directory. Matching is diacritic-insensitive
 // so "lai suat" finds "lãi suất" — typing Vietnamese without tone marks
 // (the common case on English keyboards) still works.
 //
-// The full term list is hidden on page load — 44 cards at once reads as
-// intimidating, and the search bar is meant to be the page's main tool.
-// Cards appear either by matching a search or via the one-way "show all
-// terms" button below the search bar.
+// All terms are visible on load, grouped into category sections (the
+// directory structure does the de-intimidating that a collapsed list
+// used to). Searching filters cards live; the search capsule and each
+// group's pill report the counts as they change.
 
 (function () {
   'use strict';
@@ -14,14 +14,12 @@
   var cards = Array.prototype.slice.call(document.querySelectorAll('.term-card'));
   var groups = Array.prototype.slice.call(document.querySelectorAll('.jargon-group'));
   var empty = document.getElementById('jargonEmpty');
-  var revealWrap = document.getElementById('jargonRevealWrap');
-  var showAllBtn = document.getElementById('showAllTerms');
+  var searchWrap = document.getElementById('jargonSearchWrap');
+  var searchCount = document.getElementById('jargonCount');
   if (!input) return;
 
-  var allShown = false;
-
-  // The button says how many terms it's hiding; counted live so the
-  // number can't drift as cards get added.
+  // Static totals (hero eyebrow); counted live so the number can't
+  // drift as cards get added.
   Array.prototype.forEach.call(document.querySelectorAll('.term-count'), function (el) {
     el.textContent = cards.length;
   });
@@ -43,32 +41,50 @@
   function render() {
     var query = normalize(input.value.trim());
     var searching = query.length > 0;
-    var anyVisible = false;
+    var visibleTotal = 0;
 
     cards.forEach(function (card, i) {
-      // While searching, matches win regardless of the reveal state;
-      // at rest, everything follows the show-all toggle.
-      var hit = searching ? haystacks[i].indexOf(query) !== -1 : allShown;
+      var hit = !searching || haystacks[i].indexOf(query) !== -1;
       card.classList.toggle('is-hidden', !hit);
-      if (hit) anyVisible = true;
+      if (hit) visibleTotal++;
     });
 
+    // Per-group: update the count pill, hide matchless groups, and keep
+    // the section divider off whichever visible group comes first.
+    var seenVisibleGroup = false;
     groups.forEach(function (group) {
-      var hasVisible = group.querySelector('.term-card:not(.is-hidden)');
-      group.style.display = hasVisible ? '' : 'none';
+      var visibleInGroup = group.querySelectorAll('.term-card:not(.is-hidden)').length;
+      var pill = group.querySelector('.group-count');
+      if (pill) pill.textContent = visibleInGroup;
+      group.style.display = visibleInGroup ? '' : 'none';
+      group.classList.toggle('has-divider', visibleInGroup > 0 && seenVisibleGroup);
+      if (visibleInGroup) seenVisibleGroup = true;
     });
 
-    // The "no match" note only makes sense mid-search — the collapsed
-    // rest state shows the reveal button instead.
-    empty.classList.toggle('is-visible', searching && !anyVisible);
-    revealWrap.style.display = searching || allShown ? 'none' : '';
+    // Search capsule count: "44 terms" at rest, "N matches" mid-search,
+    // rose dot on zero.
+    if (searchCount) {
+      Array.prototype.forEach.call(searchCount.querySelectorAll('.count-n'), function (el) {
+        el.textContent = visibleTotal;
+      });
+      searchCount.classList.toggle('is-searching', searching);
+      searchCount.classList.toggle('is-zero', searching && visibleTotal === 0);
+    }
+
+    empty.classList.toggle('is-visible', searching && visibleTotal === 0);
   }
 
-  showAllBtn.addEventListener('click', function () {
-    allShown = true;
-    showAllBtn.setAttribute('aria-expanded', 'true');
-    render();
-  });
+  // Dock the sticky search wrap once its sentinel scrolls under the
+  // topbar; the margin mirrors the wrap's computed sticky `top` (which
+  // differs on mobile, where the topbar wraps to two rows) so the
+  // frosted styling lands exactly when it pins.
+  var sentinel = document.getElementById('jargonSearchSentinel');
+  if (searchWrap && sentinel && 'IntersectionObserver' in window) {
+    var stickyTop = parseInt(window.getComputedStyle(searchWrap).top, 10) || 72;
+    new IntersectionObserver(function (entries) {
+      searchWrap.classList.toggle('is-docked', !entries[0].isIntersecting);
+    }, { rootMargin: '-' + (stickyTop + 1) + 'px 0px 0px 0px' }).observe(sentinel);
+  }
 
   /* ---------- Suggestion dropdown ---------- */
   // Adapted from the reference "action search bar" component (React/

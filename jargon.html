@@ -58,6 +58,10 @@
         <path d="M6.5 8h4"/>
       </svg>
     </div>
+    <p class="eyebrow">
+      <span class="en">Bilingual glossary · <span class="term-count">44</span> terms</span>
+      <span class="vi">Từ điển song ngữ · <span class="term-count">44</span> thuật ngữ</span>
+    </p>
     <h1 class="hero-title">
       <span class="en">Financial words, translated twice</span>
       <span class="vi">Thuật ngữ tài chính, dịch hai lần</span>
@@ -69,10 +73,18 @@
   </section>
 
   <section class="section">
-    <div class="jargon-search-wrap">
+    <!-- Zero-height sentinel: when it scrolls out under the topbar, js/jargon.js
+         flags the search wrap as docked (frosted tray styling). -->
+    <div class="jargon-search-sentinel" id="jargonSearchSentinel" aria-hidden="true"></div>
+    <div class="jargon-search-wrap" id="jargonSearchWrap">
       <div class="input-wrap">
         <input type="search" id="jargonSearch" placeholder="Search in English or tiếng Việt… (e.g. APR, lãi suất)" aria-label="Search terms"
                role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="jargonSuggest">
+        <span class="search-count" id="jargonCount" aria-live="polite">
+          <span class="count-dot" aria-hidden="true"></span>
+          <span class="en"><span class="count-n">44</span> <span class="count-label-rest">terms</span><span class="count-label-search">matches</span></span>
+          <span class="vi"><span class="count-n">44</span> <span class="count-label-rest">thuật ngữ</span><span class="count-label-search">kết quả</span></span>
+        </span>
       </div>
       <!-- Suggestion dropdown (adapted from the reference "action search
            bar" component): rows are built by js/jargon.js from the term
@@ -87,25 +99,21 @@
       </div>
     </div>
 
-    <div class="jargon-reveal-wrap" id="jargonRevealWrap">
-      <button class="btn btn-ghost" id="showAllTerms" aria-expanded="false">
-        <span class="en">Show all <span class="term-count"></span> terms ↓</span>
-        <span class="vi">Hiện tất cả <span class="term-count"></span> thuật ngữ ↓</span>
-      </button>
-    </div>
-
     <div class="jargon-group">
-      <div class="group-glyph" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="7" width="18" height="12" rx="2.5"/>
-          <path d="M16.5 13h.01"/>
-          <path d="M3 10c5-2 13-2 18 0"/>
-        </svg>
+      <div class="jargon-group-head">
+        <span class="group-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="7" width="18" height="12" rx="2.5"/>
+            <path d="M16.5 13h.01"/>
+            <path d="M3 10c5-2 13-2 18 0"/>
+          </svg>
+        </span>
+        <h2 class="jargon-group-title">
+          <span class="en">Earning &amp; saving</span>
+          <span class="vi">Thu nhập &amp; tiết kiệm</span>
+        </h2>
+        <span class="group-count">16</span>
       </div>
-      <h2 class="jargon-group-title">
-        <span class="en">Earning &amp; saving</span>
-        <span class="vi">Thu nhập &amp; tiết kiệm</span>
-      </h2>
       <div class="term-grid">
 
         <div class="card term-card">
@@ -320,17 +328,20 @@
     </div>
 
     <div class="jargon-group">
-      <div class="group-glyph" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="6" width="18" height="13" rx="2.5"/>
-          <path d="M3 10.5h18"/>
-          <path d="M7 15h4"/>
-        </svg>
+      <div class="jargon-group-head">
+        <span class="group-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="6" width="18" height="13" rx="2.5"/>
+            <path d="M3 10.5h18"/>
+            <path d="M7 15h4"/>
+          </svg>
+        </span>
+        <h2 class="jargon-group-title">
+          <span class="en">Credit &amp; borrowing</span>
+          <span class="vi">Tín dụng &amp; vay mượn</span>
+        </h2>
+        <span class="group-count">12</span>
       </div>
-      <h2 class="jargon-group-title">
-        <span class="en">Credit &amp; borrowing</span>
-        <span class="vi">Tín dụng &amp; vay mượn</span>
-      </h2>
       <div class="term-grid">
 
         <div class="card term-card">
@@ -493,16 +504,19 @@
     </div>
 
     <div class="jargon-group">
-      <div class="group-glyph" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m3 17 6-6 4 4 8-8"/>
-          <path d="M15 7h6v6"/>
-        </svg>
+      <div class="jargon-group-head">
+        <span class="group-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 17 6-6 4 4 8-8"/>
+            <path d="M15 7h6v6"/>
+          </svg>
+        </span>
+        <h2 class="jargon-group-title">
+          <span class="en">Investing &amp; retirement</span>
+          <span class="vi">Đầu tư &amp; hưu trí</span>
+        </h2>
+        <span class="group-count">16</span>
       </div>
-      <h2 class="jargon-group-title">
-        <span class="en">Investing &amp; retirement</span>
-        <span class="vi">Đầu tư &amp; hưu trí</span>
-      </h2>
       <div class="term-grid">
 
         <div class="card term-card">

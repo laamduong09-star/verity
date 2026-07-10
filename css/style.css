@@ -1619,28 +1619,95 @@ a.logo {
 }
 
 /* ---------- Jargon ---------- */
-/* The search bar is the page's main tool — the term list hides behind
-   it (see js/jargon.js) — so it gets hero-adjacent scale. */
+/* The directory's one working instrument: the search bar starts in the
+   hero flow, then position:sticky pins it just below the compact topbar
+   capsule for the whole term list. js/jargon.js toggles .is-docked via
+   an IntersectionObserver sentinel; docked, the wrap becomes a frosted
+   tray (same recipe as the compact topbar, one z-layer beneath it).
+   One occasional state change — nothing continuous animates layout. */
+.jargon-search-sentinel {
+  height: 1px;
+  margin-top: -1px;
+}
+
 .jargon-search-wrap {
-  position: relative;
-  max-width: 560px;
+  position: sticky;
+  top: 72px;
+  z-index: 40;
+  max-width: 576px;
   margin: 0 auto 8px;
+  padding: 8px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  transition:
+    background-color 0.25s var(--ease-out-strong),
+    border-color 0.25s var(--ease-out-strong),
+    box-shadow 0.25s var(--ease-out-strong);
+}
+
+.jargon-search-wrap.is-docked {
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-color: var(--border);
+  box-shadow: 0 12px 24px rgba(17, 17, 17, 0.06);
+}
+
+/* Below 700px the topbar wraps to two rows (logo + nav), so the docked
+   search pins lower to clear it. */
+@media (max-width: 700px) {
+  .jargon-search-wrap {
+    top: 120px;
+  }
 }
 
 .jargon-search-wrap input {
   font-size: 16px;
   padding-top: 16px;
   padding-bottom: 16px;
+  /* The long bilingual placeholder truncates on narrow screens. */
+  text-overflow: ellipsis;
 }
+
+/* Live count inside the search capsule: teal dot = data-UI "result",
+   flipping to rose only when a search comes back empty (caution). */
+.search-count {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--slate);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.count-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--teal-bright);
+}
+
+.search-count.is-zero .count-dot {
+  background: var(--rose);
+}
+
+/* "terms" at rest, "matches" mid-search — swapped by js/jargon.js on
+   the wrapper, inside each language's span so the toggle keeps working. */
+.search-count .count-label-search { display: none; }
+.search-count.is-searching .count-label-rest { display: none; }
+.search-count.is-searching .count-label-search { display: inline; }
 
 /* Suggestion dropdown under the search bar (see js/jargon.js). Floats
    over the reveal button / cards; animates opacity + transform only —
    both composited, nothing repaints per frame. */
 .search-suggest {
   position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
+  top: calc(100% + 2px);
+  left: 8px;
+  right: 8px;
   z-index: 30;
   background: var(--card);
   border: 1px solid var(--border);
@@ -1739,23 +1806,75 @@ a.logo {
   color: var(--slate);
 }
 
-.jargon-reveal-wrap {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+.jargon-group {
+  margin-top: 44px;
 }
 
-.jargon-group {
-  margin-top: 48px;
+/* Sections after the first visible one separate with a full-width
+   hairline (js/jargon.js re-assigns .has-divider as search hides
+   groups, so the first section on screen never carries a stray rule). */
+.jargon-group.has-divider {
+  border-top: 1px solid var(--border);
+  padding-top: 44px;
+}
+
+/* Directory header row: circular module-pastel badge + title + live
+   count pill, left-aligned like a library index. */
+.jargon-group-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.group-badge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  background: var(--module-pastel, var(--paper));
+  color: var(--ink);
+}
+
+.group-badge svg {
+  width: 22px;
+  height: 22px;
+}
+
+.group-count {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--card);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--slate);
+  font-variant-numeric: tabular-nums;
 }
 
 .jargon-group-title {
-  margin: 0 0 20px;
+  margin: 0;
+  min-width: 0;
   font-family: var(--font-display);
   font-size: 28px;
   font-weight: 400;
   letter-spacing: -0.017em;
-  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .jargon-group-title { font-size: 23px; }
+  .group-badge { width: 40px; height: 40px; }
+  .group-badge svg { width: 19px; height: 19px; }
 }
 
 .term-grid {
@@ -2852,21 +2971,12 @@ a.logo {
   margin-bottom: 12px;
 }
 
-/* Small centered glyph above jargon group titles. */
-.group-glyph {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-  color: var(--ink);
-}
-
-.group-glyph svg {
-  width: 26px;
-  height: 26px;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .page-hero-glyph {
     animation: none;
+  }
+
+  .jargon-search-wrap {
+    transition: none;
   }
 }

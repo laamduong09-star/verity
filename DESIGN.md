@@ -118,7 +118,7 @@ This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket 
 - **The blue gradient mesh** (`.bg-mesh`) — slow-drifting single-hue blue blobs behind every page. Removed during the initial merge, then restored by user request: it's the "theme is blue" signature, and blue's one sanctioned ambient/decorative use.
 - **The bilingual `.en`/`.vi` span system** — structural, untouchable.
 
-**Dropped:** the 3px blue card hairline, the 200px CTA pills, Verity's darker paper canvas, and Amplemarket's phoenix orange (no role here).
+**Dropped:** the 3px blue card hairline, the 200px CTA pills, Verity's darker paper canvas, and Amplemarket's phoenix orange (no role here). Also retired 2026-07-10: the jargon page's collapsed-by-default term list (`44278d8`) — replaced by the always-visible category directory (Amplemarket skills-library pattern; the section structure does the de-intimidating the collapse used to).
 
 ## 2. Colors
 
@@ -208,8 +208,10 @@ White, hairline, 12px, 28px padding. No top-edge accent (the old 3px blue hairli
 - **Charcoal spotlight band:** see Charcoal-Band Rule. White weight-400 headline, ash secondary, ghost-on-dark CTA, pill tag, boxy signal chips whose small dots keep lighter data-accent siblings (they state data facts).
 - **Module accordion:** 12px tabs, 16px flat pastel taxonomy chips (hairline so canary/aqua read on white), `+`→`×`, grid-rows 0fr→1fr animation.
 
-### Jargon search + suggestion dropdown
-White 12px panel, hairline, composited-only open animation; rows = module-pastel glyph tile, EN name 600, VI name slate, bilingual group tag.
+### Jargon directory (adopted 2026-07-10, Amplemarket skills-library pattern)
+- **Sticky search capsule:** the search bar starts in the hero flow, then `position: sticky` pins it below the compact topbar; docked, it becomes a frosted tray (the topbar's own recipe — `rgba(255,255,255,0.85)` + blur(16px) + soft shadow + hairline). Inside the input: a live count — teal dot + "44 terms" at rest, "N matches" mid-search, rose dot on zero (data-UI colors doing data jobs).
+- **Directory Header (named pattern):** each category section opens with a left-aligned row — 48px circular module-pastel badge (ink line glyph, 9999px), weight-400 section title, hairline 9999px count pill whose number goes live during search. Full-width hairline dividers separate sections; JS keeps the first *visible* section divider-free while search hides groups.
+- **Suggestion dropdown:** white 12px panel, hairline, composited-only open animation; rows = module-pastel glyph tile, EN name 600, VI name slate, bilingual group tag. Works identically docked and at rest (same element, never cloned).
 
 ## 6. Do's and Don'ts
 
