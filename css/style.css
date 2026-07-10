@@ -1,7 +1,14 @@
 :root {
-  --paper: #e7e6e2;
-  --card: #faf9f7;
-  --ink: #11151f;
+  /* Amplemarket-hybrid surfaces: white canvas, cream wash, pearl hovers.
+     --paper deliberately points at the cream wash so every legacy
+     "paper tint inside a card" usage (example boxes, window chrome,
+     resting inputs) stays a visible tint against the white card. */
+  --canvas: #ffffff;
+  --paper: #f6f5f3;
+  --pearl: #ecebea;
+  --card: #ffffff;
+  --ink: #111111;
+  --charcoal: #272625;
   --rose: #c2255c;
   --rose-soft: rgba(194, 37, 92, 0.14);
   --green: #1a7a42;
@@ -10,12 +17,21 @@
   --teal: #0b5a55;
   --teal-bright: #0e7a72;
   --teal-soft: rgba(11, 90, 85, 0.12);
-  --slate: #5d5f68;
-  --border: #d5d3cd;
+  --slate: #6d6c6b;
+  --border: rgba(17, 17, 17, 0.08);
+  --stone: #b1b1af;
   --blue: #2348ad;
   --blue-focus: #2f5abf;
   --white: #ffffff;
-  --input-hover-border: #c9cfd6;
+  --input-hover-border: #b1b1af;
+
+  /* Module pastel taxonomy — flat fills only, one pastel per module,
+     never gradients, never hover states, never accent text. */
+  --pastel-calc: #b7efb2;
+  --pastel-recommend: #e2ddfd;
+  --pastel-jargon: #ffef99;
+  --pastel-credit: #ffd7f0;
+  --pastel-family: #99fff9;
 
   --font-display: 'Lexend', sans-serif;
   --font-body: 'Be Vietnam Pro', sans-serif;
@@ -26,7 +42,7 @@
 body {
   position: relative;
   margin: 0;
-  background: var(--paper);
+  background: var(--canvas);
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -277,7 +293,7 @@ body {
   font-size: 14px;
   font-weight: 500;
   padding: 12px 16px;
-  border-radius: 10px;
+  border-radius: 8px;
   transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
   display: inline-flex;
   align-items: center;
@@ -285,13 +301,13 @@ body {
 }
 
 .nav-link.active {
-  background: var(--blue);
+  background: var(--ink);
   color: var(--white);
 }
 
 .nav-link:hover:not(.active):not([aria-disabled="true"]) {
   color: var(--ink);
-  background: var(--card);
+  background: var(--pearl);
 }
 
 .nav-link:active:not([aria-disabled="true"]) {
@@ -320,7 +336,7 @@ body {
 .lang-toggle {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 8px 16px;
   min-height: 44px;
   font-family: var(--font-body);
@@ -344,7 +360,7 @@ body {
 
 .lang-option { color: var(--slate); transition: color 0.15s ease; }
 .lang-option.active { color: var(--ink); }
-.lang-divider { color: var(--border); }
+.lang-divider { color: var(--stone); }
 
 /* ---------- Hero ---------- */
 .page {
@@ -360,12 +376,14 @@ body {
   text-align: center;
 }
 
+/* Weight-400 headings with aggressive negative tracking are the
+   adopted signature: authority through restraint, not boldness. */
 .hero-title {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 400;
   font-size: 44px;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
   max-width: 700px;
   margin: 0 auto;
   animation: fadeUp 0.6s ease-out both;
@@ -421,7 +439,7 @@ body {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(17, 21, 31, 0.45);
+  background: rgba(17, 17, 17, 0.45);
   backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
@@ -438,14 +456,14 @@ body {
 .modal-card {
   position: relative;
   background: var(--card);
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid var(--border);
   max-width: 520px;
   width: 100%;
   max-height: calc(100vh - 48px);
   overflow-y: auto;
   padding: 32px;
-  box-shadow: 0 24px 48px rgba(17, 21, 31, 0.18);
+  box-shadow: 0 24px 48px rgba(17, 17, 17, 0.18);
 }
 
 .modal-close {
@@ -475,7 +493,7 @@ body {
 .modal-title {
   font-family: var(--font-display);
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 500;
   margin: 0 0 16px;
   padding-right: 36px;
 }
@@ -495,7 +513,7 @@ body {
   margin: 4px 0 20px;
   padding: 16px;
   background: var(--paper);
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .modal-glossary dt {
@@ -527,33 +545,23 @@ body {
   .calculator { grid-template-columns: 1fr; }
 }
 
+/* White card on white canvas: the hairline border IS the separation —
+   no shadow at rest (Amplemarket's card rule), and hover earns only a
+   small lift plus a darkened hairline, not a glow. */
 .card {
   position: relative;
   overflow: hidden;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 28px;
-  box-shadow: 0 1px 2px rgba(28, 35, 48, 0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
   animation: fadeUp 0.6s ease-out both;
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--blue);
-  opacity: 0.5;
-}
-
 .card:hover {
-  transform: translateY(-3px);
-  border-color: var(--blue);
-  box-shadow: 0 12px 24px rgba(28, 35, 48, 0.08);
+  transform: translateY(-2px);
+  border-color: rgba(17, 17, 17, 0.18);
 }
 
 .inputs-card { animation-delay: 0.05s; }
@@ -566,7 +574,7 @@ body {
 .card-title {
   font-family: var(--font-display);
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   margin: 0 0 20px;
 }
 
@@ -627,7 +635,7 @@ body {
   display: flex;
   align-items: center;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 0 14px;
   background: var(--paper);
   transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
@@ -648,7 +656,7 @@ body {
   background: transparent;
   outline: none;
   width: 100%;
-  padding: 11px 6px;
+  padding: 13px 6px;
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 600;
@@ -811,13 +819,13 @@ body {
   overflow-y: auto;
   overflow-x: auto;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   /* Fades the last ~16px of rows instead of cutting them off abruptly —
      a quieter "there's more below" hint than the thin scrollbar alone. */
   -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 16px), transparent 100%);
   mask-image: linear-gradient(to bottom, black calc(100% - 16px), transparent 100%);
   scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
+  scrollbar-color: var(--stone) transparent;
 }
 
 .breakdown-table-wrap::-webkit-scrollbar {
@@ -830,7 +838,7 @@ body {
 }
 
 .breakdown-table-wrap::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--stone);
   border-radius: 8px;
 }
 
@@ -954,7 +962,7 @@ body {
 }
 
 .compare-fill.checking {
-  background: var(--border);
+  background: var(--stone);
 }
 
 .compare-value {
@@ -1093,7 +1101,7 @@ a.logo {
 
 .topbar-inner {
   border: 1px solid transparent;
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 6px 0;
   transition:
     max-width 0.3s var(--ease-out-strong),
@@ -1110,11 +1118,11 @@ a.logo {
 .topbar.is-compact .topbar-inner {
   max-width: 720px;
   padding: 6px 14px 6px 20px;
-  background: rgba(250, 249, 247, 0.88);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   border-color: var(--border);
-  box-shadow: 0 12px 24px rgba(28, 35, 48, 0.08);
+  box-shadow: 0 12px 24px rgba(17, 17, 17, 0.06);
 }
 
 /* Inside the compact capsule the nav's own capsule chrome goes quiet so
@@ -1129,7 +1137,7 @@ a.logo {
 }
 
 .topbar.is-compact .lang-toggle {
-  background: var(--paper);
+  background: var(--pearl);
 }
 
 /* The wordmark collapses to just the V badge when compact. */
@@ -1148,7 +1156,7 @@ a.logo {
 
 @media (max-width: 700px) {
   .topbar.is-compact .topbar-inner {
-    border-radius: 16px;
+    border-radius: 12px;
   }
 }
 
@@ -1162,16 +1170,17 @@ a.logo {
 }
 
 /* ---------- Buttons ---------- */
+/* Amplemarket shape language: buttons are 8px, never pills. */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   border: 1px solid transparent;
-  border-radius: 200px;
-  padding: 13px 26px;
+  border-radius: 8px;
+  padding: 12px 20px;
   font-family: var(--font-body);
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease,
@@ -1199,7 +1208,8 @@ a.logo {
 }
 
 .btn-ghost:hover {
-  border-color: var(--blue);
+  background: var(--pearl);
+  border-color: rgba(17, 17, 17, 0.16);
 }
 
 /* ---------- Section scaffolding ---------- */
@@ -1216,11 +1226,11 @@ a.logo {
 .eyebrow {
   margin: 0 0 10px;
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--slate);
 }
 
 /* Rose eyebrow marks the one caution section (Not recommended) — the
@@ -1232,10 +1242,10 @@ a.logo {
 .section-title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 30px;
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 
 .section-sub {
@@ -1288,7 +1298,7 @@ a.logo {
   margin: 0;
   font-family: var(--font-display);
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .module-desc {
@@ -1365,7 +1375,7 @@ a.logo {
   margin: 0 0 8px;
   font-family: var(--font-display);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .value-desc {
@@ -1395,7 +1405,7 @@ a.logo {
 .footer-motto {
   font-family: var(--font-display);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .footer-links {
@@ -1433,7 +1443,8 @@ a.logo {
 }
 
 .page-hero .hero-title {
-  font-size: 38px;
+  font-size: 36px;
+  letter-spacing: -0.03em;
 }
 
 .page-hero-sub {
@@ -1509,7 +1520,7 @@ a.logo {
   margin: 0 0 2px;
   font-family: var(--font-display);
   font-size: 19px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* The one-line "what this earns you" summary under each rung title —
@@ -1522,12 +1533,7 @@ a.logo {
 }
 
 /* ---------- Recommend: caution cards ---------- */
-/* Rose top hairline replaces the blue signature on caution cards only —
-   the reserved caution role, applied to the system's own signature detail. */
-.avoid-card::before {
-  background: var(--rose);
-}
-
+/* Caution cards keep a rose hover border — the reserved caution role. */
 .avoid-card:hover {
   border-color: var(--rose);
 }
@@ -1547,7 +1553,7 @@ a.logo {
   margin: 0 0 8px;
   font-family: var(--font-display);
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .avoid-grid {
@@ -1577,14 +1583,14 @@ a.logo {
   margin: 0 0 6px;
   font-family: var(--font-display);
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .plan-math {
   margin: 12px 0 0;
   padding: 12px 14px;
   background: var(--paper);
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 13.5px;
   line-height: 1.6;
   color: var(--ink);
@@ -1631,7 +1637,7 @@ a.logo {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  box-shadow: 0 12px 24px rgba(28, 35, 48, 0.08);
+  box-shadow: 0 12px 24px rgba(17, 17, 17, 0.08);
   padding: 6px;
   opacity: 0;
   transform: translateY(-6px);
@@ -1738,8 +1744,9 @@ a.logo {
 .jargon-group-title {
   margin: 0 0 20px;
   font-family: var(--font-display);
-  font-size: 21px;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.017em;
   text-align: center;
 }
 
@@ -1765,7 +1772,7 @@ a.logo {
   margin: 0;
   font-family: var(--font-display);
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* The Vietnamese name sits directly under the English term at all times —
@@ -2076,13 +2083,8 @@ a.logo {
   padding: 9px 14px;
 }
 
-/* Hover draws a tall opaque box behind the link (card-white against the
-   paper page at rest). Inside the compact capsule that same card tone
-   would vanish into the capsule's own card background, so it flips to
-   paper there. */
-.topbar.is-compact .nav-link:hover:not(.active) {
-  background: var(--paper);
-}
+/* Pearl hover works on both the white canvas at rest and the frosted
+   white compact capsule — no per-state flip needed anymore. */
 
 /* The 12px gaps push the compact capsule's content ~13px past its
    720px cap; slimmer side padding reclaims it (38px text-to-text vs
@@ -2098,28 +2100,35 @@ a.logo {
   padding: 72px 0 32px;
 }
 
+/* The one poster moment in the system: weight 900, uppercase, display
+   scale. Everything else stays weight 400. Line-height holds at 1.1
+   (not the reference's 0.8) because uppercase Vietnamese stacks
+   diacritics above cap height — tighter clips them. */
 .landing-hero .hero-title {
-  max-width: 860px;
-  font-size: clamp(44px, 6.2vw, 66px);
-  letter-spacing: -0.02em;
-  line-height: 1.04;
+  max-width: 900px;
+  font-size: clamp(46px, 7vw, 84px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
 .landing-hero .hero-title em {
   font-style: italic;
-  font-weight: 600;
+  font-weight: 900;
 }
 
 .landing-hero .hero-subtitle-stack {
   max-width: 580px;
   margin-left: auto;
   margin-right: auto;
-  font-size: 18px;
+  font-size: 20px;
+  letter-spacing: -0.02em;
   line-height: 1.5;
 }
 
-/* Announcement chip above the headline — boxy like the rest of the
-   chrome (nav chips 10px), not a pill. */
+/* Announcement badge above the headline — a true pill: badges are the
+   one shape that stays fully round in the 8/12/9999 radius system. */
 .hero-pill {
   display: inline-flex;
   align-items: center;
@@ -2127,7 +2136,7 @@ a.logo {
   margin-bottom: 30px;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 9999px;
   padding: 6px 16px 6px 6px;
   font-size: 13.5px;
   font-weight: 500;
@@ -2138,7 +2147,7 @@ a.logo {
 }
 
 .hero-pill:hover {
-  border-color: var(--blue);
+  border-color: rgba(17, 17, 17, 0.2);
 }
 
 .hero-pill:active {
@@ -2148,7 +2157,7 @@ a.logo {
 .hero-pill-tag {
   background: var(--ink);
   color: var(--white);
-  border-radius: 6px;
+  border-radius: 9999px;
   padding: 3px 10px;
   font-size: 11px;
   font-weight: 600;
@@ -2164,7 +2173,7 @@ a.logo {
 }
 
 .btn-ink:hover {
-  background: #232939;
+  background: var(--charcoal);
 }
 
 /* Quiet trust line under the CTAs (the "social proof row" slot). */
@@ -2184,6 +2193,8 @@ a.logo {
 /* The hero's product shot: a framed "window" showing the calculator's
    real anatomy (inputs, stacked growth chart, final balance). The whole
    thing is a link into the actual calculator. */
+/* The one "featured" element that keeps a real shadow (Amplemarket's
+   featured-card xl) — it's the hero product shot, not a content card. */
 .app-window {
   display: block;
   position: relative;
@@ -2192,21 +2203,20 @@ a.logo {
   text-align: left;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   color: inherit;
   text-decoration: none;
-  box-shadow: 0 24px 48px rgba(17, 21, 31, 0.1);
+  box-shadow: 0 26px 60px -6px rgba(17, 17, 17, 0.12), 0 28px 28px -14px rgba(17, 17, 17, 0.02),
+    0 6px 6px -3px rgba(17, 17, 17, 0.04), 0 1px 1px -0.5px rgba(17, 17, 17, 0.04);
   animation: fadeUp 0.7s ease-out both;
   animation-delay: 0.2s;
-  transition: transform 0.2s var(--ease-out-strong), box-shadow 0.2s var(--ease-out-strong),
-    border-color 0.2s var(--ease-out-strong);
+  transition: transform 0.2s var(--ease-out-strong), border-color 0.2s var(--ease-out-strong);
 }
 
 .app-window:hover {
   transform: translateY(-3px);
-  border-color: var(--blue);
-  box-shadow: 0 28px 56px rgba(17, 21, 31, 0.13);
+  border-color: rgba(17, 17, 17, 0.18);
 }
 
 .window-chrome {
@@ -2222,7 +2232,7 @@ a.logo {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--border);
+  background: var(--stone);
 }
 
 .window-address {
@@ -2291,7 +2301,7 @@ a.logo {
   margin: 0;
   font-family: var(--font-display);
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .mock-result-label {
@@ -2345,9 +2355,9 @@ a.logo {
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(26px, 3.6vw, 40px);
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.25;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.04em;
   color: var(--ink);
 }
 
@@ -2410,10 +2420,10 @@ a.logo {
   max-width: 720px;
   margin: 26px auto 0;
   font-family: var(--font-display);
-  font-size: clamp(34px, 4.6vw, 52px);
-  font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.015em;
+  font-size: clamp(36px, 4.8vw, 56px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.05em;
   color: var(--white);
 }
 
@@ -2501,23 +2511,12 @@ a.logo {
   overflow: hidden;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 12px;
   transition: border-color 0.2s ease;
 }
 
-.acc-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--blue);
-  opacity: 0.5;
-}
-
 .acc-item:hover {
-  border-color: var(--blue);
+  border-color: rgba(17, 17, 17, 0.18);
 }
 
 .acc-head {
@@ -2532,7 +2531,7 @@ a.logo {
   text-align: left;
   font-family: var(--font-display);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
 }
 
@@ -2598,8 +2597,8 @@ a.logo {
   margin: 0 0 10px;
   font-family: var(--font-display);
   font-size: 22px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
 .acc-desc {
@@ -2663,7 +2662,7 @@ a.logo {
   justify-content: center;
   width: 22px;
   height: 22px;
-  border-radius: 6px;
+  border-radius: 4px;
   background: var(--blue);
   color: var(--white);
   font-family: var(--font-display);
