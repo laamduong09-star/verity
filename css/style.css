@@ -390,6 +390,9 @@ body {
   font-weight: 400;
   font-size: 17px;
   line-height: 1.4;
+  /* Lives inside the h1, so the landing poster's uppercase would
+     otherwise cascade onto this body copy. */
+  text-transform: none;
 }
 
 .hero-subtitle-stack .en,
@@ -2132,8 +2135,8 @@ a.logo {
   line-height: 1.5;
 }
 
-/* Announcement badge above the headline — a true pill: badges are the
-   one shape that stays fully round in the 8/12/9999 radius system. */
+/* Announcement chip above the headline — boxy on the button end of the
+   shape language (8px), per user preference over the pill badge. */
 .hero-pill {
   display: inline-flex;
   align-items: center;
@@ -2141,7 +2144,7 @@ a.logo {
   margin-bottom: 30px;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 9999px;
+  border-radius: 8px;
   padding: 6px 16px 6px 6px;
   font-size: 13.5px;
   font-weight: 500;
@@ -2162,7 +2165,7 @@ a.logo {
 .hero-pill-tag {
   background: var(--ink);
   color: var(--white);
-  border-radius: 9999px;
+  border-radius: 4px;
   padding: 3px 10px;
   font-size: 11px;
   font-weight: 600;
