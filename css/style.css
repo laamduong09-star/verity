@@ -1641,7 +1641,10 @@ a.logo {
   position: sticky;
   top: 72px;
   z-index: 40;
-  max-width: 576px;
+  /* Full content-column width, matching the reference: the search bar
+     spans the same width as the term grid below it, not a narrow
+     centered capsule. */
+  max-width: 100%;
   /* Pulled up so it straddles the seam between the aurora backdrop
      and the cream shell, its center landing on the shell's top edge —
      the reference layout's search bar sits astride the hard hand-off,
@@ -1864,8 +1867,8 @@ a.logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 9999px;
   background: var(--module-pastel, var(--paper));
   color: var(--ink);
@@ -1883,8 +1886,8 @@ a.logo {
 }
 
 .group-badge svg {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
 }
 
 .group-count {
@@ -1892,14 +1895,14 @@ a.logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 30px;
-  height: 26px;
-  padding: 0 10px;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 9px;
   border: 1px solid var(--border);
   border-radius: 9999px;
   background: var(--card);
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--slate);
   font-variant-numeric: tabular-nums;
@@ -1909,21 +1912,21 @@ a.logo {
   margin: 0;
   min-width: 0;
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 400;
-  letter-spacing: -0.017em;
+  letter-spacing: -0.01em;
 }
 
 @media (max-width: 560px) {
-  .jargon-group-title { font-size: 23px; }
-  .group-badge { width: 40px; height: 40px; }
-  .group-badge svg { width: 19px; height: 19px; }
+  .jargon-group-title { font-size: 19px; }
+  .group-badge { width: 34px; height: 34px; }
+  .group-badge svg { width: 16px; height: 16px; }
 }
 
 .term-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 24px;
 }
 
 @media (max-width: 900px) {
@@ -1935,13 +1938,16 @@ a.logo {
 }
 
 .term-card {
-  padding: 22px;
+  /* Matches the system's default card-surface padding (DESIGN.md) —
+     the jargon cards were tighter than every other card on the site;
+     this also gives the reference format's roomier, less packed feel. */
+  padding: 28px;
 }
 
 .term-name {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -1950,7 +1956,7 @@ a.logo {
    itself is the lesson. Teal: it's the payoff, not decoration. */
 .term-vi-name {
   display: block;
-  margin: 3px 0 10px;
+  margin: 4px 0 14px;
   font-size: 13px;
   font-weight: 500;
   color: var(--teal);
@@ -1964,7 +1970,7 @@ a.logo {
 }
 
 .term-eg {
-  margin: 12px 0 0;
+  margin: 16px 0 0;
   padding: 10px 12px;
   background: var(--paper);
   border-radius: 8px;
