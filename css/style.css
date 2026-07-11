@@ -1641,10 +1641,11 @@ a.logo {
   position: sticky;
   top: 72px;
   z-index: 40;
-  /* Full content-column width, matching the reference: the search bar
-     spans the same width as the term grid below it, not a narrow
-     centered capsule. */
-  max-width: 100%;
+  /* Wider than a narrow centered capsule, but not the full content
+     column either — the reference's own bar reads as roughly 70% of
+     its content width, with margin either side even before its
+     separate filter button. */
+  max-width: 820px;
   /* Pulled up so it straddles the seam between the aurora backdrop
      and the cream shell, its center landing on the shell's top edge —
      the reference layout's search bar sits astride the hard hand-off,
