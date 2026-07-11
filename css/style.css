@@ -33,6 +33,13 @@
   --pastel-credit: #ffd7f0;
   --pastel-family: #99fff9;
 
+  /* Jargon-directory-only category accent, not a module pastel: the
+     three category badges on jargon.html are deliberately differentiated
+     (Credit blue, Investing green) rather than sharing the page's canary
+     module pastel — a scoped, documented exception to the Pastel-Taxonomy
+     Rule (see DESIGN.md). Matches the other pastels' saturation/lightness. */
+  --pastel-jargon-credit: #c9dcff;
+
   --font-display: 'Lexend', sans-serif;
   --font-body: 'Be Vietnam Pro', sans-serif;
 }
@@ -1837,6 +1844,17 @@ a.logo {
   border-radius: 9999px;
   background: var(--module-pastel, var(--paper));
   color: var(--ink);
+}
+
+/* Credit & borrowing / Investing & retirement override the page's canary
+   module pastel on purpose, so the three category badges read apart at a
+   glance — see the --pastel-jargon-credit comment above and DESIGN.md. */
+.group-badge--credit {
+  background: var(--pastel-jargon-credit);
+}
+
+.group-badge--invest {
+  background: var(--pastel-calc);
 }
 
 .group-badge svg {
