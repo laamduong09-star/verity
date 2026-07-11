@@ -4,13 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A bilingual (EN/VI) financial literacy site for young first-time earners, starting with a single compound-interest calculator page. No build tooling, no package manager, no framework — three hand-written static files:
+A bilingual (EN/VI) financial literacy site for young first-time earners, starting with a single compound-interest calculator page. Today it's hand-written static files — no framework, no package.json yet:
 
-- `actual website.html` — the page (note the literal space in the filename; this used to be `index.html`, renamed outside of git, so `git status` still shows `index.html` as deleted)
-- `css/style.css`
-- `js/calculator.js`
+- `actual website.html` — the calculator page (note the literal space in the filename; this used to be `index.html`, renamed outside of git; `index.html` is now the landing page)
+- `index.html`, `recommend.html`, `jargon.html`, `credit.html`, `family-split.html` — the other pages
+- `css/style.css` — all styling
+- `js/` — one vanilla-JS file per page plus shared `site.js`
 
 Fonts (Lexend + Be Vietnam Pro) load from Google Fonts via a `<link>` tag in the HTML head; there are no other external dependencies besides Chart.js (also loaded via CDN, referenced in the HTML).
+
+**Build tooling is permitted** (decision 2026-07-10, reversing the earlier no-tooling rule): adding a package manager, bundler, Tailwind, TypeScript, or a framework is allowed when a task genuinely needs it. Two conditions still apply: (1) don't bolt on a toolchain for something plain CSS/JS can express in a few lines — prefer the lightest tool that does the job; (2) whatever the stack, the bilingual `.en`/`.vi` parity system and DESIGN.md remain binding, and existing pages must keep working during any migration.
 
 ## Use the right plugin/skill for the task
 
@@ -47,11 +50,13 @@ If a request could plausibly match more than one, pick by what the task most spe
 
 ## Commands
 
-There is no build step, package.json, linter, or test suite in this repo. To work on it:
+There is no build step, package.json, linter, or test suite in this repo *yet* (build tooling is now permitted — see "What this is"). Until one lands:
 
 - **Serve locally**: `npx serve -p 8743 .` from the project root, then open `http://localhost:8743/actual%20website.html` (the URL-encoded space is required).
-- **Syntax-check the JS** after editing: `node --check js/calculator.js`
+- **Syntax-check the JS** after editing: `node --check js/<file>.js`
 - **Check CSS brace balance** after large edits (no CSS parser is wired up): count `{`/`}` are equal, e.g. via `grep -c` or a quick Node one-liner.
+
+If a build step is ever added, document its commands here and keep the no-tooling workflow above working until every page is migrated.
 
 ## Architecture
 
