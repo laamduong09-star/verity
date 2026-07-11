@@ -1926,12 +1926,8 @@ a.logo {
 
 .term-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
-}
-
-@media (max-width: 900px) {
-  .term-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 620px) {
@@ -1941,8 +1937,11 @@ a.logo {
 .term-card {
   /* Matches the system's default card-surface padding (DESIGN.md) —
      the jargon cards were tighter than every other card on the site;
-     this also gives the reference format's roomier, less packed feel. */
-  padding: 28px;
+     this also gives the reference format's roomier, less packed feel.
+     min-height plus the 2-column grid (was 3) gives each card the
+     reference's taller, more substantial presence. */
+  padding: 32px;
+  min-height: 240px;
 }
 
 .term-name {
