@@ -1676,6 +1676,23 @@ a.logo {
   text-overflow: ellipsis;
 }
 
+/* Leading magnifying-glass icon, Amplemarket-style: always slate, never
+   recolors on focus (the blue focus ring already signals the state). */
+.jargon-search-wrap .input-wrap {
+  gap: 10px;
+}
+
+.search-icon {
+  flex: none;
+  display: inline-flex;
+  color: var(--slate);
+}
+
+.search-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
 /* Live count inside the search capsule: teal dot = data-UI "result",
    flipping to rose only when a search comes back empty (caution). */
 .search-count {
