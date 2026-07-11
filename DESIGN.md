@@ -179,6 +179,7 @@ Exceptions, deliberately short list:
 - **App-window mockup** (landing hero product shot): the featured-xl shadow (`0 26px 60px -6px rgba(17,17,17,0.12)` stack).
 - **Info modal**: `0 24px 48px rgba(17,17,17,0.18)` above a blurred backdrop.
 - **Compact topbar capsule**: soft `0 12px 24px rgba(17,17,17,0.06)` under frosted blur(16px) white.
+- **Jargon search bar** (2026-07-10, user-directed): white at rest (not cream, unlike every other input), soft `0 4px 14px rgba(17,17,17,0.08)` pop-shadow instead of the resting hairline — the reference's search bar reads as a crisp elevated surface, not a flush field. Focus swaps the pop-shadow for the standard blue ring rather than stacking both.
 
 ## 5. Components
 

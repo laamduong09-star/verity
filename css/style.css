@@ -1690,8 +1690,19 @@ a.logo {
 
 /* Leading magnifying-glass icon, Amplemarket-style: always slate, never
    recolors on focus (the blue focus ring already signals the state). */
+/* Deliberate, scoped exception to the Hairline-Not-Shadow Rule
+   (DESIGN.md Elevation): the reference's search bar is a crisp white
+   surface that pops off the page at rest, not a cream resting-state
+   fill that only whitens on focus. Matches the reference's "37 skills
+   found" bar treatment. */
 .jargon-search-wrap .input-wrap {
   gap: 10px;
+  background: var(--card);
+  box-shadow: 0 4px 14px rgba(17, 17, 17, 0.08);
+}
+
+.jargon-search-wrap .input-wrap:focus-within {
+  box-shadow: 0 0 0 3px rgba(47, 90, 191, 0.14);
 }
 
 .search-icon {
