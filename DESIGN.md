@@ -115,7 +115,7 @@ This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket 
 - **Lexend + Be Vietnam Pro.** Be Vietnam Pro is a Vietnamese-designed body face with native diacritics; the bilingual mission outranks typeface mimicry. Amplemarket's *typography philosophy* was adopted instead of its font.
 - **The data-color meanings.** Teal = "result/positive outcome", blue = "interactive", rose = caution, amber = the one earned stat exception. These survive **inside data UI only** (chart, results, meters, focus rings, links) — chrome and decoration no longer use them.
 - **The custom cursor** (blue dot + trailing ring) — a personality piece with no Amplemarket equivalent.
-- **The blue gradient mesh** (`.bg-mesh`) — slow-drifting single-hue blue blobs behind every page. Removed during the initial merge, then restored by user request: it's the "theme is blue" signature, and blue's one sanctioned ambient/decorative use.
+- **The blue ambient background** — blue's one sanctioned ambient/decorative use, and the "theme is blue" signature. Its form has evolved: blob mesh (`.bg-mesh`) → removed in the initial merge → restored by user request → **replaced 2026-07-10 by the aurora wash** (`.bg-aurora`, user-directed, adapted natively from a supplied React "AuroraBackground" component). The aurora is blurred repeating-gradient ribbons (blue→indigo→violet stops) washing only the top ~820px of each page, masked to fade before the content shell. Its drifting layer animates `transform` only — the reference's `background-position` animation is paint-level, the same class that made BackgroundPaths flicker against the cursor's rAF loop.
 - **The bilingual `.en`/`.vi` span system** — structural, untouchable.
 
 **Dropped:** the 3px blue card hairline, the 200px CTA pills, Verity's darker paper canvas, and Amplemarket's phoenix orange (no role here). Also retired 2026-07-10: the jargon page's collapsed-by-default term list (`44278d8`) — replaced by the always-visible category directory (Amplemarket skills-library pattern; the section structure does the de-intimidating the collapse used to).
@@ -123,8 +123,8 @@ This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket 
 ## 2. Colors
 
 ### Surfaces
-- **Canvas** (`#ffffff`): the page, washed by the blue gradient mesh (see Provenance) — the mesh is the only thing allowed between canvas and content.
-- **Cream Wash / paper** (`#f6f5f3`): light section bands (quote band), resting input fill, example-box tints inside cards. (`--paper` points here so every legacy paper-tint stays a tint.)
+- **Canvas** (`#ffffff`): the page, washed at the top by the aurora background (see Provenance) — the aurora is the only thing allowed between canvas and content.
+- **Cream Wash / paper** (`#f6f5f3`): the **content shell** (the cream "subpage" panel that carries everything below a page's hero — adopted 2026-07-10 from the Amplemarket skills-library layout: dynamic backdrop above, one flat cream surface below, 12px inset panel), plus light section bands (quote band), resting input fill, and example-box tints inside cards. (`--paper` points here so every legacy paper-tint stays a tint.)
 - **Pearl** (`#ecebea`): hover fill for ghost controls and nav chips.
 - **Card** (`#ffffff`): card surfaces — separated from canvas by the hairline border, not by tone or shadow.
 - **Charcoal** (`#272625`): the one dark surface (landing spotlight band). Warm near-black, never navy.
