@@ -1642,7 +1642,15 @@ a.logo {
   top: 72px;
   z-index: 40;
   max-width: 576px;
-  margin: 0 auto 8px;
+  /* Pulled up so it straddles the seam between the aurora backdrop
+     and the cream shell, its center landing on the shell's top edge —
+     the reference layout's search bar sits astride the hard hand-off,
+     not fully inside either zone. overflow-anchor suppresses Chrome's
+     scroll-anchoring, which otherwise "corrects" for this element's
+     shrunk flow space near the top of the page by silently scrolling
+     the whole page on load. */
+  margin: -84px auto 8px;
+  overflow-anchor: none;
   padding: 8px;
   border: 1px solid transparent;
   border-radius: 12px;
