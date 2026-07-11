@@ -127,7 +127,7 @@ This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket 
 - **Cream Wash / paper** (`#f6f5f3`): the **content shell** (the cream "subpage" that carries everything below a page's hero — adopted 2026-07-10 from the Amplemarket skills-library layout: dynamic backdrop above, one flat cream surface below, hard edge). Unlike the quote band, this is genuinely full-bleed — edge to edge of the viewport, no side gaps, no rounded corners — because it *is* the page's lower background, not a decorative accent inside it. Structurally it breaks out of `.page`'s 1200px container: `<main>` carries no width constraint, `.content-shell` is its direct full-width child, and a nested `.page` div restores the centered column so cards line up with the hero. Also used for light section bands (quote band, still an inset panel — a smaller, different-role decoration), resting input fill, and example-box tints inside cards. (`--paper` points here so every legacy paper-tint stays a tint.)
 - **Pearl** (`#ecebea`): hover fill for ghost controls and nav chips.
 - **Card** (`#ffffff`): card surfaces — separated from canvas by the hairline border, not by tone or shadow.
-- **Charcoal** (`#272625`): the one dark surface (landing spotlight band). Warm near-black, never navy.
+- **Charcoal** (`#272625`): the dark surface — the landing spotlight band, and (2026-07-10, user-directed) every page's footer. Warm near-black, never navy.
 - **Ink** (`#111111`): primary text and filled primary buttons. Never `#000`.
 - **Slate/ash** (`#6d6c6b`) secondary text · **Stone** (`#b1b1af`) strong dividers and fills that were borders · **Hairline** (`rgba(17,17,17,0.08)`) all borders.
 
@@ -152,7 +152,7 @@ One flat pastel per module, used identically on the landing accordion chip, the 
 
 **The Two-Accent-in-Data-UI Rule.** Teal and blue keep their old jobs, but their territory shrank to data UI. If a surface or chrome element wants color, it gets a module pastel or nothing.
 
-**The Charcoal-Band Rule.** Exactly one dark surface per page maximum, always charcoal `#272625`, rendered as an inset 12px panel (100vw full-bleed seams against the scrollbar — measured, not theoretical).
+**The Charcoal-Band Rule.** Exactly one dark *content* band per page maximum, always charcoal `#272625`, rendered as an inset 12px panel (100vw full-bleed seams against the scrollbar — measured, not theoretical). The site footer (2026-07-10, user-directed, Amplemarket reference) is charcoal on every page and sits outside this count — it's structural chrome at a fixed position, not a page-content moment, the same way the topbar isn't counted as "a light surface." A page may have both its own charcoal band and the charcoal footer at once (the landing page does); footer text follows the ink-band's existing dark-surface convention (white primary text, `rgba(255,255,255,0.65)` secondary, `rgba(255,255,255,0.45)` tertiary/legal), full-bleed with no separate treatment needed since it was never nested inside `.page` to begin with.
 
 ## 3. Typography
 

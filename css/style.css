@@ -1401,10 +1401,16 @@ a.logo {
 }
 
 /* ---------- Footer ---------- */
+/* Charcoal, matching the reference's dark footer — a deliberate second
+   dark surface alongside the landing page's ink-band. The Charcoal-
+   Band Rule ("one dark surface per page") governs in-page content
+   bands; the footer is structural site chrome present on every page
+   at a fixed position, not a content moment, so it sits outside that
+   count (same logic as the topbar not counting as a "light surface"). */
 .site-footer {
   margin-top: 88px;
-  border-top: 1px solid var(--border);
   padding: 40px 32px 48px;
+  background: var(--charcoal);
 }
 
 .site-footer-inner {
@@ -1421,6 +1427,7 @@ a.logo {
   font-family: var(--font-display);
   font-size: 16px;
   font-weight: 500;
+  color: var(--white);
 }
 
 .footer-links {
@@ -1431,21 +1438,21 @@ a.logo {
 }
 
 .footer-links a {
-  color: var(--slate);
+  color: rgba(255, 255, 255, 0.65);
   font-size: 14px;
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
 .footer-links a:hover {
-  color: var(--ink);
+  color: var(--white);
 }
 
 .footer-note {
   max-width: 540px;
   font-size: 12.5px;
   line-height: 1.6;
-  color: var(--slate);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 /* ==================================================================
