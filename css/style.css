@@ -1205,18 +1205,23 @@ a.logo {
 }
 
 /* The cream "subpage": everything below a page's hero sits on one flat
-   cream panel, giving the reference layout's hard hand-off — dynamic
-   aurora backdrop above, plain content surface below. Same inset-panel
-   language as the quote/charcoal bands (12px, inside the page column).
-   White cards keep their hairlines; on cream they also read by tone. */
+   cream surface that runs the full width of the viewport — the
+   reference layout's hard hand-off, dynamic aurora backdrop above,
+   plain content edge-to-edge below, no side gaps. Unlike the
+   quote/charcoal bands (deliberately kept as inset panels inside the
+   page column), this is the page's actual lower background, so it
+   breaks out of `.page`'s 1200px container rather than living inside
+   it: `<main>` itself carries no width constraint, .content-shell is
+   its direct full-width child, and a nested `.page` div restores the
+   centered content column so cards line up with the hero above. */
 .content-shell {
+  width: 100%;
   margin-top: 56px;
-  padding: 48px clamp(20px, 4vw, 44px) 72px;
+  padding: 48px 0 72px;
   background: var(--paper);
-  border-radius: 12px;
 }
 
-.content-shell > :first-child {
+.content-shell .page > *:first-child {
   margin-top: 0;
 }
 
