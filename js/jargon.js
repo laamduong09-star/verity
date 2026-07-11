@@ -105,11 +105,23 @@
   var entries = cards.map(function (card) {
     var group = card.closest('.jargon-group');
     var viNameEl = card.querySelector('.term-vi-name');
+    var badge = group.querySelector('.group-badge');
+    // Credit & borrowing / Investing & retirement carry a
+    // group-badge--* color-override class (see style.css); reusing it
+    // on the suggestion glyph keeps the dropdown's colors in sync with
+    // the category headers from one source instead of a second copy.
+    var colorClass = null;
+    if (badge) {
+      Array.prototype.forEach.call(badge.classList, function (cls) {
+        if (cls.indexOf('group-badge--') === 0) colorClass = cls;
+      });
+    }
     return {
       card: card,
       name: card.querySelector('.term-name').textContent,
       viName: viNameEl ? viNameEl.textContent : '',
-      glyph: group.querySelector('.group-glyph svg'),
+      glyph: badge ? badge.querySelector('svg') : null,
+      colorClass: colorClass,
       groupTitle: group.querySelector('.jargon-group-title')
     };
   });
@@ -164,6 +176,7 @@
 
       var glyph = document.createElement('span');
       glyph.className = 'suggest-glyph';
+      if (entry.colorClass) glyph.classList.add(entry.colorClass);
       glyph.setAttribute('aria-hidden', 'true');
       if (entry.glyph) glyph.appendChild(entry.glyph.cloneNode(true));
 
