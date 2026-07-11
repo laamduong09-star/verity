@@ -1218,7 +1218,14 @@ a.logo {
   width: 100%;
   margin-top: 56px;
   padding: 48px 0 72px;
-  background: var(--paper);
+  /* The hand-off starts at canvas white (matching whatever the aurora
+     has faded to just above) and eases into cream over the first
+     160px, instead of hard-cutting straight to flat paper — softens
+     both the lightness step and aurora's cool-tint-to-warm-cream hue
+     shift. Solid cream for the remainder (background-color, so nothing
+     below the gradient's last stop needs repeating). */
+  background-color: var(--paper);
+  background-image: linear-gradient(to bottom, var(--canvas), var(--paper) 160px);
 }
 
 .content-shell .page > *:first-child {
