@@ -1649,9 +1649,9 @@ a.logo {
      scroll-anchoring, which otherwise "corrects" for this element's
      shrunk flow space near the top of the page by silently scrolling
      the whole page on load. */
-  margin: -84px auto 8px;
+  margin: -77px auto 8px;
   overflow-anchor: none;
-  padding: 8px;
+  padding: 6px;
   border: 1px solid transparent;
   border-radius: 12px;
   transition:
@@ -1678,8 +1678,8 @@ a.logo {
 
 .jargon-search-wrap input {
   font-size: 16px;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 11px;
+  padding-bottom: 11px;
   /* The long bilingual placeholder truncates on narrow screens. */
   text-overflow: ellipsis;
 }
