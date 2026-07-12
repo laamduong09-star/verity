@@ -44,6 +44,10 @@
      Rule (see DESIGN.md). Matches the other pastels' saturation/lightness. */
   --pastel-jargon-credit: #c9dcff;
 
+  --window-dot-close: #ff5f57;
+  --window-dot-minimize: #febc2e;
+  --window-dot-maximize: #28c840;
+
   --font-display: 'Lexend', sans-serif;
   --font-body: 'Be Vietnam Pro', sans-serif;
 }
@@ -2437,8 +2441,15 @@ a.logo {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--stone);
 }
+
+/* Real macOS traffic-light colors — a recognized UI convention, not a
+   brand color choice, so these three tokens intentionally sit outside
+   the module-pastel system. Confined to these three dots only; see
+   DESIGN.md's scoped-exception note. */
+.window-dot:nth-child(1) { background: var(--window-dot-close); }
+.window-dot:nth-child(2) { background: var(--window-dot-minimize); }
+.window-dot:nth-child(3) { background: var(--window-dot-maximize); }
 
 .window-address {
   margin-left: 10px;
