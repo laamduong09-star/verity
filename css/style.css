@@ -2424,7 +2424,7 @@ a.logo {
 }
 
 .app-window:hover {
-  transform: translateY(-3px);
+  translate: 0 -3px;
   border-color: rgba(17, 17, 17, 0.18);
 }
 
