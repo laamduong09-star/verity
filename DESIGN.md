@@ -160,8 +160,8 @@ One flat pastel per module, used identically on the landing accordion chip, the 
 
 ### Scale
 - **Poster** (900, clamp 46–84px, uppercase, -0.03em, lh 1.1): landing hero only. Line-height stays 1.1 — the reference's 0.8 clips uppercase Vietnamese stacked diacritics.
-- **Heading** (400, 44px, -0.04em): calculator hero.
-- **Heading-sm** (400, 36px, -0.03em): section titles, module page heroes.
+- **Heading** (400, 44px, -0.04em): base `.hero-title` value, overridden everywhere it's actually used — see Heading-sm and Poster.
+- **Heading-sm** (400, 36px, -0.03em): section titles, module page heroes — including the calculator (2026-07-10, user-directed: it used to run the bare 44px heading with no icon glyph and no separate subtitle paragraph, the one page that didn't match the other four; now identical structure and size to Recommend/Jargon/Credit/Family Split).
 - **Subheading** (400, 28px, -0.017em): jargon group titles.
 - **Title** (500, 17–22px): card/modal/accordion titles.
 - **Body** (400, 14–16px, Be Vietnam Pro): all sentence text. Cap ~70ch.
