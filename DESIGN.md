@@ -22,6 +22,9 @@ colors:
   pastel-jargon: "#ffef99"
   pastel-credit: "#ffd7f0"
   pastel-family: "#99fff9"
+  window-dot-close: "#ff5f57"
+  window-dot-minimize: "#febc2e"
+  window-dot-maximize: "#28c840"
 typography:
   poster:
     fontFamily: "Lexend, sans-serif"
@@ -115,6 +118,22 @@ This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket 
 - **The data-color meanings.** Teal = "result/positive outcome", blue = "interactive", rose = caution, amber = the one earned stat exception. These survive **inside data UI only** (chart, results, meters, focus rings, links) — chrome and decoration no longer use them.
 - **The custom cursor** (blue dot + trailing ring) — a personality piece with no Amplemarket equivalent.
 - **The blue ambient background** — blue's one sanctioned ambient/decorative use, and the "theme is blue" signature. Its form has evolved: blob mesh (`.bg-mesh`) → removed in the initial merge → restored by user request → **replaced 2026-07-10 by the aurora wash** (`.bg-aurora`, user-directed, adapted natively from a supplied React "AuroraBackground" component). The aurora is blurred repeating-gradient ribbons (blue→indigo→violet stops) washing only the top ~820px of each page, masked to fade before the content shell. Its drifting layer animates `transform` only — the reference's `background-position` animation is paint-level, the same class that made BackgroundPaths flicker against the cursor's rAF loop.
+- **App-window scroll-scale** (2026-07-12, user-directed, adapted from a
+  supplied reference at amplemarket.com): the landing hero's `.app-window`
+  mockup scales from 83% to 100% as the user scrolls the first 500px,
+  reversibly (scrolling back up shrinks it again). Implemented as a small
+  vanilla-JS scroll listener writing a `--scroll-scale` CSS custom property
+  (`js/landing.js` + `js/scroll-scale.js`), not the reference's GSAP
+  ScrollTrigger — chosen to avoid adding an external animation dependency
+  for one decorative effect. Consumed via the standalone CSS `scale`
+  property (`scale: var(--scroll-scale, 1);`), not `transform: scale(...)`
+  — `.app-window` carries `animation: fadeUp 0.7s ease-out both`, and with
+  fill-mode `both` the animation's own `transform` keyframes permanently
+  outrank a plain `transform` declaration on the same element, so the
+  effect is driven through `scale`, a separate CSS property `fadeUp` never
+  touches. Respects `prefers-reduced-motion`. The mockup's `max-width` was
+  also raised from `960px` to `1100px` (2026-07-12, user-directed) so it
+  reads bigger in both its shrunk and full-scroll states.
 - **The bilingual `.en`/`.vi` span system** — structural, untouchable.
 
 **Dropped:** the 3px blue card hairline, the 200px CTA pills, Verity's darker paper canvas, and Amplemarket's phoenix orange (no role here). Also retired 2026-07-10: the jargon page's collapsed-by-default term list (`44278d8`) — replaced by the always-visible category directory (Amplemarket skills-library pattern; the section structure does the de-intimidating the collapse used to).
@@ -141,6 +160,16 @@ One flat pastel per module, used identically on the landing accordion chip, the 
 | Family Split | Aqua | `#99fff9` |
 
 **The Pastel-Taxonomy Rule.** Pastels are flat fills only — never gradients, never hover states, never accent text, never shadowed. The flat color IS the elevation and the differentiation. Glyphs on pastel are always ink.
+
+**Chrome-dot exception (2026-07-12, user-directed).** The landing page's
+`.app-window` mockup's three window-chrome dots use real macOS traffic-light
+colors (`--window-dot-close` red `#ff5f57`, `--window-dot-minimize` yellow
+`#febc2e`, `--window-dot-maximize` green `#28c840`) rather than a module
+pastel or a data-UI accent. This is a scoped exception, the same pattern as
+the jargon page's category-badge exception: it's a widely recognized UI
+convention (macOS window controls), not a brand color decision, and it's
+confined to exactly these three decorative dots — nowhere else on the site
+uses these tokens.
 
 ### Data accents
 - **Teal** (`#0b5a55`): result/positive-outcome numbers (final balance, interest column, VI term names, payoff lines).
