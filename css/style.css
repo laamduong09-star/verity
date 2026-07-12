@@ -2415,12 +2415,12 @@ a.logo {
   animation: fadeUp 0.7s ease-out both;
   animation-delay: 0.2s;
   transition: transform 0.2s var(--ease-out-strong), border-color 0.2s var(--ease-out-strong);
-  transform: scale(var(--scroll-scale, 1));
+  scale: var(--scroll-scale, 1);
   transform-origin: top center;
 }
 
 .app-window:hover {
-  transform: scale(var(--scroll-scale, 1)) translateY(-3px);
+  transform: translateY(-3px);
   border-color: rgba(17, 17, 17, 0.18);
 }
 
