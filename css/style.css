@@ -56,6 +56,14 @@ body {
   overflow-x: hidden;
 }
 
+/* Landing only (2026-07-10, user-directed): cream instead of white, so
+   wherever the aurora's mask fades to transparent it blends into the
+   same warm tone the rest of the page already uses, rather than
+   handing off to a cooler white. Module pages keep the white canvas. */
+body.landing {
+  background: var(--paper);
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
@@ -1207,13 +1215,12 @@ a.logo {
 /* The cream "subpage": everything below a page's hero sits on one flat
    cream surface that runs the full width of the viewport — the
    reference layout's hard hand-off, dynamic aurora backdrop above,
-   plain content edge-to-edge below, no side gaps. Unlike the
-   quote/charcoal bands (deliberately kept as inset panels inside the
-   page column), this is the page's actual lower background, so it
-   breaks out of `.page`'s 1200px container rather than living inside
-   it: `<main>` itself carries no width constraint, .content-shell is
-   its direct full-width child, and a nested `.page` div restores the
-   centered content column so cards line up with the hero above. */
+   plain content edge-to-edge below, no side gaps. This is the page's
+   actual lower background, so it breaks out of `.page`'s 1200px
+   container rather than living inside it: `<main>` itself carries no
+   width constraint, .content-shell is its direct full-width child,
+   and a nested `.page` div restores the centered content column so
+   cards line up with the hero above. */
 .content-shell {
   width: 100%;
   margin-top: 56px;
@@ -1226,6 +1233,15 @@ a.logo {
      below the gradient's last stop needs repeating). */
   background-color: var(--paper);
   background-image: linear-gradient(to bottom, var(--canvas), var(--paper) 160px);
+}
+
+/* On the landing page, .content-shell follows the charcoal ink-band,
+   not the aurora directly - and the canvas is already cream (see
+   body.landing above), so the white-start gradient has nothing to
+   smooth over here and would just flash a stray highlight against an
+   already-cream page. Solid cream instead. */
+body.landing .content-shell {
+  background-image: none;
 }
 
 .content-shell .page > *:first-child {
@@ -2545,16 +2561,17 @@ a.logo {
 
 /* ---------- Pull-quote band ---------- */
 /* Cream wash band — the light half of the alternating light/dark
-   section rhythm. Rendered as an inset panel (not 100vw full-bleed,
-   which seams against the scrollbar), matching the charcoal band. */
+   section rhythm. Full-bleed (2026-07-10, user-directed): breaks out
+   of `.page`'s 1200px container the same way `.content-shell` does,
+   rather than the old inset-card treatment — a nested `.page` div
+   restores the centered, left-aligned text column. */
 .quote-band {
   margin: 104px 0 0;
-  padding: 76px clamp(28px, 6vw, 84px) 80px;
+  padding: 76px 0 80px;
   background: var(--paper);
-  border-radius: 12px;
 }
 
-.quote-band > * {
+.quote-band .page > * {
   max-width: 860px;
 }
 
@@ -2591,14 +2608,13 @@ a.logo {
 }
 
 /* ---------- Charcoal spotlight band ---------- */
-/* Amplemarket's Dark Section Panel: warm charcoal #272625, rendered as
-   a rounded panel inside the page column (avoids 100vw scrollbar-width
-   seams). The one dark surface on the page. */
+/* Amplemarket's Dark Section Panel: warm charcoal #272625. Full-bleed
+   (2026-07-10, user-directed) via the same `.content-shell`-style
+   breakout as the quote band above, instead of an inset card. */
 .ink-band {
   margin: 104px 0 0;
-  padding: 84px 32px 92px;
+  padding: 84px 0 92px;
   background: var(--charcoal);
-  border-radius: 12px;
   text-align: center;
 }
 

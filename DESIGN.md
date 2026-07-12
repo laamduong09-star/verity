@@ -123,7 +123,7 @@ This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket 
 ## 2. Colors
 
 ### Surfaces
-- **Canvas** (`#ffffff`): the page, washed at the top by the aurora background (see Provenance) — the aurora is the only thing allowed between canvas and content.
+- **Canvas** (`#ffffff`): the page, washed at the top by the aurora background (see Provenance) — the aurora is the only thing allowed between canvas and content. **Landing-only exception (2026-07-10, user-directed):** `body.landing` uses cream (`--paper`) instead, so the aurora's fade blends into a warm tone instead of handing off to white; module pages keep the white canvas.
 - **Cream Wash / paper** (`#f6f5f3`): the **content shell** (the cream "subpage" that carries everything below a page's hero — adopted 2026-07-10 from the Amplemarket skills-library layout: dynamic backdrop above, one flat cream surface below, hard edge). Unlike the quote band, this is genuinely full-bleed — edge to edge of the viewport, no side gaps, no rounded corners — because it *is* the page's lower background, not a decorative accent inside it. Structurally it breaks out of `.page`'s 1200px container: `<main>` carries no width constraint, `.content-shell` is its direct full-width child, and a nested `.page` div restores the centered column so cards line up with the hero. Also used for light section bands (quote band, still an inset panel — a smaller, different-role decoration), resting input fill, and example-box tints inside cards. (`--paper` points here so every legacy paper-tint stays a tint.)
 - **Pearl** (`#ecebea`): hover fill for ghost controls and nav chips.
 - **Card** (`#ffffff`): card surfaces — separated from canvas by the hairline border, not by tone or shadow.
@@ -152,7 +152,7 @@ One flat pastel per module, used identically on the landing accordion chip, the 
 
 **The Two-Accent-in-Data-UI Rule.** Teal and blue keep their old jobs, but their territory shrank to data UI. If a surface or chrome element wants color, it gets a module pastel or nothing.
 
-**The Charcoal-Band Rule.** Exactly one dark *content* band per page maximum, always charcoal `#272625`, rendered as an inset 12px panel (100vw full-bleed seams against the scrollbar — measured, not theoretical). The site footer (2026-07-10, user-directed, Amplemarket reference) is charcoal on every page and sits outside this count — it's structural chrome at a fixed position, not a page-content moment, the same way the topbar isn't counted as "a light surface." A page may have both its own charcoal band and the charcoal footer at once (the landing page does); footer text follows the ink-band's existing dark-surface convention (white primary text, `rgba(255,255,255,0.65)` secondary, `rgba(255,255,255,0.45)` tertiary/legal), full-bleed with no separate treatment needed since it was never nested inside `.page` to begin with.
+**The Charcoal-Band Rule.** Exactly one dark *content* band per page maximum, always charcoal `#272625`. Full-bleed as of 2026-07-10 (broken out of `.page` via the `.content-shell` pattern — unconstrained parent + nested `.page` wrapper — not the naive `100vw` trick, which seams against the scrollbar). The site footer (2026-07-10, user-directed, Amplemarket reference) is charcoal on every page and sits outside this count — it's structural chrome at a fixed position, not a page-content moment, the same way the topbar isn't counted as "a light surface." A page may have both its own charcoal band and the charcoal footer at once (the landing page does); footer text follows the ink-band's existing dark-surface convention (white primary text, `rgba(255,255,255,0.65)` secondary, `rgba(255,255,255,0.45)` tertiary/legal), full-bleed with no separate treatment needed since it was never nested inside `.page` to begin with.
 
 ## 3. Typography
 
@@ -205,8 +205,8 @@ White, hairline, 12px, 28px padding. No top-edge accent (the old 3px blue hairli
 - **Stat icons (calculator):** unchanged data trio — blue/teal solid fills with lighter-sibling top hairlines, amber for the multiplier. Recommend's ladder step numbers are pastel tiles with ink numerals.
 
 ### Landing bands
-- **Quote band:** cream-wash inset panel (12px, ~76px vertical padding), left-aligned weight-400 pull-quote, ink squiggle underline, white fact-chip pills.
-- **Charcoal spotlight band:** see Charcoal-Band Rule. White weight-400 headline, ash secondary, ghost-on-dark CTA, pill tag, boxy signal chips whose small dots keep lighter data-accent siblings (they state data facts).
+- **Quote band:** full-bleed cream-wash section (2026-07-10, user-directed — was a 12px inset panel, now breaks out of `.page` the same way `.content-shell` does), ~76px vertical padding, left-aligned weight-400 pull-quote, ink squiggle underline, white fact-chip pills.
+- **Charcoal spotlight band:** see Charcoal-Band Rule. Full-bleed as of 2026-07-10 (same breakout, was also a 12px inset panel). White weight-400 headline, ash secondary, ghost-on-dark CTA, pill tag, boxy signal chips whose small dots keep lighter data-accent siblings (they state data facts).
 - **Module accordion:** 12px tabs, 16px flat pastel taxonomy chips (hairline so canary/aqua read on white), `+`→`×`, grid-rows 0fr→1fr animation.
 
 ### Jargon directory (adopted 2026-07-10, Amplemarket skills-library pattern)

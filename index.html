@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
-<body>
+<body class="landing">
 <div class="bg-aurora" aria-hidden="true"></div>
 
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
@@ -148,7 +148,14 @@
     </a>
   </section>
 
+  </div>
+
+  <!-- Full-bleed, unlike a plain inset panel: the quote/ink bands are
+       their own sections now, not cards floating inside the page
+       column. Each carries its own inner .page for the centered
+       content width, same pattern as .content-shell. -->
   <section class="quote-band" id="about">
+    <div class="page">
     <blockquote class="quote-text">
       <span class="en">"The people who most need money explained clearly are the least likely to get it. So we made it free — in both our languages."</span>
       <span class="vi">"Những người cần được giải thích về tiền bạc rõ ràng nhất lại là những người ít có cơ hội nhận được nhất. Vì vậy chúng tôi làm nó miễn phí — bằng cả hai thứ tiếng."</span>
@@ -175,9 +182,11 @@
         <span class="vi">Không bán gì cả</span>
       </span>
     </div>
+    </div>
   </section>
 
   <section class="ink-band">
+    <div class="page">
     <span class="ink-pill">
       <span class="ink-pill-tag">Calculator</span>
       <span>
@@ -229,9 +238,8 @@
         </span>
       </div>
     </div>
+    </div>
   </section>
-
-  </div>
 
   <div class="content-shell">
   <div class="page">
