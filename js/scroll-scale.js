@@ -1,7 +1,7 @@
 // Pure math for the app-window scroll-scale effect — no DOM access.
 // Loaded as a plain script in the browser (computeScrollScale becomes a
 // global used by js/landing.js) and required directly by the node:test
-// suite, hence the exports guard (same pattern as js/budget-math.js).
+// suite, hence the exports guard.
 //
 // Linear interpolation from MIN_SCALE at scrollY=0 to MAX_SCALE at
 // scrollY=DISTANCE, clamped outside that range — measured and chosen to

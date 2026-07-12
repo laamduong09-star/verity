@@ -2418,7 +2418,7 @@ a.logo {
     0 6px 6px -3px rgba(17, 17, 17, 0.04), 0 1px 1px -0.5px rgba(17, 17, 17, 0.04);
   animation: fadeUp 0.7s ease-out both;
   animation-delay: 0.2s;
-  transition: transform 0.2s var(--ease-out-strong), border-color 0.2s var(--ease-out-strong);
+  transition: translate 0.2s var(--ease-out-strong), border-color 0.2s var(--ease-out-strong);
   scale: var(--scroll-scale, 1);
   transform-origin: top center;
 }
