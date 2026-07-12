@@ -1,9 +1,10 @@
 :root {
-  /* Amplemarket-hybrid surfaces: white canvas, cream wash, pearl hovers.
-     --paper deliberately points at the cream wash so every legacy
-     "paper tint inside a card" usage (example boxes, window chrome,
-     resting inputs) stays a visible tint against the white card. */
-  --canvas: #ffffff;
+  /* Amplemarket-hybrid surfaces: cream page canvas, pearl hovers.
+     --paper is both the page background (2026-07-10, user-directed —
+     was white on module pages, cream only on landing; now uniform)
+     and every legacy "paper tint inside a card" usage (example boxes,
+     window chrome, resting inputs), which stay a visible tint against
+     the white card since --card is still pure white. */
   --paper: #f6f5f3;
   --pearl: #ecebea;
   --card: #ffffff;
@@ -49,22 +50,18 @@
 
 * { box-sizing: border-box; }
 
+/* Cream page background site-wide (2026-07-10, user-directed — first
+   landing-only, now every page): wherever the aurora's mask fades to
+   transparent, it blends into the same warm tone the rest of the page
+   uses, instead of handing off to a cooler white. */
 body {
   position: relative;
   margin: 0;
-  background: var(--canvas);
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-}
-
-/* Landing only (2026-07-10, user-directed): cream instead of white, so
-   wherever the aurora's mask fades to transparent it blends into the
-   same warm tone the rest of the page already uses, rather than
-   handing off to a cooler white. Module pages keep the white canvas. */
-body.landing {
-  background: var(--paper);
 }
 
 @keyframes fadeUp {
@@ -1224,27 +1221,16 @@ a.logo {
    width constraint, .content-shell is its direct full-width child,
    and a nested `.page` div restores the centered content column so
    cards line up with the hero above. */
+/* Solid cream — no gradient needed (removed 2026-07-10): now that the
+   page background is cream everywhere, .content-shell's surroundings
+   are already cream by the time it starts (via the aurora's fade or,
+   on the landing page, the ink-band's hard edge), so there's no
+   white step left to smooth over. */
 .content-shell {
   width: 100%;
   margin-top: 56px;
   padding: 48px 0 72px;
-  /* The hand-off starts at canvas white (matching whatever the aurora
-     has faded to just above) and eases into cream over the first
-     160px, instead of hard-cutting straight to flat paper — softens
-     both the lightness step and aurora's cool-tint-to-warm-cream hue
-     shift. Solid cream for the remainder (background-color, so nothing
-     below the gradient's last stop needs repeating). */
-  background-color: var(--paper);
-  background-image: linear-gradient(to bottom, var(--canvas), var(--paper) 160px);
-}
-
-/* On the landing page, .content-shell follows the charcoal ink-band,
-   not the aurora directly - and the canvas is already cream (see
-   body.landing above), so the white-start gradient has nothing to
-   smooth over here and would just flash a stray highlight against an
-   already-cream page. Solid cream instead. */
-body.landing .content-shell {
-  background-image: none;
+  background: var(--paper);
 }
 
 .content-shell .page > *:first-child {

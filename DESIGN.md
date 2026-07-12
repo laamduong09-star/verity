@@ -2,7 +2,6 @@
 name: Verity
 description: A bilingual EN/VI financial literacy toolset, starting with a compound interest calculator
 colors:
-  canvas: "#ffffff"
   paper: "#f6f5f3"
   pearl: "#ecebea"
   card: "#ffffff"
@@ -109,7 +108,7 @@ components:
 
 **Creative North Star: "Sunlit Editorial Calm"**
 
-This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket style reference and merged with the elements of Verity worth keeping. The page reads as a light, airy editorial product: white canvas, cream-wash bands, near-black warm ink type at whisper weights, and a five-pastel taxonomy that color-codes the five modules. It still explicitly rejects the stiff corporate banking dashboard (cold navy/gray, dense unexplained tables) and the gamified fintech app (confetti, casino urgency) — money here is calm, explained, and bilingual.
+This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket style reference and merged with the elements of Verity worth keeping. The page reads as a light, airy editorial product: a cream page background site-wide (`--paper`, was white on module pages until 2026-07-10), near-black warm ink type at whisper weights, and a five-pastel taxonomy that color-codes the five modules. It still explicitly rejects the stiff corporate banking dashboard (cold navy/gray, dense unexplained tables) and the gamified fintech app (confetti, casino urgency) — money here is calm, explained, and bilingual.
 
 **Provenance — kept from Verity, on purpose:**
 - **Lexend + Be Vietnam Pro.** Be Vietnam Pro is a Vietnamese-designed body face with native diacritics; the bilingual mission outranks typeface mimicry. Amplemarket's *typography philosophy* was adopted instead of its font.
@@ -123,10 +122,9 @@ This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket 
 ## 2. Colors
 
 ### Surfaces
-- **Canvas** (`#ffffff`): the page, washed at the top by the aurora background (see Provenance) — the aurora is the only thing allowed between canvas and content. **Landing-only exception (2026-07-10, user-directed):** `body.landing` uses cream (`--paper`) instead, so the aurora's fade blends into a warm tone instead of handing off to white; module pages keep the white canvas.
-- **Cream Wash / paper** (`#f6f5f3`): the **content shell** (the cream "subpage" that carries everything below a page's hero — adopted 2026-07-10 from the Amplemarket skills-library layout: dynamic backdrop above, one flat cream surface below, hard edge). Unlike the quote band, this is genuinely full-bleed — edge to edge of the viewport, no side gaps, no rounded corners — because it *is* the page's lower background, not a decorative accent inside it. Structurally it breaks out of `.page`'s 1200px container: `<main>` carries no width constraint, `.content-shell` is its direct full-width child, and a nested `.page` div restores the centered column so cards line up with the hero. Also used for light section bands (quote band, still an inset panel — a smaller, different-role decoration), resting input fill, and example-box tints inside cards. (`--paper` points here so every legacy paper-tint stays a tint.)
+- **Cream / paper** (`--paper`, `#f6f5f3`): the page background, site-wide as of 2026-07-10 (user-directed — first landing-only, then extended to every page; the separate white `--canvas` token was removed, since nothing renders it anymore). Washed at the top by the aurora background on every page (see Provenance) — wherever the aurora's mask fades to transparent, it blends into the same cream the rest of the page uses, not a cooler white. The same token also carries the **content shell** (the cream "subpage" below a page's hero — Amplemarket skills-library layout: dynamic backdrop above, flat cream surface below, hard edge; full-bleed via `.content-shell` breaking out of `.page`'s 1200px container, a nested `.page` div restoring the centered column), the full-bleed **quote band**, resting input fill, and example-box tints inside cards. Since page and shell are now the same color, there's no seam left to smooth over between them.
 - **Pearl** (`#ecebea`): hover fill for ghost controls and nav chips.
-- **Card** (`#ffffff`): card surfaces — separated from canvas by the hairline border, not by tone or shadow.
+- **Card** (`#ffffff`): card surfaces — separated from the cream page by the hairline border, not by tone or shadow.
 - **Charcoal** (`#111111`, 2026-07-10 user-directed — darkened from the original `#272625`, which read as not dark enough; now identical to `--ink`, reused rather than adding a third dark value): the dark surface — the landing spotlight band, and every page's footer. Never navy.
 - **Ink** (`#111111`): primary text and filled primary buttons. Never `#000`.
 - **Slate/ash** (`#6d6c6b`) secondary text · **Stone** (`#b1b1af`) strong dividers and fills that were borders · **Hairline** (`rgba(17,17,17,0.08)`) all borders.
