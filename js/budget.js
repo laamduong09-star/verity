@@ -29,6 +29,8 @@ const bucketPctEls = {
   wants: document.getElementById('pctLabelWants'),
   savings: document.getElementById('pctLabelSavings'),
 };
+const donutTotalEl = document.getElementById('donutTotal');
+const chartCanvas = document.getElementById('budgetChart');
 
 const BUCKET_KEYS = ['needs', 'wants', 'savings'];
 
@@ -76,6 +78,82 @@ function currentPercentages() {
   };
 }
 
+// Chart text isn't markup, so it can't use the .en/.vi sibling-span pattern —
+// these strings are picked live off body's lang-vi-primary class instead
+// (same approach as js/calculator.js).
+const CHART_STRINGS = {
+  needs: { en: 'Needs', vi: 'Nhu cầu' },
+  wants: { en: 'Wants', vi: 'Mong muốn' },
+  savings: { en: 'Savings', vi: 'Tiết kiệm' },
+};
+
+// Data-UI colors doing data jobs: needs = blue, wants = neutral stone,
+// savings = teal (positive outcome). Mirrored by .legend-dot in style.css —
+// keep the two in sync.
+const SEGMENT_COLORS = ['#2348ad', '#b1b1af', '#0e7a72'];
+const EMPTY_COLOR = '#ecebea'; // pearl — muted single ring when there's nothing to split
+
+const chart = new Chart(chartCanvas, {
+  type: 'doughnut',
+  data: {
+    labels: ['Needs', 'Wants', 'Savings'],
+    datasets: [
+      {
+        data: [50, 30, 20],
+        backgroundColor: SEGMENT_COLORS,
+        borderColor: '#ffffff',
+        borderWidth: 2,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '64%',
+    animation: { duration: 500, easing: 'easeOutQuart' },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: (item) => {
+            const lang = isViPrimary() ? 'vi' : 'en';
+            const key = BUCKET_KEYS[item.dataIndex];
+            return ` ${CHART_STRINGS[key][lang]}   ${formatCurrency(item.parsed)}`;
+          },
+        },
+      },
+    },
+  },
+});
+
+function renderChart(amount, split) {
+  const lang = isViPrimary() ? 'vi' : 'en';
+  const isEmpty = amount <= 0;
+
+  chart.data.labels = BUCKET_KEYS.map((key) => CHART_STRINGS[key][lang]);
+  if (isEmpty) {
+    // A zero paycheck has no shares to show — render one muted pearl ring
+    // instead of letting Chart.js draw nothing at all.
+    chart.data.datasets[0].data = [1];
+    chart.data.datasets[0].backgroundColor = [EMPTY_COLOR];
+  } else {
+    chart.data.datasets[0].data = [split.needs, split.wants, split.savings];
+    chart.data.datasets[0].backgroundColor = SEGMENT_COLORS;
+  }
+  chart.options.plugins.tooltip.enabled = !isEmpty;
+  chart.update();
+
+  donutTotalEl.textContent = formatCurrency(amount);
+  chartCanvas.setAttribute(
+    'aria-label',
+    isViPrimary()
+      ? `Biểu đồ chia ${formatCurrency(amount)} thành ${formatCurrency(split.needs)} nhu cầu, ` +
+          `${formatCurrency(split.wants)} mong muốn và ${formatCurrency(split.savings)} tiết kiệm.`
+      : `Doughnut chart splitting ${formatCurrency(amount)} into ${formatCurrency(split.needs)} needs, ` +
+          `${formatCurrency(split.wants)} wants, and ${formatCurrency(split.savings)} savings.`
+  );
+}
+
 function update() {
   const amount = clampToInput(amountInput, parseFloat(amountInput.value) || 0, amountClampNoteEl);
   const pcts = currentPercentages();
@@ -106,6 +184,8 @@ function update() {
   savingsLinkEl.querySelectorAll('.savings-monthly-value').forEach((el) => {
     el.textContent = formatCurrency(monthlySavings);
   });
+
+  renderChart(amount, split);
 }
 
 function debounce(fn, delay) {
