@@ -1,0 +1,147 @@
+// Budget splitter page logic. The pure math (splitPaycheck, toMonthly)
+// lives in js/budget-math.js, loaded just before this file, so node's test
+// runner can exercise it without a DOM.
+
+const amountInput = document.getElementById('amount');
+const amountClampNoteEl = document.getElementById('amountClampNote');
+const periodChips = Array.from(document.querySelectorAll('#periodChips .seg-chip'));
+const presetChips = Array.from(document.querySelectorAll('#presetChips .seg-chip'));
+const customSplitEl = document.getElementById('customSplit');
+const splitNoteEl = document.getElementById('splitNote');
+const savingsLinkEl = document.getElementById('savingsLink');
+const pctInputs = {
+  needs: document.getElementById('pctNeeds'),
+  wants: document.getElementById('pctWants'),
+  savings: document.getElementById('pctSavings'),
+};
+const pctClampNotes = {
+  needs: document.getElementById('pctNeedsClampNote'),
+  wants: document.getElementById('pctWantsClampNote'),
+  savings: document.getElementById('pctSavingsClampNote'),
+};
+const bucketAmountEls = {
+  needs: document.getElementById('amtNeeds'),
+  wants: document.getElementById('amtWants'),
+  savings: document.getElementById('amtSavings'),
+};
+const bucketPctEls = {
+  needs: document.getElementById('pctLabelNeeds'),
+  wants: document.getElementById('pctLabelWants'),
+  savings: document.getElementById('pctLabelSavings'),
+};
+
+const BUCKET_KEYS = ['needs', 'wants', 'savings'];
+
+// Ratios are % of the paycheck in needs / wants / savings order.
+const PRESETS = {
+  classic: { needs: 50, wants: 30, savings: 20 },
+  home: { needs: 20, wants: 30, savings: 50 },
+};
+
+let activePreset = 'classic';
+let activePeriod = 'month';
+
+function formatCurrency(amount) {
+  return amount.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  });
+}
+
+const isViPrimary = () => document.body.classList.contains('lang-vi-primary');
+
+// Mirrors clampToInput in js/calculator.js (each page loads only its own
+// script, so the helper is duplicated rather than moved into shared chrome).
+function clampToInput(input, value, noteEl) {
+  const min = input.min !== '' ? Number(input.min) : -Infinity;
+  const max = input.max !== '' ? Number(input.max) : Infinity;
+  const clamped = Math.min(Math.max(value, min), max);
+  if (String(clamped) !== input.value) input.value = clamped;
+  if (noteEl) {
+    noteEl.classList.toggle('is-active', value !== clamped);
+    noteEl.querySelectorAll('.clamp-note-value').forEach((el) => {
+      el.textContent = clamped;
+    });
+  }
+  return clamped;
+}
+
+function currentPercentages() {
+  if (activePreset !== 'custom') return PRESETS[activePreset];
+  return {
+    needs: clampToInput(pctInputs.needs, parseFloat(pctInputs.needs.value) || 0, pctClampNotes.needs),
+    wants: clampToInput(pctInputs.wants, parseFloat(pctInputs.wants.value) || 0, pctClampNotes.wants),
+    savings: clampToInput(pctInputs.savings, parseFloat(pctInputs.savings.value) || 0, pctClampNotes.savings),
+  };
+}
+
+function update() {
+  const amount = clampToInput(amountInput, parseFloat(amountInput.value) || 0, amountClampNoteEl);
+  const pcts = currentPercentages();
+  const split = splitPaycheck(amount, pcts.needs, pcts.wants, pcts.savings);
+
+  BUCKET_KEYS.forEach((key) => {
+    bucketAmountEls[key].textContent = formatCurrency(split[key]);
+    // Show the *effective* share (normalized), so the percentage always
+    // agrees with the dollar amount next to it while a custom split is
+    // mid-edit and doesn't sum to 100.
+    const effective = split.enteredSum > 0 ? Math.round((pcts[key] / split.enteredSum) * 100) : 0;
+    bucketPctEls[key].textContent = effective + '%';
+  });
+
+  // The "adds up to N%" note only concerns the custom preset — the built-in
+  // ratios always sum to 100.
+  const showNote = activePreset === 'custom' && split.normalized;
+  splitNoteEl.classList.toggle('is-active', showNote);
+  splitNoteEl.querySelectorAll('.split-sum-value').forEach((el) => {
+    el.textContent = split.enteredSum;
+  });
+
+  // Cross-link into the compound calculator. The hash form (#monthly=X)
+  // matches what js/calculator.js already reads — see the comment there
+  // about clean-URL servers dropping query strings.
+  const monthlySavings = toMonthly(split.savings, activePeriod);
+  savingsLinkEl.href = 'actual%20website.html#monthly=' + monthlySavings;
+  savingsLinkEl.querySelectorAll('.savings-monthly-value').forEach((el) => {
+    el.textContent = formatCurrency(monthlySavings);
+  });
+}
+
+function debounce(fn, delay) {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn(...args), delay);
+  };
+}
+
+const debouncedUpdate = debounce(update, 150);
+
+amountInput.addEventListener('input', debouncedUpdate);
+Object.values(pctInputs).forEach((input) => {
+  input.addEventListener('input', debouncedUpdate);
+});
+
+periodChips.forEach((chip) => {
+  chip.addEventListener('click', () => {
+    activePeriod = chip.dataset.period;
+    periodChips.forEach((c) => c.classList.toggle('active', c === chip));
+    update();
+  });
+});
+
+presetChips.forEach((chip) => {
+  chip.addEventListener('click', () => {
+    activePreset = chip.dataset.preset;
+    presetChips.forEach((c) => c.classList.toggle('active', c === chip));
+    customSplitEl.hidden = activePreset !== 'custom';
+    update();
+  });
+});
+
+// Language switching is handled by js/site.js; this page only re-renders
+// its JS-generated strings (and, after Task 4, the chart) when it flips.
+document.addEventListener('verity:langchange', update);
+
+update();
