@@ -177,6 +177,17 @@ Add this block at the end of the existing IIFE in `js/landing.js` (inside the cl
 
 - [ ] **Step 3: Update the CSS**
 
+**Correction (found and fixed during implementation — see the design spec's
+"Correction" note in its CSS Changes section for the full root cause):** the
+approach below originally called for `transform: scale(var(--scroll-scale,
+1))`. That silently does nothing, because `.app-window`'s pre-existing
+`animation: fadeUp 0.7s ease-out both;` also animates `transform`, and a
+`both`-fill animation permanently outranks a plain `transform` declaration
+on the same element. The actual fix uses the standalone CSS `scale`
+property instead (a separate property from `transform`, untouched by
+`fadeUp`'s keyframes, safe to use as of 2026). The code below reflects the
+corrected, actually-shipped version.
+
 In `css/style.css`, change the `.app-window` rule (currently lines 2401-2418):
 
 ```css
@@ -197,17 +208,22 @@ In `css/style.css`, change the `.app-window` rule (currently lines 2401-2418):
   animation: fadeUp 0.7s ease-out both;
   animation-delay: 0.2s;
   transition: transform 0.2s var(--ease-out-strong), border-color 0.2s var(--ease-out-strong);
-  transform: scale(var(--scroll-scale, 1));
+  scale: var(--scroll-scale, 1);
   transform-origin: top center;
 }
 
 .app-window:hover {
-  transform: scale(var(--scroll-scale, 1)) translateY(-3px);
+  transform: translateY(-3px);
   border-color: rgba(17, 17, 17, 0.18);
 }
 ```
 
-(Only two lines actually change: the added `transform: scale(var(--scroll-scale, 1));` + `transform-origin: top center;` inside `.app-window`, and `.app-window:hover`'s `transform` value gains the `scale(var(--scroll-scale, 1))` prefix. Everything else in the block is unchanged — shown in full so the diff is unambiguous.)
+(`.app-window:hover` is unchanged from its original pre-feature form — the
+new `scale` property lives only on the base `.app-window` rule and doesn't
+need to be repeated in `:hover`. Only `.app-window` actually changes: the
+added `scale: var(--scroll-scale, 1);` + `transform-origin: top center;`.
+Everything else in both blocks is unchanged — shown in full so the diff is
+unambiguous.)
 
 - [ ] **Step 4: Confirm the reduced-motion block already covers this (no edit needed)**
 
@@ -240,11 +256,11 @@ Expected: two equal numbers.
 - [ ] **Step 6: Verify in the preview browser**
 
 On `http://localhost:3000/website/`:
-- At the top of the page (`scrollY = 0`): `getComputedStyle(document.querySelector('.app-window')).transform` reflects `scale(0.83)` (a 2D matrix equivalent — check via `element.style.getPropertyValue('--scroll-scale')` for the readable number instead).
-- Scroll to `window.scrollY ≈ 250`: `--scroll-scale` ≈ `0.915`.
-- Scroll to `window.scrollY ≥ 500`: `--scroll-scale` = `1`, stays there scrolling further.
-- Scroll back up to `0`: value decreases back toward `0.83` (reversible, not a one-way reveal).
-- Hover over `.app-window` while partway scaled: the element lifts (`translateY(-3px)`) on top of whatever the current scroll-scale is — check via `getComputedStyle`, transform should be a single composed matrix, not just the translate.
+- At the top of the page (`scrollY = 0`): the element visibly renders smaller than its final size; `getComputedStyle(document.querySelector('.app-window')).scale` (or the raw `--scroll-scale` custom property) reads `0.83`.
+- Scroll to `window.scrollY ≈ 250`: `--scroll-scale` ≈ `0.915`, element visibly larger than at scrollY=0.
+- Scroll to `window.scrollY ≥ 500`: `--scroll-scale` = `1`, element at full size, stays there scrolling further.
+- Scroll back up to `0`: shrinks back down (reversible, not a one-way reveal).
+- Hover over `.app-window` while partway scaled: the element lifts (`translateY(-3px)`) independent of the current scale — `scale` and `transform` are separate properties now, so both effects apply simultaneously without one overriding the other.
 - Emulate `prefers-reduced-motion: reduce` (browser dev tools or `resize_window`'s `colorScheme` sibling setting if available, otherwise via the OS/browser setting), reload, scroll: `--scroll-scale` is never set (property reads empty string), element stays visually full-size throughout.
 
 - [ ] **Step 7: Commit**

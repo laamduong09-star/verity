@@ -72,23 +72,51 @@ animation dependency for one decorative effect, against this repo's
 
 ### CSS changes (`css/style.css`)
 
+**Correction (2026-07-12, found during implementation, user-approved fix):**
+the paragraph below originally proposed consuming `--scroll-scale` via
+`transform: scale(...)`. That doesn't work: `.app-window` carries
+`animation: fadeUp 0.7s ease-out both;`, and `@keyframes fadeUp` itself
+animates `transform`. With `fill-mode: both`, a CSS animation's held value
+for a property permanently outranks any plain declaration of that same
+property on the same element — not just for the animation's ~0.9s runtime,
+indefinitely, for as long as the animation stays attached. So a plain
+`transform: scale(...)` declaration silently never applies (confirmed live
+in-browser: the `--scroll-scale` custom property computed correctly at
+every scroll position, but `getComputedStyle(el).transform` stayed identity
+throughout). The same conflict was independently confirmed to already be
+silently blocking the pre-existing `.app-window:hover` translateY lift,
+before this feature ever touched the page — a latent, out-of-scope
+pre-existing bug, left as-is.
+
+**Actual implementation:** drive the effect through the standalone CSS
+`scale` property instead of `transform: scale(...)`. `scale`, `translate`,
+and `rotate` are separate CSS properties from `transform` (CSS Transforms
+Level 2; supported since Chrome 104, Firefox 72, Safari 14.1 — safe as of
+2026) that compose with `transform` in the final render, combined in a
+fixed order. `fadeUp`'s keyframes never reference `scale`, so this sidesteps
+the animation conflict entirely, with no changes to `fadeUp` or the
+animation, and no visual glitch.
+
 `.app-window` (~line 2401) gains:
 
 ```css
-transform: scale(var(--scroll-scale, 1));
+scale: var(--scroll-scale, 1);
 transform-origin: top center;
 ```
 
-`.app-window:hover` (~line 2420) changes from `transform: translateY(-3px);`
-to `transform: scale(var(--scroll-scale, 1)) translateY(-3px);` so the
-hover-lift and scroll-scale compose as plain CSS instead of one clobbering
-the other (both are declarative now — no fighting with a JS-set inline
-`transform`, since the JS only ever touches the `--scroll-scale` custom
-property).
+(`transform-origin` still applies — it governs the combined
+translate/rotate/scale/transform pipeline, not just the `transform`
+property specifically.)
+
+`.app-window:hover` (~line 2420) is **unchanged** — stays exactly
+`transform: translateY(-3px);` as it was before this feature. Since `scale`
+is now a separate property set once on the base `.app-window` rule, hover
+doesn't need to repeat or compose it.
 
 The existing `fadeUp` load-in animation (`animation: fadeUp 0.7s ease-out
-both; animation-delay: 0.2s;`) is untouched — it completes in ~0.9s, well
-before a user would scroll.
+both; animation-delay: 0.2s;`) is untouched, exactly as originally intended
+— just for the corrected reason (a different CSS property, not because the
+animation "completes before scrolling").
 
 ### Scope
 
