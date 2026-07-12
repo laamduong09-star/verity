@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verity: Budget</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body class="module-budget">
+<div class="bg-aurora" aria-hidden="true"></div>
+
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="logo" href="./">
+      <svg class="logo-mark" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="translate(0,0.685) scale(0.020236) translate(-425.333,-611.012)">
+          <path fill="#11151f" d="M 452.5,611.5 C 533.834,611.333 615.167,611.5 696.5,612C 711.229,615.063 720.396,623.896 724,638.5C 724.333,789.167 724.667,939.833 725,1090.5C 882.221,933.279 1039.39,776.113 1196.5,619C 1200.01,616.746 1203.67,614.746 1207.5,613C 1266.11,611.345 1324.78,611.012 1383.5,612C 1398.66,614.822 1408.49,623.655 1413,638.5C 1413.67,702.167 1413.67,765.833 1413,829.5C 1411.77,834.518 1409.77,839.185 1407,843.5C 1178.83,1071.67 950.667,1299.83 722.5,1528C 720.043,1529.56 717.376,1530.56 714.5,1531C 627.5,1531.67 540.5,1531.67 453.5,1531C 439.009,1527.18 429.842,1518.01 426,1503.5C 425.333,1215.17 425.333,926.833 426,638.5C 430.351,624.984 439.184,615.984 452.5,611.5 Z"/>
+        </g>
+      </svg>
+      <span class="logo-text">verity</span>
+    </a>
+    <nav class="nav-capsule">
+      <a href="actual%20website.html" class="nav-link">Calculator</a>
+      <a href="budget.html" class="nav-link active">Budget</a>
+      <a href="recommend.html" class="nav-link">Recommend</a>
+      <a href="jargon.html" class="nav-link">Jargon</a>
+      <a href="credit.html" class="nav-link">Credit</a>
+      <a href="family-split.html" class="nav-link">Family Split</a>
+    </nav>
+    <button class="lang-toggle" id="langToggle">
+      <span class="lang-option active" data-lang="en">EN</span>
+      <span class="lang-divider">|</span>
+      <span class="lang-option" data-lang="vi">VI</span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="page">
+  <section class="page-hero" id="heroSection">
+    <div class="page-hero-glyph" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="8.5"/>
+        <path d="M12 3.5V12"/>
+        <path d="M12 12l6 6"/>
+        <path d="M12 12l-8 2.5"/>
+      </svg>
+    </div>
+    <h1 class="hero-title">
+      <span class="en">Every dollar gets a job.</span>
+      <span class="vi">Mỗi đồng tiền đều có nhiệm vụ.</span>
+    </h1>
+    <p class="page-hero-sub">
+      <span class="en">Enter what you get paid and see it split into needs, wants, and savings — before it disappears on its own.</span>
+      <span class="vi">Nhập số tiền bạn nhận được và xem nó được chia thành nhu cầu, mong muốn và tiết kiệm — trước khi nó tự biến mất.</span>
+    </p>
+  </section>
+  </div>
+
+  <div class="content-shell">
+  <div class="page">
+
+  <section class="calculator">
+    <div class="card inputs-card">
+      <div class="inputs-card-header">
+        <h2 class="card-title">
+          <span class="en">Your paycheck</span>
+          <span class="vi">Kỳ lương của bạn</span>
+        </h2>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="amount">
+          <span class="en">Money you get</span>
+          <span class="vi">Số tiền bạn nhận được</span>
+        </label>
+        <div class="input-wrap">
+          <span class="prefix">$</span>
+          <input type="number" id="amount" value="500" min="0" max="1000000" step="10">
+        </div>
+        <p class="clamp-note" id="amountClampNote">
+          <span class="en">Capped at <span class="clamp-note-value"></span></span>
+          <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span></span>
+        </p>
+      </div>
+
+      <div class="field">
+        <span class="field-label" id="periodLabel">
+          <span class="en">How often</span>
+          <span class="vi">Bao lâu một lần</span>
+        </span>
+        <div class="chip-group" id="periodChips" role="group" aria-labelledby="periodLabel">
+          <button type="button" class="seg-chip" data-period="week">
+            <span class="en">Per week</span>
+            <span class="vi">Mỗi tuần</span>
+          </button>
+          <button type="button" class="seg-chip" data-period="biweek">
+            <span class="en">Every two weeks</span>
+            <span class="vi">Hai tuần một lần</span>
+          </button>
+          <button type="button" class="seg-chip active" data-period="month">
+            <span class="en">Per month</span>
+            <span class="vi">Mỗi tháng</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label" id="presetLabel">
+          <span class="en">How to split it</span>
+          <span class="vi">Cách chia</span>
+        </span>
+        <div class="chip-group" id="presetChips" role="group" aria-labelledby="presetLabel">
+          <button type="button" class="seg-chip active" data-preset="classic">
+            <span class="en">50/30/20 · Classic</span>
+            <span class="vi">50/30/20 · Cổ điển</span>
+          </button>
+          <button type="button" class="seg-chip" data-preset="home">
+            <span class="en">20/30/50 · Living at home</span>
+            <span class="vi">20/30/50 · Sống cùng gia đình</span>
+          </button>
+          <button type="button" class="seg-chip" data-preset="custom">
+            <span class="en">Custom</span>
+            <span class="vi">Tùy chỉnh</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="custom-split" id="customSplit" hidden>
+        <div class="field">
+          <label class="field-label" for="pctNeeds">
+            <span class="en">Needs</span>
+            <span class="vi">Nhu cầu</span>
+          </label>
+          <div class="input-wrap">
+            <input type="number" id="pctNeeds" value="50" min="0" max="100" step="5">
+            <span class="suffix">%</span>
+          </div>
+          <p class="clamp-note" id="pctNeedsClampNote">
+            <span class="en">Capped at <span class="clamp-note-value"></span>%</span>
+            <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span>%</span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="field-label" for="pctWants">
+            <span class="en">Wants</span>
+            <span class="vi">Mong muốn</span>
+          </label>
+          <div class="input-wrap">
+            <input type="number" id="pctWants" value="30" min="0" max="100" step="5">
+            <span class="suffix">%</span>
+          </div>
+          <p class="clamp-note" id="pctWantsClampNote">
+            <span class="en">Capped at <span class="clamp-note-value"></span>%</span>
+            <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span>%</span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="field-label" for="pctSavings">
+            <span class="en">Savings</span>
+            <span class="vi">Tiết kiệm</span>
+          </label>
+          <div class="input-wrap">
+            <input type="number" id="pctSavings" value="20" min="0" max="100" step="5">
+            <span class="suffix">%</span>
+          </div>
+          <p class="clamp-note" id="pctSavingsClampNote">
+            <span class="en">Capped at <span class="clamp-note-value"></span>%</span>
+            <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span>%</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="clamp-note" id="splitNote">
+        <span class="en">Adds up to <span class="split-sum-value"></span>% — adjusted to fit.</span>
+        <span class="vi">Tổng là <span class="split-sum-value"></span>% — đã điều chỉnh cho đủ 100%.</span>
+      </p>
+    </div>
+
+    <div class="card graph-card">
+      <div class="graph-card-header">
+        <h2 class="card-title">
+          <span class="en">Where it goes</span>
+          <span class="vi">Tiền đi về đâu</span>
+        </h2>
+      </div>
+      <div class="chart-wrap donut-wrap">
+        <canvas id="budgetChart" role="img" aria-label="Doughnut chart splitting your pay into needs, wants, and savings."></canvas>
+        <div class="donut-center" aria-hidden="true">
+          <span class="donut-total" id="donutTotal">$0</span>
+        </div>
+      </div>
+      <div class="donut-legend" aria-hidden="true">
+        <span class="legend-item">
+          <span class="legend-dot dot-needs"></span>
+          <span class="en">Needs</span>
+          <span class="vi">Nhu cầu</span>
+        </span>
+        <span class="legend-item">
+          <span class="legend-dot dot-wants"></span>
+          <span class="en">Wants</span>
+          <span class="vi">Mong muốn</span>
+        </span>
+        <span class="legend-item">
+          <span class="legend-dot dot-savings"></span>
+          <span class="en">Savings</span>
+          <span class="vi">Tiết kiệm</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-row">
+    <div class="card stat-card tint-blue">
+      <span class="icon-tile tile-blue" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 11l9-7 9 7"/>
+          <path d="M5 10v9h14v-9"/>
+        </svg>
+      </span>
+      <span class="field-label">
+        <span class="en">Needs</span>
+        <span class="vi">Nhu cầu</span>
+      </span>
+      <span class="stat-value" id="amtNeeds">$0</span>
+      <span class="bucket-pct" id="pctLabelNeeds">50%</span>
+      <ul class="bucket-list">
+        <li><span class="en">Phone bill</span><span class="vi">Tiền điện thoại</span></li>
+        <li><span class="en">Bus pass</span><span class="vi">Vé xe buýt</span></li>
+        <li><span class="en">Food you owe family</span><span class="vi">Tiền ăn phụ gia đình</span></li>
+        <li><span class="en">School supplies</span><span class="vi">Dụng cụ học tập</span></li>
+      </ul>
+    </div>
+
+    <div class="card stat-card">
+      <span class="icon-tile tile-blue" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="9" width="16" height="11" rx="1.5"/>
+          <path d="M4 12h16"/>
+          <path d="M12 9v11"/>
+          <path d="M8.5 9a2.2 2.2 0 1 1 3.5-2.6A2.2 2.2 0 1 1 15.5 9"/>
+        </svg>
+      </span>
+      <span class="field-label">
+        <span class="en">Wants</span>
+        <span class="vi">Mong muốn</span>
+      </span>
+      <span class="stat-value" id="amtWants">$0</span>
+      <span class="bucket-pct" id="pctLabelWants">30%</span>
+      <ul class="bucket-list">
+        <li><span class="en">Eating out</span><span class="vi">Ăn ngoài</span></li>
+        <li><span class="en">Games</span><span class="vi">Trò chơi</span></li>
+        <li><span class="en">Clothes</span><span class="vi">Quần áo</span></li>
+        <li><span class="en">Streaming</span><span class="vi">Dịch vụ xem phim, nhạc</span></li>
+      </ul>
+    </div>
+
+    <div class="card stat-card tint-teal">
+      <span class="icon-tile tile-teal" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 17l6-6 4 4 6-7"/>
+          <path d="M20 12V8h-4"/>
+        </svg>
+      </span>
+      <span class="field-label">
+        <span class="en">Savings</span>
+        <span class="vi">Tiết kiệm</span>
+      </span>
+      <span class="stat-value accent" id="amtSavings">$0</span>
+      <span class="bucket-pct" id="pctLabelSavings">20%</span>
+      <ul class="bucket-list">
+        <li><span class="en">Emergency cushion</span><span class="vi">Quỹ dự phòng</span></li>
+        <li><span class="en">Future goals — laptop, car, college</span><span class="vi">Mục tiêu tương lai — laptop, xe, đại học</span></li>
+      </ul>
+      <a class="savings-link" id="savingsLink" href="actual%20website.html#monthly=0">
+        <span class="en">See what saving <span class="savings-monthly-value">$0</span>/month grows into →</span>
+        <span class="vi">Xem <span class="savings-monthly-value">$0</span>/tháng tiết kiệm sẽ tăng trưởng thành bao nhiêu →</span>
+      </a>
+    </div>
+  </section>
+
+  <p class="disclaimer">
+    <span class="en">Educational tool only. Not licensed financial advice.</span>
+    <span class="vi">Chỉ là công cụ giáo dục. Không phải lời khuyên tài chính được cấp phép.</span>
+  </p>
+
+  </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span class="footer-motto">
+      <span class="en">verity — money made easy</span>
+      <span class="vi">verity — tiền bạc, dễ hiểu</span>
+    </span>
+    <nav class="footer-links">
+      <a href="actual%20website.html">Calculator</a>
+      <a href="budget.html">Budget</a>
+      <a href="recommend.html">Recommend</a>
+      <a href="jargon.html">Jargon</a>
+      <a href="credit.html">Credit</a>
+      <a href="family-split.html">Family Split</a>
+    </nav>
+    <p class="footer-note">
+      <span class="en">Educational only — not licensed financial advice. Example rates are approximate as of 2025.</span>
+      <span class="vi">Chỉ mang tính giáo dục — không phải lời khuyên tài chính được cấp phép. Các mức lãi trong ví dụ là gần đúng tính đến 2025.</span>
+    </p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="js/site.js"></script>
+<script src="js/budget-math.js"></script>
+<script src="js/budget.js"></script>
+</body>
+</html>

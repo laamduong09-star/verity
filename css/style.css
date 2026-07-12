@@ -36,6 +36,7 @@
   --pastel-jargon: #ffef99;
   --pastel-credit: #ffd7f0;
   --pastel-family: #99fff9;
+  --pastel-budget: #ffddb5;
 
   /* Jargon-directory-only category accent, not a module pastel: the
      three category badges on jargon.html are deliberately differentiated
@@ -2980,6 +2981,7 @@ a.logo {
 .module-jar { --module-pastel: var(--pastel-jargon); }
 .module-cred { --module-pastel: var(--pastel-credit); }
 .module-fam { --module-pastel: var(--pastel-family); }
+.module-budget { --module-pastel: var(--pastel-budget); }
 
 /* The page's "mark" above the hero title: an ink line glyph on the
    module's flat pastel tile. */
@@ -3075,3 +3077,129 @@ a.logo {
     transition: none;
   }
 }
+/* ---------- Budget module ---------- */
+
+/* Chip groups: pay-period toggle and preset ratios. White + hairline like
+   btn-ghost; active chip flips to ink fill per the button-chip-active spec. */
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.seg-chip {
+  appearance: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 13px;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.seg-chip:hover { background: var(--pearl); }
+
+.seg-chip.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #ffffff;
+}
+
+.seg-chip:focus-visible {
+  outline: 2px solid var(--blue-focus);
+  outline-offset: 2px;
+}
+
+/* Custom percentage fields, revealed only while the Custom preset is active.
+   The explicit [hidden] rule is required: display:grid on the class would
+   otherwise beat the UA's [hidden]{display:none}. */
+.custom-split {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.custom-split[hidden] { display: none; }
+.custom-split .field { margin-bottom: 0; }
+
+/* Doughnut center total + static legend (Chart.js's own legend can't hold
+   the .en/.vi span pair, so the legend is plain markup). */
+.donut-wrap { position: relative; }
+
+.donut-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.donut-total {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.donut-legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 14px;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate);
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+}
+
+/* Same data-UI colors as the doughnut segments in js/budget.js
+   (SEGMENT_COLORS): needs = interactive blue, wants = neutral stone,
+   savings = positive teal. Keep the two in sync. */
+.legend-dot.dot-needs { background: #2348ad; }
+.legend-dot.dot-wants { background: #b1b1af; }
+.legend-dot.dot-savings { background: #0e7a72; }
+
+/* Bucket cards (reuse .stats-row / .stat-card / .icon-tile) */
+.bucket-pct {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate);
+  margin-top: -8px;
+}
+
+.bucket-list {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13.5px;
+  color: var(--slate);
+}
+
+.savings-link {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.savings-link:hover { text-decoration: underline; }
