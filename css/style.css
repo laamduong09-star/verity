@@ -2564,15 +2564,20 @@ body.landing .content-shell {
    section rhythm. Full-bleed (2026-07-10, user-directed): breaks out
    of `.page`'s 1200px container the same way `.content-shell` does,
    rather than the old inset-card treatment — a nested `.page` div
-   restores the centered, left-aligned text column. */
+   restores the content column, centered as a block (2026-07-10,
+   user-directed fix: `max-width` alone left it flush left once the
+   section went full-width instead of a narrow card); the text itself
+   stays left-aligned within that centered block. */
 .quote-band {
-  margin: 104px 0 0;
-  padding: 76px 0 80px;
+  margin: 80px 0 0;
+  padding: 64px 0;
   background: var(--paper);
 }
 
 .quote-band .page > * {
   max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .quote-band .fact-chip {
@@ -2612,8 +2617,8 @@ body.landing .content-shell {
    (2026-07-10, user-directed) via the same `.content-shell`-style
    breakout as the quote band above, instead of an inset card. */
 .ink-band {
-  margin: 104px 0 0;
-  padding: 84px 0 92px;
+  margin: 80px 0 0;
+  padding: 72px 0 80px;
   background: var(--charcoal);
   text-align: center;
 }
