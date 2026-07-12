@@ -118,6 +118,19 @@ both; animation-delay: 0.2s;`) is untouched, exactly as originally intended
 — just for the corrected reason (a different CSS property, not because the
 animation "completes before scrolling").
 
+### Size increase (2026-07-12, user-directed addendum)
+
+After the scale-property fix shipped, the user asked for the mockup to read
+bigger overall, in both its shrunk and full-scroll states. Chosen approach:
+raise `.app-window`'s `max-width` from `960px` to `1100px` (the scale
+mechanic itself — 0.83→1.0 over scrollY 0→500 — is unchanged), rather than
+pushing the scale numbers above 1.0. `.page`'s container caps at `1200px`
+with `32px` side padding (1136px content width), so 1100px leaves headroom
+and never touches the container edges even on narrower page-content widths
+above ~1055px; on narrower viewports the block already shrinks to fit via
+normal `max-width` behavior, same as before. Verified both endpoints render
+correctly: `913px` (1100 × 0.83) at scrollY 0, `1100px` at scrollY ≥ 500.
+
 ### Scope
 
 Landing page only (`index.html`'s `.app-window`). No other page has this
