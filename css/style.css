@@ -1116,7 +1116,7 @@ a.logo {
 }
 
 .topbar.is-compact .topbar-inner {
-  max-width: 720px;
+  max-width: 800px;
   padding: 6px 14px 6px 20px;
   background: rgba(255, 255, 255, 0.85);
   -webkit-backdrop-filter: blur(16px);
@@ -2294,10 +2294,12 @@ a.logo {
 /* Pearl hover works on both the white canvas at rest and the frosted
    white compact capsule — no per-state flip needed anymore. */
 
-/* The 12px gaps push the compact capsule's content ~13px past its
-   720px cap; slimmer side padding reclaims it (38px text-to-text vs
-   44px at rest — visually the same rhythm) with ~10px slack so a
-   pixel of font-rendering drift can't overflow the capsule. */
+/* Slimmer side padding than at rest (38px text-to-text vs 44px —
+   visually the same rhythm). The capsule's 800px cap budgets for all
+   six nav items at this padding (~605px of links and gaps + 185px of
+   logo/toggle/inner-padding overhead) with ~10px slack so a pixel of
+   font-rendering drift can't overflow the capsule. Widened from 720px
+   when the Budget module made it six items (2026-07-12). */
 .topbar.is-compact .nav-link {
   padding-left: 13px;
   padding-right: 13px;

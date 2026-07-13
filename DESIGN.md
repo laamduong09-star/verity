@@ -212,7 +212,7 @@ Exceptions, deliberately short list:
 
 ### Navigation (compacting topbar)
 - **Rest:** ~62px band on the canvas, logo + left-packed nav (`auto 1fr auto`, 20px gap, 2.5px baseline nudge), EN|VI toggle right. Active chip = **ink** fill, 8px radius; inactive links ink 14px/600; hover = pearl box.
-- **Compact (scroll):** 720px frosted-white capsule, 12px radius, hairline, blur(16px); wordmark collapses to the V glyph; nav side-padding slims to 13px. Hysteresis 56/8px in `js/site.js`.
+- **Compact (scroll):** 800px frosted-white capsule, 12px radius, hairline, blur(16px); wordmark collapses to the V glyph; nav side-padding slims to 13px. Hysteresis 56/8px in `js/site.js`. Widened from 720px on 2026-07-12 when Budget became the sixth nav item — the old cap only budgeted for five.
 
 ### Buttons & badges
 - **Shape language: 8px buttons, 12px cards/inputs, 9999px badges. Nothing else.**
