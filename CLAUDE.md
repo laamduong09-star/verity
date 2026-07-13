@@ -7,9 +7,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A bilingual (EN/VI) financial literacy site for young first-time earners, starting with a single compound-interest calculator page. Today it's hand-written static files — no framework, no package.json yet:
 
 - `actual website.html` — the calculator page (note the literal space in the filename; this used to be `index.html`, renamed outside of git; `index.html` is now the landing page)
-- `index.html`, `recommend.html`, `jargon.html`, `credit.html`, `family-split.html` — the other pages
+- `index.html`, `recommend.html`, `jargon.html`, `credit.html`, `family-split.html`, `budget.html` — the other pages
 - `css/style.css` — all styling
-- `js/` — one vanilla-JS file per page plus shared `site.js`
+- `js/` — one vanilla-JS file per page plus shared `site.js`. Budget splits its logic across two files: `js/budget-math.js` (pure math, no DOM — `splitPaycheck`/`toMonthly` — node-testable) and `js/budget.js` (DOM wiring, loads budget-math.js first). `js/scroll-scale.js` (the landing app-window scroll effect, see DESIGN.md) follows the same split from `js/landing.js`.
+- `tests/` — node:test unit tests: `tests/budget-math.test.js`, `tests/scroll-scale.test.js`. See Commands below for how to run them.
 
 Fonts (Lexend + Be Vietnam Pro) load from Google Fonts via a `<link>` tag in the HTML head; there are no other external dependencies besides Chart.js (also loaded via CDN, referenced in the HTML).
 
@@ -55,6 +56,7 @@ There is no build step, package.json, linter, or test suite in this repo *yet* (
 - **Serve locally**: `npx serve -p 8743 .` from the project root, then open `http://localhost:8743/actual%20website.html` (the URL-encoded space is required).
 - **Syntax-check the JS** after editing: `node --check js/<file>.js`
 - **Check CSS brace balance** after large edits (no CSS parser is wired up): count `{`/`}` are equal, e.g. via `grep -c` or a quick Node one-liner.
+- **Run unit tests**: `node --test tests/budget-math.test.js tests/scroll-scale.test.js` (or any single file) — list files explicitly rather than pointing `node --test` at the bare `tests/` directory; the directory form hits a path-resolution quirk in this environment's shell and fails with a misleading `Cannot find module 'tests'` error instead of discovering the files inside it. `js/budget-math.js` and `js/scroll-scale.js` are plain browser scripts that also export via `if (typeof module !== 'undefined') module.exports = {...}`, which is what lets node:test `require()` them directly without a DOM.
 
 If a build step is ever added, document its commands here and keep the no-tooling workflow above working until every page is migrated.
 
@@ -65,6 +67,8 @@ If a build step is ever added, document its commands here and keep the no-toolin
 `js/calculator.js` is plain vanilla JS. `projectGrowth(initial, monthlyContribution, annualRatePercent, years)` is the one pure calculation function — it returns one row per year (`{ year, balance, contributed, interest }`), cumulative, not per-year deltas. `update()` is the single re-render entry point: it reads all four inputs, calls `projectGrowth` (once for the main plan, again for the high-yield-savings and checking-account comparison baselines), and then pushes the results into every dependent UI piece — the Chart.js graph, the four stat cards, the year-by-year breakdown table, and the "what compounding buys you" comparison widget. `update()` runs on a debounced input listener and is also called directly by the language-toggle click handler (so chart text refreshes immediately on language switch, not just on the next input change). There's no component model — any new derived UI must be wired into `update()` by hand.
 
 `clampToInput(input, value, noteEl)` clamps a value to the input's own `min`/`max` attributes and, when given a `noteEl`, toggles a visible "Capped at X" message next to the field — don't silently clamp a new input without wiring up a matching `.clamp-note` element, that was a fixed bug.
+
+`js/budget.js` follows the same single-`update()` pattern as the calculator: one re-render entry point reads all inputs (amount, period, active preset/custom percentages), calls the pure `splitPaycheck`/`toMonthly` helpers, and pushes results into the bucket amounts, the doughnut chart, and the savings cross-link. That cross-link writes `#monthly=X` onto a link to the calculator page — the same hash-prefill format `js/calculator.js` already reads on load, so opening it from Budget lands with the monthly-savings figure pre-filled.
 
 ### Bilingual system (EN/VI)
 
@@ -78,7 +82,7 @@ Numbers never need translation, only copy. Strings that get built dynamically in
 
 `PRODUCT.md` (audience, brand personality, anti-references) and `DESIGN.md` (color/type/spacing tokens, named rules) are the source of truth for visual decisions — maintained by the "impeccable" Claude Code skill. Before changing colors, typography, spacing, or motion, check these first. Key named rules actually enforced in the CSS:
 
-- **Pastel-Taxonomy Rule**: five flat pastels color-code the five modules (declared per page as `--module-pastel` via a `<body class="module-…">` hook); flat fills only — never gradients, hovers, or text color.
+- **Pastel-Taxonomy Rule**: a flat-pastel taxonomy color-codes the modules, one pastel per module (declared per page as `--module-pastel` via a `<body class="module-…">` hook); flat fills only — never gradients, hovers, or text color.
 - **Two-Accent-in-Data-UI Rule**: teal ("result/positive outcome") and blue ("interactive") keep their meanings but only inside data UI (chart, results, meters, links, focus rings). Rose stays reserved for caution.
 - **Hairline-Not-Shadow Rule**: white cards on the white canvas separate via 1px `rgba(17,17,17,0.08)` borders, not shadows or tones.
 - Shape language is exactly 8px (buttons/chips) / 12px (cards/inputs/capsule) / 9999px (badges); spacing follows a 4px grid (see DESIGN.md).

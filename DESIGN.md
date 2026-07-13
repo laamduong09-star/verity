@@ -22,6 +22,7 @@ colors:
   pastel-jargon: "#ffef99"
   pastel-credit: "#ffd7f0"
   pastel-family: "#99fff9"
+  pastel-budget: "#ffddb5"
   window-dot-close: "#ff5f57"
   window-dot-minimize: "#febc2e"
   window-dot-maximize: "#28c840"
@@ -111,7 +112,7 @@ components:
 
 **Creative North Star: "Sunlit Editorial Calm"**
 
-This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket style reference and merged with the elements of Verity worth keeping. The page reads as a light, airy editorial product: a cream page background site-wide (`--paper`, was white on module pages until 2026-07-10), near-black warm ink type at whisper weights, and a five-pastel taxonomy that color-codes the five modules. It still explicitly rejects the stiff corporate banking dashboard (cold navy/gray, dense unexplained tables) and the gamified fintech app (confetti, casino urgency) — money here is calm, explained, and bilingual.
+This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket style reference and merged with the elements of Verity worth keeping. The page reads as a light, airy editorial product: a cream page background site-wide (`--paper`, was white on module pages until 2026-07-10), near-black warm ink type at whisper weights, and a flat-pastel taxonomy that color-codes the modules (one pastel per module). It still explicitly rejects the stiff corporate banking dashboard (cold navy/gray, dense unexplained tables) and the gamified fintech app (confetti, casino urgency) — money here is calm, explained, and bilingual.
 
 **Provenance — kept from Verity, on purpose:**
 - **Lexend + Be Vietnam Pro.** Be Vietnam Pro is a Vietnamese-designed body face with native diacritics; the bilingual mission outranks typeface mimicry. Amplemarket's *typography philosophy* was adopted instead of its font.
@@ -158,6 +159,9 @@ One flat pastel per module, used identically on the landing accordion chip, the 
 | Jargon | Canary | `#ffef99` |
 | Credit | Petal Pink | `#ffd7f0` |
 | Family Split | Aqua | `#99fff9` |
+| Budget | Peach | `#ffddb5` |
+
+Peach was chosen for Budget (2026-07-12) because the spec's first pick, lavender, collides with Recommend's soft violet.
 
 **The Pastel-Taxonomy Rule.** Pastels are flat fills only — never gradients, never hover states, never accent text, never shadowed. The flat color IS the elevation and the differentiation. Glyphs on pastel are always ink.
 
@@ -241,6 +245,11 @@ White, hairline, 12px, 28px padding. No top-edge accent (the old 3px blue hairli
 - **Directory Header (named pattern):** each category section opens with a left-aligned row — 48px circular badge (ink line glyph, 9999px), weight-400 section title, hairline 9999px count pill whose number goes live during search. Full-width hairline dividers separate sections; JS keeps the first *visible* section divider-free while search hides groups.
 - **Category-badge color exception (2026-07-10, user-directed):** the three directory badges do *not* all share the page's canary module pastel — Credit & borrowing is `--pastel-jargon-credit` (`#c9dcff`, a periwinkle sized to match the other five pastels' saturation/lightness) and Investing & retirement reuses `--pastel-calc` (mint). Earning & saving keeps canary. This is a **deliberate, scoped exception** to the Pastel-Taxonomy Rule — it applies only to `.group-badge` on this page, not to the page-hero glyph, the suggestion-dropdown glyphs, or any other module's pastel identity.
 - **Suggestion dropdown:** white 12px panel, hairline, composited-only open animation; rows = module-pastel glyph tile, EN name 600, VI name slate, bilingual group tag. Works identically docked and at rest (same element, never cloned).
+
+### Budget splitter
+- **Chip groups** (`.seg-chip`, period and preset selectors): white + hairline at rest, active flips to ink fill per the `button-chip-active` spec — the same pattern `.chip-group` documents elsewhere.
+- **Doughnut segments** use data-UI colors doing data jobs, not the module pastel: needs = blue, wants = stone, savings = teal (positive outcome) — mirrored by the static `.legend-dot` markup so chart and legend stay in sync.
+- **Center total:** an HTML overlay (`.donut-center`/`.donut-total`), not a Chart.js plugin — `.donut-wrap` is `position: relative` with the total absolutely centered over the canvas, since Chart.js's own legend/center-text can't hold the `.en`/`.vi` span pair.
 
 ## 6. Do's and Don'ts
 
