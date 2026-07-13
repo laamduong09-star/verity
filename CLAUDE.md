@@ -90,3 +90,7 @@ Numbers never need translation, only copy. Strings that get built dynamically in
 Top bar (logo, nav capsule, language toggle) → centered hero → two-column calculator grid (inputs card + chart card, stacks to one column under 800px) → stats row (3 stat cards) → breakdown grid (year-by-year table + "what compounding buys you" comparison widget, also stacks under 800px) → disclaimer. An info modal (triggered from the inputs card) explains compound interest inline, per the product's "explain, don't impress" principle.
 
 The nav's `Recommend`/`Jargon`/`Credit`/`Family Split` items are PRODUCT.md's roadmapped future modules, not dead code — they're intentionally `aria-disabled="true"` with a "soon" badge and a blocked click handler, not yet wired to real pages.
+
+## Delegation policy
+
+Implementation work like writing components, styling, and routine edits should be delegated to the `executor` subagent (defined in `.claude/agents/executor.md` at the session project root), while planning, architecture decisions, and reviewing the executor's output stay with the orchestrating session directly. Plan first and present the plan before any code is written; then hand the decided spec to the executor rather than implementing inline.
