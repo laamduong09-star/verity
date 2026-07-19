@@ -32,11 +32,13 @@ test('all-zero percentages return all-zero buckets, flagged normalized', () => {
     { needs: 0, wants: 0, savings: 0 }
   );
   assert.equal(r.normalized, true);
+  assert.equal(r.enteredSum, 0);
 });
 
 test('negative amount is treated as zero', () => {
   const r = splitPaycheck(-50, 50, 30, 20);
   assert.equal(r.needs, 0);
+  assert.equal(r.wants, 0);
   assert.equal(r.savings, 0);
 });
 

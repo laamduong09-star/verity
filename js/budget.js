@@ -206,7 +206,10 @@ Object.values(pctInputs).forEach((input) => {
 periodChips.forEach((chip) => {
   chip.addEventListener('click', () => {
     activePeriod = chip.dataset.period;
-    periodChips.forEach((c) => c.classList.toggle('active', c === chip));
+    periodChips.forEach((c) => {
+      c.classList.toggle('active', c === chip);
+      c.setAttribute('aria-pressed', String(c === chip));
+    });
     update();
   });
 });
@@ -214,7 +217,10 @@ periodChips.forEach((chip) => {
 presetChips.forEach((chip) => {
   chip.addEventListener('click', () => {
     activePreset = chip.dataset.preset;
-    presetChips.forEach((c) => c.classList.toggle('active', c === chip));
+    presetChips.forEach((c) => {
+      c.classList.toggle('active', c === chip);
+      c.setAttribute('aria-pressed', String(c === chip));
+    });
     customSplitEl.hidden = activePreset !== 'custom';
     update();
   });
