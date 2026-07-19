@@ -2805,6 +2805,7 @@ a.logo {
 .acc-dot.dot-jar { background: var(--pastel-jargon); }
 .acc-dot.dot-cred { background: var(--pastel-credit); }
 .acc-dot.dot-fam { background: var(--pastel-family); }
+.acc-dot.dot-budget { background: var(--pastel-budget); }
 
 .acc-icon {
   margin-left: auto;
@@ -2990,7 +2991,7 @@ a.logo {
 
 /* Each module page declares its taxonomy pastel once on <body>; every
    tile below inherits it. The landing accordion chips use the same
-   five pastels, so the color-coding carries across pages. */
+   six pastels, so the color-coding carries across pages. */
 .module-calc { --module-pastel: var(--pastel-calc); }
 .module-rec { --module-pastel: var(--pastel-recommend); }
 .module-jar { --module-pastel: var(--pastel-jargon); }
