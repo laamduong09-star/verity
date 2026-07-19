@@ -2408,7 +2408,7 @@ a.logo {
 .app-window {
   display: block;
   position: relative;
-  max-width: 1100px;
+  max-width: 1280px;
   margin: 56px auto 0;
   text-align: left;
   background: var(--card);
@@ -2429,6 +2429,19 @@ a.logo {
 .app-window:hover {
   translate: 0 -3px;
   border-color: rgba(17, 17, 17, 0.18);
+}
+
+/* .page caps content at 1136px (1200px minus 2x32px padding), which
+   would silently cap the 1280px max-width above. On viewports with
+   room for the full width (1280 + 2x32 = 1344), -72px side margins
+   let the hero shot bleed 72px past the column on each side, keeping
+   it centered ((1280 - 1136) / 2 = 72). Below that it fills the
+   column as before. */
+@media (min-width: 1345px) {
+  .app-window {
+    margin-left: -72px;
+    margin-right: -72px;
+  }
 }
 
 .window-chrome {

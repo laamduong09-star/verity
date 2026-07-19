@@ -134,7 +134,10 @@ This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket 
   effect is driven through `scale`, a separate CSS property `fadeUp` never
   touches. Respects `prefers-reduced-motion`. The mockup's `max-width` was
   also raised from `960px` to `1100px` (2026-07-12, user-directed) so it
-  reads bigger in both its shrunk and full-scroll states.
+  reads bigger in both its shrunk and full-scroll states, then to `1280px`
+  with a `0.90` starting scale and a `-72px` side-bleed past `.page`'s
+  1136px column on viewports ≥ 1345px (2026-07-18, user-directed — see
+  the spec's second size-increase addendum).
 - **The bilingual `.en`/`.vi` span system** — structural, untouchable.
 
 **Dropped:** the 3px blue card hairline, the 200px CTA pills, Verity's darker paper canvas, and Amplemarket's phoenix orange (no role here). Also retired 2026-07-10: the jargon page's collapsed-by-default term list (`44278d8`) — replaced by the always-visible category directory (Amplemarket skills-library pattern; the section structure does the de-intimidating the collapse used to).

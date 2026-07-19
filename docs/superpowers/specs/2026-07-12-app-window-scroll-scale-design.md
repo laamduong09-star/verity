@@ -131,6 +131,20 @@ above ~1055px; on narrower viewports the block already shrinks to fit via
 normal `max-width` behavior, same as before. Verified both endpoints render
 correctly: `913px` (1100 × 0.83) at scrollY 0, `1100px` at scrollY ≥ 500.
 
+### Second size increase (2026-07-18, user-directed addendum)
+
+The user asked for the mockup to read bigger still — there was visible
+empty space beside and below it on wide viewports. Two knobs turned this
+time: `max-width` raised `1100px` → `1280px`, and `MIN_SCALE` raised
+`0.83` → `0.90` (the scroll mechanic and its 500px distance are
+otherwise unchanged). Since `.page` caps its content column at 1136px
+(1200px minus 2×32px padding), the extra width comes from a breakout: at
+viewports ≥ 1345px (room for 1280 + 2×32), a media query gives
+`.app-window` `-72px` side margins so it bleeds symmetrically past the
+column; below that it fills the 1136px column via normal `max-width`
+behavior. New endpoints on wide viewports: `1152px` (1280 × 0.90) at
+scrollY 0, `1280px` at scrollY ≥ 500.
+
 ### Scope
 
 Landing page only (`index.html`'s `.app-window`). No other page has this

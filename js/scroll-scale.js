@@ -4,10 +4,12 @@
 // suite, hence the exports guard.
 //
 // Linear interpolation from MIN_SCALE at scrollY=0 to MAX_SCALE at
-// scrollY=DISTANCE, clamped outside that range — measured and chosen to
-// match the scale-in effect on amplemarket.com's hero product shot (see
+// scrollY=DISTANCE, clamped outside that range. MIN_SCALE was originally
+// 0.83, measured from the scale-in effect on amplemarket.com's hero
+// product shot; it was raised to 0.90 on 2026-07-18 (user-directed) so
+// the mockup reads larger before any scrolling (see
 // docs/superpowers/specs/2026-07-12-app-window-scroll-scale-design.md).
-const MIN_SCALE = 0.83;
+const MIN_SCALE = 0.9;
 const MAX_SCALE = 1.0;
 const SCROLL_DISTANCE = 500;
 
