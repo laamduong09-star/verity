@@ -56,9 +56,7 @@
 * { box-sizing: border-box; }
 
 /* Cream page background site-wide (2026-07-10, user-directed — first
-   landing-only, now every page): wherever the aurora's mask fades to
-   transparent, it blends into the same warm tone the rest of the page
-   uses, instead of handing off to a cooler white. */
+   landing-only, now every page). */
 body {
   position: relative;
   margin: 0;
@@ -78,72 +76,6 @@ body {
   0% { transform: scale(1); }
   40% { transform: scale(1.06); }
   100% { transform: scale(1); }
-}
-
-/* Aurora page background — adapted natively (2026-07-10) from the
-   supplied React "AuroraBackground" component; its visual is entirely
-   CSS, React only provided a wrapper div. Replaces the blue blob mesh
-   as blue's one sanctioned ambient use: two stacks of blurred
-   repeating-gradient ribbons (white interference stripes over a
-   blue→violet progression) wash the top of every page, inverted and
-   masked so the wash is strongest behind the hero and gone before the
-   cream content shell. The reference animated background-position —
-   paint-level work every frame, the same class of animation that made
-   BackgroundPaths flicker against the cursor's rAF loop — so the
-   moving layer here drifts by exactly one gradient tile via transform
-   instead: composited, seamless at loop, visually identical. */
-.bg-aurora {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: min(820px, 115vh);
-  z-index: -2;
-  overflow: hidden;
-  pointer-events: none;
-  opacity: 0.42;
-  filter: blur(10px) invert(1);
-  -webkit-mask-image: radial-gradient(ellipse 130% 95% at 50% -12%, #000 32%, transparent 76%);
-  mask-image: radial-gradient(ellipse 130% 95% at 50% -12%, #000 32%, transparent 76%);
-}
-
-/* Both layers carry the same dual gradient (interference stripes +
-   aurora colors, the reference component's exact stops); the ::after
-   copy is 4x oversized, blended with difference, and drifting. */
-.bg-aurora::before,
-.bg-aurora::after {
-  content: "";
-  position: absolute;
-  top: -10px;
-  bottom: -10px;
-  left: -10px;
-  background-image:
-    repeating-linear-gradient(100deg, #ffffff 0%, #ffffff 7%, transparent 10%, transparent 12%, #ffffff 16%),
-    repeating-linear-gradient(100deg, #3b82f6 10%, #a5b4fc 15%, #93c5fd 20%, #ddd6fe 25%, #60a5fa 30%);
-}
-
-.bg-aurora::before {
-  right: -10px;
-  background-size: 300% 200%;
-  background-position: 50% 50%;
-}
-
-.bg-aurora::after {
-  width: 400%;
-  background-size: 50% 100%;
-  mix-blend-mode: difference;
-  animation: auroraDrift 60s linear infinite;
-  /* Start mid-cycle: at t=0 the two layers align and difference-blend
-     cancels to nothing, leaving a blank first frame. */
-  animation-delay: -22s;
-  will-change: transform;
-}
-
-/* -50% of the layer's own 400% width = exactly one background tile
-   (background-size 50%), so the loop restart is seamless. */
-@keyframes auroraDrift {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
 }
 
 /* ---------- Custom cursor ---------- */
@@ -1049,13 +981,11 @@ body.lang-vi-primary .vi {
 
 /* ---------- Reduced motion ---------- */
 /* Per DESIGN.md: the card/title entrances and result-value pop need an
-   instant fallback instead of looping/animating; the aurora freezes as
-   a static wash rather than drifting. */
+   instant fallback instead of looping/animating. */
 @media (prefers-reduced-motion: reduce) {
   .hero-title,
   .card,
-  .modal-backdrop,
-  .bg-aurora::after {
+  .modal-backdrop {
     animation: none;
   }
 
