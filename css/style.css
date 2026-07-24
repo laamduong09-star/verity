@@ -3128,7 +3128,16 @@ a.logo {
 .donut-wrap {
   position: relative;
   flex: 0 0 auto;
-  height: 320px;
+  height: 345px;
+}
+
+/* Don't stretch the graph card to match the inputs card. When Custom is
+   selected the inputs card grows; stretching would leave dead space below
+   the doughnut legend. Natural height instead — 345px wheel makes it equal
+   to the inputs card in the default state, and it simply stays put (no
+   extra space) when Custom grows the inputs card. :has() keeps it budget-only. */
+.graph-card:has(.donut-wrap) {
+  align-self: start;
 }
 
 .donut-center {
