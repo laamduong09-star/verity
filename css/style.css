@@ -3131,13 +3131,6 @@ a.logo {
   height: 320px;
 }
 
-/* Center header+wheel+legend as a group so the extra height the grid adds
-   to this card (when Custom is on) becomes even breathing room rather than
-   dead space at the bottom. :has(.donut-wrap) keeps it budget-only. */
-.graph-card:has(.donut-wrap) {
-  justify-content: center;
-}
-
 .donut-center {
   position: absolute;
   inset: 0;
