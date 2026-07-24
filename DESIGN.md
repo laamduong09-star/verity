@@ -141,10 +141,12 @@ This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket 
 - **The accordion rainbow glow** (2026-07-19, user-directed) — an
   Amplemarket-reference pastel glow behind the landing module accordion
   (`.acc-glow` + `.acc-glow-grain` inside `#modules`, landing page only):
-  two blurred radial-gradient blob clusters (lavender `#a78bfa` + pink
-  `#f0abcf` left, peach `#fdba74` + mint `#a7f3d0` right) drifting on
-  slow transform-only loops under a static SVG `feTurbulence` grain at
-  `soft-light`. Pure CSS stand-in for the reference's WebGL shader. These
+  two blurred colour columns anchored at the left and right edges
+  (lavender `#a78bfa` + pink `#f0abcf` left, peach `#fdba74` + mint
+  `#a7f3d0` right) with a clean centre behind the cards, drifting on slow
+  transform-only loops (clipped by `overflow:hidden` so they never add
+  page scroll) under a static SVG `feTurbulence` grain at `soft-light`.
+  Pure CSS stand-in for the reference's WebGL shader. These
   four hues are a **scoped decorative exception**: background light only,
   never UI color — Pastel-Taxonomy, Two-Accent-in-Data-UI, and
   Hairline-Not-Shadow are unaffected. Freezes to a static wash under

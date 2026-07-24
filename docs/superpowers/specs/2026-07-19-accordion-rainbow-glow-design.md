@@ -140,3 +140,20 @@ No unit-testable logic (pure CSS). Verify:
    - Mobile 375px: glow present, no horizontal overflow.
 4. Accordion still functions (click a head, panel opens) — the glow must
    not intercept clicks (`pointer-events: none`).
+
+## Revision 2026-07-19: edge-columns (matching Amplemarket more closely)
+
+First cut read as a diffuse pastel cloud across the whole section because
+the blobs sat mid-section (28%/72%) behind the title and cards. Reworked to
+match Amplemarket's actual technique (their effect is a full-width WebGL
+canvas literally class-named "pillars"): the colour is pushed fully to the
+left and right edges as two tall columns with the bright spot at each edge
+(4%/0% left, 96%/100% right) fading toward a clean centre where the cards
+sit; grain opacity raised 0.5 → 0.9. The glow box is now the section width
+(`top/bottom: -40px; left/right: 0`) with `overflow: hidden`, and the
+pseudo-columns are `left: 0; width: 100%` positioned purely by gradient
+stops — so nothing extends past the section horizontally and the old 8px
+mobile overflow is gone. Drift shortened to 26s/32s with smaller travel
+(clipped by the glow's `overflow: hidden`). Verified live at 1680px and
+375px: colour hugs both edges, centre clean, columns drift, zero horizontal
+overflow at either width.

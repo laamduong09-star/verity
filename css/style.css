@@ -2988,11 +2988,13 @@ a.logo {
 /* ---------- Landing: accordion rainbow glow ---------- */
 /* Amplemarket-reference pastel glow behind the module accordion (spec:
    docs/superpowers/specs/2026-07-19-accordion-rainbow-glow-design.md).
-   Pure CSS stand-in for the reference's WebGL shader: two blurred
-   radial-gradient blob clusters drifting on transform-only loops, plus
-   a static SVG-noise grain. The four hues here are a scoped decorative
-   exception (DESIGN.md provenance note) — they exist nowhere else in
-   the system. */
+   Pure CSS stand-in for the reference's WebGL shader: two blurred colour
+   columns hugging the left and right edges with a clean centre where the
+   cards sit (Amplemarket calls the equivalent a "pillars" background),
+   drifting on transform-only loops, plus a static SVG-noise grain.
+   overflow:hidden on .acc-glow clips the drift so it never adds page
+   scroll. The four hues here are a scoped decorative exception (DESIGN.md
+   provenance note) — they exist nowhere else in the system. */
 #modules {
   position: relative;
   isolation: isolate;
@@ -3000,64 +3002,66 @@ a.logo {
 
 .acc-glow {
   position: absolute;
-  inset: -60px 0;
+  top: -40px;
+  bottom: -40px;
+  left: 0;
+  right: 0;
   z-index: -1;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
 }
 
 .acc-glow::before,
 .acc-glow::after {
   content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 60%;
-  filter: blur(70px);
+  top: -14%;
+  bottom: -14%;
+  left: 0;
+  width: 100%;
+  filter: blur(60px);
   will-change: transform;
 }
 
-/* Left cluster: lavender + soft pink bleeding in from the left edge. */
+/* Left column: lavender + soft pink, bright spot at the left edge, fading
+   toward the clean center where the cards sit. */
 .acc-glow::before {
-  left: -12%;
   background-image:
-    radial-gradient(42% 34% at 28% 26%, rgba(167, 139, 250, 0.5), transparent 70%),
-    radial-gradient(38% 30% at 18% 68%, rgba(240, 171, 207, 0.45), transparent 70%);
-  animation: glowDriftA 70s ease-in-out infinite alternate;
+    radial-gradient(30% 46% at 4% 42%, rgba(167, 139, 250, 0.85), transparent 62%),
+    radial-gradient(26% 32% at 0% 72%, rgba(240, 171, 207, 0.65), transparent 64%);
+  animation: glowDriftA 26s ease-in-out infinite alternate;
 }
 
-/* Right cluster: peach + mint bleeding in from the right edge. */
+/* Right column: peach + mint, mirrored at the right edge. */
 .acc-glow::after {
-  right: -12%;
   background-image:
-    radial-gradient(42% 34% at 72% 30%, rgba(253, 186, 116, 0.5), transparent 70%),
-    radial-gradient(36% 30% at 82% 72%, rgba(167, 243, 208, 0.45), transparent 70%);
-  animation: glowDriftB 90s ease-in-out infinite alternate;
+    radial-gradient(30% 46% at 96% 40%, rgba(253, 186, 116, 0.8), transparent 62%),
+    radial-gradient(26% 32% at 100% 70%, rgba(167, 243, 208, 0.65), transparent 64%);
+  animation: glowDriftB 32s ease-in-out infinite alternate;
 }
 
-/* Different durations keep the clusters out of phase forever; alternate
-   direction means no loop snap. transform-only = fully composited. */
+/* Gentle breathing drift. overflow:hidden on .acc-glow clips the horizontal
+   travel so it can never add page scroll (the old centered-blob version
+   leaked 8px at 375px). Different durations keep the two columns out of
+   phase; alternate = no loop snap. transform-only = fully composited. */
 @keyframes glowDriftA {
   from { transform: translate3d(0, 0, 0) scale(1); }
-  to { transform: translate3d(40px, -30px, 0) scale(1.08); }
+  to { transform: translate3d(12px, -26px, 0) scale(1.07); }
 }
 
 @keyframes glowDriftB {
-  from { transform: translate3d(0, 0, 0) scale(1.06); }
-  to { transform: translate3d(-45px, 25px, 0) scale(0.96); }
+  from { transform: translate3d(0, 0, 0) scale(1.05); }
+  to { transform: translate3d(-14px, 20px, 0) scale(0.97); }
 }
 
-/* Grain: tiny tiled feTurbulence noise, painted above the blobs. It
-   needs its own element — a parent's background paints BELOW its
-   pseudo-elements, so a third background layer on .acc-glow could
-   never sit on top of the ::before/::after blobs. */
 .acc-glow-grain {
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
-  opacity: 0.5;
+  opacity: 0.9;
 }
 
 /* Must sit AFTER the base animation declarations above — media queries
