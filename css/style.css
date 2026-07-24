@@ -3120,7 +3120,23 @@ a.logo {
 
 /* Doughnut center total + static legend (Chart.js's own legend can't hold
    the .en/.vi span pair, so the legend is plain markup). */
-.donut-wrap { position: relative; }
+/* Pin the doughnut to a fixed size: the graph card sits in a grid that
+   stretches it to match the inputs card, which grows when the Custom
+   split fields appear — without this, the responsive wheel resizes with
+   the card. .donut-wrap is budget-only (the calculator's chart-wrap has
+   no donut-wrap class), so this overrides .chart-wrap's flex:1 here only. */
+.donut-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  height: 320px;
+}
+
+/* Center header+wheel+legend as a group so the extra height the grid adds
+   to this card (when Custom is on) becomes even breathing room rather than
+   dead space at the bottom. :has(.donut-wrap) keeps it budget-only. */
+.graph-card:has(.donut-wrap) {
+  justify-content: center;
+}
 
 .donut-center {
   position: absolute;
