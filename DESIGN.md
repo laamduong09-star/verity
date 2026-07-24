@@ -138,19 +138,6 @@ This system is a deliberate hybrid, adopted 2026-07 from a supplied Amplemarket 
   with a `0.90` starting scale and a `-72px` side-bleed past `.page`'s
   1136px column on viewports ≥ 1345px (2026-07-18, user-directed — see
   the spec's second size-increase addendum).
-- **The accordion rainbow glow** (2026-07-19, user-directed) — an
-  Amplemarket-reference pastel glow behind the landing module accordion
-  (`.acc-glow` + `.acc-glow-grain` inside `#modules`, landing page only):
-  two blurred colour columns anchored at the left and right edges
-  (lavender `#a78bfa` + pink `#f0abcf` left, peach `#fdba74` + mint
-  `#a7f3d0` right) with a clean centre behind the cards, drifting on slow
-  transform-only loops (clipped by `overflow:hidden` so they never add
-  page scroll) under a static SVG `feTurbulence` grain at `soft-light`.
-  Pure CSS stand-in for the reference's WebGL shader. These
-  four hues are a **scoped decorative exception**: background light only,
-  never UI color — Pastel-Taxonomy, Two-Accent-in-Data-UI, and
-  Hairline-Not-Shadow are unaffected. Freezes to a static wash under
-  `prefers-reduced-motion`, same as the aurora.
 - **The bilingual `.en`/`.vi` span system** — structural, untouchable.
 
 **Dropped:** the 3px blue card hairline, the 200px CTA pills, Verity's darker paper canvas, and Amplemarket's phoenix orange (no role here). Also retired 2026-07-10: the jargon page's collapsed-by-default term list (`44278d8`) — replaced by the always-visible category directory (Amplemarket skills-library pattern; the section structure does the de-intimidating the collapse used to).
