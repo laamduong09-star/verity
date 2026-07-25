@@ -209,7 +209,7 @@
   </section>
 
   <section class="stats-row">
-    <div class="card stat-card tint-blue">
+    <div class="card stat-card tint-blue" tabindex="0">
       <span class="stat-icon icon-blue" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 11l9-7 9 7"/>
@@ -220,17 +220,19 @@
         <span class="en">Needs</span>
         <span class="vi">Nhu cầu</span>
       </span>
-      <span class="stat-value" id="amtNeeds">$0</span>
-      <span class="bucket-pct" id="pctLabelNeeds">50%</span>
-      <ul class="bucket-list">
-        <li><span class="en">Phone bill</span><span class="vi">Tiền điện thoại</span></li>
-        <li><span class="en">Bus pass</span><span class="vi">Vé xe buýt</span></li>
-        <li><span class="en">Food you owe family</span><span class="vi">Tiền ăn phụ gia đình</span></li>
-        <li><span class="en">School supplies</span><span class="vi">Dụng cụ học tập</span></li>
-      </ul>
+      <span class="bucket-swap">
+        <span class="bucket-figure">
+          <span class="stat-value" id="amtNeeds">$0</span>
+          <span class="bucket-pct" id="pctLabelNeeds">50%</span>
+        </span>
+        <span class="bucket-examples">
+          <span class="en">Phone bill · Bus pass · Food you owe family · School supplies</span>
+          <span class="vi">Tiền điện thoại · Vé xe buýt · Tiền ăn phụ gia đình · Dụng cụ học tập</span>
+        </span>
+      </span>
     </div>
 
-    <div class="card stat-card">
+    <div class="card stat-card tint-rose" tabindex="0">
       <span class="stat-icon icon-rose" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="4" y="9" width="16" height="11" rx="1.5"/>
@@ -243,17 +245,19 @@
         <span class="en">Wants</span>
         <span class="vi">Mong muốn</span>
       </span>
-      <span class="stat-value" id="amtWants">$0</span>
-      <span class="bucket-pct" id="pctLabelWants">30%</span>
-      <ul class="bucket-list">
-        <li><span class="en">Eating out</span><span class="vi">Ăn ngoài</span></li>
-        <li><span class="en">Games</span><span class="vi">Trò chơi</span></li>
-        <li><span class="en">Clothes</span><span class="vi">Quần áo</span></li>
-        <li><span class="en">Streaming</span><span class="vi">Dịch vụ xem phim, nhạc</span></li>
-      </ul>
+      <span class="bucket-swap">
+        <span class="bucket-figure">
+          <span class="stat-value" id="amtWants">$0</span>
+          <span class="bucket-pct" id="pctLabelWants">30%</span>
+        </span>
+        <span class="bucket-examples">
+          <span class="en">Eating out · Games · Clothes · Streaming</span>
+          <span class="vi">Ăn ngoài · Trò chơi · Quần áo · Dịch vụ xem phim, nhạc</span>
+        </span>
+      </span>
     </div>
 
-    <div class="card stat-card tint-teal">
+    <div class="card stat-card tint-teal" tabindex="0">
       <span class="stat-icon icon-teal" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 17l6-6 4 4 6-7"/>
@@ -264,18 +268,25 @@
         <span class="en">Savings</span>
         <span class="vi">Tiết kiệm</span>
       </span>
-      <span class="stat-value accent" id="amtSavings">$0</span>
-      <span class="bucket-pct" id="pctLabelSavings">20%</span>
-      <ul class="bucket-list">
-        <li><span class="en">Emergency cushion</span><span class="vi">Quỹ dự phòng</span></li>
-        <li><span class="en">Future goals — laptop, car, college</span><span class="vi">Mục tiêu tương lai — laptop, xe, đại học</span></li>
-      </ul>
-      <a class="savings-link" id="savingsLink" href="actual%20website.html#monthly=0">
-        <span class="en">See what saving <span class="savings-monthly-value">$0</span>/month grows into →</span>
-        <span class="vi">Xem <span class="savings-monthly-value">$0</span>/tháng tiết kiệm sẽ tăng trưởng thành bao nhiêu →</span>
-      </a>
+      <span class="bucket-swap">
+        <span class="bucket-figure">
+          <span class="stat-value accent" id="amtSavings">$0</span>
+          <span class="bucket-pct" id="pctLabelSavings">20%</span>
+        </span>
+        <span class="bucket-examples">
+          <span class="en">Emergency cushion · Future goals — laptop, car, college</span>
+          <span class="vi">Quỹ dự phòng · Mục tiêu tương lai — laptop, xe, đại học</span>
+        </span>
+      </span>
     </div>
   </section>
+
+  <p class="savings-cta">
+    <a class="savings-link" id="savingsLink" href="actual%20website.html#monthly=0">
+      <span class="en">See what saving <span class="savings-monthly-value">$0</span>/month grows into →</span>
+      <span class="vi">Xem <span class="savings-monthly-value">$0</span>/tháng tiết kiệm sẽ tăng trưởng thành bao nhiêu →</span>
+    </a>
+  </p>
 
   <p class="disclaimer">
     <span class="en">Educational tool only. Not licensed financial advice.</span>
