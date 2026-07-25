@@ -251,7 +251,7 @@ White, hairline, 12px, 28px padding. No top-edge accent (the old 3px blue hairli
 
 ### Budget splitter
 - **Chip groups** (`.seg-chip`, period and preset selectors): white + hairline at rest, active flips to ink fill per the `button-chip-active` spec — the same pattern `.chip-group` documents elsewhere.
-- **Doughnut segments** use data-UI colors doing data jobs, not the module pastel: needs = blue, wants = stone, savings = teal (positive outcome) — mirrored by the static `.legend-dot` markup so chart and legend stay in sync.
+- **Doughnut segments** use data-UI colors doing data jobs, not the module pastel: needs = blue, wants = `--rose-muted`, savings = teal (positive outcome) — mirrored by the static `.legend-dot` markup so chart and legend stay in sync.
 - **Bucket-card icon colors (2026-07-24, user-directed):** the three bucket-card stat icons carry the module's own data colors rather than a module pastel — needs = `--blue`, wants = `--rose-muted`, savings = `--teal`. `--rose-muted` is a separate palette entry from the caution `--rose`, not a reuse of it, so rose's reserved caution meaning stays exclusive. Each card's examples (phone bill, eating out, emergency cushion, etc.) crossfade in place with the amount on hover/focus, keeping the card itself compact; on touch, which has no hover, they stay permanently visible instead.
 - **Center total:** an HTML overlay (`.donut-center`/`.donut-total`), not a Chart.js plugin — `.donut-wrap` is `position: relative` with the total absolutely centered over the canvas, since Chart.js's own legend/center-text can't hold the `.en`/`.vi` span pair.
 

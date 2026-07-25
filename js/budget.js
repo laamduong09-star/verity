@@ -104,10 +104,12 @@ const CHART_STRINGS = {
   savings: { en: 'Savings', vi: 'Tiết kiệm' },
 };
 
-// Data-UI colors doing data jobs: needs = blue, wants = neutral stone,
-// savings = teal (positive outcome). Mirrored by .legend-dot in style.css —
-// keep the two in sync.
-const SEGMENT_COLORS = ['#2348ad', '#b1b1af', '#0e7a72'];
+// Data-UI colors doing data jobs: needs = blue, wants = muted rose
+// (--rose-muted in style.css, written here as a literal since this file has
+// no access to CSS custom properties — same reason #2348ad and #0e7a72 are
+// literals), savings = teal (positive outcome). Mirrored by .legend-dot in
+// style.css — keep the two in sync.
+const SEGMENT_COLORS = ['#2348ad', '#9d3f5f', '#0e7a72'];
 const EMPTY_COLOR = '#ecebea'; // pearl — muted single ring when there's nothing to split
 
 const chart = new Chart(chartCanvas, {

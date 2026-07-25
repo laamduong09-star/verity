@@ -3220,10 +3220,10 @@ a.logo {
 }
 
 /* Same data-UI colors as the doughnut segments in js/budget.js
-   (SEGMENT_COLORS): needs = interactive blue, wants = neutral stone,
+   (SEGMENT_COLORS): needs = interactive blue, wants = muted rose,
    savings = positive teal. Keep the two in sync. */
 .legend-dot.dot-needs { background: #2348ad; }
-.legend-dot.dot-wants { background: #b1b1af; }
+.legend-dot.dot-wants { background: #9d3f5f; }
 .legend-dot.dot-savings { background: #0e7a72; }
 
 /* Bucket cards (reuse .stats-row / .stat-card / .stat-icon) */
