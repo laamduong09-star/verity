@@ -252,6 +252,7 @@ White, hairline, 12px, 28px padding. No top-edge accent (the old 3px blue hairli
 ### Budget splitter
 - **Chip groups** (`.seg-chip`, period and preset selectors): white + hairline at rest, active flips to ink fill per the `button-chip-active` spec — the same pattern `.chip-group` documents elsewhere.
 - **Doughnut segments** use data-UI colors doing data jobs, not the module pastel: needs = blue, wants = stone, savings = teal (positive outcome) — mirrored by the static `.legend-dot` markup so chart and legend stay in sync.
+- **Bucket-card icon color exception (2026-07-24, user-directed):** the three bucket-card stat icons carry the module's own data colors rather than a module pastel — needs = blue, wants = rose, savings = teal. Wants using rose is a **deliberate, scoped exception** to rose's caution-only reservation (see Data accents) — it applies only to `.stat-icon.icon-rose` on these three cards, not to any other rose usage (clamp notes, myth tags, caution tiles/borders) elsewhere on the site.
 - **Center total:** an HTML overlay (`.donut-center`/`.donut-total`), not a Chart.js plugin — `.donut-wrap` is `position: relative` with the total absolutely centered over the canvas, since Chart.js's own legend/center-text can't hold the `.en`/`.vi` span pair.
 
 ## 6. Do's and Don'ts

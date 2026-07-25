@@ -15,6 +15,7 @@
   --charcoal: #111111;
   --rose: #c2255c;
   --rose-soft: rgba(194, 37, 92, 0.14);
+  --rose-bright: #df497d;
   --green: #1a7a42;
   --amber: #c27e0a;
   --amber-bright: #efaa34;
@@ -793,6 +794,14 @@ body {
 
 .stat-icon.icon-amber { background: var(--amber); }
 .stat-icon.icon-amber::before { background: var(--amber-bright); }
+
+/* Budget's "Wants" bucket is the discretionary one, so it takes rose rather
+   than a second helping of blue or teal — a deliberate, scoped widening of
+   rose's role beyond pure caution (see DESIGN.md), kept honest by using the
+   same fill + lighter-sibling-edge construction as every other variant.
+   White on #c2255c still measures 5.7:1, so the glyph reads fine. */
+.stat-icon.icon-rose { background: var(--rose); }
+.stat-icon.icon-rose::before { background: var(--rose-bright); }
 
 .stat-icon svg {
   position: relative;
@@ -3211,7 +3220,7 @@ a.logo {
 .legend-dot.dot-wants { background: #b1b1af; }
 .legend-dot.dot-savings { background: #0e7a72; }
 
-/* Bucket cards (reuse .stats-row / .stat-card / .icon-tile) */
+/* Bucket cards (reuse .stats-row / .stat-card / .stat-icon) */
 .bucket-pct {
   font-size: 13px;
   font-weight: 500;
