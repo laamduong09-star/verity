@@ -78,6 +78,23 @@ function currentPercentages() {
   };
 }
 
+// The % fields stay in the layout at all times (never [hidden]) so picking
+// Custom never changes the inputs card's height. Outside the Custom preset
+// they're locked read-only and show the active preset's own ratio — a
+// readout, not an editable field. Useful side effect: switching Home ->
+// Custom starts you at 20/30/50 instead of snapping back to 50/30/20.
+function syncSplitFields() {
+  const locked = activePreset !== 'custom';
+  customSplitEl.classList.toggle('is-locked', locked);
+  BUCKET_KEYS.forEach((key) => {
+    pctInputs[key].readOnly = locked;
+    if (locked) {
+      pctInputs[key].value = PRESETS[activePreset][key];
+      pctClampNotes[key].classList.remove('is-active');
+    }
+  });
+}
+
 // Chart text isn't markup, so it can't use the .en/.vi sibling-span pattern —
 // these strings are picked live off body's lang-vi-primary class instead
 // (same approach as js/calculator.js).
@@ -221,7 +238,7 @@ presetChips.forEach((chip) => {
       c.classList.toggle('active', c === chip);
       c.setAttribute('aria-pressed', String(c === chip));
     });
-    customSplitEl.hidden = activePreset !== 'custom';
+    syncSplitFields();
     update();
   });
 });
@@ -230,4 +247,5 @@ presetChips.forEach((chip) => {
 // its JS-generated strings (and, after Task 4, the chart) when it flips.
 document.addEventListener('verity:langchange', update);
 
+syncSplitFields();
 update();

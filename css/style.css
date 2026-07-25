@@ -3106,36 +3106,61 @@ a.logo {
   outline-offset: 2px;
 }
 
-/* Custom percentage fields, revealed only while the Custom preset is active.
-   The explicit [hidden] rule is required: display:grid on the class would
-   otherwise beat the UA's [hidden]{display:none}. */
+/* Custom percentage fields. These stay permanently in the layout (never
+   [hidden]) so switching presets never changes the inputs card's height —
+   js/budget.js toggles .is-locked on this element outside the Custom preset,
+   turning the fields into a read-only readout of the active preset's ratio. */
 .custom-split {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 
-.custom-split[hidden] { display: none; }
 .custom-split .field { margin-bottom: 0; }
+
+/* Locked state (any preset but Custom): read as a plain readout, not an
+   input — no paper fill, no hover feedback, no interactive cursor. */
+.custom-split.is-locked .input-wrap {
+  background: transparent;
+  cursor: default;
+}
+
+.custom-split.is-locked .input-wrap:hover {
+  border-color: var(--border);
+}
+
+.custom-split.is-locked .input-wrap input,
+.custom-split.is-locked .suffix {
+  color: var(--slate);
+  cursor: default;
+}
 
 /* Doughnut center total + static legend (Chart.js's own legend can't hold
    the .en/.vi span pair, so the legend is plain markup). */
 /* Pin the doughnut to a fixed size: the graph card sits in a grid that
-   stretches it to match the inputs card, which grows when the Custom
-   split fields appear — without this, the responsive wheel resizes with
-   the card. .donut-wrap is budget-only (the calculator's chart-wrap has
-   no donut-wrap class), so this overrides .chart-wrap's flex:1 here only. */
+   stretches it to match the inputs card — without this, the responsive
+   wheel resizes with the card. .donut-wrap is budget-only (the calculator's
+   chart-wrap has no donut-wrap class), so this overrides .chart-wrap's
+   flex:1 here only. The inputs card is now a constant 553px in every
+   preset, and the graph card's non-wheel chrome (header + legend + margins)
+   measures 135px, so 418 + 135 = 553 makes the two cards equal again. */
 .donut-wrap {
   position: relative;
   flex: 0 0 auto;
-  height: 345px;
+  height: 418px;
 }
 
-/* Don't stretch the graph card to match the inputs card. When Custom is
-   selected the inputs card grows; stretching would leave dead space below
-   the doughnut legend. Natural height instead — 345px wheel makes it equal
-   to the inputs card in the default state, and it simply stays put (no
-   extra space) when Custom grows the inputs card. :has() keeps it budget-only. */
+@media (max-width: 800px) {
+  /* Cards stack here, so height-matching no longer applies — 418px would
+     just letterbox the wheel on a phone-width card. */
+  .donut-wrap { height: 345px; }
+}
+
+/* Don't stretch the graph card to match the inputs card. The two now match
+   by construction (see the .donut-wrap height comment above), so this is
+   insurance: align-self:start guarantees the graph card is never stretched
+   taller than its own content, regardless of any future change to either
+   card's height. :has() keeps it budget-only. */
 .graph-card:has(.donut-wrap) {
   align-self: start;
 }
