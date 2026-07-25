@@ -1445,27 +1445,63 @@ a.logo {
 }
 
 .site-footer-inner {
+  /* Match the page content column so the footer's first column lines up
+     with the content above it rather than floating wider. */
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1.4fr;
+  gap: 48px;
+  align-items: start;
 }
 
-.footer-motto {
+@media (max-width: 800px) {
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+
+/* The mark ships with a hardcoded dark fill for the light topbar; a CSS
+   fill beats the presentation attribute, so the footer copy goes white. */
+.footer-logo .logo-mark path {
+  fill: var(--white);
+}
+
+.footer-tagline {
+  margin: 14px 0 0;
+  max-width: 34ch;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer-col-title {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
   color: var(--white);
 }
 
 .footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 22px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .footer-links a {
@@ -1480,7 +1516,7 @@ a.logo {
 }
 
 .footer-note {
-  max-width: 540px;
+  margin: 0;
   font-size: 12.5px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.45);
