@@ -786,17 +786,6 @@ body {
 .stat-icon.icon-blue { background: var(--blue); }
 .stat-icon.icon-blue::before { background: var(--blue-focus); }
 
-/* Recommend's ladder step numbers: module pastel with an ink numeral —
-   taxonomy wayfinding, not a data accent. Flat fill, no edge highlight. */
-.stat-icon.step-num {
-  background: var(--module-pastel, var(--paper));
-  color: var(--ink);
-}
-
-.stat-icon.step-num::before {
-  display: none;
-}
-
 .stat-icon.icon-teal { background: var(--teal); }
 .stat-icon.icon-teal::before { background: var(--teal-bright); }
 
@@ -1588,36 +1577,61 @@ a.logo {
   margin: 0 auto;
 }
 
-.ladder-card {
+/* .ladder is shared with credit.html and family-split.html's plain card
+   lists (they never adopted the rung layout), so the wider rung gap is
+   scoped to this page via body.module-rec rather than overriding .ladder
+   globally. */
+body.module-rec .ladder { gap: 104px; }
+
+.rung {
   display: grid;
-  grid-template-columns: 52px 1fr;
-  gap: 22px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: center;
 }
+.rung:nth-child(even) .rung-body { order: 2; }
+.rung:nth-child(even) .rung-figure { order: 1; }
 
-@media (max-width: 560px) {
-  .ladder-card { grid-template-columns: 1fr; }
-}
-
-.step-num {
+.rung-num {
+  display: block;
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 56px;
   font-weight: 700;
+  line-height: 1;
+  color: var(--module-pastel);
+  margin-bottom: 8px;
 }
+.rung-title { font-family: var(--font-display); font-size: 30px; font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 10px; text-wrap: balance; }
+.rung-payoff { color: var(--teal); font-weight: 500; margin: 0 0 14px; }
+.rung-prose { color: var(--slate); margin: 0 0 18px; max-width: 62ch; }
 
-.ladder-title {
-  margin: 0 0 2px;
-  font-family: var(--font-display);
-  font-size: 19px;
-  font-weight: 500;
-}
+.rung-figure { border: 1px solid var(--border); border-radius: 12px; padding: 28px; background: var(--card); }
 
-/* The one-line "what this earns you" summary under each rung title —
-   teal because it names the positive outcome. */
-.ladder-payoff {
-  margin: 0 0 12px;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--teal);
+.fig-bar-row { display: grid; grid-template-columns: 1fr; gap: 6px; margin-bottom: 18px; }
+.fig-label { font-size: 14px; color: var(--slate); }
+.fig-track { display: block; width: 100%; height: 14px; border-radius: 9999px; background: var(--paper); overflow: hidden; }
+.fig-fill { display: block; height: 100%; border-radius: 9999px; }
+.fig-value { font-family: var(--font-display); font-size: 20px; font-weight: 700; }
+.fig-caption { font-size: 13px; color: var(--slate); margin: 14px 0 0; }
+
+.fig-stack { display: flex; width: 100%; height: 20px; border-radius: 9999px; overflow: hidden; }
+.fig-stack-seg { height: 100%; }
+.fig-stack-labels { display: flex; justify-content: space-between; gap: 16px; margin-top: 10px; font-size: 13px; color: var(--slate); }
+
+.fig-dots { display: grid; grid-template-columns: repeat(25, 1fr); gap: 3px; }
+.fig-dot { width: 6px; height: 6px; border-radius: 9999px; background: var(--teal); }
+
+.fig-source { display: inline-block; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 8px; background: var(--module-pastel); }
+.fig-flow-list { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+.fig-flow-item { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; }
+
+@media (max-width: 860px) {
+  body.module-rec .ladder { gap: 64px; }
+  .rung { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .rung:nth-child(even) .rung-body,
+  .rung:nth-child(even) .rung-figure { order: 0; }
+  .rung-num { font-size: 44px; }
+  .rung-title { font-size: 25px; }
 }
 
 /* ---------- Recommend: caution cards ---------- */
@@ -3080,20 +3094,11 @@ a.logo {
 .tile-rose { background: var(--rose-soft); color: var(--rose); }
 
 /* Title rows that pair an icon tile with an existing heading. */
-.ladder-title-row,
 .card-title-row,
 .plan-head {
   display: flex;
   align-items: center;
   gap: 12px;
-}
-
-.ladder-title-row {
-  margin-bottom: 2px;
-}
-
-.ladder-title-row .ladder-title {
-  margin: 0;
 }
 
 .card-title-row {

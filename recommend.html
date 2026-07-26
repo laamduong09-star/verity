@@ -64,35 +64,20 @@
   <section class="section">
     <div class="ladder">
 
-      <div class="card ladder-card">
-        <span class="stat-icon icon-blue step-num" aria-hidden="true">1</span>
-        <div>
-          <div class="ladder-title-row">
-            <span class="icon-tile tile-blue" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 13a9 9 0 0 1 18 0Z"/>
-                <path d="M12 13v5a2 2 0 0 0 4 0"/>
-                <path d="M12 4V2.5"/>
-              </svg>
-            </span>
-            <h2 class="ladder-title">
-              <span class="en">Emergency fund in a high-yield savings account</span>
-              <span class="vi">Quỹ khẩn cấp trong tài khoản tiết kiệm lãi suất cao</span>
-            </h2>
-          </div>
-          <p class="ladder-payoff">
+      <div class="rung">
+        <div class="rung-body">
+          <span class="rung-num" aria-hidden="true">1</span>
+          <h2 class="rung-title">
+            <span class="en">Emergency fund in a high-yield savings account</span>
+            <span class="vi">Quỹ khẩn cấp trong tài khoản tiết kiệm lãi suất cao</span>
+          </h2>
+          <p class="rung-payoff">
             <span class="en">Pays: never needing debt when life goes wrong</span>
             <span class="vi">Lợi ích: không bao giờ phải vay nợ khi có chuyện bất ngờ</span>
           </p>
-          <div class="prose">
-            <p>
-              <span class="en">Save one month of expenses — then build toward three — in a high-yield savings account (HYSA): FDIC-insured, paying ~4% instead of ~0%. This money's job isn't growth; it's keeping a car repair or a lost shift from becoming credit card debt at 25%.</span>
-              <span class="vi">Tiết kiệm một tháng chi tiêu — rồi hướng tới ba — trong tài khoản tiết kiệm lãi suất cao (HYSA): có bảo hiểm FDIC, trả ~4% thay vì ~0%. Nhiệm vụ của khoản này không phải sinh lời; mà là giữ cho một lần sửa xe hay mất ca làm không biến thành nợ thẻ tín dụng lãi 25%.</span>
-            </p>
-          </div>
-          <p class="mini-label">
-            <span class="en">How to start</span>
-            <span class="vi">Bắt đầu như thế nào</span>
+          <p class="rung-prose">
+            <span class="en">Save one month of expenses — then build toward three — in a high-yield savings account (HYSA): FDIC-insured, paying ~4% instead of ~0%. This money's job isn't growth; it's keeping a car repair or a lost shift from becoming credit card debt at 25%.</span>
+            <span class="vi">Tiết kiệm một tháng chi tiêu — rồi hướng tới ba — trong tài khoản tiết kiệm lãi suất cao (HYSA): có bảo hiểm FDIC, trả ~4% thay vì ~0%. Nhiệm vụ của khoản này không phải sinh lời; mà là giữ cho một lần sửa xe hay mất ca làm không biến thành nợ thẻ tín dụng lãi 25%.</span>
           </p>
           <ol class="step-list">
             <li>
@@ -109,37 +94,44 @@
             </li>
           </ol>
         </div>
+        <div class="rung-figure">
+          <div class="fig-bar-row">
+            <span class="fig-label">
+              <span class="en">Checking</span>
+              <span class="vi">Tài khoản vãng lai</span>
+            </span>
+            <span class="fig-track"><span class="fig-fill" style="width:96%; background:var(--stone)"></span></span>
+            <span class="fig-value">$1,200</span>
+          </div>
+          <div class="fig-bar-row">
+            <span class="fig-label">
+              <span class="en">HYSA at 4%</span>
+              <span class="vi">HYSA lãi 4%</span>
+            </span>
+            <span class="fig-track"><span class="fig-fill" style="width:100%; background:var(--teal)"></span></span>
+            <span class="fig-value">$1,248</span>
+          </div>
+          <p class="fig-caption">
+            <span class="en">Same money, one year later.</span>
+            <span class="vi">Cùng số tiền, sau một năm.</span>
+          </p>
+        </div>
       </div>
 
-      <div class="card ladder-card">
-        <span class="stat-icon icon-blue step-num" aria-hidden="true">2</span>
-        <div>
-          <div class="ladder-title-row">
-            <span class="icon-tile tile-blue" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="10" width="16" height="10" rx="2"/>
-                <path d="M12 10v10"/>
-                <path d="M12 10C9.5 10 6.5 9 8 6.5S12 7 12 10c0-3 2.5-6 4-3.5S14.5 10 12 10Z"/>
-              </svg>
-            </span>
-            <h2 class="ladder-title">
-              <span class="en">Your employer's 401(k) match</span>
-              <span class="vi">Khoản đối ứng 401(k) của công ty</span>
-            </h2>
-          </div>
-          <p class="ladder-payoff">
+      <div class="rung">
+        <div class="rung-body">
+          <span class="rung-num" aria-hidden="true">2</span>
+          <h2 class="rung-title">
+            <span class="en">Your employer's 401(k) match</span>
+            <span class="vi">Khoản đối ứng 401(k) của công ty</span>
+          </h2>
+          <p class="rung-payoff">
             <span class="en">Pays: an instant 50–100% return — the only free money in finance</span>
             <span class="vi">Lợi ích: lợi nhuận tức thì 50–100% — khoản tiền miễn phí duy nhất trong tài chính</span>
           </p>
-          <div class="prose">
-            <p>
-              <span class="en">Many employers match what you put into a 401(k) retirement account — commonly 50 cents to a dollar for every dollar you contribute, up to a few percent of your pay. Skipping the match is turning down part of your salary.</span>
-              <span class="vi">Nhiều công ty sẽ "đối ứng" số tiền bạn bỏ vào tài khoản hưu trí 401(k) — thường từ 50 xu đến 1 đô cho mỗi đô bạn đóng, tối đa vài phần trăm lương. Bỏ qua khoản đối ứng là từ chối một phần lương của chính mình.</span>
-            </p>
-          </div>
-          <p class="mini-label">
-            <span class="en">How to start</span>
-            <span class="vi">Bắt đầu như thế nào</span>
+          <p class="rung-prose">
+            <span class="en">Many employers match what you put into a 401(k) retirement account — commonly 50 cents to a dollar for every dollar you contribute, up to a few percent of your pay. Skipping the match is turning down part of your salary.</span>
+            <span class="vi">Nhiều công ty sẽ "đối ứng" số tiền bạn bỏ vào tài khoản hưu trí 401(k) — thường từ 50 xu đến 1 đô cho mỗi đô bạn đóng, tối đa vài phần trăm lương. Bỏ qua khoản đối ứng là từ chối một phần lương của chính mình.</span>
           </p>
           <ol class="step-list">
             <li>
@@ -156,37 +148,44 @@
             </li>
           </ol>
         </div>
+        <div class="rung-figure">
+          <div class="fig-bar-row">
+            <span class="fig-label">
+              <span class="en">You contribute</span>
+              <span class="vi">Bạn đóng góp</span>
+            </span>
+            <span class="fig-track"><span class="fig-fill" style="width:66%; background:var(--ink)"></span></span>
+            <span class="fig-value">$100</span>
+          </div>
+          <div class="fig-bar-row">
+            <span class="fig-label">
+              <span class="en">Lands in your account</span>
+              <span class="vi">Vào tài khoản của bạn</span>
+            </span>
+            <span class="fig-track"><span class="fig-fill" style="width:100%; background:var(--teal)"></span></span>
+            <span class="fig-value">$150</span>
+          </div>
+          <p class="fig-caption">
+            <span class="en">A 50% match, before the market does anything.</span>
+            <span class="vi">Match 50%, trước khi thị trường làm gì cả.</span>
+          </p>
+        </div>
       </div>
 
-      <div class="card ladder-card">
-        <span class="stat-icon icon-blue step-num" aria-hidden="true">3</span>
-        <div>
-          <div class="ladder-title-row">
-            <span class="icon-tile tile-blue" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 21v-8"/>
-                <path d="M12 13C12 8.5 8.5 6 4.5 6 4.5 10.5 8 13 12 13Z"/>
-                <path d="M12 13c0-4.5 3.5-7 7.5-7 0 4.5-3.5 7-7.5 7Z"/>
-              </svg>
-            </span>
-            <h2 class="ladder-title">
-              <span class="en">Open a Roth IRA</span>
-              <span class="vi">Mở tài khoản Roth IRA</span>
-            </h2>
-          </div>
-          <p class="ladder-payoff">
+      <div class="rung">
+        <div class="rung-body">
+          <span class="rung-num" aria-hidden="true">3</span>
+          <h2 class="rung-title">
+            <span class="en">Open a Roth IRA</span>
+            <span class="vi">Mở tài khoản Roth IRA</span>
+          </h2>
+          <p class="rung-payoff">
             <span class="en">Pays: decades of growth you will never owe taxes on</span>
             <span class="vi">Lợi ích: hàng chục năm tăng trưởng mà bạn không bao giờ phải đóng thuế</span>
           </p>
-          <div class="prose">
-            <p>
-              <span class="en">Fund it with already-taxed money now; everything it grows into comes out tax-free after 59½. Your tax rate may never be this low again — that's the whole bet, and it favors the young. You can take back contributions (not growth) anytime, the limit is $7,000/year as of 2025, and under 18 a parent can open a custodial Roth with you.</span>
-              <span class="vi">Nạp bằng tiền đã đóng thuế bây giờ; toàn bộ phần tăng trưởng được rút miễn thuế sau tuổi 59½. Thuế suất của bạn có lẽ không bao giờ thấp như lúc này nữa — đó là toàn bộ ván cược, và nó nghiêng về người trẻ. Tiền gốc (không phải phần lãi) rút lại được bất cứ lúc nào, hạn mức $7,000/năm tính đến 2025, và dưới 18 tuổi cha mẹ có thể cùng bạn mở Roth giám hộ.</span>
-            </p>
-          </div>
-          <p class="mini-label">
-            <span class="en">How to start</span>
-            <span class="vi">Bắt đầu như thế nào</span>
+          <p class="rung-prose">
+            <span class="en">Fund it with already-taxed money now; everything it grows into comes out tax-free after 59½. Your tax rate may never be this low again — that's the whole bet, and it favors the young. You can take back contributions (not growth) anytime, the limit is $7,000/year as of 2025, and under 18 a parent can open a custodial Roth with you.</span>
+            <span class="vi">Nạp bằng tiền đã đóng thuế bây giờ; toàn bộ phần tăng trưởng được rút miễn thuế sau tuổi 59½. Thuế suất của bạn có lẽ không bao giờ thấp như lúc này nữa — đó là toàn bộ ván cược, và nó nghiêng về người trẻ. Tiền gốc (không phải phần lãi) rút lại được bất cứ lúc nào, hạn mức $7,000/năm tính đến 2025, và dưới 18 tuổi cha mẹ có thể cùng bạn mở Roth giám hộ.</span>
           </p>
           <ol class="step-list">
             <li>
@@ -203,37 +202,42 @@
             </li>
           </ol>
         </div>
+        <div class="rung-figure">
+          <div class="fig-stack">
+            <span class="fig-stack-seg" style="width:18%; background:var(--stone)"></span>
+            <span class="fig-stack-seg" style="width:82%; background:var(--teal)"></span>
+          </div>
+          <div class="fig-stack-labels">
+            <span>
+              <span class="en">$50,400 put in</span>
+              <span class="vi">$50,400 bạn bỏ vào</span>
+            </span>
+            <span>
+              <span class="en">$235,600 growth, never taxed</span>
+              <span class="vi">$235,600 tăng trưởng, không bao giờ bị đánh thuế</span>
+            </span>
+          </div>
+          <p class="fig-caption">
+            <span class="en">$100/month from 18 to 60, at 7%.</span>
+            <span class="vi">$100/tháng từ 18 đến 60 tuổi, lãi 7%.</span>
+          </p>
+        </div>
       </div>
 
-      <div class="card ladder-card">
-        <span class="stat-icon icon-blue step-num" aria-hidden="true">4</span>
-        <div>
-          <div class="ladder-title-row">
-            <span class="icon-tile tile-blue" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m12 3 9 5-9 5-9-5 9-5Z"/>
-                <path d="m3 13 9 5 9-5"/>
-                <path d="m3 17 9 5 9-5"/>
-              </svg>
-            </span>
-            <h2 class="ladder-title">
-              <span class="en">Buy low-cost index funds (like the S&amp;P 500)</span>
-              <span class="vi">Mua quỹ chỉ số chi phí thấp (như S&amp;P 500)</span>
-            </h2>
-          </div>
-          <p class="ladder-payoff">
+      <div class="rung">
+        <div class="rung-body">
+          <span class="rung-num" aria-hidden="true">4</span>
+          <h2 class="rung-title">
+            <span class="en">Buy low-cost index funds (like the S&amp;P 500)</span>
+            <span class="vi">Mua quỹ chỉ số chi phí thấp (như S&amp;P 500)</span>
+          </h2>
+          <p class="rung-payoff">
             <span class="en">Pays: the market's long-run growth without picking winners</span>
             <span class="vi">Lợi ích: mức tăng trưởng dài hạn của thị trường mà không cần chọn đúng công ty</span>
           </p>
-          <div class="prose">
-            <p>
-              <span class="en">One purchase buys a slice of hundreds of companies — an S&amp;P 500 fund holds the 500 largest in the US. You're betting on the whole economy, which has averaged ~10% a year over long stretches (scary years included). Two rules: fees near zero (expense ratio under 0.1%), and hands off for years.</span>
-              <span class="vi">Một lần mua sở hữu một phần của hàng trăm công ty — quỹ S&amp;P 500 nắm 500 công ty lớn nhất nước Mỹ. Bạn đặt cược vào cả nền kinh tế, vốn đạt trung bình ~10%/năm trong dài hạn (kể cả những năm đáng sợ). Hai nguyên tắc: phí gần bằng không (expense ratio dưới 0.1%), và không đụng vào trong nhiều năm.</span>
-            </p>
-          </div>
-          <p class="mini-label">
-            <span class="en">How to start</span>
-            <span class="vi">Bắt đầu như thế nào</span>
+          <p class="rung-prose">
+            <span class="en">One purchase buys a slice of hundreds of companies — an S&amp;P 500 fund holds the 500 largest in the US. You're betting on the whole economy, which has averaged ~10% a year over long stretches (scary years included). Two rules: fees near zero (expense ratio under 0.1%), and hands off for years.</span>
+            <span class="vi">Một lần mua sở hữu một phần của hàng trăm công ty — quỹ S&amp;P 500 nắm 500 công ty lớn nhất nước Mỹ. Bạn đặt cược vào cả nền kinh tế, vốn đạt trung bình ~10%/năm trong dài hạn (kể cả những năm đáng sợ). Hai nguyên tắc: phí gần bằng không (expense ratio dưới 0.1%), và không đụng vào trong nhiều năm.</span>
           </p>
           <ol class="step-list">
             <li>
@@ -250,62 +254,106 @@
             </li>
           </ol>
         </div>
-      </div>
-
-      <div class="card ladder-card">
-        <span class="stat-icon icon-blue step-num" aria-hidden="true">5</span>
-        <div>
-          <div class="ladder-title-row">
-            <span class="icon-tile tile-blue" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m12 4 10 5-10 5L2 9l10-5Z"/>
-                <path d="M6 11.5V16c0 2 12 2 12 0v-4.5"/>
-                <path d="M22 9v5"/>
-              </svg>
-            </span>
-            <h2 class="ladder-title">
-              <span class="en">Invest in skills that raise your income</span>
-              <span class="vi">Đầu tư vào kỹ năng giúp tăng thu nhập</span>
-            </h2>
-          </div>
-          <p class="ladder-payoff">
-            <span class="en">Pays: the highest return available to anyone under 25</span>
-            <span class="vi">Lợi ích: mức lợi nhuận cao nhất dành cho bất kỳ ai dưới 25 tuổi</span>
+        <div class="rung-figure">
+          <div class="fig-dots" aria-hidden="true"><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span><span class="fig-dot"></span></div>
+          <p class="fig-caption">
+            <span class="en">One purchase. All 500 companies.</span>
+            <span class="vi">Một lần mua. Tất cả 500 công ty.</span>
           </p>
-          <div class="prose">
-            <p>
-              <span class="en">Compounding needs fuel, and income is the fuel. A certification, a trade license, or a portfolio of real work can raise earnings by thousands a year — no fund matches that return on a few hundred dollars. Being bilingual already is one of these skills; plenty of roles pay a real premium for it.</span>
-              <span class="vi">Lãi kép cần nhiên liệu, và thu nhập chính là nhiên liệu. Một chứng chỉ, giấy phép nghề, hay hồ sơ công việc thực tế có thể tăng thu nhập hàng nghìn đô mỗi năm — không quỹ nào sánh được mức lợi nhuận đó với vài trăm đô. Song ngữ vốn đã là một kỹ năng như vậy; nhiều vị trí trả thêm thực sự cho nó.</span>
-            </p>
-          </div>
         </div>
       </div>
 
-      <div class="card ladder-card">
-        <span class="stat-icon icon-blue step-num" aria-hidden="true">6</span>
-        <div>
-          <div class="ladder-title-row">
-            <span class="icon-tile tile-blue" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 12a8 8 0 1 1-2.34-5.66"/>
-                <path d="M20 3v4h-4"/>
-              </svg>
+      <div class="rung">
+        <div class="rung-body">
+          <span class="rung-num" aria-hidden="true">5</span>
+          <h2 class="rung-title">
+            <span class="en">Invest in skills that raise your income</span>
+            <span class="vi">Đầu tư vào kỹ năng giúp tăng thu nhập</span>
+          </h2>
+          <p class="rung-payoff">
+            <span class="en">Pays: the highest return available to anyone under 25</span>
+            <span class="vi">Lợi ích: mức lợi nhuận cao nhất dành cho bất kỳ ai dưới 25 tuổi</span>
+          </p>
+          <p class="rung-prose">
+            <span class="en">Compounding needs fuel, and income is the fuel. A certification, a trade license, or a portfolio of real work can raise earnings by thousands a year — no fund matches that return on a few hundred dollars. Being bilingual already is one of these skills; plenty of roles pay a real premium for it.</span>
+            <span class="vi">Lãi kép cần nhiên liệu, và thu nhập chính là nhiên liệu. Một chứng chỉ, giấy phép nghề, hay hồ sơ công việc thực tế có thể tăng thu nhập hàng nghìn đô mỗi năm — không quỹ nào sánh được mức lợi nhuận đó với vài trăm đô. Song ngữ vốn đã là một kỹ năng như vậy; nhiều vị trí trả thêm thực sự cho nó.</span>
+          </p>
+        </div>
+        <div class="rung-figure">
+          <div class="fig-bar-row">
+            <span class="fig-label">
+              <span class="en">$18/hour</span>
+              <span class="vi">$18/giờ</span>
             </span>
-            <h2 class="ladder-title">
-              <span class="en">Automate it and stop thinking about it</span>
-              <span class="vi">Tự động hóa rồi thôi nghĩ về nó</span>
-            </h2>
+            <span class="fig-track"><span class="fig-fill" style="width:72%; background:var(--stone)"></span></span>
+            <span class="fig-value">$7,488</span>
           </div>
-          <p class="ladder-payoff">
+          <div class="fig-bar-row">
+            <span class="fig-label">
+              <span class="en">$25/hour</span>
+              <span class="vi">$25/giờ</span>
+            </span>
+            <span class="fig-track"><span class="fig-fill" style="width:100%; background:var(--teal)"></span></span>
+            <span class="fig-value">$10,400</span>
+          </div>
+          <p class="fig-caption">
+            <span class="en">Same 20% saved. Different income.</span>
+            <span class="vi">Cùng tiết kiệm 20%. Thu nhập khác nhau.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="rung-body">
+          <span class="rung-num" aria-hidden="true">6</span>
+          <h2 class="rung-title">
+            <span class="en">Automate it and stop thinking about it</span>
+            <span class="vi">Tự động hóa rồi thôi nghĩ về nó</span>
+          </h2>
+          <p class="rung-payoff">
             <span class="en">Pays: consistency — the thing that actually decides the outcome</span>
             <span class="vi">Lợi ích: sự đều đặn — yếu tố thực sự quyết định kết quả</span>
           </p>
-          <div class="prose">
-            <p>
-              <span class="en">The plan that works is the one that runs without willpower. Automatic transfers on payday to your HYSA and Roth IRA mean the saving already happened before you could spend it. Check in twice a year, not twice a day.</span>
-              <span class="vi">Kế hoạch hiệu quả là kế hoạch chạy được mà không cần ý chí. Chuyển khoản tự động vào ngày lãnh lương sang HYSA và Roth IRA nghĩa là việc tiết kiệm đã xong trước khi bạn kịp tiêu. Kiểm tra hai lần một năm, không phải hai lần một ngày.</span>
-            </p>
+          <p class="rung-prose">
+            <span class="en">The plan that works is the one that runs without willpower. Automatic transfers on payday to your HYSA and Roth IRA mean the saving already happened before you could spend it. Check in twice a year, not twice a day.</span>
+            <span class="vi">Kế hoạch hiệu quả là kế hoạch chạy được mà không cần ý chí. Chuyển khoản tự động vào ngày lãnh lương sang HYSA và Roth IRA nghĩa là việc tiết kiệm đã xong trước khi bạn kịp tiêu. Kiểm tra hai lần một năm, không phải hai lần một ngày.</span>
+          </p>
+        </div>
+        <div class="rung-figure">
+          <span class="fig-source">
+            <span class="en">Payday</span>
+            <span class="vi">Ngày lãnh lương</span>
+          </span>
+          <div class="fig-flow-list">
+            <div class="fig-flow-item">
+              <span class="fig-flow-label">
+                <span class="en">Auto → HYSA</span>
+                <span class="vi">Tự động → HYSA</span>
+              </span>
+              <span class="fig-value">$100</span>
+            </div>
+            <div class="fig-flow-item">
+              <span class="fig-flow-label">
+                <span class="en">Auto → Roth IRA</span>
+                <span class="vi">Tự động → Roth IRA</span>
+              </span>
+              <span class="fig-value">$100</span>
+            </div>
+            <div class="fig-flow-item">
+              <span class="fig-flow-label">
+                <span class="en">Left to spend</span>
+                <span class="vi">Còn lại để tiêu</span>
+              </span>
+              <span class="fig-value">
+                <span class="en">the rest</span>
+                <span class="vi">phần còn lại</span>
+              </span>
+            </div>
           </div>
+          <p class="fig-caption">
+            <span class="en">Set once. It runs without you.</span>
+            <span class="vi">Cài một lần. Nó tự chạy.</span>
+          </p>
         </div>
       </div>
 
