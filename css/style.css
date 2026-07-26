@@ -1587,7 +1587,7 @@ body.module-rec .ladder { gap: 104px; }
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 64px;
-  align-items: center;
+  align-items: stretch;
 }
 .rung:nth-child(even) .rung-body { order: 2; }
 .rung:nth-child(even) .rung-figure { order: 1; }
@@ -1598,23 +1598,23 @@ body.module-rec .ladder { gap: 104px; }
   font-size: 56px;
   font-weight: 700;
   line-height: 1;
-  color: var(--module-pastel);
+  color: var(--stone);
   margin-bottom: 8px;
 }
 .rung-title { font-family: var(--font-display); font-size: 30px; font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 10px; text-wrap: balance; }
 .rung-payoff { color: var(--teal); font-weight: 500; margin: 0 0 14px; }
 .rung-prose { color: var(--slate); margin: 0 0 18px; max-width: 62ch; }
 
-.rung-figure { border: 1px solid var(--border); border-radius: 12px; padding: 28px; background: var(--card); }
+.rung-figure { border: 1px solid var(--border); border-radius: 12px; padding: 28px; background: var(--card); display: flex; flex-direction: column; justify-content: center; }
 
-.fig-bar-row { display: grid; grid-template-columns: 1fr; gap: 6px; margin-bottom: 18px; }
+.fig-bar-row { display: grid; grid-template-columns: 1fr; gap: 6px; margin-bottom: 24px; }
 .fig-label { font-size: 14px; color: var(--slate); }
-.fig-track { display: block; width: 100%; height: 14px; border-radius: 9999px; background: var(--paper); overflow: hidden; }
+.fig-track { display: block; width: 100%; height: 18px; border-radius: 9999px; background: var(--paper); overflow: hidden; }
 .fig-fill { display: block; height: 100%; border-radius: 9999px; }
-.fig-value { font-family: var(--font-display); font-size: 20px; font-weight: 700; }
+.fig-value { font-family: var(--font-display); font-size: 26px; font-weight: 700; }
 .fig-caption { font-size: 13px; color: var(--slate); margin: 14px 0 0; }
 
-.fig-stack { display: flex; width: 100%; height: 20px; border-radius: 9999px; overflow: hidden; }
+.fig-stack { display: flex; width: 100%; height: 28px; border-radius: 9999px; overflow: hidden; }
 .fig-stack-seg { height: 100%; }
 .fig-stack-labels { display: flex; justify-content: space-between; gap: 16px; margin-top: 10px; font-size: 13px; color: var(--slate); }
 
