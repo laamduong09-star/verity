@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Working files, not part of the site.
+Disallow: /docs/
+Disallow: /tests/
+Disallow: /.impeccable/
+
+Sitemap: https://verityfinance.vercel.app/sitemap.xml
