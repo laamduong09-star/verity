@@ -9,9 +9,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/recommend.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body class="module-rec">
+<div class="bg-wash" aria-hidden="true"></div>
 
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
@@ -27,12 +29,12 @@
       <span class="logo-text">verity</span>
     </a>
     <nav class="nav-capsule">
-      <a href="actual%20website.html" class="nav-link">Calculator</a>
+      <a href="calculator.html" class="nav-link">Calculator</a>
       <a href="budget.html" class="nav-link">Budget</a>
       <a href="recommend.html" class="nav-link active">Recommend</a>
       <a href="jargon.html" class="nav-link">Jargon</a>
       <a href="credit.html" class="nav-link">Credit</a>
-      <a href="family-split.html" class="nav-link">Family Split</a>
+      <a href="tuition.html" class="nav-link">Tuition</a>
     </nav>
     <button class="lang-toggle" id="langToggle">
       <span class="lang-option active" data-lang="en">EN</span>
@@ -47,12 +49,12 @@
 
   <section class="page-hero">
     <h1 class="hero-title">
-      <span class="en">Where to put your first dollars</span>
-      <span class="vi">Nên đặt những đồng tiền đầu tiên ở đâu</span>
+      <span class="en">The order most money guides agree on</span>
+      <span class="vi">Thứ tự mà hầu hết các sách hướng dẫn tài chính đều đồng ý</span>
     </h1>
     <p class="page-hero-sub">
-      <span class="en">This is a ladder, not a menu — each step assumes the one before it is handled. Climb in order and every dollar has a job before you ever take a risk with it.</span>
-      <span class="vi">Đây là một chiếc thang, không phải thực đơn — mỗi bậc mặc định bậc trước đã được lo xong. Leo theo thứ tự thì mỗi đồng tiền đều có nhiệm vụ trước khi bạn phải mạo hiểm với nó.</span>
+      <span class="en">It is a ladder rather than a menu: each step assumes the one before it is handled. That ordering is what the common frameworks share, and it exists so money is doing something known before any of it is exposed to risk.</span>
+      <span class="vi">Đây là một cái thang chứ không phải thực đơn: mỗi bậc giả định bậc trước đã xong. Thứ tự đó là điểm chung của các khung hướng dẫn phổ biến, và nó tồn tại để tiền làm một việc đã biết trước khi bất kỳ phần nào chịu rủi ro.</span>
     </p>
   </section>
 
@@ -64,7 +66,7 @@
   <section class="section">
     <div class="ladder">
 
-      <div class="rung">
+      <div class="rung" id="step-1">
         <div class="rung-body">
           <span class="rung-num" aria-hidden="true">1</span>
           <h2 class="rung-title">
@@ -76,21 +78,21 @@
             <span class="vi">Lợi ích: không bao giờ phải vay nợ khi có chuyện bất ngờ</span>
           </p>
           <p class="rung-prose">
-            <span class="en">Save one month of expenses — then build toward three — in a high-yield savings account (HYSA): FDIC-insured, paying ~4% instead of ~0%. This money's job isn't growth; it's keeping a car repair or a lost shift from becoming credit card debt at 25%.</span>
-            <span class="vi">Tiết kiệm một tháng chi tiêu — rồi hướng tới ba — trong tài khoản tiết kiệm lãi suất cao (HYSA): có bảo hiểm FDIC, trả ~4% thay vì ~0%. Nhiệm vụ của khoản này không phải sinh lời; mà là giữ cho một lần sửa xe hay mất ca làm không biến thành nợ thẻ tín dụng lãi 25%.</span>
+            <span class="en">Save one month of expenses — then build toward three — in a high-yield savings account (HYSA): FDIC-insured, paying ~4% instead of ~0%. Living at home, a month of expenses is usually a phone bill, transport and food out rather than rent, so the number is far smaller than most guides assume. This money's job isn't growth; it's keeping a car repair or a lost shift from becoming credit card debt at 25%.</span>
+            <span class="vi">Tiết kiệm một tháng chi tiêu — rồi hướng tới ba — trong tài khoản tiết kiệm lãi suất cao (HYSA): có bảo hiểm FDIC, trả ~4% thay vì ~0%. Khi còn sống cùng gia đình, một tháng chi tiêu thường là tiền điện thoại, đi lại và ăn ngoài chứ không phải tiền thuê nhà, nên con số nhỏ hơn nhiều so với giả định của phần lớn sách hướng dẫn. Nhiệm vụ của khoản này không phải sinh lời; mà là giữ cho một lần sửa xe hay mất ca làm không biến thành nợ thẻ tín dụng lãi 25%.</span>
           </p>
           <ol class="step-list">
             <li>
-              <span class="en">Search "high-yield savings account" and pick an FDIC-insured bank with no monthly fee and no minimum.</span>
-              <span class="vi">Tìm "high-yield savings account" và chọn ngân hàng có bảo hiểm FDIC, không phí hàng tháng, không yêu cầu số dư tối thiểu.</span>
+              <span class="en">These are found by searching "high-yield savings account." The ones with no monthly fee and no minimum are the common starting point, and FDIC insurance is what protects the deposit.</span>
+              <span class="vi">Có thể tìm bằng cách tra "high-yield savings account". Loại không phí hằng tháng và không yêu cầu số dư tối thiểu là điểm khởi đầu phổ biến, còn bảo hiểm FDIC là thứ bảo vệ khoản tiền gửi.</span>
             </li>
             <li>
               <span class="en">Set an automatic transfer for payday — even $25 per paycheck counts.</span>
               <span class="vi">Cài chuyển khoản tự động vào ngày lãnh lương — dù chỉ $25 mỗi kỳ lương cũng có giá trị.</span>
             </li>
             <li>
-              <span class="en">Don't link it to your debit card. Friction is the feature.</span>
-              <span class="vi">Đừng liên kết nó với thẻ ghi nợ. Khó rút chính là điểm mạnh.</span>
+              <span class="en">Left unlinked from a debit card, the account is slower to reach — which is the point of a buffer.</span>
+              <span class="vi">Khi không liên kết với thẻ ghi nợ, tài khoản sẽ khó chạm tới hơn — và đó chính là điểm mấu chốt của một quỹ dự phòng.</span>
             </li>
           </ol>
         </div>
@@ -101,7 +103,7 @@
               <span class="vi">Tài khoản vãng lai</span>
             </span>
             <span class="fig-track"><span class="fig-fill" style="width:96%; background:var(--stone)"></span></span>
-            <span class="fig-value">$1,200</span>
+            <span class="fig-value">$600</span>
           </div>
           <div class="fig-bar-row">
             <span class="fig-label">
@@ -109,42 +111,62 @@
               <span class="vi">HYSA lãi 4%</span>
             </span>
             <span class="fig-track"><span class="fig-fill" style="width:100%; background:var(--teal)"></span></span>
-            <span class="fig-value">$1,248</span>
+            <span class="fig-value">$624</span>
           </div>
           <p class="fig-caption">
             <span class="en">Same money, one year later.</span>
             <span class="vi">Cùng số tiền, sau một năm.</span>
           </p>
+          <div class="rec-watch">
+            <span class="rec-watch-label">
+              <span class="en">Common mistake</span>
+              <span class="vi">Lỗi thường gặp</span>
+            </span>
+            <p class="rec-watch-body">
+              <span class="en">Keeping it at the same bank as your checking account. Money you can move in one tap is money you will move.</span>
+              <span class="vi">Để nó cùng ngân hàng với tài khoản chi tiêu. Tiền chuyển được chỉ bằng một chạm là tiền bạn sẽ tiêu.</span>
+            </p>
+          </div>
+          <div class="rec-firstgen">
+            <span class="rec-firstgen-label">
+              <span class="en">First-gen note</span>
+              <span class="vi">Ghi chú cho thế hệ đầu</span>
+            </span>
+            <p class="rec-firstgen-body">
+              <span class="en">Opening the account is the step that stalls. Banks are required to verify identity, not citizenship: major banks and credit unions accept an ITIN in place of an SSN, along with a photo ID — a foreign passport or consular ID at many of them — and proof of address. Under 18 the account is normally joint with an adult, so whoever opens it with you is on it too.</span>
+              <span class="vi">Mở tài khoản mới là bước hay bị kẹt. Ngân hàng buộc phải xác minh danh tính, không phải tình trạng cư trú: các ngân hàng lớn và quỹ tín dụng đều nhận ITIN thay cho SSN, kèm giấy tờ tùy thân có ảnh — nhiều nơi chấp nhận hộ chiếu nước ngoài hoặc thẻ lãnh sự — và giấy tờ chứng minh địa chỉ. Dưới 18 tuổi, tài khoản thường là tài khoản chung với một người lớn, nên ai đứng tên cùng bạn cũng có tên trên đó.</span>
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="rung">
+      <div class="rung" id="step-2">
         <div class="rung-body">
           <span class="rung-num" aria-hidden="true">2</span>
           <h2 class="rung-title">
-            <span class="en">Your employer's 401(k) match</span>
-            <span class="vi">Khoản đối ứng 401(k) của công ty</span>
+            <span class="en">An employer's 401(k) match</span>
+            <span class="vi">Khoản đối ứng 401(k) của một công ty</span>
           </h2>
           <p class="rung-payoff">
-            <span class="en">Pays: an instant 50–100% return — the only free money in finance</span>
-            <span class="vi">Lợi ích: lợi nhuận tức thì 50–100% — khoản tiền miễn phí duy nhất trong tài chính</span>
+            <span class="en">Pays: an instant 50–100% return, on the day a job offers one</span>
+            <span class="vi">Lợi ích: lợi nhuận tức thì 50–100%, kể từ ngày một công việc có khoản này</span>
           </p>
           <p class="rung-prose">
-            <span class="en">Many employers match what you put into a 401(k) retirement account — commonly 50 cents to a dollar for every dollar you contribute, up to a few percent of your pay. Skipping the match is turning down part of your salary.</span>
-            <span class="vi">Nhiều công ty sẽ "đối ứng" số tiền bạn bỏ vào tài khoản hưu trí 401(k) — thường từ 50 xu đến 1 đô cho mỗi đô bạn đóng, tối đa vài phần trăm lương. Bỏ qua khoản đối ứng là từ chối một phần lương của chính mình.</span>
+            <span class="en">Many employers match what you put into a 401(k) retirement account — commonly 50 cents to a dollar for every dollar you contribute, up to a few percent of your pay. An unclaimed match is part of a salary going unpaid. Most plans set a minimum age of 21, though, and that floor applies even through the long-term part-time route added in 2025 — so for anyone still in high school this rung describes something that arrives with a later job rather than something available now.</span>
+            <span class="vi">Nhiều công ty sẽ "đối ứng" số tiền bạn bỏ vào tài khoản hưu trí 401(k) — thường từ 50 xu đến 1 đô cho mỗi đô bạn đóng, tối đa vài phần trăm lương. Khoản đối ứng không nhận là một phần lương không được trả. Tuy vậy, phần lớn chương trình đặt tuổi tối thiểu là 21, và mốc đó áp dụng cả với diện nhân viên bán thời gian dài hạn có từ năm 2025 — nên với người còn học trung học, bậc này mô tả điều sẽ đến cùng một công việc sau này, chứ chưa dùng được ngay.</span>
           </p>
           <ol class="step-list">
             <li>
-              <span class="en">Ask HR (or check your onboarding papers): "Do we have a 401(k) match, and what's the formula?"</span>
-              <span class="vi">Hỏi bộ phận nhân sự (hoặc xem giấy tờ nhận việc): "Công ty có đối ứng 401(k) không, và công thức là gì?"</span>
+              <span class="en">Where a job does offer one, the question for HR or the onboarding papers is whether there is a match and what the formula is.</span>
+              <span class="vi">Ở nơi làm có chương trình này, câu hỏi dành cho bộ phận nhân sự hoặc giấy tờ nhận việc là: có khoản đối ứng không, và công thức tính thế nào.</span>
             </li>
             <li>
-              <span class="en">Contribute at least enough to get the full match — that's the minimum, not the goal.</span>
-              <span class="vi">Đóng ít nhất đủ để nhận toàn bộ khoản đối ứng — đó là mức tối thiểu, không phải mục tiêu.</span>
+              <span class="en">The full match is the point where the employer's share stops. Contributing below it leaves the rest of that share unpaid.</span>
+              <span class="vi">Mức đối ứng tối đa là điểm phần đóng góp của công ty dừng lại. Đóng thấp hơn mức đó thì phần còn lại không được trả.</span>
             </li>
             <li>
-              <span class="en">No 401(k) at your job? Skip to step 3 — the Roth IRA is yours no matter where you work.</span>
-              <span class="vi">Công việc không có 401(k)? Chuyển sang bước 3 — Roth IRA là của bạn dù làm ở đâu.</span>
+              <span class="en">Under 21, or no plan where you work? The Roth IRA at step 4 takes earned income at any age — under 18 that means a custodial one, opened with a parent.</span>
+              <span class="vi">Chưa đủ 21 tuổi, hoặc nơi làm không có chương trình này? Roth IRA ở bước 4 nhận thu nhập từ lao động ở mọi lứa tuổi — dưới 18 tuổi thì là tài khoản giám hộ, mở cùng cha mẹ.</span>
             </li>
           </ol>
         </div>
@@ -169,36 +191,120 @@
             <span class="en">A 50% match, before the market does anything.</span>
             <span class="vi">Match 50%, trước khi thị trường làm gì cả.</span>
           </p>
+          <div class="rec-watch">
+            <span class="rec-watch-label">
+              <span class="en">Common mistake</span>
+              <span class="vi">Lỗi thường gặp</span>
+            </span>
+            <p class="rec-watch-body">
+              <span class="en">Leaving whatever percentage was the default on your first day. The default is almost never the full match.</span>
+              <span class="vi">Cứ để nguyên mức phần trăm mặc định từ ngày đầu đi làm. Mức mặc định gần như không bao giờ đủ để nhận trọn khoản hỗ trợ.</span>
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="rung">
+      <div class="rung" id="step-3">
         <div class="rung-body">
           <span class="rung-num" aria-hidden="true">3</span>
           <h2 class="rung-title">
-            <span class="en">Open a Roth IRA</span>
-            <span class="vi">Mở tài khoản Roth IRA</span>
+            <span class="en">Clear anything above about 8%</span>
+            <span class="vi">Xoá sạch mọi khoản nợ trên khoảng 8%</span>
+          </h2>
+          <p class="rung-payoff">
+            <span class="en">Pays: a guaranteed return equal to the rate you are being charged</span>
+            <span class="vi">Lợi ích: mức lợi nhuận chắc chắn bằng đúng lãi suất bạn đang phải trả</span>
+          </p>
+          <p class="rung-prose">
+            <span class="en">A credit card at 25% is the compounding curve from the calculator pointed at you instead of for you. Paying it off returns exactly 25%, guaranteed, tax-free, with no risk — a rate nothing else on this ladder can promise. That is why it comes before every investment, and why it does not wait for a good market.</span>
+            <span class="vi">Thẻ tín dụng lãi 25% chính là đường cong lãi kép trong máy tính, chỉ khác là nó chĩa vào bạn thay vì làm việc cho bạn. Trả hết khoản đó mang lại đúng 25%, chắc chắn, miễn thuế, không rủi ro — mức mà không thứ nào khác trên chiếc thang này hứa được. Vì vậy nó đứng trước mọi khoản đầu tư, và không cần chờ thị trường thuận lợi.</span>
+          </p>
+          <ol class="step-list">
+            <li>
+              <span class="en">List every debt with its APR next to it. Card statements and loan portals both show the rate.</span>
+              <span class="vi">Liệt kê mọi khoản nợ kèm lãi suất APR bên cạnh. Sao kê thẻ và cổng thông tin khoản vay đều ghi rõ mức lãi.</span>
+            </li>
+            <li>
+              <span class="en">Pay the minimum on all of them, then put every spare dollar on the highest rate. When it clears, move to the next highest.</span>
+              <span class="vi">Trả mức tối thiểu cho tất cả, rồi dồn mọi đồng dư ra vào khoản lãi cao nhất. Xong khoản đó thì chuyển sang khoản cao kế tiếp.</span>
+            </li>
+            <li>
+              <span class="en">Below about 8%, stop rushing. A 4% student loan is not an emergency — over time, investing beats it.</span>
+              <span class="vi">Dưới khoảng 8% thì đừng vội. Khoản vay sinh viên lãi 4% không phải chuyện khẩn cấp — về lâu dài, đầu tư vẫn có lợi hơn.</span>
+            </li>
+          </ol>
+        </div>
+        <div class="rung-figure">
+          <div class="fig-bar-row">
+            <span class="fig-label">
+              <span class="en">$1,000 left on a 25% card</span>
+              <span class="vi">$1,000 còn nợ trên thẻ lãi 25%</span>
+            </span>
+            <span class="fig-track"><span class="fig-fill" style="width:100%; background:var(--rose-muted)"></span></span>
+            <span class="fig-value">$1,250</span>
+          </div>
+          <div class="fig-bar-row">
+            <span class="fig-label">
+              <span class="en">$1,000 invested at 7%</span>
+              <span class="vi">$1,000 đem đầu tư lãi 7%</span>
+            </span>
+            <span class="fig-track"><span class="fig-fill" style="width:85.6%; background:var(--teal)"></span></span>
+            <span class="fig-value">$1,070</span>
+          </div>
+          <p class="fig-caption">
+            <span class="en">One year, same $1,000. A good year in the market does not catch a bad rate.</span>
+            <span class="vi">Cùng $1,000, sau một năm. Một năm tốt của thị trường vẫn không đuổi kịp một mức lãi xấu.</span>
+          </p>
+          <div class="rec-watch">
+            <span class="rec-watch-label">
+              <span class="en">Common mistake</span>
+              <span class="vi">Lỗi thường gặp</span>
+            </span>
+            <p class="rec-watch-body">
+              <span class="en">Clearing the smallest balance first because it feels better. Some people stick with it longer that way, and that is a real advantage — but the highest rate first is what costs you least.</span>
+              <span class="vi">Trả hết khoản nhỏ nhất trước vì thấy nhẹ nhõm hơn. Một số người nhờ vậy mà kiên trì hơn, và đó là lợi thế thật — nhưng trả khoản lãi cao nhất trước mới là cách tốn ít tiền nhất.</span>
+            </p>
+          </div>
+          <div class="rec-firstgen">
+            <span class="rec-firstgen-label">
+              <span class="en">First-gen note</span>
+              <span class="vi">Ghi chú cho thế hệ đầu</span>
+            </span>
+            <p class="rec-firstgen-body">
+              <span class="en">This rung sorts debt by interest rate, which means it has nothing to say about money borrowed inside a family. That debt usually carries no rate at all, so it never meets the 8% test, and the ladder keeps pointing past it.</span>
+              <span class="vi">Bậc này sắp xếp nợ theo lãi suất, nghĩa là nó không nói gì về khoản tiền vay trong gia đình. Khoản đó thường không có lãi suất nào cả, nên không bao giờ chạm ngưỡng 8%, và chiếc thang cứ thế chỉ vượt qua nó.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung" id="step-4">
+        <div class="rung-body">
+          <span class="rung-num" aria-hidden="true">4</span>
+          <h2 class="rung-title">
+            <span class="en">The Roth IRA</span>
+            <span class="vi">Tài khoản Roth IRA</span>
           </h2>
           <p class="rung-payoff">
             <span class="en">Pays: decades of growth you will never owe taxes on</span>
             <span class="vi">Lợi ích: hàng chục năm tăng trưởng mà bạn không bao giờ phải đóng thuế</span>
           </p>
           <p class="rung-prose">
-            <span class="en">Fund it with already-taxed money now; everything it grows into comes out tax-free after 59½. Your tax rate may never be this low again — that's the whole bet, and it favors the young. You can take back contributions (not growth) anytime, the limit is $7,000/year as of 2025, and under 18 a parent can open a custodial Roth with you.</span>
-            <span class="vi">Nạp bằng tiền đã đóng thuế bây giờ; toàn bộ phần tăng trưởng được rút miễn thuế sau tuổi 59½. Thuế suất của bạn có lẽ không bao giờ thấp như lúc này nữa — đó là toàn bộ ván cược, và nó nghiêng về người trẻ. Tiền gốc (không phải phần lãi) rút lại được bất cứ lúc nào, hạn mức $7,000/năm tính đến 2025, và dưới 18 tuổi cha mẹ có thể cùng bạn mở Roth giám hộ.</span>
+            <span class="en">Fund it with already-taxed money now; everything it grows into comes out tax-free after 59½. Your tax rate may never be this low again — that's the whole bet, and it favors the young. You can take back contributions (not growth) anytime, the limit is $7,500 for 2026, and under 18 a parent can open a custodial Roth with you.</span>
+            <span class="vi">Nạp bằng tiền đã đóng thuế bây giờ; toàn bộ phần tăng trưởng được rút miễn thuế sau tuổi 59½. Thuế suất của bạn có lẽ không bao giờ thấp như lúc này nữa — đó là toàn bộ ván cược, và nó nghiêng về người trẻ. Tiền gốc (không phải phần lãi) rút lại được bất cứ lúc nào, hạn mức $7,500 cho năm 2026, và dưới 18 tuổi cha mẹ có thể cùng bạn mở Roth giám hộ.</span>
           </p>
           <ol class="step-list">
             <li>
-              <span class="en">Open a Roth IRA at a major low-cost brokerage (Fidelity, Schwab, and Vanguard are the usual names). It takes about 15 minutes.</span>
-              <span class="vi">Mở Roth IRA tại một công ty môi giới chi phí thấp lớn (Fidelity, Schwab, Vanguard là những cái tên quen thuộc). Mất khoảng 15 phút.</span>
+              <span class="en">Roth IRAs are opened at brokerages; Fidelity, Schwab and Vanguard are the low-cost names that come up most often. The paperwork takes about 15 minutes.</span>
+              <span class="vi">Roth IRA được mở tại các công ty môi giới; Fidelity, Schwab và Vanguard là những cái tên chi phí thấp hay được nhắc tới nhất. Thủ tục mất khoảng 15 phút.</span>
             </li>
             <li>
               <span class="en">Set up an automatic monthly transfer, even a small one.</span>
               <span class="vi">Cài chuyển tiền tự động hàng tháng, dù là khoản nhỏ.</span>
             </li>
             <li>
-              <span class="en">Important: money sitting in the account isn't invested yet — buy an index fund inside it (step 4).</span>
-              <span class="vi">Quan trọng: tiền nằm trong tài khoản chưa phải là đã đầu tư — hãy mua quỹ chỉ số bên trong nó (bước 4).</span>
+              <span class="en">Important: money sitting in the account isn't invested yet — buy an index fund inside it (step 5).</span>
+              <span class="vi">Quan trọng: tiền nằm trong tài khoản chưa phải là đã đầu tư — hãy mua quỹ chỉ số bên trong nó (bước 5).</span>
             </li>
           </ol>
         </div>
@@ -221,12 +327,32 @@
             <span class="en">$100/month from 18 to 60, at 7%.</span>
             <span class="vi">$100/tháng từ 18 đến 60 tuổi, lãi 7%.</span>
           </p>
+          <div class="rec-watch">
+            <span class="rec-watch-label">
+              <span class="en">Common mistake</span>
+              <span class="vi">Lỗi thường gặp</span>
+            </span>
+            <p class="rec-watch-body">
+              <span class="en">Assuming you need a full-time job to qualify. Any earned income counts — a summer job, tutoring, a few shifts a week.</span>
+              <span class="vi">Tưởng rằng phải có việc toàn thời gian mới đủ điều kiện. Bất kỳ thu nhập từ lao động nào cũng tính — việc làm hè, dạy kèm, vài ca mỗi tuần.</span>
+            </p>
+          </div>
+          <div class="rec-firstgen">
+            <span class="rec-firstgen-label">
+              <span class="en">First-gen note</span>
+              <span class="vi">Ghi chú cho thế hệ đầu</span>
+            </span>
+            <p class="rec-firstgen-body">
+              <span class="en">The IRS applies the same rules to ITIN and SSN holders — earned income is what makes a contribution eligible, not which number is on the return. Brokerages set their own paperwork on top of that, and several large ones ask for the minor's own SSN before opening a custodial account.</span>
+              <span class="vi">Sở Thuế vụ (IRS) áp dụng cùng quy định cho người có ITIN và người có SSN — điều quyết định là thu nhập từ lao động, chứ không phải con số nào ghi trên tờ khai thuế. Tuy vậy, các công ty môi giới còn đặt thêm yêu cầu giấy tờ riêng, và một số công ty lớn đòi phải có SSN của chính người chưa thành niên trước khi mở tài khoản giám hộ.</span>
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="rung">
+      <div class="rung" id="step-5">
         <div class="rung-body">
-          <span class="rung-num" aria-hidden="true">4</span>
+          <span class="rung-num" aria-hidden="true">5</span>
           <h2 class="rung-title">
             <span class="en">Buy low-cost index funds (like the S&amp;P 500)</span>
             <span class="vi">Mua quỹ chỉ số chi phí thấp (như S&amp;P 500)</span>
@@ -260,12 +386,22 @@
             <span class="en">One purchase. All 500 companies.</span>
             <span class="vi">Một lần mua. Tất cả 500 công ty.</span>
           </p>
+          <div class="rec-watch">
+            <span class="rec-watch-label">
+              <span class="en">Common mistake</span>
+              <span class="vi">Lỗi thường gặp</span>
+            </span>
+            <p class="rec-watch-body">
+              <span class="en">Buying five different funds that all hold the same 500 companies. That is one bet, paid for five times.</span>
+              <span class="vi">Mua năm quỹ khác nhau nhưng đều nắm cùng 500 công ty đó. Vẫn là một ván cược, chỉ là trả phí năm lần.</span>
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="rung">
+      <div class="rung" id="step-6">
         <div class="rung-body">
-          <span class="rung-num" aria-hidden="true">5</span>
+          <span class="rung-num" aria-hidden="true">6</span>
           <h2 class="rung-title">
             <span class="en">Invest in skills that raise your income</span>
             <span class="vi">Đầu tư vào kỹ năng giúp tăng thu nhập</span>
@@ -300,12 +436,22 @@
             <span class="en">Same 20% saved. Different income.</span>
             <span class="vi">Cùng tiết kiệm 20%. Thu nhập khác nhau.</span>
           </p>
+          <div class="rec-watch">
+            <span class="rec-watch-label">
+              <span class="en">Common mistake</span>
+              <span class="vi">Lỗi thường gặp</span>
+            </span>
+            <p class="rec-watch-body">
+              <span class="en">Counting a course as an investment before checking what it pays. Ask someone already doing the job, not the person selling the course.</span>
+              <span class="vi">Coi một khoá học là khoản đầu tư trước khi kiểm tra nó mang lại bao nhiêu. Hãy hỏi người đang làm công việc đó, đừng hỏi người bán khoá học.</span>
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="rung">
+      <div class="rung" id="step-7">
         <div class="rung-body">
-          <span class="rung-num" aria-hidden="true">6</span>
+          <span class="rung-num" aria-hidden="true">7</span>
           <h2 class="rung-title">
             <span class="en">Automate it and stop thinking about it</span>
             <span class="vi">Tự động hóa rồi thôi nghĩ về nó</span>
@@ -354,11 +500,36 @@
             <span class="en">Set once. It runs without you.</span>
             <span class="vi">Cài một lần. Nó tự chạy.</span>
           </p>
+          <div class="rec-watch">
+            <span class="rec-watch-label">
+              <span class="en">Common mistake</span>
+              <span class="vi">Lỗi thường gặp</span>
+            </span>
+            <p class="rec-watch-body">
+              <span class="en">Setting it up and never looking again. Twice a year is enough — but it is not zero.</span>
+              <span class="vi">Cài xong rồi không bao giờ ngó lại. Một năm hai lần là đủ — nhưng không được là không lần nào.</span>
+            </p>
+          </div>
+          <div class="rec-firstgen">
+            <span class="rec-firstgen-label">
+              <span class="en">First-gen note</span>
+              <span class="vi">Ghi chú cho thế hệ đầu</span>
+            </span>
+            <p class="rec-firstgen-body">
+              <span class="en">Automatic transfers assume the money lands in an account by itself. A first job paid by paper check or in cash has no payday to trigger, so the transfer is made by hand — or the check has to be deposited first, which is the step that quietly doesn't happen.</span>
+              <span class="vi">Chuyển tiền tự động giả định rằng tiền tự vào tài khoản. Công việc đầu tiên trả bằng séc giấy hoặc tiền mặt thì không có ngày lương nào để kích hoạt, nên phải chuyển bằng tay — hoặc phải đem séc đi gửi trước, và đó chính là bước lặng lẽ không xảy ra.</span>
+            </p>
+          </div>
         </div>
       </div>
 
     </div>
   </section>
+
+  </div>
+
+  <div class="section-band">
+  <div class="page">
 
   <section class="section" id="not-recommended">
     <div class="section-head">
@@ -375,78 +546,91 @@
         <span class="vi">Không thứ nào dưới đây là phạm pháp hay đáng xấu hổ — chúng chỉ không phải là một kế hoạch. Kế hoạch thì nhàm chán, lặp lại được, và không phụ thuộc vào may mắn.</span>
       </p>
     </div>
-    <div class="avoid-grid">
+    <div class="avoid-list">
 
-      <div class="card avoid-card">
-        <span class="avoid-tag">
-          <span class="en">Speculation, not a plan</span>
-          <span class="vi">Đầu cơ, không phải kế hoạch</span>
-        </span>
-        <h3 class="avoid-title">
+      <div class="avoid-row">
+        <h3 class="avoid-name">
           <span class="en">Crypto &amp; NFTs as a strategy</span>
           <span class="vi">Crypto &amp; NFT như một chiến lược</span>
         </h3>
-        <div class="prose">
-          <p>
-            <span class="en">Prices move on attention, not earnings — there's nothing underneath them to grow back after a crash. Curious anyway? Cap it at money you'd happily lose, after the ladder — never instead of it.</span>
-            <span class="vi">Giá chạy theo sự chú ý, không theo lợi nhuận — không có gì bên dưới để phục hồi sau cú sập. Vẫn tò mò? Hãy giới hạn ở số tiền bạn sẵn sàng mất, sau khi leo xong chiếc thang — không bao giờ thay cho nó.</span>
+        <div class="avoid-detail">
+          <p class="avoid-verdict">
+            <span class="en">Speculation, not a plan</span>
+            <span class="vi">Đầu cơ, không phải kế hoạch</span>
           </p>
+          <div class="prose">
+            <p>
+              <span class="en">Prices move on attention, not earnings — there's nothing underneath them to grow back after a crash. Curious anyway? Cap it at money you'd happily lose, after the ladder — never instead of it.</span>
+              <span class="vi">Giá chạy theo sự chú ý, không theo lợi nhuận — không có gì bên dưới để phục hồi sau cú sập. Vẫn tò mò? Hãy giới hạn ở số tiền bạn sẵn sàng mất, sau khi leo xong chiếc thang — không bao giờ thay cho nó.</span>
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="card avoid-card">
-        <span class="avoid-tag">
-          <span class="en">The house usually wins</span>
-          <span class="vi">Nhà cái thường thắng</span>
-        </span>
-        <h3 class="avoid-title">
+      <div class="avoid-row">
+        <h3 class="avoid-name">
           <span class="en">Day trading &amp; meme stocks</span>
           <span class="vi">Lướt sóng &amp; cổ phiếu meme</span>
         </h3>
-        <div class="prose">
-          <p>
-            <span class="en">Most day traders lose money over time — every trade has a professional with faster information on the other side. The screenshots online are survivors, not averages. Index funds win this game by refusing to play it.</span>
-            <span class="vi">Đa số người lướt sóng thua lỗ theo thời gian — mỗi giao dịch đều có dân chuyên nghiệp với thông tin nhanh hơn ở phía bên kia. Ảnh trên mạng là người sống sót, không phải mức trung bình. Quỹ chỉ số thắng trò chơi này bằng cách từ chối tham gia.</span>
+        <div class="avoid-detail">
+          <p class="avoid-verdict">
+            <span class="en">The house usually wins</span>
+            <span class="vi">Nhà cái thường thắng</span>
           </p>
+          <div class="prose">
+            <p>
+              <span class="en">Most day traders lose money over time — every trade has a professional with faster information on the other side. The screenshots online are survivors, not averages. Index funds win this game by refusing to play it.</span>
+              <span class="vi">Đa số người lướt sóng thua lỗ theo thời gian — mỗi giao dịch đều có dân chuyên nghiệp với thông tin nhanh hơn ở phía bên kia. Ảnh trên mạng là người sống sót, không phải mức trung bình. Quỹ chỉ số thắng trò chơi này bằng cách từ chối tham gia.</span>
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="card avoid-card">
-        <span class="avoid-tag">
-          <span class="en">Compounding in reverse</span>
-          <span class="vi">Lãi kép đảo ngược</span>
-        </span>
-        <h3 class="avoid-title">
+      <div class="avoid-row">
+        <h3 class="avoid-name">
           <span class="en">Payday loans &amp; buy-now-pay-later habits</span>
           <span class="vi">Vay nóng &amp; thói quen mua trước trả sau</span>
         </h3>
-        <div class="prose">
-          <p>
-            <span class="en">Payday loans can cost several hundred percent a year — our compounding curve, pointed at you. Buy-now-pay-later trains the same habit gently: spending money that hasn't arrived. If you can't buy it twice, wait.</span>
-            <span class="vi">Vay nóng có thể tốn vài trăm phần trăm mỗi năm — chính đường cong lãi kép, nhưng chĩa vào bạn. Mua trước trả sau luyện cùng thói quen đó một cách nhẹ nhàng: tiêu tiền chưa về tay. Nếu không đủ tiền mua món đó hai lần, hãy chờ.</span>
+        <div class="avoid-detail">
+          <p class="avoid-verdict">
+            <span class="en">Compounding in reverse</span>
+            <span class="vi">Lãi kép đảo ngược</span>
           </p>
+          <div class="prose">
+            <p>
+              <span class="en">Payday loans can cost several hundred percent a year — our compounding curve, pointed at you. Buy-now-pay-later trains the same habit gently: spending money that hasn't arrived. If you can't buy it twice, wait.</span>
+              <span class="vi">Vay nóng có thể tốn vài trăm phần trăm mỗi năm — chính đường cong lãi kép, nhưng chĩa vào bạn. Mua trước trả sau luyện cùng thói quen đó một cách nhẹ nhàng: tiêu tiền chưa về tay. Nếu không đủ tiền mua món đó hai lần, hãy chờ.</span>
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="card avoid-card">
-        <span class="avoid-tag">
-          <span class="en">If it were real, they'd be quiet</span>
-          <span class="vi">Nếu có thật, họ đã im lặng</span>
-        </span>
-        <h3 class="avoid-title">
+      <div class="avoid-row">
+        <h3 class="avoid-name">
           <span class="en">Lottery tickets &amp; get-rich courses</span>
           <span class="vi">Vé số &amp; khóa học làm giàu</span>
         </h3>
-        <div class="prose">
-          <p>
-            <span class="en">The lottery pays out less than it takes in — that's the business model. And a $500 get-rich course mostly shows you how its seller gets rich. The boring ladder above has no seller because nobody earns commission on it.</span>
-            <span class="vi">Xổ số trả ra ít hơn số thu vào — đó là mô hình kinh doanh. Còn khóa học làm giàu giá $500 chủ yếu cho bạn thấy cách người bán làm giàu. Chiếc thang nhàm chán ở trên không có người rao bán vì chẳng ai được hoa hồng từ nó.</span>
+        <div class="avoid-detail">
+          <p class="avoid-verdict">
+            <span class="en">If it were real, they'd be quiet</span>
+            <span class="vi">Nếu có thật, họ đã im lặng</span>
           </p>
+          <div class="prose">
+            <p>
+              <span class="en">The lottery pays out less than it takes in — that's the business model. And a $500 get-rich course mostly shows you how its seller gets rich. The boring ladder above has no seller because nobody earns commission on it.</span>
+              <span class="vi">Xổ số trả ra ít hơn số thu vào — đó là mô hình kinh doanh. Còn khóa học làm giàu giá $500 chủ yếu cho bạn thấy cách người bán làm giàu. Chiếc thang nhàm chán ở trên không có người rao bán vì chẳng ai được hoa hồng từ nó.</span>
+            </p>
+          </div>
         </div>
       </div>
 
     </div>
   </section>
+
+  </div>
+  </div>
+
+  <div class="page">
 
   <section class="section" id="starter-plans">
     <div class="section-head">
@@ -465,13 +649,11 @@
     </div>
     <div class="plan-grid">
 
-      <div class="card">
-        <div class="plan-head">
-          <h3 class="plan-title">
-            <span class="en">Emergency fund in 12 months</span>
-            <span class="vi">Quỹ khẩn cấp trong 12 tháng</span>
-          </h3>
-        </div>
+      <div class="plan-col">
+        <h3 class="plan-title">
+          <span class="en">Emergency fund in 12 months</span>
+          <span class="vi">Quỹ khẩn cấp trong 12 tháng</span>
+        </h3>
         <div class="prose">
           <p>
             <span class="en">The first $1,200 matters more than any investment you'll ever make — it's what keeps a bad week from becoming debt.</span>
@@ -482,19 +664,17 @@
           <span class="en">$100/month × 12 months in a 4% HYSA ≈ $1,222. Skip one $25 takeout order a week and you're there.</span>
           <span class="vi">$100/tháng × 12 tháng trong HYSA 4% ≈ $1,222. Bỏ một bữa đặt đồ ăn $25 mỗi tuần là đủ.</span>
         </p>
-        <a class="plan-link" href="actual%20website.html#initial=0&amp;monthly=100&amp;rate=4&amp;years=1">
-          <span class="en">Run it in the calculator →</span>
-          <span class="vi">Tính thử trong máy tính →</span>
+        <a class="plan-link" href="calculator.html#initial=0&amp;monthly=100&amp;rate=4&amp;years=1">
+          <span class="en">Run it in the calculator</span>
+          <span class="vi">Tính thử trong máy tính</span>
         </a>
       </div>
 
-      <div class="card">
-        <div class="plan-head">
-          <h3 class="plan-title">
-            <span class="en">A used car in 3 years</span>
-            <span class="vi">Xe cũ trong 3 năm</span>
-          </h3>
-        </div>
+      <div class="plan-col">
+        <h3 class="plan-title">
+          <span class="en">A used car in 3 years</span>
+          <span class="vi">Xe cũ trong 3 năm</span>
+        </h3>
         <div class="prose">
           <p>
             <span class="en">A reliable used car bought in cash means no monthly loan payment at 8–14% interest — that payment becomes your investing money instead.</span>
@@ -505,19 +685,17 @@
           <span class="en">$150/month × 36 months in a 4% HYSA ≈ $5,721 — solid used-car money. Budget ~$150/month more for insurance once you own it.</span>
           <span class="vi">$150/tháng × 36 tháng trong HYSA 4% ≈ $5,721 — đủ cho một chiếc xe cũ tốt. Dự trù thêm ~$150/tháng tiền bảo hiểm khi đã có xe.</span>
         </p>
-        <a class="plan-link" href="actual%20website.html#initial=0&amp;monthly=150&amp;rate=4&amp;years=3">
-          <span class="en">Run it in the calculator →</span>
-          <span class="vi">Tính thử trong máy tính →</span>
+        <a class="plan-link" href="calculator.html#initial=0&amp;monthly=150&amp;rate=4&amp;years=3">
+          <span class="en">Run it in the calculator</span>
+          <span class="vi">Tính thử trong máy tính</span>
         </a>
       </div>
 
-      <div class="card">
-        <div class="plan-head">
-          <h3 class="plan-title">
-            <span class="en">Retirement, started at 18</span>
-            <span class="vi">Hưu trí, bắt đầu từ tuổi 18</span>
-          </h3>
-        </div>
+      <div class="plan-col">
+        <h3 class="plan-title">
+          <span class="en">Retirement, started at 18</span>
+          <span class="vi">Hưu trí, bắt đầu từ tuổi 18</span>
+        </h3>
         <div class="prose">
           <p>
             <span class="en">This is the one where starting early is almost unfair. The same $100/month costs the 28-year-old more than twice as much to catch up.</span>
@@ -528,9 +706,9 @@
           <span class="en">$100/month from 18 to 60 at 7% ≈ $286,000 — on $50,400 put in. Wait until 28 and the same habit ends near $136,000.</span>
           <span class="vi">$100/tháng từ 18 đến 60 tuổi với 7% ≈ $286,000 — chỉ từ $50,400 tiền gốc. Đợi đến 28 tuổi, cùng thói quen đó chỉ còn khoảng $136,000.</span>
         </p>
-        <a class="plan-link" href="actual%20website.html#initial=0&amp;monthly=100&amp;rate=7&amp;years=42">
-          <span class="en">Run it in the calculator →</span>
-          <span class="vi">Tính thử trong máy tính →</span>
+        <a class="plan-link" href="calculator.html#initial=0&amp;monthly=100&amp;rate=7&amp;years=42">
+          <span class="en">Run it in the calculator</span>
+          <span class="vi">Tính thử trong máy tính</span>
         </a>
       </div>
 
@@ -552,6 +730,11 @@
 
   </div>
   </div>
+
+  <p class="disclaimer">
+    <span class="en">Educational tool only. Not licensed financial advice.</span>
+    <span class="vi">Chỉ là công cụ giáo dục. Không phải lời khuyên tài chính được cấp phép.</span>
+  </p>
 
 </main>
 
@@ -578,12 +761,12 @@
       <span class="vi">Các mô-đun</span>
     </h2>
     <ul class="footer-links">
-      <li><a href="actual%20website.html">Calculator</a></li>
+      <li><a href="calculator.html">Calculator</a></li>
       <li><a href="budget.html">Budget</a></li>
       <li><a href="recommend.html">Recommend</a></li>
       <li><a href="jargon.html">Jargon</a></li>
       <li><a href="credit.html">Credit</a></li>
-      <li><a href="family-split.html">Family Split</a></li>
+      <li><a href="tuition.html">Tuition</a></li>
     </ul>
   </nav>
 
@@ -593,8 +776,8 @@
       <span class="vi">Cần biết</span>
     </h2>
     <p class="footer-note">
-      <span class="en">Educational only — not licensed financial advice. Rates and limits mentioned (HYSA ~4%, Roth IRA $7,000) are approximate as of 2025 and change over time.</span>
-      <span class="vi">Chỉ mang tính giáo dục — không phải lời khuyên tài chính được cấp phép. Các mức lãi và hạn mức nêu trên (HYSA ~4%, Roth IRA $7,000) là gần đúng tính đến 2025 và thay đổi theo thời gian.</span>
+      <span class="en">Educational only — not licensed financial advice. Rates and limits change every year. The Roth IRA limit is $7,500 for 2026 (IRS); HYSA rates are approximate and move with the Fed.</span>
+      <span class="vi">Chỉ mang tính giáo dục — không phải lời khuyên tài chính được cấp phép. Lãi suất và hạn mức thay đổi hằng năm. Hạn mức Roth IRA là $7,500 cho năm 2026 (theo IRS); lãi suất HYSA là con số gần đúng và thay đổi theo lãi suất của Fed.</span>
     </p>
   </div>
   </div>

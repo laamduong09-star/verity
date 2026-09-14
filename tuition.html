@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verity: Tuition</title>
+<meta name="description" content="What college actually costs — every figure drawn to one $31,000 scale. Published price vs net price, the FAFSA, aid you never repay, the order to borrow in, and a repayment calculator for the 2026–27 federal rules. Bilingual EN/VI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/tuition.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body class="module-tuition">
+<div class="bg-wash" aria-hidden="true"></div>
+
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="logo" href="./">
+      <svg class="logo-mark" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="translate(0,0.685) scale(0.020236) translate(-425.333,-611.012)">
+          <path fill="#11151f" d="M 452.5,611.5 C 533.834,611.333 615.167,611.5 696.5,612C 711.229,615.063 720.396,623.896 724,638.5C 724.333,789.167 724.667,939.833 725,1090.5C 882.221,933.279 1039.39,776.113 1196.5,619C 1200.01,616.746 1203.67,614.746 1207.5,613C 1266.11,611.345 1324.78,611.012 1383.5,612C 1398.66,614.822 1408.49,623.655 1413,638.5C 1413.67,702.167 1413.67,765.833 1413,829.5C 1411.77,834.518 1409.77,839.185 1407,843.5C 1178.83,1071.67 950.667,1299.83 722.5,1528C 720.043,1529.56 717.376,1530.56 714.5,1531C 627.5,1531.67 540.5,1531.67 453.5,1531C 439.009,1527.18 429.842,1518.01 426,1503.5C 425.333,1215.17 425.333,926.833 426,638.5C 430.351,624.984 439.184,615.984 452.5,611.5 Z"/>
+        </g>
+      </svg>
+      <span class="logo-text">verity</span>
+    </a>
+    <nav class="nav-capsule">
+      <a href="calculator.html" class="nav-link">Calculator</a>
+      <a href="budget.html" class="nav-link">Budget</a>
+      <a href="recommend.html" class="nav-link">Recommend</a>
+      <a href="jargon.html" class="nav-link">Jargon</a>
+      <a href="credit.html" class="nav-link">Credit</a>
+      <a href="tuition.html" class="nav-link active">Tuition</a>
+    </nav>
+    <button class="lang-toggle" id="langToggle">
+      <span class="lang-option active" data-lang="en">EN</span>
+      <span class="lang-divider">|</span>
+      <span class="lang-option" data-lang="vi">VI</span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="page">
+
+  <section class="page-hero">
+    <h1 class="hero-title">
+      <span class="en">What college actually costs</span>
+      <span class="vi">Chi phí thật sự của việc học đại học</span>
+    </h1>
+    <p class="page-hero-sub">
+      <span class="en">Almost every number in this subject is a quantity of dollars, and the topic goes wrong when people compare quantities they have never seen side by side. So every bar on this page is drawn to one scale.</span>
+      <span class="vi">Gần như mọi con số trong chủ đề này đều là một lượng tiền, và người ta hiểu sai chính vì chưa bao giờ được nhìn các lượng đó cạnh nhau. Vì vậy mọi thanh đo trên trang này đều được vẽ theo cùng một thước.</span>
+    </p>
+  </section>
+
+  </div>
+
+  <div class="content-shell">
+  <div class="page">
+
+  <!-- ============================================================
+       THE INSTRUMENT. Stated once, then obeyed silently by every bar
+       below. $31,000 is the most a dependent undergraduate may ever owe
+       in federal student loans, and also one year of published cost —
+       which is the point the whole page
+       is built to deliver, down at #tu-limits.
+       ============================================================ -->
+  <div class="tu-part">
+    <div class="tu-part-row">
+      <p class="tu-part-name">
+        <span class="en">Part one · What you will actually pay</span>
+        <span class="vi">Phần một · Số tiền bạn thực trả</span>
+      </p>
+    </div>
+    <div class="tu-ruler" aria-hidden="true">
+      <span class="tu-ruler-end">$0</span>
+      <span class="tu-ruler-line"></span>
+      <span class="tu-ruler-end">$31,000</span>
+    </div>
+    <p class="tu-caption tu-measure">
+      <span class="en">Every bar below this line is drawn to it. A bar that looks twice as long is twice the money.</span>
+      <span class="vi">Mọi thanh đo bên dưới đều vẽ theo thước này. Thanh dài gấp đôi nghĩa là số tiền gấp đôi.</span>
+    </p>
+  </div>
+
+  <!-- ---------- 1. Tuition is not the price ---------- -->
+  <section class="section tu-section" id="tu-year">
+    <div class="tu-measure">
+      <p class="eyebrow">
+        <span class="en">One year, published</span>
+        <span class="vi">Một năm, theo giá niêm yết</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">Tuition is not the price</span>
+        <span class="vi">Học phí không phải là toàn bộ chi phí</span>
+      </h2>
+      <p class="tu-lede">
+        <span class="en">Ask what a college costs and you get a tuition figure. Tuition is the smaller half. The other half — a place to sleep, food, books, a bus pass — is the part families are least ready for, because nobody advertises it.</span>
+        <span class="vi">Hỏi một trường học phí bao nhiêu, bạn sẽ nhận được con số học phí. Nhưng học phí mới là phần nhỏ hơn. Nửa còn lại — chỗ ngủ, ăn uống, sách vở, vé xe buýt — mới là phần các gia đình ít chuẩn bị nhất, vì chẳng ai quảng cáo nó.</span>
+      </p>
+    </div>
+
+    <div class="tu-bar" style="margin-top: 40px">
+      <div class="tu-bar-head">
+        <span class="tu-bar-name">
+          <span class="en">Average published budget — public four-year, in-state, 2025–26</span>
+          <span class="vi">Tổng chi phí niêm yết trung bình — trường công bốn năm, học sinh trong bang, 2025–26</span>
+        </span>
+        <span class="tu-bar-value is-lead">$30,990</span>
+      </div>
+      <div class="tu-track is-tall">
+        <span class="tu-seg is-ink" style="--w: 38.55%"></span>
+        <span class="tu-seg is-rest" style="--w: 61.42%"></span>
+      </div>
+      <div class="tu-legend">
+        <div class="tu-legend-item" style="--w: 38.55%">
+          <span class="tu-legend-name">
+            <span class="en">Tuition and fees</span>
+            <span class="vi">Học phí và lệ phí</span>
+          </span>
+          <span class="tu-legend-value">$11,950</span>
+        </div>
+        <div class="tu-legend-item" style="--w: 61.42%">
+          <span class="tu-legend-name">
+            <span class="en">Housing, food, books, transport, everything else</span>
+            <span class="vi">Chỗ ở, ăn uống, sách vở, đi lại và mọi thứ khác</span>
+          </span>
+          <span class="tu-legend-value">$19,040</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tu-spread" style="margin-top: 36px">
+      <p class="tu-caption">
+        <span class="en">The whole box is what a college calls your <strong>cost of attendance</strong>, and aid is calculated against all of it — not against tuition alone. That is the one useful thing about the bigger number.</span>
+        <span class="vi">Toàn bộ khối này là thứ nhà trường gọi là <strong>tổng chi phí theo học</strong>, và tiền hỗ trợ được tính trên toàn bộ nó — không phải chỉ trên học phí. Đó là điểm hữu ích duy nhất của con số lớn hơn này.</span>
+      </p>
+      <aside class="tu-margin">
+        <div>
+          <span class="tu-margin-label">
+            <span class="en">The half nobody advertises</span>
+            <span class="vi">Nửa không ai quảng cáo</span>
+          </span>
+          <span class="tu-margin-stat">$19,040</span>
+          <p class="tu-margin-note">
+            <span class="en">Larger than the tuition figure beside it. A family that budgeted for tuition alone is short by the bigger of the two numbers, not the smaller.</span>
+            <span class="vi">Lớn hơn cả con số học phí bên cạnh. Gia đình chỉ tính tiền học phí sẽ thiếu đúng con số lớn hơn trong hai con số, chứ không phải con số nhỏ hơn.</span>
+          </p>
+        </div>
+        <p class="tu-dated">
+          <span class="en">College Board, <em>Trends in College Pricing and Student Aid 2025</em> (published November 2025). The $30,990 total and the $11,950 tuition line are both published figures; the $19,040 is the difference between them, because the report does not itemise the rest.</span>
+          <span class="vi">College Board, <em>Trends in College Pricing and Student Aid 2025</em> (công bố tháng 11 năm 2025). Con số tổng $30,990 và dòng học phí $11,950 đều được công bố; $19,040 là hiệu của hai số đó, vì báo cáo không tách chi tiết phần còn lại.</span>
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ---------- 2. The retracting bar ---------- -->
+  <section class="section tu-section" id="tu-net">
+    <div class="tu-measure">
+      <p class="eyebrow">
+        <span class="en">Published price against real price</span>
+        <span class="vi">Giá niêm yết so với giá thật</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">And the published price is not what people pay</span>
+        <span class="vi">Và giá niêm yết cũng không phải số tiền người ta thực trả</span>
+      </h2>
+      <p class="tu-lede">
+        <span class="en">Aid comes off before anyone borrows anything. Watch what happens to the tuition line from the bar above.</span>
+        <span class="vi">Tiền hỗ trợ được trừ đi trước khi ai đó phải vay mượn gì cả. Hãy xem điều gì xảy ra với dòng học phí ở thanh phía trên.</span>
+      </p>
+    </div>
+
+    <figure class="tu-retract" id="tuLedger" style="margin: 40px 0 0">
+      <div class="tu-bar">
+        <div class="tu-bar-head">
+          <span class="tu-bar-name">
+            <span class="en">Published tuition and fees</span>
+            <span class="vi">Học phí và lệ phí niêm yết</span>
+          </span>
+          <span class="tu-bar-value">$11,950</span>
+        </div>
+        <div class="tu-track">
+          <span class="tu-seg is-ink" style="--w: 38.55%"></span>
+        </div>
+      </div>
+
+      <p class="tu-minus">
+        <span>
+          <span class="en">Average grant aid and education tax benefits</span>
+          <span class="vi">Trợ cấp và ưu đãi thuế giáo dục, tính trung bình</span>
+        </span>
+        <span class="tu-minus-value">$9,650</span>
+      </p>
+
+      <div class="tu-bar">
+        <div class="tu-bar-head">
+          <span class="tu-bar-name">
+            <span class="en">What the average first-time, full-time student was left paying</span>
+            <span class="vi">Số tiền sinh viên năm đầu học toàn thời gian thực trả, tính trung bình</span>
+          </span>
+          <span class="tu-bar-value is-lead">$2,300</span>
+        </div>
+        <div class="tu-track" style="--tu-from: 38.55%">
+          <span class="tu-seg is-aid" style="--w: 38.55%"></span>
+          <span class="tu-fill" style="--w: 7.42%"></span>
+        </div>
+      </div>
+
+      <figcaption class="tu-key">
+        <span class="tu-key-item">
+          <span class="tu-key-swatch is-ink" aria-hidden="true"></span>
+          <span class="en">Paid by the student</span>
+          <span class="vi">Sinh viên tự trả</span>
+        </span>
+        <span class="tu-key-item">
+          <span class="tu-key-swatch is-aid" aria-hidden="true"></span>
+          <span class="en">Covered by aid</span>
+          <span class="vi">Được hỗ trợ chi trả</span>
+        </span>
+      </figcaption>
+    </figure>
+
+    <div class="tu-spread">
+      <p class="tu-caption">
+        <span class="en">Housing and food do not disappear with it — that $19,040 is still standing. But the gap between the advertised number and the paid number is the largest single misunderstanding in this whole subject, and it runs in the direction nobody expects.</span>
+        <span class="vi">Chỗ ở và ăn uống không biến mất theo — khoản $19,040 kia vẫn còn nguyên. Nhưng khoảng cách giữa con số quảng cáo và con số thực trả là hiểu lầm lớn nhất trong toàn bộ chủ đề này, và nó lệch về hướng không ai ngờ tới.</span>
+      </p>
+      <aside class="tu-margin">
+        <div>
+          <span class="tu-margin-label">
+            <span class="en">Your own number</span>
+            <span class="vi">Con số của riêng bạn</span>
+          </span>
+          <p class="tu-margin-note" style="margin-top: 0">
+            <span class="en">Every college is required to post a <strong>Net Price Calculator</strong>. It is free, it takes about ten minutes, and you can run it years before you apply. An average is not an offer; that is.</span>
+            <span class="vi">Mọi trường đều bắt buộc phải đăng một <strong>Net Price Calculator</strong>. Nó miễn phí, mất khoảng mười phút, và bạn có thể dùng từ nhiều năm trước khi nộp đơn. Con số trung bình không phải mức trường dành cho bạn; con số này thì có.</span>
+          </p>
+        </div>
+        <p class="tu-dated">
+          <span class="en">Same source. Figures are for 2025–26 in 2025 dollars.</span>
+          <span class="vi">Cùng nguồn. Số liệu cho năm học 2025–26, quy về đô-la năm 2025.</span>
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ---------- 3. The FAFSA ---------- -->
+  <section class="section tu-section" id="tu-fafsa">
+    <div class="tu-measure">
+      <p class="eyebrow">
+        <span class="en">The form</span>
+        <span class="vi">Lá đơn</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">One free form decides most of that</span>
+        <span class="vi">Một lá đơn miễn phí quyết định phần lớn điều đó</span>
+      </h2>
+      <p class="tu-lede">
+        <span class="en">The FAFSA — the Free Application for Federal Student Aid — is how you reach grants, work-study, and federal loans. Most colleges and states use it to hand out their own money too. Filing it costs nothing; not filing it is the most expensive thing in this module.</span>
+        <span class="vi">FAFSA — Đơn xin Hỗ trợ Tài chính Sinh viên Liên bang Miễn phí — là cách bạn tiếp cận trợ cấp, chương trình vừa học vừa làm và các khoản vay liên bang. Phần lớn các trường và tiểu bang cũng dựa vào nó để phát tiền của chính họ. Nộp đơn không tốn gì; không nộp mới là điều đắt đỏ nhất trong mô-đun này.</span>
+      </p>
+    </div>
+
+    <div class="tu-time" aria-hidden="true">
+      <div class="tu-time-line">
+        <span class="tu-time-window" style="--from: 9.5%; --to: 19.1%"></span>
+        <span class="tu-time-mark" style="--at: 0%"></span>
+        <span class="tu-time-mark is-open" style="--at: 100%"></span>
+      </div>
+    </div>
+    <div class="tu-time-labels" aria-hidden="true">
+      <p class="tu-time-label" style="--at: 0%">
+        <span class="tu-time-when">Oct 1, 2026</span>
+        <span class="en">The 2027–28 form opens</span>
+        <span class="vi">Đơn năm học 2027–28 mở</span>
+      </p>
+      <p class="tu-time-label" style="--at: 19%">
+        <span class="tu-time-when">Dec — Mar</span>
+        <span class="en">Where most state and college deadlines land</span>
+        <span class="vi">Nơi phần lớn hạn chót của tiểu bang và trường rơi vào</span>
+      </p>
+      <p class="tu-time-label is-end" style="--at: 100%">
+        <span class="tu-time-when">Jun 30, 2028</span>
+        <span class="en">The federal window closes — long after the money is gone</span>
+        <span class="vi">Cửa sổ liên bang đóng lại — rất lâu sau khi tiền đã hết</span>
+      </p>
+    </div>
+
+    <div class="tu-spread">
+      <p class="tu-body" style="margin-bottom: 0">
+        <span class="en">The shape of that line is the advice. The federal deadline is generous and almost irrelevant; the deadlines that decide whether you get money are the ones in the shaded band, and some states award until the money runs out rather than until a date passes. File near the opening, not near the closing.</span>
+        <span class="vi">Hình dạng của đường thời gian đó chính là lời khuyên. Hạn chót liên bang rất rộng rãi và gần như không quan trọng; những hạn quyết định bạn có được tiền hay không nằm trong dải tô đậm, và một số tiểu bang phát cho đến khi hết tiền chứ không phải đến khi hết hạn. Hãy nộp gần ngày mở đơn, đừng đợi tới ngày đóng.</span>
+      </p>
+      <aside class="tu-margin">
+        <p class="tu-dated" style="margin-top: 0">
+          <span class="en">Opening date confirmed by the Department of Education. State and college deadlines vary — check each one. The June 30, 2028 federal close follows the standing pattern (the 2026–27 form closes June 30, 2027) and is published with the form.</span>
+          <span class="vi">Ngày mở đơn đã được Bộ Giáo dục xác nhận. Hạn của tiểu bang và của trường khác nhau — hãy kiểm tra từng nơi. Hạn liên bang 30/6/2028 theo đúng quy luật lâu nay (đơn 2026–27 đóng ngày 30/6/2027) và được công bố kèm theo mẫu đơn.</span>
+        </p>
+      </aside>
+    </div>
+
+    <div class="tu-split-cols" style="margin-top: 64px">
+      <div>
+        <p class="mini-label">
+          <span class="en">What comes back</span>
+          <span class="vi">Kết quả nhận lại</span>
+        </p>
+        <p class="tu-body">
+          <span class="en">The form turns your family's answers into one number, the <strong>Student Aid Index</strong>. It replaced the Expected Family Contribution in 2024–25, and the rename was the point: it is not a bill, and it is not a prediction of what your family will pay. It is one input colleges use to decide how much need-based aid to offer.</span>
+          <span class="vi">Lá đơn biến câu trả lời của gia đình bạn thành một con số duy nhất, <strong>Chỉ số Hỗ trợ Sinh viên</strong>. Nó thay thế Expected Family Contribution từ năm học 2024–25, và việc đổi tên chính là điểm mấu chốt: đây không phải hóa đơn, cũng không phải dự đoán số tiền gia đình bạn sẽ trả. Nó chỉ là một dữ kiện để trường quyết định mức hỗ trợ theo nhu cầu.</span>
+        </p>
+        <p class="tu-body">
+          <span class="en">It runs from −$1,500 upward, and lower means more demonstrated need. A negative number is not a mistake and not a debt — it is the formula saying your family has less than nothing to spare, and it exists so that the students with the least are told apart from each other instead of all landing on zero.</span>
+          <span class="vi">Chỉ số chạy từ −$1,500 trở lên, và càng thấp nghĩa là nhu cầu được chứng minh càng lớn. Số âm không phải lỗi và cũng không phải khoản nợ — đó là cách công thức nói rằng gia đình bạn không dư ra được gì cả, và nó tồn tại để những sinh viên khó khăn nhất được phân biệt với nhau thay vì cùng dồn về số không.</span>
+        </p>
+      </div>
+      <div class="tu-axis" aria-hidden="true">
+        <div class="tu-axis-line">
+          <span class="tu-axis-tick" style="--at: 0%"></span>
+          <span class="tu-axis-tick" style="--at: 30%"></span>
+          <span class="tu-axis-tick" style="--at: 100%"></span>
+        </div>
+        <div class="tu-axis-labels">
+          <span>
+            <span class="tu-axis-num">−1,500</span>
+            <span class="en">most need</span>
+            <span class="vi">nhu cầu cao nhất</span>
+          </span>
+          <span style="text-align: right">
+            <span class="tu-axis-num">higher</span>
+            <span class="en">least need</span>
+            <span class="vi">nhu cầu thấp nhất</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tu-aside">
+      <h3 class="tu-aside-title">
+        <span class="en">If a parent has no Social Security number</span>
+        <span class="vi">Nếu cha mẹ không có số an sinh xã hội</span>
+      </h3>
+      <p class="tu-body">
+        <span class="en">They can still be a contributor on your form, and you can still get aid. They make their own StudentAid.gov account and select "I do not have a Social Security number" when it asks. Their name and mailing address then have to match that account exactly on the FAFSA — "St." against "Street" is enough to stall the whole application.</span>
+        <span class="vi">Cha mẹ vẫn có thể là người cung cấp thông tin trên đơn của bạn, và bạn vẫn được nhận hỗ trợ. Họ tự lập tài khoản StudentAid.gov riêng và chọn "I do not have a Social Security number" khi được hỏi. Sau đó tên và địa chỉ nhận thư phải khớp chính xác với tài khoản đó trên FAFSA — chỉ cần "St." lệch với "Street" là cả hồ sơ đã bị kẹt.</span>
+      </p>
+      <p class="tu-body">
+        <span class="en">Without an SSN they cannot pull tax figures across from the IRS automatically, so those numbers get typed in by hand from the tax return. And the form asks about <em>your</em> citizenship status, not your parent's — a parent's immigration status does not decide whether you qualify.</span>
+        <span class="vi">Không có SSN thì họ không thể lấy số liệu thuế tự động từ IRS, nên phải tự nhập tay các con số đó từ tờ khai thuế. Và lá đơn hỏi về tình trạng công dân của <em>bạn</em>, không phải của cha mẹ — tình trạng cư trú của cha mẹ không quyết định bạn có đủ điều kiện hay không.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ---------- 4. Aid you keep ---------- -->
+  <section class="section tu-section" id="tu-aid">
+    <div class="tu-measure">
+      <p class="eyebrow">
+        <span class="en">Aid you keep</span>
+        <span class="vi">Khoản hỗ trợ bạn được giữ</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">Three kinds of money you never pay back</span>
+        <span class="vi">Ba loại tiền bạn không bao giờ phải hoàn lại</span>
+      </h2>
+      <p class="tu-lede">
+        <span class="en">Only one of the three has a published maximum, so only one of the three can be drawn on the ruler. That is worth knowing before you start hunting.</span>
+        <span class="vi">Chỉ một trong ba loại có mức tối đa được công bố, nên chỉ một loại vẽ được lên thước đo. Điều đó đáng biết trước khi bạn bắt đầu đi tìm.</span>
+      </p>
+    </div>
+
+    <ul class="tu-rows" style="margin-top: 44px">
+      <li>
+        <div class="tu-row-head">
+          <span class="tu-row-term">
+            <span class="en">Grant</span>
+            <span class="vi">Trợ cấp</span>
+          </span>
+          <span class="tu-row-vi">
+            <span class="en">trợ cấp</span>
+            <span class="vi">grant</span>
+          </span>
+        </div>
+        <div class="tu-spread">
+          <p class="tu-row-body">
+            <span class="en">Need-based money, awarded from what the FAFSA says about your family's finances. The federal Pell Grant is the largest one for undergraduates, and it is the reason filing matters most for the families least likely to file.</span>
+            <span class="vi">Tiền cấp theo nhu cầu tài chính, xét dựa trên những gì FAFSA cho biết về hoàn cảnh gia đình bạn. Pell Grant của liên bang là khoản lớn nhất cho bậc cử nhân, và nó chính là lý do việc nộp đơn quan trọng nhất với đúng những gia đình ít có khả năng nộp nhất.</span>
+          </p>
+          <aside class="tu-margin">
+            <div>
+          <span class="tu-margin-label">
+            <span class="en">How you get it</span>
+            <span class="vi">Cách nhận được</span>
+          </span>
+              <p class="tu-margin-note" style="margin-top: 0">
+                <span class="en">The FAFSA, and nothing else. There is no separate Pell application.</span>
+                <span class="vi">Chỉ cần FAFSA, không cần gì thêm. Không có đơn xin Pell riêng.</span>
+              </p>
+            </div>
+          </aside>
+        </div>
+        <div class="tu-bar tu-row-fig">
+            <div class="tu-bar-head">
+              <span class="tu-bar-sub">
+                <span class="en">Pell Grant, maximum award, 2026–27</span>
+                <span class="vi">Pell Grant, mức tối đa, 2026–27</span>
+              </span>
+              <span class="tu-bar-value">$7,395</span>
+            </div>
+            <div class="tu-track is-slim">
+              <span class="tu-seg is-aid" style="--w: 23.85%"></span>
+            </div>
+            <p class="tu-caption">
+              <span class="en">Against the same $31,000 ruler: roughly a quarter of a published year, or about 62% of the tuition line. The minimum award is $740.</span>
+              <span class="vi">So với cùng thước $31,000: khoảng một phần tư một năm niêm yết, tức chừng 62% dòng học phí. Mức thấp nhất là $740.</span>
+            </p>
+        </div>
+      </li>
+      <li>
+        <div class="tu-row-head">
+          <span class="tu-row-term">
+            <span class="en">Scholarship</span>
+            <span class="vi">Học bổng</span>
+          </span>
+          <span class="tu-row-vi">
+            <span class="en">học bổng</span>
+            <span class="vi">scholarship</span>
+          </span>
+        </div>
+        <div class="tu-spread">
+          <p class="tu-row-body">
+            <span class="en">Awarded for something other than need — grades, a sport, an essay, a language, a community, a parent's employer. There is no maximum and no single application: colleges hand out most of the money in this category themselves, from the admission file you already sent, and the rest you apply for one at a time.</span>
+            <span class="vi">Trao vì một lý do khác ngoài nhu cầu tài chính — điểm số, thể thao, bài luận, ngôn ngữ, cộng đồng, nơi làm việc của cha mẹ. Không có mức trần và không có một lá đơn chung: phần lớn tiền trong nhóm này do chính các trường trao, dựa trên hồ sơ tuyển sinh bạn đã nộp, phần còn lại bạn phải xin từng suất một.</span>
+          </p>
+          <aside class="tu-margin">
+            <div>
+          <span class="tu-margin-label">
+            <span class="en">How you get it</span>
+            <span class="vi">Cách nhận được</span>
+          </span>
+              <p class="tu-margin-note" style="margin-top: 0">
+                <span class="en">Mostly the application you already sent. The rest, one form at a time — start with your own school, city and parents' employers before the national databases.</span>
+                <span class="vi">Phần lớn là từ chính hồ sơ bạn đã nộp. Phần còn lại thì xin từng đơn một — hãy bắt đầu từ trường, thành phố và nơi làm việc của cha mẹ trước khi tìm tới các trang tổng hợp toàn quốc.</span>
+              </p>
+            </div>
+          </aside>
+        </div>
+      </li>
+      <li>
+        <div class="tu-row-head">
+          <span class="tu-row-term">
+            <span class="en">Work-study</span>
+            <span class="vi">Vừa học vừa làm</span>
+          </span>
+          <span class="tu-row-vi">
+            <span class="en">chương trình vừa học vừa làm</span>
+            <span class="vi">work-study</span>
+          </span>
+        </div>
+        <div class="tu-spread">
+          <p class="tu-row-body">
+            <span class="en">A part-time job on or near campus, partly funded by the federal government and offered inside your aid package. The amount is a ceiling on what you may earn, not a cheque — you get it by working, and it arrives as a paycheck rather than as a credit against your bill. Budget accordingly: it lands after the bill is due.</span>
+            <span class="vi">Một công việc bán thời gian trong hoặc gần trường, được liên bang tài trợ một phần và nằm ngay trong gói hỗ trợ của bạn. Con số ghi trong gói là mức trần bạn được phép kiếm, không phải một tấm séc — bạn nhận được nó bằng cách đi làm, và tiền về dưới dạng lương chứ không phải khoản trừ vào hóa đơn. Hãy tính toán cho phù hợp: nó đến sau khi hóa đơn đã đến hạn.</span>
+          </p>
+          <aside class="tu-margin">
+            <div>
+          <span class="tu-margin-label">
+            <span class="en">How you get it</span>
+            <span class="vi">Cách nhận được</span>
+          </span>
+              <p class="tu-margin-note" style="margin-top: 0">
+                <span class="en">The FAFSA offers it; you still have to accept it and then find the job. Campus listings open early and fill fast.</span>
+                <span class="vi">FAFSA cấp cho bạn suất này; bạn vẫn phải chấp nhận rồi tự đi tìm việc. Danh sách việc trong trường mở sớm và hết rất nhanh.</span>
+              </p>
+            </div>
+          </aside>
+        </div>
+      </li>
+    </ul>
+
+    <p class="tu-dated tu-measure">
+      <span class="en">Pell figures are the 2026–27 award year maximum and minimum, from Federal Student Aid.</span>
+      <span class="vi">Số liệu Pell là mức tối đa và tối thiểu của năm học 2026–27, theo Federal Student Aid.</span>
+    </p>
+  </section>
+
+  <!-- ============================================================
+       PART TWO. Same ruler, pointed the other way: everything below
+       is money that has to come back.
+       ============================================================ -->
+  <div class="tu-part">
+    <div class="tu-part-row">
+      <p class="tu-part-name">
+        <span class="en">Part two · What borrowing costs</span>
+        <span class="vi">Phần hai · Cái giá của việc vay</span>
+      </p>
+    </div>
+    <div class="tu-ruler" aria-hidden="true">
+      <span class="tu-ruler-end">$0</span>
+      <span class="tu-ruler-line"></span>
+      <span class="tu-ruler-end">$31,000</span>
+    </div>
+    <p class="tu-caption tu-measure">
+      <span class="en">Same scale. From here on, every bar is money that has to come back.</span>
+      <span class="vi">Vẫn thước đó. Từ đây trở đi, mọi thanh đo đều là số tiền phải hoàn lại.</span>
+    </p>
+  </div>
+
+  <!-- ---------- 5. The order to borrow ---------- -->
+  <section class="section tu-section" id="tu-order">
+    <div class="tu-measure">
+      <p class="eyebrow">
+        <span class="en">Three kinds of loan, ranked</span>
+        <span class="vi">Ba loại khoản vay, xếp hạng</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">If you borrow, the order matters as much as the amount</span>
+        <span class="vi">Nếu phải vay, thứ tự cũng quan trọng như số tiền</span>
+      </h2>
+      <p class="tu-lede">
+        <span class="en">These are not three versions of one product, and the ranking barely moves from year to year. Each one below sits further from the margin than the option that beats it.</span>
+        <span class="vi">Đây không phải ba phiên bản của cùng một thứ, và thứ hạng gần như không đổi qua các năm. Mỗi mục bên dưới nằm xa lề hơn so với lựa chọn tốt hơn nó.</span>
+      </p>
+    </div>
+
+    <ul class="tu-order" style="margin-top: 44px">
+      <li>
+        <p class="tu-order-when">
+          <span class="en">Take this first</span>
+          <span class="vi">Nhận khoản này trước</span>
+        </p>
+        <h3 class="tu-order-name">
+          <span class="en">Federal subsidized loan</span>
+          <span class="vi">Khoản vay liên bang được trợ cấp lãi</span>
+          <span class="tu-order-vi">Direct Subsidized Loan</span>
+        </h3>
+        <div class="tu-spread">
+        <p class="tu-order-body">
+          <span class="en">The government pays the interest while you are enrolled at least half-time and through the six-month grace period after you leave. Need-based, so the FAFSA decides whether it is offered. Borrow a dollar and, on the day repayment starts, you still owe exactly a dollar.</span>
+          <span class="vi">Chính phủ trả lãi trong lúc bạn còn đi học ít nhất bán thời gian và suốt sáu tháng ân hạn sau khi rời trường. Xét theo nhu cầu tài chính, nên FAFSA quyết định bạn có được cấp hay không. Vay một đồng, thì đúng ngày bắt đầu trả nợ, bạn vẫn chỉ nợ một đồng.</span>
+        </p>
+        <aside class="tu-margin">
+          <ul class="tu-facts">
+              <li>
+                <span>
+                  <span class="en">Fixed rate</span>
+                  <span class="vi">Lãi suất cố định</span>
+                </span>
+                <span class="tu-fact-value">6.52%</span>
+              </li>
+              <li>
+                <span>
+                  <span class="en">Loan fee, taken off the top</span>
+                  <span class="vi">Phí khoản vay, trừ ngay từ đầu</span>
+                </span>
+                <span class="tu-fact-value">1.057%</span>
+              </li>
+              <li>
+                <span>
+                  <span class="en">Interest while you are enrolled</span>
+                  <span class="vi">Lãi trong lúc bạn còn đi học</span>
+                </span>
+                <span class="tu-fact-value"><span class="en">Paid for you</span><span class="vi">Có người trả hộ</span></span>
+              </li>
+          </ul>
+        </aside>
+        </div>
+        <div class="tu-bar tu-row-fig">
+          <div class="tu-bar-head">
+            <span class="tu-bar-sub">
+              <span class="en">Most a third- or fourth-year student can take, per year</span>
+              <span class="vi">Mức cao nhất sinh viên năm ba hoặc năm tư được vay, mỗi năm</span>
+            </span>
+            <span class="tu-bar-value">$5,500</span>
+          </div>
+          <div class="tu-track is-slim">
+            <span class="tu-seg is-sub" style="--w: 17.74%"></span>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <p class="tu-order-when">
+          <span class="en">Then this</span>
+          <span class="vi">Rồi đến khoản này</span>
+        </p>
+        <h3 class="tu-order-name">
+          <span class="en">Federal unsubsidized loan</span>
+          <span class="vi">Khoản vay liên bang không được trợ cấp lãi</span>
+          <span class="tu-order-vi">Direct Unsubsidized Loan</span>
+        </h3>
+        <div class="tu-spread">
+        <p class="tu-order-body">
+          <span class="en">Same rate, same protections, one difference that costs real money: interest starts on the day the loan is disbursed, including every year you are still sitting in class. Not need-based, so it is offered regardless of your Student Aid Index — and it fills the gap up to the same annual ceiling.</span>
+          <span class="vi">Cùng lãi suất, cùng các quyền bảo vệ, chỉ khác một điểm nhưng tốn tiền thật: lãi bắt đầu chạy ngay ngày khoản vay được giải ngân, kể cả những năm bạn vẫn đang ngồi trên giảng đường. Không xét theo nhu cầu, nên bạn được cấp bất kể Chỉ số Hỗ trợ Sinh viên là bao nhiêu — và nó lấp phần còn thiếu cho tới cùng mức trần hằng năm đó.</span>
+        </p>
+        <aside class="tu-margin">
+          <ul class="tu-facts">
+              <li>
+                <span>
+                  <span class="en">Fixed rate</span>
+                  <span class="vi">Lãi suất cố định</span>
+                </span>
+                <span class="tu-fact-value">6.52%</span>
+              </li>
+              <li>
+                <span>
+                  <span class="en">Loan fee, taken off the top</span>
+                  <span class="vi">Phí khoản vay, trừ ngay từ đầu</span>
+                </span>
+                <span class="tu-fact-value">1.057%</span>
+              </li>
+              <li>
+                <span>
+                  <span class="en">Interest while you are enrolled</span>
+                  <span class="vi">Lãi trong lúc bạn còn đi học</span>
+                </span>
+                <span class="tu-fact-value"><span class="en">Yours</span><span class="vi">Của bạn</span></span>
+              </li>
+          </ul>
+        </aside>
+        </div>
+        <div class="tu-bar tu-row-fig">
+          <div class="tu-bar-head">
+            <span class="tu-bar-sub">
+              <span class="en">The same year's ceiling, both federal loans combined</span>
+              <span class="vi">Mức trần của cùng năm đó, tính gộp cả hai khoản vay liên bang</span>
+            </span>
+            <span class="tu-bar-value">$7,500</span>
+          </div>
+          <div class="tu-track is-slim">
+            <span class="tu-seg is-sub" style="--w: 17.74%"></span>
+            <span class="tu-seg is-mid" style="--w: 6.45%"></span>
+          </div>
+          <p class="tu-caption">
+            <span class="en">Teal is the subsidized part of that ceiling. The rest can only be unsubsidized.</span>
+            <span class="vi">Màu xanh mòng két là phần được trợ cấp lãi trong mức trần đó. Phần còn lại chỉ có thể là khoản không trợ cấp.</span>
+          </p>
+        </div>
+      </li>
+
+      <li>
+        <p class="tu-order-when">
+          <span class="en">Only if you have to</span>
+          <span class="vi">Chỉ khi buộc phải vay</span>
+        </p>
+        <h3 class="tu-order-name">
+          <span class="en">Private student loan</span>
+          <span class="vi">Khoản vay sinh viên tư nhân</span>
+          <span class="tu-order-vi">
+            <span class="en">from a bank or credit union</span>
+            <span class="vi">từ ngân hàng hoặc quỹ tín dụng</span>
+          </span>
+        </h3>
+        <div class="tu-spread">
+        <p class="tu-order-body">
+          <span class="en">Priced on credit history — which at seventeen usually means a cosigner's, and puts that person fully on the hook for every payment. The rate can be variable, and none of the federal protections travel with it: no income-driven plan, no repayment terms set by law. There is also no federal ceiling, which is exactly why the bar below has no right-hand edge.</span>
+          <span class="vi">Lãi suất định theo lịch sử tín dụng — mà ở tuổi mười bảy thì thường là lịch sử của người đồng ký khoản vay, và người đó chịu trách nhiệm hoàn toàn cho từng kỳ trả. Lãi suất có thể thả nổi, và không quyền bảo vệ nào của liên bang đi kèm: không có kế hoạch trả nợ theo thu nhập, không có điều khoản do luật quy định. Cũng không có mức trần liên bang nào, và đó chính là lý do thanh đo bên dưới không có cạnh phải.</span>
+        </p>
+        <aside class="tu-margin">
+          <ul class="tu-facts">
+              <li>
+                <span>
+                  <span class="en">Rate</span>
+                  <span class="vi">Lãi suất</span>
+                </span>
+                <span class="tu-fact-value"><span class="en">Set by the lender</span><span class="vi">Bên cho vay đặt</span></span>
+              </li>
+              <li>
+                <span>
+                  <span class="en">Usually needs a cosigner</span>
+                  <span class="vi">Thường cần người đồng ký</span>
+                </span>
+                <span class="tu-fact-value"><span class="en">Yes</span><span class="vi">Có</span></span>
+              </li>
+              <li>
+                <span>
+                  <span class="en">Federal protections</span>
+                  <span class="vi">Quyền bảo vệ của liên bang</span>
+                </span>
+                <span class="tu-fact-value"><span class="en">None</span><span class="vi">Không có</span></span>
+              </li>
+          </ul>
+        </aside>
+        </div>
+        <div class="tu-bar tu-row-fig">
+          <div class="tu-bar-head">
+            <span class="tu-bar-sub">
+              <span class="en">Annual limit</span>
+              <span class="vi">Hạn mức hằng năm</span>
+            </span>
+            <span class="tu-bar-value">
+              <span class="en">none</span>
+              <span class="vi">không có</span>
+            </span>
+          </div>
+          <div class="tu-track is-slim">
+            <span class="tu-seg is-open" style="--w: 100%"></span>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="tu-key">
+      <span class="tu-key-item">
+        <span class="tu-key-swatch is-sub" aria-hidden="true"></span>
+        <span class="en">Subsidized — interest paid for you until repayment</span>
+        <span class="vi">Được trợ cấp lãi — có người trả lãi hộ tới khi bắt đầu trả nợ</span>
+      </span>
+      <span class="tu-key-item">
+        <span class="tu-key-swatch is-mid" aria-hidden="true"></span>
+        <span class="en">Unsubsidized — interest is yours from day one</span>
+        <span class="vi">Không trợ cấp lãi — lãi là của bạn ngay từ ngày đầu</span>
+      </span>
+      <span class="tu-key-item">
+        <span class="tu-key-swatch is-open" aria-hidden="true"></span>
+        <span class="en">Private — no federal ceiling, no federal floor</span>
+        <span class="vi">Tư nhân — không trần liên bang, cũng không sàn liên bang</span>
+      </span>
+    </div>
+  </section>
+
+  <!-- ---------- 6. The interest clock ---------- -->
+  <section class="section tu-section" id="tu-clock">
+    <div class="tu-measure">
+      <p class="eyebrow">
+        <span class="en">The difference, drawn</span>
+        <span class="vi">Sự khác biệt, vẽ ra</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">What "interest starts on day one" actually costs</span>
+        <span class="vi">"Lãi chạy ngay từ ngày đầu" thực sự tốn bao nhiêu</span>
+      </h2>
+      <p class="tu-lede">
+        <span class="en">Two students borrow the same $5,500 in their first year, at the same 6.52%. One loan is subsidized and one is not. Nothing else about them differs — not the school, not the payment, not a single decision either of them makes.</span>
+        <span class="vi">Hai sinh viên cùng vay $5,500 trong năm đầu, cùng lãi suất 6,52%. Một khoản được trợ cấp lãi, một khoản thì không. Ngoài ra không có gì khác biệt — không phải trường, không phải khoản trả, không một quyết định nào của họ khác nhau.</span>
+      </p>
+    </div>
+
+    <svg class="tu-clock" viewBox="0 0 820 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <!-- The six-month grace period. -->
+      <rect class="tu-clock-fill" x="576.7" y="30" width="63.3" height="165"></rect>
+      <!-- Year grid. -->
+      <line class="tu-clock-grid" x1="196.7" y1="30" x2="196.7" y2="195"></line>
+      <line class="tu-clock-grid" x1="323.3" y1="30" x2="323.3" y2="195"></line>
+      <line class="tu-clock-grid" x1="450" y1="30" x2="450" y2="195"></line>
+      <line class="tu-clock-grid" x1="576.7" y1="30" x2="576.7" y2="195"></line>
+      <!-- The $5,500 itself: the part both students owe. The axis starts at
+           zero, so this band is what would otherwise be dead space. -->
+      <path class="tu-clock-base" d="M70,74 L640,74 L640,195 L70,195 Z"></path>
+      <!-- Interest one of them is accruing and the other is not. -->
+      <path class="tu-clock-wedge" d="M70,74 L640,38.5 L640,74 Z"></path>
+      <!-- Axes. -->
+      <line class="tu-clock-axis" x1="70" y1="195" x2="640" y2="195"></line>
+      <line class="tu-clock-axis" x1="70" y1="30" x2="70" y2="195"></line>
+      <!-- The two balances. -->
+      <path class="tu-clock-sub" d="M70,74 L640,74"></path>
+      <path class="tu-clock-unsub" d="M70,74 L640,38.5"></path>
+      <line class="tu-clock-gap" x1="640" y1="38.5" x2="640" y2="74"></line>
+      <!-- Values. -->
+      <text class="tu-clock-name is-unsub" x="652" y="35">$7,114</text>
+      <text class="tu-clock-tick" x="652" y="60">+$1,614</text>
+      <text class="tu-clock-name is-sub" x="652" y="82">$5,500</text>
+      <text class="tu-clock-tick" x="62" y="199" text-anchor="end">$0</text>
+      <!-- Years. -->
+      <text class="tu-clock-tick" x="196.7" y="215" text-anchor="middle">1</text>
+      <text class="tu-clock-tick" x="323.3" y="215" text-anchor="middle">2</text>
+      <text class="tu-clock-tick" x="450" y="215" text-anchor="middle">3</text>
+      <text class="tu-clock-tick" x="576.7" y="215" text-anchor="middle">4</text>
+    </svg>
+
+    <div class="tu-key">
+      <span class="tu-key-item">
+        <span class="tu-key-swatch is-sub" aria-hidden="true"></span>
+        <span class="en">Subsidized — flat the whole way. The government covers the interest.</span>
+        <span class="vi">Được trợ cấp lãi — nằm ngang suốt chặng. Chính phủ trả phần lãi.</span>
+      </span>
+      <span class="tu-key-item">
+        <span class="tu-key-swatch is-ink" aria-hidden="true"></span>
+        <span class="en">Unsubsidized — climbing from the day the money lands.</span>
+        <span class="vi">Không trợ cấp lãi — leo dốc từ ngày tiền về tài khoản.</span>
+      </span>
+      <span class="tu-key-item">
+        <span class="tu-key-swatch is-base" aria-hidden="true"></span>
+        <span class="en">The band underneath is the $5,500 itself — the part both of them owe.</span>
+        <span class="vi">Dải phía dưới chính là khoản $5,500 — phần mà cả hai đều nợ.</span>
+      </span>
+    </div>
+
+    <div class="tu-spread" style="margin-top: 28px">
+      <div>
+      <p class="tu-body">
+        <span class="en">Four years of classes, then the six-month grace period — the shaded band at the right. By the day the first payment is due, the unsubsidized borrower owes about <strong>$1,614</strong> more than the subsidized one. Neither of them ever saw that money, spent it, or made a choice about it.</span>
+        <span class="vi">Bốn năm học, rồi sáu tháng ân hạn — dải tô đậm bên phải. Đến ngày phải trả kỳ đầu tiên, người vay không trợ cấp nợ nhiều hơn người được trợ cấp khoảng <strong>$1,614</strong>. Không ai trong hai người từng nhìn thấy khoản tiền đó, tiêu nó, hay đưa ra bất kỳ lựa chọn nào về nó.</span>
+      </p>
+      <p class="tu-body">
+        <span class="en">That is the entire argument for taking every subsidized dollar you are offered before any unsubsidized one — and the reason the order above is the advice.</span>
+        <span class="vi">Đó là toàn bộ lý do vì sao nên nhận hết phần được trợ cấp lãi trước khi động đến phần không trợ cấp — và cũng là lý do thứ tự phía trên chính là lời khuyên.</span>
+      </p>
+      </div>
+      <aside class="tu-margin">
+      <p class="tu-dated" style="margin-top: 0">
+        <span class="en">$5,500 at 6.52% simple accrual over four years of enrollment plus a six-month grace period. Rate is for federal loans first disbursed between July 1, 2026 and June 30, 2027. The same curve, pointed the other way, is what the <a href="calculator.html">Calculator</a> module draws for savings.</span>
+        <span class="vi">$5,500 với lãi đơn 6,52% trong bốn năm học cộng sáu tháng ân hạn. Lãi suất áp dụng cho khoản vay liên bang giải ngân lần đầu từ 1/7/2026 đến 30/6/2027. Cũng đường cong đó, chĩa theo hướng ngược lại, là thứ mô-đun <a href="calculator.html">Máy tính</a> vẽ cho tiền tiết kiệm.</span>
+      </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ---------- 7. The limits, and the payoff ---------- -->
+  <section class="section tu-section" id="tu-limits">
+    <div class="tu-measure">
+      <p class="eyebrow">
+        <span class="en">How much there is to take</span>
+        <span class="vi">Có bao nhiêu để vay</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">Federal borrowing has a ceiling, and it is lower than people think</span>
+        <span class="vi">Vay liên bang có mức trần, và nó thấp hơn nhiều người tưởng</span>
+      </h2>
+      <p class="tu-lede">
+        <span class="en">A dependent undergraduate can borrow this much from the federal government, and not a dollar more. The limit rises each year, and the subsidized share inside it rises with it.</span>
+        <span class="vi">Một sinh viên phụ thuộc chỉ được vay từ chính phủ liên bang đúng chừng này, không hơn một đồng. Hạn mức tăng dần theo từng năm, và phần được trợ cấp lãi bên trong cũng tăng theo.</span>
+      </p>
+    </div>
+
+    <ul class="tu-ladder" style="margin-top: 44px">
+      <li>
+        <div class="tu-ladder-head">
+          <span class="tu-ladder-year">
+            <span class="en">Year 1</span>
+            <span class="vi">Năm 1</span>
+          </span>
+          <span class="tu-ladder-value">$5,500</span>
+        </div>
+        <div class="tu-track is-slim">
+          <span class="tu-seg is-sub" style="--w: 11.29%"></span>
+          <span class="tu-seg is-mid" style="--w: 6.45%"></span>
+        </div>
+      </li>
+      <li>
+        <div class="tu-ladder-head">
+          <span class="tu-ladder-year">
+            <span class="en">Year 2</span>
+            <span class="vi">Năm 2</span>
+          </span>
+          <span class="tu-ladder-value">$6,500</span>
+        </div>
+        <div class="tu-track is-slim">
+          <span class="tu-seg is-sub" style="--w: 14.52%"></span>
+          <span class="tu-seg is-mid" style="--w: 6.45%"></span>
+        </div>
+      </li>
+      <li>
+        <div class="tu-ladder-head">
+          <span class="tu-ladder-year">
+            <span class="en">Year 3</span>
+            <span class="vi">Năm 3</span>
+          </span>
+          <span class="tu-ladder-value">$7,500</span>
+        </div>
+        <div class="tu-track is-slim">
+          <span class="tu-seg is-sub" style="--w: 17.74%"></span>
+          <span class="tu-seg is-mid" style="--w: 6.45%"></span>
+        </div>
+      </li>
+      <li>
+        <div class="tu-ladder-head">
+          <span class="tu-ladder-year">
+            <span class="en">Year 4</span>
+            <span class="vi">Năm 4</span>
+          </span>
+          <span class="tu-ladder-value">$7,500</span>
+        </div>
+        <div class="tu-track is-slim">
+          <span class="tu-seg is-sub" style="--w: 17.74%"></span>
+          <span class="tu-seg is-mid" style="--w: 6.45%"></span>
+        </div>
+      </li>
+    </ul>
+
+    <!-- The two bars this whole page was built to put next to each
+         other. Same ruler, same left edge, same length. -->
+    <div class="tu-match">
+      <div class="tu-bar">
+        <div class="tu-bar-head">
+          <span class="tu-bar-name">
+            <span class="en">Every federal dollar you can borrow as an undergraduate, in total</span>
+            <span class="vi">Toàn bộ số tiền liên bang bạn có thể vay thời đại học, tính gộp</span>
+          </span>
+          <span class="tu-bar-value is-lead">$31,000</span>
+        </div>
+        <div class="tu-track is-tall">
+          <span class="tu-seg is-sub" style="--w: 74.19%"></span>
+          <span class="tu-seg is-mid" style="--w: 25.81%"></span>
+        </div>
+      </div>
+
+      <div class="tu-bar">
+        <div class="tu-bar-head">
+          <span class="tu-bar-name">
+            <span class="en">One year of published cost, from the top of this page</span>
+            <span class="vi">Một năm chi phí niêm yết, lấy từ đầu trang này</span>
+          </span>
+          <span class="tu-bar-value is-lead">$30,990</span>
+        </div>
+        <div class="tu-track is-tall">
+          <span class="tu-seg is-ink" style="--w: 38.55%"></span>
+          <span class="tu-seg is-rest" style="--w: 61.42%"></span>
+        </div>
+      </div>
+
+      <p class="tu-match-note">
+        <span class="en">Those two bars are the same length. Every federal dollar you can borrow as an undergraduate — the whole lifetime ceiling, not one year of it — is worth about one year of sticker price. That is why aid, scholarships, in-state pricing, community college transfer, and living at home are not consolation prizes. They are the part of this that actually moves the number.</span>
+        <span class="vi">Hai thanh đo đó dài bằng nhau. Toàn bộ số tiền liên bang bạn có thể vay thời đại học — trọn mức trần cả đời, không phải của một năm — chỉ tương đương khoảng một năm giá niêm yết. Đó là lý do vì sao tiền hỗ trợ, học bổng, học phí trong bang, chuyển tiếp từ cao đẳng cộng đồng và việc ở nhà không phải là giải an ủi. Chúng mới là phần thật sự làm con số thay đổi.</span>
+      </p>
+    </div>
+
+    <p class="tu-dated tu-measure">
+      <span class="en">Annual and aggregate limits for a dependent undergraduate, unchanged for 2026–27; at most $23,000 of the $31,000 may be subsidized. Part-time enrollment prorates these limits. Four years at these annual limits comes to $27,000; the $31,000 ceiling is a lifetime total that a fifth year or extra terms can reach. A parent can borrow separately through Parent PLUS, now capped at $20,000 a year and $65,000 in total per student. Check <a href="https://studentaid.gov" target="_blank" rel="noopener">studentaid.gov</a> before you sign anything.</span>
+      <span class="vi">Hạn mức hằng năm và tổng cộng dành cho sinh viên phụ thuộc, không đổi cho năm 2026–27; tối đa $23,000 trong $31,000 được trợ cấp lãi. Học bán thời gian sẽ bị chia tỷ lệ các hạn mức này. Bốn năm theo các hạn mức hằng năm này cộng lại là $27,000; mức trần $31,000 là tổng cả đời, mà năm thứ năm hoặc các học kỳ phụ trội có thể chạm tới. Cha mẹ có thể vay riêng qua Parent PLUS, nay giới hạn ở $20,000 mỗi năm và $65,000 tổng cộng cho mỗi sinh viên. Hãy kiểm tra <a href="https://studentaid.gov" target="_blank" rel="noopener">studentaid.gov</a> trước khi ký bất cứ giấy tờ nào.</span>
+    </p>
+  </section>
+
+  </div>
+
+  <!-- ---------- 8. The calculator ---------- -->
+  <div class="section-band">
+  <div class="page">
+
+  <section class="section tu-section" id="tu-calc">
+    <div class="tu-measure">
+      <p class="eyebrow">
+        <span class="en">The tool</span>
+        <span class="vi">Công cụ</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">What a loan costs per month</span>
+        <span class="vi">Một khoản vay tốn bao nhiêu mỗi tháng</span>
+      </h2>
+      <p class="tu-lede">
+        <span class="en">Estimates, not an offer. They assume a fixed rate and every payment made on time.</span>
+        <span class="vi">Đây là ước tính, không phải mức vay được duyệt. Phép tính giả định lãi suất cố định và bạn trả đúng hạn mọi kỳ.</span>
+      </p>
+    </div>
+
+    <div class="tu-calc" style="margin-top: 44px">
+      <div class="tu-calc-inputs">
+        <h3 class="tu-calc-title">
+          <span class="en">Your loan</span>
+          <span class="vi">Khoản vay của bạn</span>
+        </h3>
+
+        <div class="field">
+          <label class="field-label" for="borrowed">
+            <span class="en">Total amount borrowed</span>
+            <span class="vi">Tổng số tiền vay</span>
+          </label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="borrowed" value="31000" min="0" max="500000" step="500">
+          </div>
+          <p class="clamp-note" id="borrowedClampNote">
+            <span class="en">Capped at <span class="clamp-note-value"></span></span>
+            <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span></span>
+          </p>
+          <p class="tu-hint">
+            <span class="en">Starts at the federal aggregate cap — the bar you just saw.</span>
+            <span class="vi">Mặc định là mức trần liên bang tính gộp — chính thanh đo bạn vừa xem.</span>
+          </p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="rate">
+            <span class="en">Annual interest rate</span>
+            <span class="vi">Lãi suất hằng năm</span>
+          </label>
+          <div class="input-wrap">
+            <input type="number" id="rate" value="6.52" min="0" max="30" step="0.01">
+            <span class="prefix">%</span>
+          </div>
+          <p class="clamp-note" id="rateClampNote">
+            <span class="en">Capped at <span class="clamp-note-value"></span></span>
+            <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span></span>
+          </p>
+          <p class="tu-hint">
+            <span class="en">The federal undergraduate rate for 2026–27. A private loan will have its own.</span>
+            <span class="vi">Lãi suất liên bang bậc cử nhân năm 2026–27. Khoản vay tư nhân sẽ có mức riêng.</span>
+          </p>
+        </div>
+
+        <div class="field">
+          <span class="field-label" id="termLabel">
+            <span class="en">Repayment term, in years</span>
+            <span class="vi">Thời hạn trả nợ, tính bằng năm</span>
+          </span>
+          <div class="chip-group" id="termChips" role="group" aria-labelledby="termLabel">
+            <button type="button" class="seg-chip" data-years="10" aria-pressed="false">10</button>
+            <button type="button" class="seg-chip" data-years="15" aria-pressed="false">15</button>
+            <button type="button" class="seg-chip" data-years="20" aria-pressed="false">20</button>
+            <button type="button" class="seg-chip" data-years="25" aria-pressed="false">25</button>
+          </div>
+          <p class="tu-hint">
+            <span class="en"><span class="tu-dot" aria-hidden="true"></span>The Standard plan sets your term by what you owe, so this follows the amount until you pick one yourself.</span>
+            <span class="vi"><span class="tu-dot" aria-hidden="true"></span>Kế hoạch Standard định thời hạn theo số tiền bạn nợ, nên ô này chạy theo số tiền cho tới khi bạn tự chọn.</span>
+          </p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="salary">
+            <span class="en">Expected starting salary — optional</span>
+            <span class="vi">Lương khởi điểm dự kiến — không bắt buộc</span>
+          </label>
+          <div class="input-wrap">
+            <span class="prefix">$</span>
+            <input type="number" id="salary" placeholder="0" min="0" max="1000000" step="1000">
+          </div>
+          <p class="clamp-note" id="salaryClampNote">
+            <span class="en">Capped at <span class="clamp-note-value"></span></span>
+            <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span></span>
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <p class="tu-headline-label">
+          <span class="en">Monthly payment</span>
+          <span class="vi">Khoản trả hằng tháng</span>
+        </p>
+        <p class="tu-headline" id="tuMonthly">$0</p>
+        <p class="tu-headline-sub">
+          <span class="en">Every month, from the end of the six-month grace period until the term runs out.</span>
+          <span class="vi">Mỗi tháng, từ khi hết sáu tháng ân hạn cho đến khi hết thời hạn trả nợ.</span>
+        </p>
+
+        <div class="tu-result-block">
+          <div class="tu-bar-head">
+            <span class="tu-bar-name">
+              <span class="en">Total repaid over the whole term</span>
+              <span class="vi">Tổng số tiền trả trong suốt thời hạn</span>
+            </span>
+            <span class="tu-bar-value is-lead" id="tuTotalRepaid">$0</span>
+          </div>
+          <div class="tu-track is-tall tu-calc-track">
+            <span class="tu-seg is-ink" id="tuSegPrincipal"></span>
+            <span class="tu-seg is-mid" id="tuSegInterest"></span>
+          </div>
+          <div class="tu-legend">
+            <div class="tu-legend-item" style="--w: 50%">
+              <span class="tu-legend-name">
+                <span class="en">What you borrowed</span>
+                <span class="vi">Số tiền bạn vay</span>
+              </span>
+              <span class="tu-legend-value" id="tuPrincipalAmt">$0</span>
+            </div>
+            <div class="tu-legend-item" style="--w: 50%">
+              <span class="tu-legend-name">
+                <span class="en">Interest</span>
+                <span class="vi">Tiền lãi</span>
+              </span>
+              <span class="tu-legend-value" id="tuInterestAmt">$0</span>
+            </div>
+          </div>
+          <p class="tu-caption">
+            <span class="en">This bar is its own scale — the full width is the total you repay, not the page's $31,000 ruler.</span>
+            <span class="vi">Thanh này có thước riêng — toàn bộ chiều dài là tổng số tiền bạn trả, không phải thước $31,000 của trang.</span>
+          </p>
+        </div>
+
+        <div class="tu-result-block" id="tuCheck">
+          <p class="mini-label" style="margin-top: 0">
+            <span class="en">Against a starting salary</span>
+            <span class="vi">So với mức lương khởi điểm</span>
+          </p>
+          <p class="tu-headline-sub" style="margin-top: 0">
+            <span class="en">A common rule of thumb is to keep total borrowing under one year of expected pay. It is a rule of thumb, not a line you pass or fail.</span>
+            <span class="vi">Một nguyên tắc phổ biến là giữ tổng số tiền vay dưới một năm lương dự kiến. Đó là nguyên tắc tham khảo, không phải ranh giới để đánh trượt ai.</span>
+          </p>
+          <div class="tu-check-rows">
+            <div class="tu-check-row">
+              <span>
+                <span class="en">What you borrowed, next to one year of that salary</span>
+                <span class="vi">Số tiền bạn vay, so với một năm lương đó</span>
+              </span>
+              <span class="tu-check-value is-empty" id="tuBorrowedVsSalary">—</span>
+            </div>
+            <div class="tu-check-row">
+              <span>
+                <span class="en">Monthly payment as a share of gross monthly pay</span>
+                <span class="vi">Khoản trả hằng tháng chiếm bao nhiêu phần lương gộp mỗi tháng</span>
+              </span>
+              <span class="tu-check-value is-empty" id="tuPaymentShare">—</span>
+            </div>
+          </div>
+          <p class="tu-caption">
+            <span class="en">Gross pay is before tax, so the share of what actually reaches your bank account is higher than the figure above.</span>
+            <span class="vi">Lương gộp là mức trước thuế, nên tỷ lệ so với số tiền thật sự vào tài khoản của bạn còn cao hơn con số trên.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div>
+  </div>
+
+  <div class="page">
+
+  <!-- ---------- 9. After you leave ---------- -->
+  <section class="section tu-section" id="tu-after">
+    <div class="tu-measure">
+      <p class="eyebrow">
+        <span class="en">After you leave</span>
+        <span class="vi">Sau khi rời trường</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">Repayment has two shapes now</span>
+        <span class="vi">Việc trả nợ giờ chỉ còn hai hình thức</span>
+      </h2>
+      <p class="tu-lede">
+        <span class="en">Nothing is due while you are enrolled, and nothing is due for six months after you stop. The first payment lands later than most people expect — and the two plans below are the whole list for loans borrowed now.</span>
+        <span class="vi">Bạn không phải trả gì trong lúc còn đi học, và cũng không phải trả gì trong sáu tháng sau khi nghỉ. Kỳ trả đầu tiên đến muộn hơn phần lớn mọi người tưởng — và hai kế hoạch dưới đây là toàn bộ lựa chọn cho các khoản vay hiện nay.</span>
+      </p>
+    </div>
+
+    <div class="tu-time" aria-hidden="true">
+      <div class="tu-time-line">
+        <span class="tu-time-window" style="--from: 32%; --to: 26%"></span>
+        <span class="tu-time-mark" style="--at: 32%"></span>
+        <span class="tu-time-mark is-open" style="--at: 58%"></span>
+      </div>
+    </div>
+    <div class="tu-time-labels" aria-hidden="true">
+      <p class="tu-time-label" style="--at: 0%">
+        <span class="tu-time-when">1 — 4</span>
+        <span class="en">Enrolled. Subsidized interest is covered; unsubsidized is building.</span>
+        <span class="vi">Đang đi học. Lãi khoản trợ cấp có người trả; khoản không trợ cấp thì đang tích lại.</span>
+      </p>
+      <p class="tu-time-label" style="--at: 32%">
+        <span class="tu-time-when">+6</span>
+        <span class="en">Grace period. Still nothing due.</span>
+        <span class="vi">Thời gian ân hạn. Vẫn chưa phải trả gì.</span>
+      </p>
+      <p class="tu-time-label is-end" style="--at: 100%">
+        <span class="tu-time-when">
+          <span class="en">First payment</span>
+          <span class="vi">Kỳ trả đầu tiên</span>
+        </span>
+        <span class="en">And it keeps its size for the whole term.</span>
+        <span class="vi">Và giữ nguyên mức đó suốt thời hạn.</span>
+      </p>
+    </div>
+
+    <div class="tu-split-cols" style="margin-top: 56px">
+      <div>
+        <p class="mini-label">
+          <span class="en">Standard — your balance sets the term</span>
+          <span class="vi">Standard — số dư nợ quyết định thời hạn</span>
+        </p>
+        <p class="tu-body">
+          <span class="en">Fixed payments. You do not choose the term; the balance on the day repayment starts chooses it for you. This is the plan the calculator above models.</span>
+          <span class="vi">Khoản trả cố định. Bạn không chọn thời hạn; số dư nợ vào ngày bắt đầu trả sẽ chọn thay bạn. Đây chính là kế hoạch mà công cụ phía trên tính toán.</span>
+        </p>
+        <ul class="tu-tiers" style="margin-top: 20px">
+          <li>
+            <span>
+              <span class="en">Under $25,000</span>
+              <span class="vi">Dưới $25,000</span>
+            </span>
+            <span class="tu-tier-term">10</span>
+          </li>
+          <li>
+            <span>$25,000 – $49,999</span>
+            <span class="tu-tier-term">15</span>
+          </li>
+          <li>
+            <span>$50,000 – $99,999</span>
+            <span class="tu-tier-term">20</span>
+          </li>
+          <li>
+            <span>
+              <span class="en">$100,000 and up</span>
+              <span class="vi">Từ $100,000 trở lên</span>
+            </span>
+            <span class="tu-tier-term">25</span>
+          </li>
+        </ul>
+        <p class="tu-caption">
+          <span class="en">Terms in years.</span>
+          <span class="vi">Thời hạn tính bằng năm.</span>
+        </p>
+      </div>
+
+      <div>
+        <span class="tu-aside-label">
+          <span class="en">At the federal cap</span>
+          <span class="vi">Ở mức trần liên bang</span>
+        </span>
+        <span class="tu-aside-value">15</span>
+        <p class="tu-caption">
+          <span class="en">A student who borrows the full $31,000 lands in the fifteen-year tier, not the ten — five extra years of payments that nobody chose.</span>
+          <span class="vi">Sinh viên vay trọn $31,000 sẽ rơi vào bậc mười lăm năm, không phải mười — thêm năm năm trả nợ mà chẳng ai chọn cả.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="tu-spread" style="margin-top: 48px">
+      <div>
+      <p class="mini-label" style="margin-top: 0">
+        <span class="en">Repayment Assistance Plan — your income sets the payment</span>
+        <span class="vi">Repayment Assistance Plan — thu nhập quyết định khoản trả</span>
+      </p>
+      <p class="tu-body">
+        <span class="en">Payments run from 1% to 10% of your income, minus $50 a month for each dependent child, with a floor of $10. Any interest your payment does not cover is waived, so the balance cannot grow while you keep paying. Whatever is left after 360 payments — thirty years — is forgiven, and a forgiven balance counts as taxable income that year.</span>
+        <span class="vi">Khoản trả dao động từ 1% đến 10% thu nhập, trừ $50 mỗi tháng cho mỗi con phụ thuộc, và không thấp hơn $10. Phần lãi mà khoản trả không bù nổi sẽ được xóa, nên dư nợ không thể phình lên chừng nào bạn còn trả đều. Phần còn lại sau 360 kỳ trả — ba mươi năm — sẽ được xóa nợ, và khoản được xóa bị tính là thu nhập chịu thuế trong năm đó.</span>
+      </p>
+      <p class="tu-body">
+        <span class="en">It moves with your income every year, so there is no single number to draw for it here — which is exactly why it is not in the calculator. Your servicer runs the figure once you are in repayment.</span>
+        <span class="vi">Kế hoạch này thay đổi theo thu nhập từng năm, nên không có con số cố định nào để vẽ ở đây — và đó chính là lý do nó không nằm trong công cụ tính. Đơn vị quản lý khoản vay sẽ tính giúp bạn khi bắt đầu trả nợ.</span>
+      </p>
+      </div>
+      <aside class="tu-margin">
+      <p class="tu-dated" style="margin-top: 0">
+        <span class="en">For federal loans first disbursed on or after July 1, 2026, these two plans are the whole list — the old flat ten-year Standard plan and the older income-driven plans are closed to them. Rules for loans disbursed before that date are different; see <a href="https://studentaid.gov" target="_blank" rel="noopener">studentaid.gov</a>.</span>
+        <span class="vi">Với các khoản vay liên bang giải ngân lần đầu từ ngày 1/7/2026, hai kế hoạch này là toàn bộ lựa chọn — kế hoạch Standard mười năm cố định trước đây và các kế hoạch theo thu nhập cũ đều đã đóng với chúng. Quy định cho khoản vay giải ngân trước ngày đó thì khác; xem <a href="https://studentaid.gov" target="_blank" rel="noopener">studentaid.gov</a>.</span>
+      </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ---------- 10. Out ---------- -->
+  <section class="section tu-section">
+    <div class="tu-measure">
+      <p class="eyebrow">
+        <span class="en">Keep going</span>
+        <span class="vi">Đi tiếp</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">Three things this page left to other modules</span>
+        <span class="vi">Ba điều trang này để dành cho các mô-đun khác</span>
+      </h2>
+      <p class="tu-lede">
+        <span class="en">A loan balance grows on the same math as savings, pointed the other way.</span>
+        <span class="vi">Dư nợ vay tăng theo đúng phép toán của tiền tiết kiệm, chỉ là chĩa theo hướng ngược lại.</span>
+      </p>
+    </div>
+    <div class="next-links" style="justify-content: flex-start; margin-top: 32px">
+      <a class="btn btn-ghost" href="calculator.html">
+        <span class="en">How interest compounds → Calculator</span>
+        <span class="vi">Lãi kép hoạt động thế nào → Máy tính</span>
+      </a>
+      <a class="btn btn-ghost" href="credit.html">
+        <span class="en">What borrowing does to your record → Credit</span>
+        <span class="vi">Vay nợ ảnh hưởng hồ sơ của bạn ra sao → Credit</span>
+      </a>
+      <a class="btn btn-ghost" href="jargon.html">
+        <span class="en">Every term on this page, defined → Jargon</span>
+        <span class="vi">Mọi thuật ngữ trên trang này, có định nghĩa → Jargon</span>
+      </a>
+    </div>
+  </section>
+
+  </div>
+  </div>
+
+  <p class="disclaimer">
+    <span class="en">Educational tool only. Not licensed financial advice.</span>
+    <span class="vi">Chỉ là công cụ giáo dục. Không phải lời khuyên tài chính được cấp phép.</span>
+  </p>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+  <div class="footer-col footer-brand">
+    <span class="footer-logo">
+      <svg class="logo-mark" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="translate(0,0.685) scale(0.020236) translate(-425.333,-611.012)">
+          <path fill="#11151f" d="M 452.5,611.5 C 533.834,611.333 615.167,611.5 696.5,612C 711.229,615.063 720.396,623.896 724,638.5C 724.333,789.167 724.667,939.833 725,1090.5C 882.221,933.279 1039.39,776.113 1196.5,619C 1200.01,616.746 1203.67,614.746 1207.5,613C 1266.11,611.345 1324.78,611.012 1383.5,612C 1398.66,614.822 1408.49,623.655 1413,638.5C 1413.67,702.167 1413.67,765.833 1413,829.5C 1411.77,834.518 1409.77,839.185 1407,843.5C 1178.83,1071.67 950.667,1299.83 722.5,1528C 720.043,1529.56 717.376,1530.56 714.5,1531C 627.5,1531.67 540.5,1531.67 453.5,1531C 439.009,1527.18 429.842,1518.01 426,1503.5C 425.333,1215.17 425.333,926.833 426,638.5C 430.351,624.984 439.184,615.984 452.5,611.5 Z"/>
+        </g>
+      </svg>
+      <span class="logo-text">verity</span>
+    </span>
+    <p class="footer-tagline">
+      <span class="en">A financial literacy toolset for first-time earners — bilingual by design.</span>
+      <span class="vi">Bộ công cụ hiểu biết tài chính cho người mới đi làm — song ngữ ngay từ đầu.</span>
+    </p>
+  </div>
+
+  <nav class="footer-col">
+    <h2 class="footer-col-title">
+      <span class="en">Modules</span>
+      <span class="vi">Các mô-đun</span>
+    </h2>
+    <ul class="footer-links">
+      <li><a href="calculator.html">Calculator</a></li>
+      <li><a href="budget.html">Budget</a></li>
+      <li><a href="recommend.html">Recommend</a></li>
+      <li><a href="jargon.html">Jargon</a></li>
+      <li><a href="credit.html">Credit</a></li>
+      <li><a href="tuition.html">Tuition</a></li>
+    </ul>
+  </nav>
+
+  <div class="footer-col">
+    <h2 class="footer-col-title">
+      <span class="en">Good to know</span>
+      <span class="vi">Cần biết</span>
+    </h2>
+    <p class="footer-note">
+      <span class="en">Educational only — not licensed financial advice. Aid rules and loan rates change every year; every figure on this page is dated where it appears, and studentaid.gov is the source that stays current.</span>
+      <span class="vi">Chỉ mang tính giáo dục — không phải lời khuyên tài chính được cấp phép. Quy định hỗ trợ và lãi suất khoản vay thay đổi hằng năm; mọi con số trên trang này đều ghi rõ thời điểm ngay tại chỗ, và studentaid.gov là nguồn luôn cập nhật.</span>
+    </p>
+  </div>
+  </div>
+</footer>
+
+<script src="js/site.js"></script>
+<script src="js/tuition-math.js"></script>
+<script src="js/tuition.js"></script>
+</body>
+</html>

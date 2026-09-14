@@ -6,8 +6,17 @@
      window chrome, resting inputs), which stay a visible tint against
      the white card since --card is still pure white. */
   --paper: #f6f5f3;
+  /* One step lighter than --paper, same warm R>G>B relationship so the
+     hue holds and only the value moves. Used for alternating full-width
+     section bands (see .section-band). */
+  --chalk: #fcfbf9;
   --pearl: #ecebea;
   --card: #ffffff;
+  /* The card surface, measured from the reference layout: white at 80%
+     over the cream page, compositing to ~#fdfdfd. Translucent rather
+     than a flat hex on purpose — a card placed on a --chalk band still
+     composites one step lighter than the band instead of vanishing. */
+  --veil: rgba(255, 255, 255, 0.8);
   --ink: #111111;
   /* Darkened 2026-07-10 (user-directed, was #272625 - read as not dark
      enough against the cream page) to match --ink exactly: same warm
@@ -43,8 +52,8 @@
   --pastel-recommend: #e2ddfd;
   --pastel-jargon: #ffef99;
   --pastel-credit: #ffd7f0;
-  --pastel-family: #99fff9;
   --pastel-budget: #ffddb5;
+  --pastel-tuition: #99fff9;
 
   /* Jargon-directory-only category accent, not a module pastel: the
      three category badges on jargon.html are deliberately differentiated
@@ -156,6 +165,81 @@ body {
   to { transform: translate3d(-50%, 0, 0); }
 }
 
+/* ---------- Ambient hero wash (all six module pages) ---------- */
+/* Same device as .bg-aurora above — one aria-hidden div at z-index -2,
+   masked so it has fully faded before the page's content begins — with a
+   static palette and film grain instead of drifting stripes. Module
+   pages went flat on 2026-07-19; this reopens that for all six of them,
+   user-directed (Jargon 2026-08-28, the rest immediately after). The
+   landing keeps the aurora; it does not get a wash too.
+
+   Ported from a supplied React/Tailwind component (GradientBackground +
+   a canvas Noise child). The canvas is deliberately not reproduced: it
+   rebuilt a 100x100 ImageData with Math.random() per pixel on every
+   rAF tick — ~40k random values plus a full-canvas pattern fill at
+   60fps, forever, for decoration, and it would now have been running on
+   six pages instead of one. The grain below is one inline feTurbulence
+   tiled as a background-image: indistinguishable while static, no JS, no
+   per-frame cost. Nothing animates, which is also why there is no
+   reduced-motion branch to write.
+
+   Only two things vary per page, both custom properties set on the body
+   alongside --module-pastel (see the palette block near the bottom of
+   this file): --wash-stops and, where a hero is an unusual height,
+   --wash-height. Everything else is shared. */
+.bg-wash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--wash-height, 340px);
+  opacity: 0.9;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.98) 26%, rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.80) 52%, rgba(0,0,0,0.62) 63%, rgba(0,0,0,0.42) 73%, rgba(0,0,0,0.24) 82%, rgba(0,0,0,0.10) 90%, rgba(0,0,0,0.03) 95%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.98) 26%, rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.80) 52%, rgba(0,0,0,0.62) 63%, rgba(0,0,0,0.42) 73%, rgba(0,0,0,0.24) 82%, rgba(0,0,0,0.10) 90%, rgba(0,0,0,0.03) 95%, transparent 100%);
+}
+
+/* The height is not a taste call, it is a hard constraint. .content-shell
+   paints an opaque background: var(--paper), so wherever it starts it
+   covers the wash with a straight horizontal edge. If the wash still has
+   any alpha left at that line, you see the cut — which is exactly the
+   seam this replaced. Each page is therefore sized to reach zero alpha
+   at or before its own shell, at BOTH breakpoints; mobile pushes the
+   shell further down, so the desktop number is always the binding one.
+   Measured shell tops, desktop: 341 on calculator/budget/recommend/
+   tuition, 366 on credit, 390 on jargon (mobile: 468-566). Hence a 340
+   default, 364 on credit, 388 on jargon. Re-measure if a hero gains or
+   loses a line, and keep the value under the desktop figure.
+
+   The fade is a vertical linear mask rather than a radial one for a
+   related reason: an ellipse that finishes inside the viewport draws its
+   terminating arc across the page as a visible curved contour. A
+   top-to-bottom ramp has no contour at all, and easing it over nine
+   stops instead of two keeps its own tail from reading as a Mach band.
+   Horizontal shaping is left to the colour gradient alpha instead. */
+.bg-wash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(165% 135% at 50% -10%, var(--wash-stops));
+}
+
+/* baseFrequency 0.8 over 4 octaves reads as grain rather than texture at
+   1x; the 180px tile keeps the data URI short and hides its own repeat.
+   soft-light lets the grain sit in the wash instead of greying it. This
+   one rule is shared by every page — only the color underneath changes. */
+.bg-wash::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: 0.5;
+  mix-blend-mode: soft-light;
+}
+
 /* ---------- Custom cursor ---------- */
 /* A small ring + dot that lag-follows the pointer (the dot tracks closely,
    the ring trails slightly looser), expanding over interactive elements.
@@ -220,6 +304,11 @@ body {
   padding: 20px 32px 0;
 }
 
+/* Two states, per the Amplemarket reference: at rest a full-width,
+   chrome-less bar with the logo hard left and the toggle hard right;
+   on scroll it collapses into the snug centred pill drawn below. The
+   wide resting gap between the nav and the toggle is the reference's
+   own shape, not dead space — do not "fix" it by shrinking this. */
 .topbar-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -310,10 +399,10 @@ body {
   transform: scale(0.96);
 }
 
-/* Roadmapped modules (Recommend/Jargon/Credit/Family Split) aren't built
-   yet. Keep them visible and focusable so users know they exist, but
-   visually inert — no hover/active feedback that implies they'd do
-   something if clicked. */
+/* Legacy: dates from when the module pages were nav placeholders. All
+   five modules are real pages now, so nothing on the site renders this
+   inert state — kept only because the disabled treatment is still the
+   right pattern if a future module ships behind a nav link first. */
 .nav-link[aria-disabled="true"] {
   opacity: 0.55;
   gap: 6px;
@@ -550,7 +639,7 @@ body {
 .card {
   position: relative;
   overflow: hidden;
-  background: var(--card);
+  background: var(--veil);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 28px;
@@ -1020,8 +1109,18 @@ body {
 
 
 /* ---------- Disclaimer ---------- */
+/* A page-level footnote, so it belongs to the page's bottom edge, not
+   to whatever happens to end the content. It used to sit inside
+   .content-shell as the last child of .page, which put it 32px under the
+   final card and 100px clear of the footer — three times nearer the
+   content it is not part of than the chrome it belongs with, so it read
+   as a stray caption on that last card. Moved outside the shell it
+   clears the shell's own 72px bottom padding plus 24 of its own, and
+   sits 40 off the footer: attached to the bottom, not to the cards.
+   Every page carries one, immediately before </main>. */
 .disclaimer {
-  margin-top: 32px;
+  margin: 0;
+  padding: 24px 0 40px;
   text-align: center;
   font-size: 12px;
   color: var(--slate);
@@ -1121,8 +1220,23 @@ a.logo {
   padding-top: 10px;
 }
 
+/* Width MUST stay a length here, never fit-content or any other
+   intrinsic keyword: max-width is in the transition list and a length
+   interpolates, but there is no way to tween to `fit-content`, so the
+   bar snapped its width instantly while the background, border and
+   shadow eased behind it over 0.3s. That mismatch is what read as the
+   bar "acting weird" on scroll. The cap is also what evens out the two
+   inner gaps. The desktop grid is `auto 1fr auto` with the nav
+   start-aligned, so every pixel the cap exceeds the content piles up in
+   one place — between the last nav link and the language toggle. Sizing
+   the cap to the content instead (measured 2026-08-28: 20 + 28 logo +
+   20 + 573 nav + 20 + 83 toggle + 14 + 2 border = 760px, set to 761 for
+   ~1.5px of sub-pixel headroom) leaves a 20px gap either side of the nav
+   rather than 20px left / 60px right. Redistributing that slack any
+   other way — justify-self, justify-content, auto margins — snaps,
+   because none of those interpolate while max-width is still easing. */
 .topbar.is-compact .topbar-inner {
-  max-width: 800px;
+  max-width: 761px;
   padding: 6px 14px 6px 20px;
   background: rgba(255, 255, 255, 0.85);
   -webkit-backdrop-filter: blur(16px);
@@ -1245,6 +1359,23 @@ a.logo {
 }
 
 .content-shell .page > *:first-child {
+  margin-top: 0;
+}
+
+/* Alternating neutral bands, the reference layout's sectioning device: a
+   band is a full-width child of .content-shell with a nested .page
+   restoring the centred column — the same break-out .content-shell
+   itself uses, rather than a 100vw pseudo-element that would fight the
+   scrollbar. The band supplies its own vertical rhythm, so the sections
+   inside it drop their margin. */
+.section-band {
+  width: 100%;
+  margin: 72px 0;
+  padding: 72px 0;
+  background: var(--chalk);
+}
+
+.section-band .section {
   margin-top: 0;
 }
 
@@ -1512,7 +1643,7 @@ a.logo {
 }
 
 /* ==================================================================
-   Module pages (Recommend / Jargon / Credit / Family Split)
+   Module pages (Recommend / Jargon / Credit / Budget)
    ================================================================== */
 
 .page-hero {
@@ -1577,17 +1708,33 @@ a.logo {
   margin: 0 auto;
 }
 
-/* .ladder is shared with credit.html and family-split.html's plain card
-   lists (they never adopted the rung layout), so the wider rung gap is
-   scoped to this page via body.module-rec rather than overriding .ladder
-   globally. */
+/* The rung layout belongs to Recommend alone — credit.html carries its
+   own visual system (the 300–850 score rail), so the wide rung gap is
+   scoped here rather than overriding .ladder globally. */
 body.module-rec .ladder { gap: 104px; }
 
 .rung {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 64px;
-  align-items: stretch;
+  /* The body carries the reading; the figure only has to be legible, so
+     it does not need half the page. */
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 72px;
+  /* start, not stretch: stretching made every figure as tall as the prose
+     beside it, which is where the big empty panels came from. */
+  align-items: start;
+}
+
+/* The figure centres against the prose; the body stays pinned to the top.
+   Top-aligned, a short figure left a column of dead space under it —
+   356px on rung 4, which is most of the rung. Centring only the figure
+   (rather than setting align-items: center on the grid) is deliberate:
+   on rungs 6 and 7 the figure is TALLER than the prose beside it, and
+   centring the whole row there would drop the rung number and title away
+   from the top edge. This way the number always starts the rung, and the
+   slack — whichever side carries it — is split instead of dumped at the
+   bottom. */
+.rung-figure {
+  align-self: center;
 }
 .rung:nth-child(even) .rung-body { order: 2; }
 .rung:nth-child(even) .rung-figure { order: 1; }
@@ -1598,14 +1745,19 @@ body.module-rec .ladder { gap: 104px; }
   font-size: 56px;
   font-weight: 700;
   line-height: 1;
-  color: var(--stone);
+  color: var(--amber);
   margin-bottom: 8px;
 }
 .rung-title { font-family: var(--font-display); font-size: 30px; font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 10px; text-wrap: balance; }
 .rung-payoff { color: var(--teal); font-weight: 500; margin: 0 0 14px; }
-.rung-prose { color: var(--slate); margin: 0 0 18px; max-width: 62ch; }
+/* Ink, not slate. This is the page's primary content — setting it in the
+   secondary text colour made the whole ladder read as caption. */
+.rung-prose { color: var(--ink); margin: 0 0 18px; max-width: 62ch; }
 
-.rung-figure { border: 1px solid var(--border); border-radius: 12px; padding: 28px; background: var(--card); display: flex; flex-direction: column; justify-content: center; }
+/* No panel at all any more. A filled box that was 40% empty read as a
+   card with nothing in it; a single rule at the top says "figure" just as
+   clearly and costs no dead space. */
+.rung-figure { border: 0; border-top: 1px solid var(--border); border-radius: 0; padding: 22px 0 0; background: none; display: block; }
 
 .fig-bar-row { display: grid; grid-template-columns: 1fr; gap: 6px; margin-bottom: 24px; }
 .fig-label { font-size: 14px; color: var(--slate); }
@@ -1634,50 +1786,146 @@ body.module-rec .ladder { gap: 104px; }
   .rung-title { font-size: 25px; }
 }
 
-/* ---------- Recommend: caution cards ---------- */
-/* Caution cards keep a rose hover border — the reserved caution role. */
-.avoid-card:hover {
-  border-color: var(--rose);
+/* ---------- Recommend: not-recommended list ---------- */
+/* Ruled rows, not cards: a box around prose is decoration. Deliberately
+   unnumbered — unlike the ladder above, these four have no order, and
+   the absence of numbering is what says so. */
+body.module-rec .avoid-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
 }
 
-.avoid-tag {
-  display: inline-block;
-  margin-bottom: 10px;
-  background: var(--rose-soft);
-  color: var(--rose);
-  border-radius: 200px;
-  padding: 3px 12px;
-  font-size: 12px;
-  font-weight: 600;
+body.module-rec .avoid-row {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 48px;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.avoid-title {
+body.module-rec .avoid-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* Rose is the reserved caution role (DESIGN.md), which is exactly what
+   this verdict line is — the pill capsule was the decoration, not the color. */
+body.module-rec .avoid-verdict {
   margin: 0 0 8px;
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 500;
+  color: var(--rose);
 }
 
-.avoid-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin: 0 auto;
+body.module-rec .avoid-row .prose p {
+  margin: 0;
+  color: var(--slate);
 }
 
 @media (max-width: 700px) {
-  .avoid-grid { grid-template-columns: 1fr; }
+  body.module-rec .avoid-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding: 24px 0;
+  }
+  body.module-rec .avoid-name { font-size: 20px; }
 }
 
 /* ---------- Recommend: starter plans ---------- */
+/* Three parallel worked examples really are a comparison, so the columns
+   stay — but divided by vertical hairlines instead of wrapped in cards.
+   Horizontal rules above for the unordered list, vertical rules here for
+   the parallel one. .plan-math and .plan-link are also usable as
+   standalone elements outside the grid. */
 .plan-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
+body.module-rec .plan-grid { gap: 0; }
+
+body.module-rec .plan-col {
+  display: flex;
+  flex-direction: column;
+  padding: 0 28px;
+  border-left: 1px solid var(--border);
+}
+body.module-rec .plan-col:first-child { padding-left: 0; border-left: 0; }
+body.module-rec .plan-col:last-child { padding-right: 0; }
+
+/* A uniform two-line title is what lines the hairlines up across the
+   three columns; the prose below it runs to the same depth in each. */
+body.module-rec .plan-title {
+  font-size: 20px;
+  line-height: 1.25;
+  min-height: 2.5em;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+
+/* No rule above the math line: the three columns' prose runs to different
+   depths, so a horizontal hairline here can never line up across them, and
+   a rule that misaligns reads worse than no rule. The vertical dividers
+   already carry the structure — the math is set apart by weight instead,
+   quieter and smaller than the ink prose above it. */
+body.module-rec .plan-math {
+  margin-top: 24px;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  color: var(--slate);
+}
+
+body.module-rec .plan-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 16px;
+  text-decoration: none;
+}
+
+body.module-rec .plan-link::after {
+  content: "\2192";
+  display: inline-block;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.module-rec .plan-link::after {
+    transition: transform 160ms var(--ease-out-strong);
+  }
+  body.module-rec .plan-link:hover::after { transform: translateX(3px); }
+}
+
+body.module-rec .plan-link:focus-visible {
+  outline: 2px solid var(--blue-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.module-rec .plan-link::after { transition: none; }
+}
+
 @media (max-width: 900px) {
-  .plan-grid { grid-template-columns: 1fr; }
+  .plan-grid { grid-template-columns: minmax(0, 1fr); }
+  body.module-rec .plan-grid { gap: 32px; }
+  body.module-rec .plan-col {
+    padding: 0;
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+  }
+  body.module-rec .plan-col:first-child { border-top: 0; padding-top: 0; }
 }
 
 .plan-title {
@@ -1983,6 +2231,12 @@ body.module-rec .ladder { gap: 104px; }
   background: var(--pastel-calc);
 }
 
+/* The Paying-for-college group carries the Tuition module pastel, the
+   same taxonomy hook the module page uses. */
+.group-badge--college {
+  background: var(--pastel-tuition);
+}
+
 .group-badge svg {
   width: 18px;
   height: 18px;
@@ -2147,6 +2401,12 @@ body.module-rec .ladder { gap: 104px; }
   font-variant-numeric: tabular-nums;
 }
 
+/* The sentence that reads the weights back sits under them, one 4px-grid
+   step away (was an inline margin-top). */
+.factor-note {
+  margin-top: 20px;
+}
+
 /* ---------- Credit: myths ---------- */
 .myth {
   padding: 18px 0;
@@ -2190,85 +2450,6 @@ body.module-rec .ladder { gap: 104px; }
 
 .myth p:last-child {
   margin-bottom: 0;
-}
-
-/* ---------- Family Split: paycheck splitter ---------- */
-.split-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-}
-
-@media (max-width: 800px) {
-  .split-grid { grid-template-columns: 1fr; }
-}
-
-.split-range {
-  width: 100%;
-  margin: 6px 0 0;
-  accent-color: var(--blue);
-}
-
-.split-range-label {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.split-pct {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
-.split-result-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 13px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.split-result-row:last-of-type {
-  border-bottom: none;
-}
-
-.split-result-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ink);
-}
-
-.split-result-value {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
-.split-result-value.accent {
-  color: var(--teal);
-}
-
-/* Appears only when the three sliders don't add up to 100% — the same
-   reserved rose caution role the calculator's clamp-notes use. */
-.split-note {
-  display: none;
-  margin: 14px 0 0;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--slate);
-}
-
-.split-note.is-active {
-  display: block;
-}
-
-.split-note.is-over {
-  color: var(--rose);
 }
 
 /* ---------- Cross-page "next module" links ---------- */
@@ -2342,6 +2523,15 @@ body.module-rec .ladder { gap: 104px; }
   color: var(--ink);
 }
 
+/* min-height: 0 above drops the 44px tap floor to slim the desktop bar.
+   Put it back wherever there's no fine pointer to aim with — on touch
+   the bar is a full-width scrolling row, so height costs nothing there. */
+@media (hover: none), (pointer: coarse) {
+  .nav-link {
+    min-height: 44px;
+  }
+}
+
 /* The capsule's old 8px inner padding and the toggle's 44px tap-target
    floor were silently propping the bar up past 70px. The 12px gap
    (was 4px) keeps the module names from reading as one run-on phrase,
@@ -2356,15 +2546,23 @@ body.module-rec .ladder { gap: 104px; }
   padding: 9px 14px;
 }
 
+@media (hover: none), (pointer: coarse) {
+  .lang-toggle {
+    min-height: 44px;
+  }
+}
+
 /* Pearl hover works on both the white canvas at rest and the frosted
    white compact capsule — no per-state flip needed anymore. */
 
 /* Slimmer side padding than at rest (38px text-to-text vs 44px —
-   visually the same rhythm). The capsule's 800px cap budgets for all
-   six nav items at this padding (~605px of links and gaps + 185px of
-   logo/toggle/inner-padding overhead) with ~10px slack so a pixel of
-   font-rendering drift can't overflow the capsule. Widened from 720px
-   when the Budget module made it six items (2026-07-12). */
+   visually the same rhythm). This padding is what fixes the nav's
+   rendered width at ~573px for six items, and the compact cap above is
+   sized to exactly that. Change this padding, rename a module, or add a
+   seventh item and the cap must be re-measured or the two inner gaps go
+   uneven again. Overflow is no longer the risk it was: the fallback
+   stack renders narrower than Lexend (Arial ~555px vs ~573px), so a
+   font swap shrinks the nav rather than bursting the capsule. */
 .topbar.is-compact .nav-link {
   padding-left: 13px;
   padding-right: 13px;
@@ -2869,8 +3067,8 @@ body.module-rec .ladder { gap: 104px; }
 .acc-dot.dot-rec { background: var(--pastel-recommend); }
 .acc-dot.dot-jar { background: var(--pastel-jargon); }
 .acc-dot.dot-cred { background: var(--pastel-credit); }
-.acc-dot.dot-fam { background: var(--pastel-family); }
 .acc-dot.dot-budget { background: var(--pastel-budget); }
+.acc-dot.dot-tui { background: var(--pastel-tuition); }
 
 .acc-icon {
   margin-left: auto;
@@ -3061,8 +3259,82 @@ body.module-rec .ladder { gap: 104px; }
 .module-rec { --module-pastel: var(--pastel-recommend); }
 .module-jar { --module-pastel: var(--pastel-jargon); }
 .module-cred { --module-pastel: var(--pastel-credit); }
-.module-fam { --module-pastel: var(--pastel-family); }
 .module-budget { --module-pastel: var(--pastel-budget); }
+.module-tuition { --module-pastel: var(--pastel-tuition); }
+
+/* Ambient hero wash palettes, one per module — consumed by .bg-wash near
+   the top of this file. Two rules govern these, and both are deliberate:
+
+   1. The wash hue is never the module's own pastel hue. Jargon's pastel
+      is canary and its wash is pink/lavender; Tuition's pastel is aqua
+      and its wash is blush. Decoupling them keeps the pastel as the
+      page's identity color and lets the wash read as ambient light
+      rather than as a second, bigger version of the chip. It also keeps
+      the Pastel-Taxonomy Rule intact — those tokens stay flat fills and
+      never become gradients.
+   2. No two pages adjacent in the nav share a cast. Reading across the
+      nav the washes run periwinkle, mint, gold, pink, sky, blush, so
+      moving between neighbouring modules always changes the light.
+
+   Every list ends on --paper at zero alpha so the wash dissolves into
+   the page instead of stopping on an edge. */
+.module-calc {
+  --wash-stops:
+    rgba(212, 218, 247, 0.76) 0%,
+    rgba(222, 214, 245, 0.62) 27%,
+    rgba(210, 228, 244, 0.46) 51%,
+    rgba(234, 234, 243, 0.30) 75%,
+    rgba(246, 245, 243, 0) 100%;
+}
+
+.module-budget {
+  --wash-stops:
+    rgba(208, 238, 224, 0.76) 0%,
+    rgba(214, 238, 238, 0.62) 27%,
+    rgba(226, 240, 218, 0.46) 51%,
+    rgba(234, 241, 236, 0.30) 75%,
+    rgba(246, 245, 243, 0) 100%;
+}
+
+.module-rec {
+  --wash-stops:
+    rgba(249, 232, 199, 0.76) 0%,
+    rgba(250, 222, 203, 0.62) 27%,
+    rgba(245, 234, 214, 0.46) 51%,
+    rgba(242, 238, 224, 0.30) 75%,
+    rgba(246, 245, 243, 0) 100%;
+}
+
+/* The original of the six, and the tallest wash: its hero carries the
+   search bar, so its content shell starts at 390 rather than 341. */
+.module-jar {
+  --wash-height: 388px;
+  --wash-stops:
+    rgba(243, 212, 232, 0.78) 0%,
+    rgba(231, 218, 245, 0.66) 26%,
+    rgba(216, 224, 246, 0.50) 48%,
+    rgba(247, 230, 214, 0.34) 72%,
+    rgba(246, 245, 243, 0) 100%;
+}
+
+.module-cred {
+  --wash-height: 364px;
+  --wash-stops:
+    rgba(203, 228, 245, 0.76) 0%,
+    rgba(212, 235, 242, 0.62) 27%,
+    rgba(224, 231, 244, 0.46) 51%,
+    rgba(234, 238, 243, 0.30) 75%,
+    rgba(246, 245, 243, 0) 100%;
+}
+
+.module-tuition {
+  --wash-stops:
+    rgba(248, 220, 219, 0.76) 0%,
+    rgba(247, 226, 210, 0.62) 27%,
+    rgba(245, 232, 226, 0.46) 51%,
+    rgba(243, 237, 230, 0.30) 75%,
+    rgba(246, 245, 243, 0) 100%;
+}
 
 /* Icon tiles for card headers: the module's flat pastel with an ink
    stroke glyph — taxonomy color, not per-card accents. No shadow, no
@@ -3094,8 +3366,7 @@ body.module-rec .ladder { gap: 104px; }
 .tile-rose { background: var(--rose-soft); color: var(--rose); }
 
 /* Title rows that pair an icon tile with an existing heading. */
-.card-title-row,
-.plan-head {
+.card-title-row {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -3107,18 +3378,6 @@ body.module-rec .ladder { gap: 104px; }
 
 .card-title-row .card-title {
   margin: 0;
-}
-
-.plan-head {
-  margin-bottom: 10px;
-}
-
-.plan-head .plan-title {
-  margin: 0;
-}
-
-.avoid-card .icon-tile {
-  margin-bottom: 12px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3146,10 +3405,15 @@ body.module-rec .ladder { gap: 104px; }
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px 13px;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+    transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .seg-chip:hover { background: var(--pearl); }
+
+/* Press feedback. Without it a chip gives nothing back until the whole
+   result re-renders, which reads as the click not having landed. */
+.seg-chip:active { transform: scale(0.97); }
 
 .seg-chip.active {
   background: var(--ink);
@@ -3193,32 +3457,27 @@ body.module-rec .ladder { gap: 104px; }
 
 /* Doughnut center total + static legend (Chart.js's own legend can't hold
    the .en/.vi span pair, so the legend is plain markup). */
-/* Pin the doughnut to a fixed size: the graph card sits in a grid that
-   stretches it to match the inputs card — without this, the responsive
-   wheel resizes with the card. .donut-wrap is budget-only (the calculator's
-   chart-wrap has no donut-wrap class), so this overrides .chart-wrap's
-   flex:1 here only. The inputs card is now a constant 553px in every
-   preset, and the graph card's non-wheel chrome (header + legend + margins)
-   measures 135px, so 418 + 135 = 553 makes the two cards equal again. */
+/* The doughnut fills whatever height the card is given, rather than being
+   pinned to a number. It used to be a hard 418px, picked so that
+   418 + 135px of chrome equalled the inputs card's then-constant 553px —
+   an arithmetic coupling that broke silently the moment a field was added
+   to that card (2026-09-05: inputs grew to 646px and the two cards stopped
+   matching). .graph-card is a flex column, so flex: 1 lets the wheel absorb
+   whatever the grid stretches the card to, and the two stay equal at any
+   content height. Chart.js is already responsive with maintainAspectRatio
+   off, so it follows the container. .donut-wrap is budget-only (the
+   calculator's chart-wrap has no donut-wrap class), so this overrides
+   .chart-wrap's flex here only. */
 .donut-wrap {
   position: relative;
-  flex: 0 0 auto;
-  height: 418px;
+  flex: 1 1 auto;
+  min-height: 320px;
 }
 
 @media (max-width: 800px) {
-  /* Cards stack here, so height-matching no longer applies — 418px would
-     just letterbox the wheel on a phone-width card. */
-  .donut-wrap { height: 345px; }
-}
-
-/* Don't stretch the graph card to match the inputs card. The two now match
-   by construction (see the .donut-wrap height comment above), so this is
-   insurance: align-self:start guarantees the graph card is never stretched
-   taller than its own content, regardless of any future change to either
-   card's height. :has() keeps it budget-only. */
-.graph-card:has(.donut-wrap) {
-  align-self: start;
+  /* Cards stack here, so there is no sibling height to match and the grid
+     no longer supplies one — the wheel needs its own floor. */
+  .donut-wrap { min-height: 345px; }
 }
 
 .donut-center {
@@ -3262,10 +3521,15 @@ body.module-rec .ladder { gap: 104px; }
 
 /* Same data-UI colors as the doughnut segments in js/budget.js
    (SEGMENT_COLORS): needs = interactive blue, wants = muted rose,
-   savings = positive teal. Keep the two in sync. */
+   savings = positive teal, home = ink. Keep the two in sync.
+   Home is ink rather than a fourth category color because it is not a
+   bucket — it is taken off the top before the split exists. Its legend
+   item only renders when there is a home amount to name; see
+   .legend-home in css/budget.css. */
 .legend-dot.dot-needs { background: #2348ad; }
 .legend-dot.dot-wants { background: #9d3f5f; }
 .legend-dot.dot-savings { background: #0e7a72; }
+.legend-dot.dot-home { background: #111111; }
 
 /* Bucket cards (reuse .stats-row / .stat-card / .stat-icon) */
 .bucket-pct {

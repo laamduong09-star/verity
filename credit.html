@@ -9,9 +9,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/credit.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body class="module-cred">
+<div class="bg-wash" aria-hidden="true"></div>
 
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
@@ -27,18 +29,27 @@
       <span class="logo-text">verity</span>
     </a>
     <nav class="nav-capsule">
-      <a href="actual%20website.html" class="nav-link">Calculator</a>
+      <a href="calculator.html" class="nav-link">Calculator</a>
       <a href="budget.html" class="nav-link">Budget</a>
       <a href="recommend.html" class="nav-link">Recommend</a>
       <a href="jargon.html" class="nav-link">Jargon</a>
       <a href="credit.html" class="nav-link active">Credit</a>
-      <a href="family-split.html" class="nav-link">Family Split</a>
+      <a href="tuition.html" class="nav-link">Tuition</a>
     </nav>
     <button class="lang-toggle" id="langToggle">
       <span class="lang-option active" data-lang="en">EN</span>
       <span class="lang-divider">|</span>
       <span class="lang-option" data-lang="vi">VI</span>
     </button>
+  </div>
+
+  <!-- Under 1040px the vertical rail collapses to this slim bar. It lives
+       inside the sticky topbar so it stays pinned directly under the nav
+       row in both the resting and compact states, with no measured offset
+       to go stale. -->
+  <div class="cr-railbar" id="creditRailBar" aria-hidden="true">
+    <span class="cr-railbar-track"><span class="cr-railbar-fill"></span></span>
+    <span class="cr-railbar-score" id="creditRailBarScore">300</span>
   </div>
 </header>
 
@@ -61,247 +72,590 @@
   <div class="content-shell">
   <div class="page">
 
-  <section class="section">
-    <div class="ladder">
+  <!-- The score rail: the page IS the 300–850 scale. The gutter holds the
+       track, the ticks at their true proportional positions, one dot per
+       anchored section, and the readout that travels with the fill head.
+       js/credit-rail.js measures this scope (never the rail itself, which
+       is display:none under 1040px) and writes --cr-rail-progress. -->
+  <div class="cr-rail-scope" id="creditRailScope">
 
-      <div class="card">
-        <div class="card-title-row">
-          <span class="icon-tile tile-blue" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="9"/>
-              <path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/>
-            </svg>
-          </span>
-          <h2 class="card-title">
-            <span class="en">Why a three-digit number matters</span>
-            <span class="vi">Vì sao một con số ba chữ số lại quan trọng</span>
-          </h2>
-        </div>
-        <div class="prose">
-          <p>
-            <span class="en">Your score (300–850) gets checked when you rent, finance a car, or get a phone plan, and sometimes even when you apply for a job. Higher score, more trust, lower cost: over a lifetime, "good credit" vs "no credit" is tens of thousands of dollars in interest. The catch-22 is that you need history to build it, which is exactly why starting early wins. Roughly: 670+ is good, 740+ gets the best rates.</span>
-            <span class="vi">Điểm của bạn (300–850) được kiểm tra khi thuê nhà, trả góp xe, đăng ký gói điện thoại, đôi khi cả khi xin việc. Điểm cao hơn, được tin hơn, chi phí thấp hơn: trong cả cuộc đời, "tín dụng tốt" so với "không có tín dụng" là hàng chục nghìn đô tiền lãi. Nghịch lý là bạn cần lịch sử để xây điểm, và đó chính là lý do bắt đầu sớm luôn thắng. Đại khái: từ 670 là tốt, từ 740 nhận mức lãi tốt nhất.</span>
-          </p>
-        </div>
+    <div class="cr-rail" id="creditRail" data-band="building" aria-hidden="true">
+      <!-- The outer .cr-rail spans the full height of .cr-rail-scope; this
+           inner element is the part that sticks. Sticky (not fixed) is
+           what makes the rail let go exactly where the scope ends, so it
+           never follows you into Myths — which are off the scale. -->
+      <div class="cr-rail-inner">
+      <span class="cr-rail-track"><span class="cr-rail-fill"></span></span>
+
+      <span class="cr-tick" style="--at: 0%">300</span>
+      <span class="cr-tick" style="--at: 50.909%">580</span>
+      <span class="cr-tick" style="--at: 67.273%">670</span>
+      <span class="cr-tick" style="--at: 80%">740</span>
+      <span class="cr-tick" style="--at: 100%">850</span>
+
+      <span class="cr-dot" data-anchor="cr-basics"></span>
+      <span class="cr-dot" data-anchor="cr-factors"></span>
+      <span class="cr-dot" data-anchor="how-to-start"></span>
+      <span class="cr-dot" data-anchor="golden-rules"></span>
+
+      <span class="cr-readout">
+        <span class="cr-readout-score" id="creditRailScore">300</span>
+        <span class="cr-band cr-band-building">
+          <span class="en">Building</span>
+          <span class="vi">Đang xây</span>
+        </span>
+        <span class="cr-band cr-band-fair">
+          <span class="en">Fair</span>
+          <span class="vi">Trung bình</span>
+        </span>
+        <span class="cr-band cr-band-good">
+          <span class="en">Good</span>
+          <span class="vi">Tốt</span>
+        </span>
+        <span class="cr-band cr-band-best">
+          <span class="en">Best rates</span>
+          <span class="vi">Lãi tốt nhất</span>
+        </span>
+      </span>
       </div>
+    </div>
 
-      <div class="card">
-        <div class="card-title-row">
-          <span class="icon-tile tile-blue" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <rect x="3" y="13" width="4" height="8" rx="1.3"/>
-              <rect x="10" y="9" width="4" height="12" rx="1.3"/>
-              <rect x="17" y="5" width="4" height="16" rx="1.3"/>
-            </svg>
-          </span>
-          <h2 class="card-title">
-            <span class="en">What the score is made of</span>
-            <span class="vi">Điểm số được cấu thành từ gì</span>
-          </h2>
-        </div>
-        <div class="factor-list">
-          <div class="factor">
-            <span class="factor-label">
-              <span class="en">Payment history: did you pay on time?</span>
-              <span class="vi">Lịch sử thanh toán: bạn có trả đúng hạn?</span>
-            </span>
-            <div class="factor-track"><div class="factor-fill" style="width: 35%"></div></div>
-            <span class="factor-pct">35%</span>
-          </div>
-          <div class="factor">
-            <span class="factor-label">
-              <span class="en">Utilization: how much of your limit you use</span>
-              <span class="vi">Tỷ lệ dùng hạn mức: bạn dùng bao nhiêu phần</span>
-            </span>
-            <div class="factor-track"><div class="factor-fill" style="width: 30%"></div></div>
-            <span class="factor-pct">30%</span>
-          </div>
-          <div class="factor">
-            <span class="factor-label">
-              <span class="en">Credit age: how long you've had accounts</span>
-              <span class="vi">Tuổi tín dụng: bạn có tài khoản bao lâu rồi</span>
-            </span>
-            <div class="factor-track"><div class="factor-fill" style="width: 15%"></div></div>
-            <span class="factor-pct">15%</span>
-          </div>
-          <div class="factor">
-            <span class="factor-label">
-              <span class="en">New credit: recent applications</span>
-              <span class="vi">Tín dụng mới: các đơn đăng ký gần đây</span>
-            </span>
-            <div class="factor-track"><div class="factor-fill" style="width: 10%"></div></div>
-            <span class="factor-pct">10%</span>
-          </div>
-          <div class="factor">
-            <span class="factor-label">
-              <span class="en">Credit mix: variety of account types</span>
-              <span class="vi">Cơ cấu tín dụng: sự đa dạng loại tài khoản</span>
-            </span>
-            <div class="factor-track"><div class="factor-fill" style="width: 10%"></div></div>
-            <span class="factor-pct">10%</span>
-          </div>
-        </div>
-        <div class="prose" style="margin-top: 20px">
-          <p>
-            <span class="en">Read the weights and the strategy writes itself: paying on time and keeping balances low is 65% of the whole game. The rest mostly rewards patience.</span>
-            <span class="vi">Nhìn vào trọng số là thấy ngay chiến lược: trả đúng hạn và giữ dư nợ thấp chiếm 65% cả cuộc chơi. Phần còn lại chủ yếu thưởng cho sự kiên nhẫn.</span>
-          </p>
-        </div>
-      </div>
+    <div class="cr-rail-body">
 
-      <div class="card">
-        <div class="card-title-row">
-          <span class="icon-tile tile-teal" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="8" cy="8" r="4.5"/>
-              <path d="M11 11.5 20 20.5"/>
-              <path d="M17 17.5 19.5 15"/>
-              <path d="M14.5 15 16.5 13"/>
-            </svg>
-          </span>
-          <h2 class="card-title">
-            <span class="en">How to start, by age</span>
-            <span class="vi">Bắt đầu như thế nào, theo độ tuổi</span>
-          </h2>
-        </div>
-        <p class="mini-label">
-          <span class="en">Under 18</span>
-          <span class="vi">Dưới 18 tuổi</span>
+    <div class="cr-chapter">
+      <span class="cr-chapter-num" aria-hidden="true">01</span>
+      <p class="cr-chapter-name">
+        <span class="en">What the number is</span>
+        <span class="vi">Con số đó là gì</span>
+      </p>
+    </div>
+
+    <section class="section cr-section" id="cr-basics">
+      <div class="section-head">
+        <p class="eyebrow">
+          <span class="en">Where the scale starts</span>
+          <span class="vi">Nơi thang điểm bắt đầu</span>
         </p>
-        <ol class="step-list">
-          <li>
-            <span class="en">Ask a parent with good habits to add you as an authorized user on their oldest credit card. Their on-time history can start appearing on your report. You don't even need to touch the card.</span>
-            <span class="vi">Nhờ cha mẹ (người có thói quen tốt) thêm bạn làm người dùng ủy quyền (authorized user) trên thẻ tín dụng lâu năm nhất của họ. Lịch sử trả đúng hạn của họ có thể bắt đầu xuất hiện trên hồ sơ của bạn. Bạn thậm chí không cần dùng thẻ.</span>
-          </li>
-          <li>
-            <span class="en">Important: this only helps if that card is paid on time with low balances. Their habits become your record, good or bad.</span>
-            <span class="vi">Quan trọng: điều này chỉ có lợi nếu thẻ đó được trả đúng hạn và dư nợ thấp. Thói quen của họ trở thành hồ sơ của bạn, tốt hay xấu đều vậy.</span>
-          </li>
-        </ol>
-        <p class="mini-label">
-          <span class="en">18 and older</span>
-          <span class="vi">Từ 18 tuổi trở lên</span>
+        <h2 class="section-title">
+          <span class="en">Why a three-digit number matters</span>
+          <span class="vi">Vì sao một con số ba chữ số lại quan trọng</span>
+        </h2>
+      </div>
+      <!-- Two columns on the same 1fr/232px rhythm as the age stages and
+           the golden rules below, so this section fills the measure
+           instead of capping at 66ch and hugging the left edge. The prose
+           keeps a readable line length via .cr-measure on the body
+           column; the threshold note becomes a margin note, which is what
+           it always was. The range line then spans both columns, so the
+           section closes on a full-width horizontal that echoes the
+           vertical rail rather than a short stub. -->
+      <div class="cr-open">
+        <div class="cr-open-body cr-measure">
+          <p class="cr-lede">
+            <span class="en">Your score (300–850) gets checked when you rent, finance a car, or get a phone plan, and sometimes even when you apply for a job. Higher score, more trust, lower cost: over a lifetime, "good credit" vs "no credit" is tens of thousands of dollars in interest. The catch-22 is that you need history to build it, which is exactly why starting early wins.</span>
+            <span class="vi">Điểm của bạn (300–850) được kiểm tra khi thuê nhà, trả góp xe, đăng ký gói điện thoại, đôi khi cả khi xin việc. Điểm cao hơn, được tin hơn, chi phí thấp hơn: trong cả cuộc đời, "tín dụng tốt" so với "không có tín dụng" là hàng chục nghìn đô tiền lãi. Nghịch lý là bạn cần lịch sử để xây điểm, và đó chính là lý do bắt đầu sớm luôn thắng.</span>
+          </p>
+        </div>
+
+        <div class="cr-aside cr-open-aside">
+          <span class="cr-aside-label">
+            <span class="en">Good starts at</span>
+            <span class="vi">Mức tốt bắt đầu từ</span>
+          </span>
+          <span class="cr-aside-value">670</span>
+          <p class="cr-caption">
+            <span class="en">740+ gets the best rates.</span>
+            <span class="vi">Từ 740 nhận mức lãi tốt nhất.</span>
+          </p>
+        </div>
+
+        <div class="cr-open-range">
+          <div class="cr-range" aria-hidden="true">
+            <span class="cr-range-num">300</span>
+            <span class="cr-range-line"></span>
+            <span class="cr-range-num">850</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cr-section" id="cr-factors">
+      <div class="section-head">
+        <p class="eyebrow">
+          <span class="en">Inside the number</span>
+          <span class="vi">Bên trong con số</span>
         </p>
-        <ol class="step-list">
-          <li>
-            <span class="en">Get a student card (if enrolled) or a secured card, where a $200 refundable deposit becomes your limit. These are built for zero-history applicants.</span>
-            <span class="vi">Mở thẻ sinh viên (nếu đang đi học) hoặc thẻ ký quỹ (secured), trong đó khoản ký quỹ hoàn lại $200 trở thành hạn mức của bạn. Các loại thẻ này sinh ra cho người chưa có lịch sử.</span>
-          </li>
-          <li>
-            <span class="en">Put one small recurring bill on it (a music subscription, gas once a month). Nothing else.</span>
-            <span class="vi">Đặt một hóa đơn định kỳ nhỏ vào thẻ (gói nhạc, một lần đổ xăng mỗi tháng). Không gì thêm.</span>
-          </li>
-          <li>
-            <span class="en">Set autopay to pay the FULL statement balance. This one setting is most of the strategy.</span>
-            <span class="vi">Cài thanh toán tự động trả TOÀN BỘ dư nợ sao kê. Riêng cài đặt này đã là phần lớn chiến lược.</span>
-          </li>
-          <li>
-            <span class="en">Wait. A first score typically appears after ~6 months of history. After a year, ask for a limit increase (it lowers utilization).</span>
-            <span class="vi">Chờ đợi. Điểm số đầu tiên thường xuất hiện sau ~6 tháng có lịch sử. Sau một năm, xin tăng hạn mức (giúp giảm tỷ lệ sử dụng).</span>
-          </li>
-        </ol>
+        <h2 class="section-title">
+          <span class="en">What the score is made of</span>
+          <span class="vi">Điểm số được cấu thành từ gì</span>
+        </h2>
+        <p class="section-sub">
+          <span class="en">Each block's height is its weight in the score.</span>
+          <span class="vi">Chiều cao mỗi khối chính là trọng số của nó trong điểm số.</span>
+        </p>
       </div>
 
-      <div class="card">
-        <div class="card-title-row">
-          <span class="icon-tile tile-teal" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3 4 6.5v5c0 5 3.5 8 8 9.5 4.5-1.5 8-4.5 8-9.5v-5L12 3Z"/>
-              <path d="m8.5 12 2.5 2.5 4.5-4.5"/>
-            </svg>
-          </span>
-          <h2 class="card-title">
-            <span class="en">The golden rules</span>
-            <span class="vi">Những nguyên tắc vàng</span>
-          </h2>
+      <!-- Two columns, matching the rhythm the rest of the page already
+           uses: the composition chart holds the left, and the one factor
+           you can act on this month holds the right, instead of the two
+           stacking down a narrow left-hand strip. -->
+      <div class="cr-factors-grid">
+        <div class="cr-factors-chart">
+        <!-- The section claims "each block's height is its weight", so the
+             block has to actually exist. The column IS the chart: one 100%
+             bar cut into five filled segments. Both the segments and the
+             label rows beside them are flexed by the same --w number, so
+             label and segment can never drift apart and nothing is
+             positioned by hand. --seg-a rides along in the same attribute
+             to keep each row's two numbers in one place. -->
+        <div class="cr-stack">
+          <div class="cr-stack-col" aria-hidden="true">
+            <span class="cr-seg" style="--w: 35; --seg-a: 0.86"></span>
+            <span class="cr-seg" style="--w: 30; --seg-a: 0.60"></span>
+            <span class="cr-seg" style="--w: 15; --seg-a: 0.26"></span>
+            <span class="cr-seg" style="--w: 10; --seg-a: 0.17"></span>
+            <span class="cr-seg" style="--w: 10; --seg-a: 0.11"></span>
+          </div>
+
+          <div class="cr-stack-rows">
+            <div class="cr-weight is-major" style="--w: 35">
+              <span class="cr-weight-pct">35%</span>
+              <span class="cr-weight-label">
+                <span class="cr-weight-name">
+                  <span class="en">Payment history</span>
+                  <span class="vi">Lịch sử thanh toán</span>
+                </span>
+                <span class="cr-weight-q">
+                  <span class="en">Did you pay on time?</span>
+                  <span class="vi">Bạn có trả đúng hạn?</span>
+                </span>
+              </span>
+            </div>
+            <div class="cr-weight is-major" style="--w: 30">
+              <span class="cr-weight-pct">30%</span>
+              <span class="cr-weight-label">
+                <span class="cr-weight-name">
+                  <span class="en">Utilization</span>
+                  <span class="vi">Tỷ lệ dùng hạn mức</span>
+                </span>
+                <span class="cr-weight-q">
+                  <span class="en">How much of your limit you use</span>
+                  <span class="vi">Bạn dùng bao nhiêu phần hạn mức</span>
+                </span>
+              </span>
+            </div>
+            <div class="cr-weight" style="--w: 15">
+              <span class="cr-weight-pct">15%</span>
+              <span class="cr-weight-label">
+                <span class="cr-weight-name">
+                  <span class="en">Credit age</span>
+                  <span class="vi">Tuổi tín dụng</span>
+                </span>
+                <span class="cr-weight-q">
+                  <span class="en">How long you've had accounts</span>
+                  <span class="vi">Bạn có tài khoản bao lâu rồi</span>
+                </span>
+              </span>
+            </div>
+            <div class="cr-weight" style="--w: 10">
+              <span class="cr-weight-pct">10%</span>
+              <span class="cr-weight-label">
+                <span class="cr-weight-name">
+                  <span class="en">New credit</span>
+                  <span class="vi">Tín dụng mới</span>
+                </span>
+                <span class="cr-weight-q">
+                  <span class="en">Recent applications</span>
+                  <span class="vi">Các đơn đăng ký gần đây</span>
+                </span>
+              </span>
+            </div>
+            <div class="cr-weight" style="--w: 10">
+              <span class="cr-weight-pct">10%</span>
+              <span class="cr-weight-label">
+                <span class="cr-weight-name">
+                  <span class="en">Credit mix</span>
+                  <span class="vi">Cơ cấu tín dụng</span>
+                </span>
+                <span class="cr-weight-q">
+                  <span class="en">Variety of account types</span>
+                  <span class="vi">Sự đa dạng loại tài khoản</span>
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Spans exactly the top 65% of the column, so the claim in the
+               paragraph below is a measurement you can see rather than a
+               number to take on faith. It now lands on a real segment
+               boundary, because the segments are real. -->
+          <div class="cr-weights-brace" aria-hidden="true">
+            <span class="cr-brace-pct">65%</span>
+            <span class="cr-brace-note">
+              <span class="en">is yours to control</span>
+              <span class="vi">là phần bạn kiểm soát</span>
+            </span>
+          </div>
         </div>
-        <ol class="step-list">
-          <li>
-            <span class="en">Never spend money on credit that you don't already have in checking. A credit card is a payment method, not extra income.</span>
-            <span class="vi">Không bao giờ quẹt thẻ số tiền bạn chưa có sẵn trong tài khoản. Thẻ tín dụng là phương thức thanh toán, không phải thu nhập thêm.</span>
-          </li>
-          <li>
-            <span class="en">Pay the full balance every month. Inside the grace period, a card costs you $0 in interest, ever.</span>
-            <span class="vi">Trả đủ toàn bộ dư nợ mỗi tháng. Trong thời gian ân hạn, thẻ không tốn của bạn đồng lãi nào.</span>
-          </li>
-          <li>
-            <span class="en">Keep utilization under 30% of your limit; under 10% is even better.</span>
-            <span class="vi">Giữ mức sử dụng dưới 30% hạn mức; dưới 10% càng tốt.</span>
-          </li>
-          <li>
-            <span class="en">Never miss a due date. One 30-day late payment can undo a year of building. Autopay makes this rule automatic.</span>
-            <span class="vi">Không bao giờ trễ hạn. Một lần trễ 30 ngày có thể xóa sạch một năm gây dựng. Thanh toán tự động biến nguyên tắc này thành mặc định.</span>
-          </li>
-          <li>
-            <span class="en">Keep your oldest card open forever (it anchors your credit age), and don't apply for several cards in a short window.</span>
-            <span class="vi">Giữ thẻ lâu năm nhất mở mãi mãi (nó neo tuổi tín dụng của bạn), và đừng đăng ký nhiều thẻ trong thời gian ngắn.</span>
-          </li>
-        </ol>
+
+        <p class="cr-lede cr-weights-note">
+          <span class="en">Read the weights and the strategy writes itself: paying on time and keeping balances low is 65% of the whole game. The rest mostly rewards patience.</span>
+          <span class="vi">Nhìn vào trọng số là thấy ngay chiến lược: trả đúng hạn và giữ dư nợ thấp chiếm 65% cả cuộc chơi. Phần còn lại chủ yếu thưởng cho sự kiên nhẫn.</span>
+        </p>
+        </div>
+
+        <!-- The one factor on the list with no waiting period, so it earns
+             the page's only worked example. Same money owed in both bars;
+             only the limit it sits against changes, which is the whole
+             point and the part prose keeps failing to land. -->
+        <div class="cr-util">
+          <p class="mini-label">
+            <span class="en">The 30% you can change this month</span>
+            <span class="vi">Phần 30% bạn có thể thay đổi ngay tháng này</span>
+          </p>
+          <p class="cr-lede cr-util-lede">
+            <span class="en">Utilization is the share of your limit you're currently using. It's the one big factor with no waiting period — pay a balance down today and the lower number can land on your next statement.</span>
+            <span class="vi">Tỷ lệ dùng hạn mức là phần hạn mức bạn đang dùng. Đây là yếu tố lớn duy nhất không cần chờ đợi — trả bớt dư nợ hôm nay và con số thấp hơn có thể xuất hiện ngay ở sao kê kế tiếp.</span>
+          </p>
+
+          <div class="cr-util-cases">
+            <div class="cr-util-case is-good" style="--u: 30">
+              <div class="cr-util-top">
+                <span class="cr-util-amt">$300</span>
+                <span class="cr-util-of">
+                  <span class="en">used of a $1,000 limit</span>
+                  <span class="vi">đã dùng trên hạn mức $1,000</span>
+                </span>
+              </div>
+              <div class="cr-util-track">
+                <span class="cr-util-fill"></span>
+                <span class="cr-util-line" aria-hidden="true"></span>
+              </div>
+              <p class="cr-util-verdict">
+                <span class="en">30% — inside the comfortable zone</span>
+                <span class="vi">30% — nằm trong vùng an toàn</span>
+              </p>
+            </div>
+
+            <div class="cr-util-case is-high" style="--u: 70">
+              <div class="cr-util-top">
+                <span class="cr-util-amt">$700</span>
+                <span class="cr-util-of">
+                  <span class="en">used of the same $1,000 limit</span>
+                  <span class="vi">đã dùng trên cùng hạn mức $1,000</span>
+                </span>
+              </div>
+              <div class="cr-util-track">
+                <span class="cr-util-fill"></span>
+                <span class="cr-util-line" aria-hidden="true"></span>
+              </div>
+              <p class="cr-util-verdict">
+                <span class="en">70% — same card, weaker score</span>
+                <span class="vi">70% — cùng thẻ đó, điểm thấp hơn</span>
+              </p>
+            </div>
+          </div>
+
+          <p class="cr-util-foot">
+            <span class="en">The dotted line is 30%. Nothing is charged for crossing it and no one tells you that you have — the score simply reads lower until the balance comes down.</span>
+            <span class="vi">Đường chấm là mốc 30%. Vượt qua nó không bị tính phí và không ai báo cho bạn biết — điểm chỉ đơn giản là thấp hơn cho đến khi dư nợ giảm xuống.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cr-chapter">
+      <span class="cr-chapter-num" aria-hidden="true">02</span>
+      <p class="cr-chapter-name">
+        <span class="en">How you build one</span>
+        <span class="vi">Cách bạn xây dựng điểm số</span>
+      </p>
+    </div>
+
+    <section class="section cr-section" id="how-to-start">
+      <div class="section-head">
+        <p class="eyebrow">
+          <span class="en">How to start, by age</span>
+          <span class="vi">Bắt đầu như thế nào, theo độ tuổi</span>
+        </p>
+        <h2 class="section-title">
+          <span class="en">Where you start depends on your age</span>
+          <span class="vi">Bắt đầu từ đâu là tùy vào tuổi của bạn</span>
+        </h2>
+        <p class="section-sub">
+          <span class="en">Step one can begin years before step two — and it builds history while you wait.</span>
+          <span class="vi">Bước một có thể bắt đầu nhiều năm trước bước hai — và nó xây lịch sử trong lúc bạn chờ.</span>
+        </p>
       </div>
 
-      <div class="card">
-        <div class="card-title-row">
-          <span class="icon-tile tile-rose" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 4v16"/>
-              <path d="M6 7h12"/>
-              <path d="m6 7-2.7 5.5a3 3 0 0 0 5.4 0L6 7Z"/>
-              <path d="m18 7-2.7 5.5a3 3 0 0 0 5.4 0L18 7Z"/>
-            </svg>
-          </span>
-          <h2 class="card-title">
-            <span class="en">Myths, debunked</span>
-            <span class="vi">Giải oan những lầm tưởng</span>
-          </h2>
+      <div class="cr-stages">
+
+        <div class="cr-stage">
+          <div class="cr-stage-body">
+            <h3 class="cr-stage-title">
+              <span class="en">Under 18</span>
+              <span class="vi">Dưới 18 tuổi</span>
+            </h3>
+            <ol class="step-list">
+              <li>
+                <span class="en">A parent with a long, on-time card can add someone as an authorized user, and that card’s history can begin appearing on the authorized user’s report. The card itself never has to be used.</span>
+                <span class="vi">Cha mẹ có thẻ lâu năm và luôn trả đúng hạn có thể thêm một người làm người dùng ủy quyền (authorized user), và lịch sử của thẻ đó có thể bắt đầu xuất hiện trên báo cáo của người được thêm. Bản thân chiếc thẻ không cần được dùng đến.</span>
+              </li>
+              <li>
+                <span class="en">Important: this only helps if that card is paid on time with low balances. Their habits become your record, good or bad.</span>
+                <span class="vi">Quan trọng: điều này chỉ có lợi nếu thẻ đó được trả đúng hạn và dư nợ thấp. Thói quen của họ trở thành hồ sơ của bạn, tốt hay xấu đều vậy.</span>
+              </li>
+            </ol>
+          </div>
+          <aside class="cr-aside">
+            <span class="cr-aside-tag">
+              <span class="en">Authorized user</span>
+              <span class="vi">Người dùng ủy quyền</span>
+            </span>
+            <p class="cr-caption">
+              <span class="en">No card in your hand, history on your report.</span>
+              <span class="vi">Không cầm thẻ, vẫn có lịch sử trên hồ sơ.</span>
+            </p>
+          </aside>
         </div>
 
-        <div class="myth" style="border-top: none; padding-top: 4px;">
-          <p>
-            <span class="en"><span class="myth-tag">Myth</span>"Carrying a balance builds credit faster."</span>
-            <span class="vi"><span class="myth-tag">Lầm tưởng</span>"Giữ dư nợ giúp xây điểm nhanh hơn."</span>
-          </p>
-          <p>
-            <span class="en"><span class="truth-tag">Reality</span>Paying in full builds the same history and costs $0. Carrying a balance only pays the bank 20%+ interest for nothing.</span>
-            <span class="vi"><span class="truth-tag">Sự thật</span>Trả đủ tạo cùng lịch sử tốt và tốn $0. Giữ dư nợ chỉ để trả ngân hàng hơn 20% lãi mà không được gì.</span>
-          </p>
+        <div class="cr-stage">
+          <div class="cr-stage-body">
+            <h3 class="cr-stage-title">
+              <span class="en">18 and older</span>
+              <span class="vi">Từ 18 tuổi trở lên</span>
+            </h3>
+            <ol class="step-list">
+              <li>
+                <span class="en">Student cards (for those enrolled) and secured cards — where a refundable deposit of around $200 becomes the limit — are the two products built for applicants with no history.</span>
+                <span class="vi">Thẻ sinh viên (dành cho người đang đi học) và thẻ ký quỹ (secured) — nơi khoản ký quỹ hoàn lại khoảng $200 trở thành hạn mức — là hai sản phẩm sinh ra cho người chưa có lịch sử.</span>
+              </li>
+              <li>
+                <span class="en">Put one small recurring bill on it (a music subscription, gas once a month). Nothing else.</span>
+                <span class="vi">Đặt một hóa đơn định kỳ nhỏ vào thẻ (gói nhạc, một lần đổ xăng mỗi tháng). Không gì thêm.</span>
+              </li>
+              <li>
+                <span class="en">Set autopay to pay the FULL statement balance. This one setting is most of the strategy.</span>
+                <span class="vi">Cài thanh toán tự động trả TOÀN BỘ dư nợ sao kê. Riêng cài đặt này đã là phần lớn chiến lược.</span>
+              </li>
+              <li>
+                <span class="en">Wait. A first score typically appears after ~6 months of history. After a year, ask for a limit increase (it lowers utilization).</span>
+                <span class="vi">Chờ đợi. Điểm số đầu tiên thường xuất hiện sau ~6 tháng có lịch sử. Sau một năm, xin tăng hạn mức (giúp giảm tỷ lệ sử dụng).</span>
+              </li>
+            </ol>
+          </div>
+          <aside class="cr-aside">
+            <span class="cr-aside-label">
+              <span class="en">Secured card deposit</span>
+              <span class="vi">Tiền ký quỹ thẻ secured</span>
+            </span>
+            <span class="cr-aside-value">$200</span>
+            <p class="cr-caption">
+              <span class="en">Your deposit is your limit.</span>
+              <span class="vi">Tiền ký quỹ chính là hạn mức của bạn.</span>
+            </p>
+          </aside>
         </div>
 
-        <div class="myth">
-          <p>
-            <span class="en"><span class="myth-tag">Myth</span>"Checking my own score hurts it."</span>
-            <span class="vi"><span class="myth-tag">Lầm tưởng</span>"Tự kiểm tra điểm làm giảm điểm."</span>
-          </p>
-          <p>
-            <span class="en"><span class="truth-tag">Reality</span>Checking your own score is a "soft pull" and never affects it. Only applications for new credit ("hard pulls") cause a small, temporary dip.</span>
-            <span class="vi"><span class="truth-tag">Sự thật</span>Tự xem điểm là "soft pull" và không bao giờ ảnh hưởng. Chỉ đơn đăng ký tín dụng mới ("hard pull") mới gây giảm nhẹ, tạm thời.</span>
-          </p>
+      </div>
+    </section>
+
+    <section class="section cr-section" id="golden-rules">
+      <div class="section-head">
+        <p class="eyebrow">
+          <span class="en">The golden rules</span>
+          <span class="vi">Những nguyên tắc vàng</span>
+        </p>
+        <h2 class="section-title">
+          <span class="en">Five habits that keep a score healthy</span>
+          <span class="vi">Năm thói quen giữ cho điểm số khỏe mạnh</span>
+        </h2>
+        <p class="section-sub">
+          <span class="en">No order here — every one of them matters every month.</span>
+          <span class="vi">Không có thứ tự — điều nào cũng quan trọng, mỗi tháng.</span>
+        </p>
+      </div>
+
+      <div class="cr-rules">
+
+        <div class="cr-rule">
+          <h3 class="cr-rule-name">
+            <span class="en">Spend only what you have</span>
+            <span class="vi">Chỉ tiêu số tiền đang có</span>
+          </h3>
+          <div class="cr-rule-body">
+            <p>
+              <span class="en">A credit card is a payment method, not extra income. A charge that is not already covered by money in checking becomes a balance, and a balance carries interest.</span>
+              <span class="vi">Thẻ tín dụng là phương thức thanh toán, không phải thu nhập thêm. Khoản chi chưa có sẵn tiền trong tài khoản sẽ trở thành dư nợ, và dư nợ thì bị tính lãi.</span>
+            </p>
+          </div>
         </div>
 
-        <div class="myth">
-          <p>
-            <span class="en"><span class="myth-tag">Myth</span>"My debit card is building my credit."</span>
-            <span class="vi"><span class="myth-tag">Lầm tưởng</span>"Thẻ ghi nợ đang xây tín dụng cho tôi."</span>
-          </p>
-          <p>
-            <span class="en"><span class="truth-tag">Reality</span>Debit spends your own money, so there's nothing to repay — and nothing reported. Years of perfect debit use build exactly zero credit.</span>
-            <span class="vi"><span class="truth-tag">Sự thật</span>Thẻ ghi nợ tiêu tiền của chính bạn, không có gì để hoàn trả — nên không có gì được ghi nhận. Nhiều năm dùng thẻ ghi nợ hoàn hảo xây được đúng số 0 điểm tín dụng.</span>
-          </p>
+        <div class="cr-rule">
+          <h3 class="cr-rule-name">
+            <span class="en">Full balance, not the minimum</span>
+            <span class="vi">Trả toàn bộ, không trả tối thiểu</span>
+          </h3>
+          <div class="cr-rule-body">
+            <p>
+              <span class="en">Pay the full balance every month. Inside the grace period, a card costs you $0 in interest, ever.</span>
+              <span class="vi">Trả đủ toàn bộ dư nợ mỗi tháng. Trong thời gian ân hạn, thẻ không tốn của bạn đồng lãi nào.</span>
+            </p>
+          </div>
         </div>
 
-        <div class="myth">
-          <p>
-            <span class="en"><span class="myth-tag">Myth</span>"You need to be rich to have good credit."</span>
-            <span class="vi"><span class="myth-tag">Lầm tưởng</span>"Phải giàu mới có tín dụng tốt."</span>
+        <div class="cr-rule">
+          <h3 class="cr-rule-name">
+            <span class="en">Keep utilization low</span>
+            <span class="vi">Giữ mức sử dụng thấp</span>
+          </h3>
+          <div class="cr-rule-body">
+            <p>
+              <span class="en">Keep utilization under 30% of your limit; under 10% is even better.</span>
+              <span class="vi">Giữ mức sử dụng dưới 30% hạn mức; dưới 10% càng tốt.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="cr-rule">
+          <h3 class="cr-rule-name">
+            <span class="en">Due dates come first</span>
+            <span class="vi">Ưu tiên ngày đến hạn</span>
+          </h3>
+          <div class="cr-rule-body">
+            <p>
+              <span class="en">Payment history is the heaviest factor in the score. A single payment reported 30 days late can outweigh a year of on-time ones, which is what autopay exists to prevent.</span>
+              <span class="vi">Lịch sử thanh toán là yếu tố nặng ký nhất trong điểm số. Một lần bị báo trễ 30 ngày có thể lấn át cả một năm trả đúng hạn, và đó là điều thanh toán tự động sinh ra để ngăn chặn.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="cr-rule">
+          <h3 class="cr-rule-name">
+            <span class="en">Let accounts get old</span>
+            <span class="vi">Để tài khoản già đi</span>
+          </h3>
+          <div class="cr-rule-body">
+            <p>
+              <span class="en">The oldest open card anchors the average age of accounts, so closing it shortens that history. Several applications in a short window each add a hard inquiry.</span>
+              <span class="vi">Chiếc thẻ mở lâu nhất neo giữ tuổi trung bình của các tài khoản, nên đóng nó lại sẽ rút ngắn lịch sử đó. Nhiều đơn đăng ký trong thời gian ngắn, mỗi đơn lại thêm một lần tra cứu cứng (hard inquiry).</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Deliberately off the rail: myths aren't positions on a scale, so the
+       one section that breaks the system is the one that has to. -->
+  <div class="section-band">
+  <div class="page">
+
+  <div class="cr-chapter">
+    <span class="cr-chapter-num" aria-hidden="true">03</span>
+    <p class="cr-chapter-name">
+      <span class="en">What to unlearn</span>
+      <span class="vi">Những điều cần bỏ đi</span>
+    </p>
+  </div>
+
+  <section class="section" id="myths">
+    <div class="section-head">
+      <p class="eyebrow eyebrow-rose">
+        <span class="en">Myths, debunked</span>
+        <span class="vi">Giải oan những lầm tưởng</span>
+      </p>
+      <h2 class="section-title">
+        <span class="en">What people repeat, and what's true</span>
+        <span class="vi">Điều người ta hay nói, và sự thật</span>
+      </h2>
+      <p class="section-sub">
+        <span class="en">Each of these costs someone real money every month.</span>
+        <span class="vi">Mỗi điều dưới đây đều khiến ai đó mất tiền thật mỗi tháng.</span>
+      </p>
+    </div>
+    <div class="cr-myths">
+
+      <div class="cr-myth">
+        <h3 class="cr-myth-claim">
+          <span class="en">"Carrying a balance builds credit faster."</span>
+          <span class="vi">"Giữ dư nợ giúp xây điểm nhanh hơn."</span>
+        </h3>
+        <div class="cr-myth-body">
+          <p class="cr-verdict">
+            <span class="en">Paying in full does it</span>
+            <span class="vi">Trả đủ là đã đủ</span>
           </p>
           <p>
-            <span class="en"><span class="truth-tag">Reality</span>Income isn't even in the formula. A student paying a $12 subscription on time every month can outscore a high earner who pays late.</span>
-            <span class="vi"><span class="truth-tag">Sự thật</span>Thu nhập thậm chí không nằm trong công thức. Một sinh viên trả gói $12 đúng hạn hàng tháng có thể vượt điểm người thu nhập cao nhưng trả trễ.</span>
+            <span class="en">Paying in full builds the same history and costs $0. Carrying a balance only pays the bank 20%+ interest for nothing.</span>
+            <span class="vi">Trả đủ tạo cùng lịch sử tốt và tốn $0. Giữ dư nợ chỉ để trả ngân hàng hơn 20% lãi mà không được gì.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="cr-myth">
+        <h3 class="cr-myth-claim">
+          <span class="en">"Checking my own score hurts it."</span>
+          <span class="vi">"Tự kiểm tra điểm làm giảm điểm."</span>
+        </h3>
+        <div class="cr-myth-body">
+          <p class="cr-verdict">
+            <span class="en">Your own check is free</span>
+            <span class="vi">Tự kiểm tra thì miễn phí</span>
+          </p>
+          <p>
+            <span class="en">Checking your own score is a "soft pull" and never affects it. Only applications for new credit ("hard pulls") cause a small, temporary dip.</span>
+            <span class="vi">Tự xem điểm là "soft pull" và không bao giờ ảnh hưởng. Chỉ đơn đăng ký tín dụng mới ("hard pull") mới gây giảm nhẹ, tạm thời.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="cr-myth">
+        <h3 class="cr-myth-claim">
+          <span class="en">"My debit card is building my credit."</span>
+          <span class="vi">"Thẻ ghi nợ đang xây tín dụng cho tôi."</span>
+        </h3>
+        <div class="cr-myth-body">
+          <p class="cr-verdict">
+            <span class="en">Debit reports nothing</span>
+            <span class="vi">Thẻ ghi nợ không được ghi nhận</span>
+          </p>
+          <p>
+            <span class="en">Debit spends your own money, so there's nothing to repay — and nothing reported. Years of perfect debit use build exactly zero credit.</span>
+            <span class="vi">Thẻ ghi nợ tiêu tiền của chính bạn, không có gì để hoàn trả — nên không có gì được ghi nhận. Nhiều năm dùng thẻ ghi nợ hoàn hảo xây được đúng số 0 điểm tín dụng.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="cr-myth">
+        <h3 class="cr-myth-claim">
+          <span class="en">"You need to be rich to have good credit."</span>
+          <span class="vi">"Phải giàu mới có tín dụng tốt."</span>
+        </h3>
+        <div class="cr-myth-body">
+          <p class="cr-verdict">
+            <span class="en">Income isn't in the formula</span>
+            <span class="vi">Thu nhập không nằm trong công thức</span>
+          </p>
+          <p>
+            <span class="en">Income isn't even in the formula. A student paying a $12 subscription on time every month can outscore a high earner who pays late.</span>
+            <span class="vi">Thu nhập thậm chí không nằm trong công thức. Một sinh viên trả gói $12 đúng hạn hàng tháng có thể vượt điểm người thu nhập cao nhưng trả trễ.</span>
           </p>
         </div>
       </div>
 
     </div>
   </section>
+
+  </div>
+  </div>
+
+  <div class="page">
 
   <section class="section">
     <div class="next-links">
@@ -309,15 +663,20 @@
         <span class="en">APR? Utilization? Open Jargon →</span>
         <span class="vi">APR? Utilization? Mở Jargon →</span>
       </a>
-      <a class="btn btn-ghost" href="family-split.html">
-        <span class="en">Next module: Family Split →</span>
-        <span class="vi">Công cụ tiếp theo: Family Split →</span>
+      <a class="btn btn-ghost" href="recommend.html">
+        <span class="en">Where should savings go? Open Recommend →</span>
+        <span class="vi">Tiền để dành nên đi đâu? Mở Recommend →</span>
       </a>
     </div>
   </section>
 
   </div>
   </div>
+
+  <p class="disclaimer">
+    <span class="en">Educational tool only. Not licensed financial advice.</span>
+    <span class="vi">Chỉ là công cụ giáo dục. Không phải lời khuyên tài chính được cấp phép.</span>
+  </p>
 
 </main>
 
@@ -344,12 +703,12 @@
       <span class="vi">Các mô-đun</span>
     </h2>
     <ul class="footer-links">
-      <li><a href="actual%20website.html">Calculator</a></li>
+      <li><a href="calculator.html">Calculator</a></li>
       <li><a href="budget.html">Budget</a></li>
       <li><a href="recommend.html">Recommend</a></li>
       <li><a href="jargon.html">Jargon</a></li>
       <li><a href="credit.html">Credit</a></li>
-      <li><a href="family-split.html">Family Split</a></li>
+      <li><a href="tuition.html">Tuition</a></li>
     </ul>
   </nav>
 
@@ -367,5 +726,6 @@
 </footer>
 
 <script src="js/site.js"></script>
+<script src="js/credit-rail.js"></script>
 </body>
 </html>

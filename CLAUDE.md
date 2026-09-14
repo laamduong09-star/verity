@@ -6,11 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A bilingual (EN/VI) financial literacy site for young first-time earners, starting with a single compound-interest calculator page. Today it's hand-written static files — no framework, no package.json yet:
 
-- `actual website.html` — the calculator page (note the literal space in the filename; this used to be `index.html`, renamed outside of git; `index.html` is now the landing page)
-- `index.html`, `recommend.html`, `jargon.html`, `credit.html`, `family-split.html`, `budget.html` — the other pages
-- `css/style.css` — all styling
-- `js/` — one vanilla-JS file per page plus shared `site.js`. Budget splits its logic across two files: `js/budget-math.js` (pure math, no DOM — `splitPaycheck`/`toMonthly` — node-testable) and `js/budget.js` (DOM wiring, loads budget-math.js first). `js/scroll-scale.js` (the landing app-window scroll effect, see DESIGN.md) follows the same split from `js/landing.js`.
-- `tests/` — node:test unit tests: `tests/budget-math.test.js`, `tests/scroll-scale.test.js`. See Commands below for how to run them.
+- `calculator.html` — the calculator page (this was `index.html` originally, then `actual website.html` with a literal space; renamed to `calculator.html` on 2026-09-13 before publishing, so the public URL is not `/actual%20website.html`. `index.html` is the landing page)
+- `index.html`, `recommend.html`, `jargon.html`, `credit.html`, `budget.html`, `tuition.html` — the other pages
+- `css/style.css` — the shared design system and every component used on more than one page. Two pages additionally carry a page-scoped stylesheet for a visual system that is theirs alone and would be dead weight everywhere else: `css/credit.css` (the 300–850 score rail), `css/tuition.css` (the money ruler), `css/budget.css` (the money-that-goes-home figure) and `css/recommend.css` (the ladder margin notes), each loaded *after* `style.css`. Default to `style.css`; only reach for a page-scoped file when the component genuinely cannot be reused.
+- `js/` — one vanilla-JS file per page plus shared `site.js`. Budget splits its logic across two files: `js/budget-math.js` (pure math, no DOM — `splitPaycheck`/`toMonthly` — node-testable) and `js/budget.js` (DOM wiring, loads budget-math.js first). `js/scroll-scale.js` (the landing app-window scroll effect, see DESIGN.md) follows the same split from `js/landing.js`, and so does Tuition (`js/tuition-math.js` — pure `amortize`/`standardTierYears`/`salaryCheck` — plus `js/tuition.js`). Recommend has no page script at all: its four-question placement block was removed on 2026-09-05 and the ladder is static markup.
+- `tests/` — node:test unit tests, inside `website/`: `tests/budget-math.test.js`, `tests/scroll-scale.test.js`, `tests/credit-rail.test.js`, `tests/tuition-math.test.js`. Each requires its module with a `../js/…` relative path, so they must be run from the `website/` directory. See Commands below.
 
 Fonts (Lexend + Be Vietnam Pro) load from Google Fonts via a `<link>` tag in the HTML head; there are no other external dependencies besides Chart.js (also loaded via CDN, referenced in the HTML).
 
@@ -53,10 +53,11 @@ If a request could plausibly match more than one, pick by what the task most spe
 
 There is no build step, package.json, linter, or test suite in this repo *yet* (build tooling is now permitted — see "What this is"). Until one lands:
 
-- **Serve locally**: `npx serve -p 8743 .` from the project root, then open `http://localhost:8743/actual%20website.html` (the URL-encoded space is required).
+- **Serve locally**: `npx serve -p 8743 .` from the project root, then open `http://localhost:8743/calculator.html`.
 - **Syntax-check the JS** after editing: `node --check js/<file>.js`
 - **Check CSS brace balance** after large edits (no CSS parser is wired up): count `{`/`}` are equal, e.g. via `grep -c` or a quick Node one-liner.
-- **Run unit tests**: `node --test tests/budget-math.test.js tests/scroll-scale.test.js` (or any single file) — list files explicitly rather than pointing `node --test` at the bare `tests/` directory; the directory form hits a path-resolution quirk in this environment's shell and fails with a misleading `Cannot find module 'tests'` error instead of discovering the files inside it. `js/budget-math.js` and `js/scroll-scale.js` are plain browser scripts that also export via `if (typeof module !== 'undefined') module.exports = {...}`, which is what lets node:test `require()` them directly without a DOM.
+- **Line endings are mixed on purpose and must be preserved per file.** `css/style.css` and `DESIGN.md` are CRLF; every `.html`, every `.js`, `css/credit.css`, `css/tuition.css`, `css/recommend.css`, `css/budget.css` and this file are LF. Check with `grep -qU $'\r' <file>` before and after editing. **`sed -i` silently rewrites a CRLF file as LF in this environment** — it converted all 310 lines of DESIGN.md on a one-line insert (2026-09-04). Use the Edit tool on CRLF files, or if you must use `sed -i`, restore afterwards with `sed -i 's/$/\r/' <file>` and verify with `grep -cUv $'\r$' <file>` returning 0 and `grep -cU $'\r\r$' <file>` returning 0.
+- **Run unit tests**: from `website/`, `node --test tests/budget-math.test.js tests/scroll-scale.test.js tests/credit-rail.test.js tests/tuition-math.test.js` (39 tests as of 2026-09-05). Run them from `website/`, not the session root — each test requires its module via `../js/…`. List files explicitly rather than pointing `node --test` at the bare `tests/` directory; the directory form hits a path-resolution quirk in this environment's shell and fails with a misleading `Cannot find module 'tests'` error instead of discovering the files inside it. **Watch out:** `node --test` silently *passes* when handed a path that doesn't exist — it reports `pass N, fail 0` for whichever files it did find and says nothing about the missing ones. Check the reported test count matches what you expected before trusting a green run. `js/budget-math.js`, `js/scroll-scale.js`, `js/tuition-math.js` and `js/recommend-ladder.js` are plain browser scripts that also export via `if (typeof module !== 'undefined') module.exports = {...}`, which is what lets node:test `require()` them directly without a DOM.
 
 If a build step is ever added, document its commands here and keep the no-tooling workflow above working until every page is migrated.
 
@@ -93,7 +94,34 @@ Numbers never need translation, only copy. Strings that get built dynamically in
 
 Top bar (logo, nav capsule, language toggle) → centered hero → two-column calculator grid (inputs card + chart card, stacks to one column under 800px) → stats row (3 stat cards) → breakdown grid (year-by-year table + "what compounding buys you" comparison widget, also stacks under 800px) → disclaimer. An info modal (triggered from the inputs card) explains compound interest inline, per the product's "explain, don't impress" principle.
 
-The nav's `Recommend`/`Jargon`/`Credit`/`Family Split` items are PRODUCT.md's roadmapped future modules, not dead code — they're intentionally `aria-disabled="true"` with a "soon" badge and a blocked click handler, not yet wired to real pages.
+Six modules have real pages and live nav links — Calculator, Budget, Recommend, Jargon, Credit, and Tuition. (This section previously said several were `aria-disabled="true"` placeholders with a "soon" badge; that has not been true since they were built, and the disabled-nav markup is gone.)
+
+**`tuition.html` was built out against PRD §6.5 on 2026-08-28** (it had been a content-free shell until then). Two rules govern any future edit to it. First, **every figure on the page is dated in place and expires**: the federal rate and loan fee are for loans first disbursed 2026-07-01 → 2027-06-30, the Pell maximum is the 2026–27 award year, the ledger numbers are College Board 2025–26, and the repayment plans are the two that replaced the flat ten-year Standard plan on 2026-07-01. Re-verify against studentaid.gov and the current College Board Trends report before changing any of them, never from memory — a wrong number here costs someone real money. Second, the page deliberately does not restate what other modules own: interest mechanics belong to Calculator, debt-as-reputation to Credit, definitions to Jargon (whose "Paying for college" group holds the six terms this page introduces). Its own subject is the cost side and the choice between ways of paying.
+
+The repayment calculator models the tiered Standard plan only. RAP is described in prose and deliberately not calculated: it moves with income every year, so any single number printed for it would be fiction.
+
+**The ruler is an invariant, not a style choice** (redesign 2026-09-03, replacing a card-based first version). Every `.tu-track` on the page except the calculator's own split must render at the same left offset and the same width, because the page's entire claim is that a bar twice as long is twice the money. Three separate layout decisions broke it during the build and none were visible by eye — an indented staircase, a two-column definition list, and a label column beside the four-year ladder each put a track in a narrower box, where the same `--w` percentage silently meant fewer dollars. Verify with:
+
+```js
+[...new Set([...document.querySelectorAll('.tu-track')]
+  .filter(t => !t.classList.contains('tu-calc-track'))
+  .map(t => { const r = t.getBoundingClientRect(); return `${Math.round(r.left)}@${Math.round(r.width)}`; }))]
+```
+
+That must return exactly one entry, at every viewport width. The calculator's split bar is the one deliberate exception — its full width is the total repaid, and the caption under it says so.
+
+The `--w` percentages are hard-coded in the markup because they are facts, not state ($7,395 of $31,000 is 23.85%). Recompute them against $31,000 if a figure changes.
+
+**Budget's columns carry the same invariant** ("Money that goes home", added 2026-09-04): every `.bd-stack` is drawn against one scale, $700 full height, via `flex: none; height: calc(var(--bd-scale) * var(--income) / var(--bd-max))`. Drop `flex: none` and the tallest stack becomes a flex item with default `flex-shrink: 1`, squeezed by its own label's height — short by a dollars-per-pixel margin invisible by eye. Verify in the browser, at every viewport:
+
+```js
+[...new Set([...document.querySelectorAll('.bd-stack')].map((s, i) =>
+  Math.round([700, 500, 300][i] / s.getBoundingClientRect().height * 100) / 100))]
+```
+
+Must return exactly one entry. The three `.bd-seg.is-home` blocks must likewise all report the same height. See DESIGN.md, "Budget columns".
+
+Each module page owns its visual system rather than sharing one template, because the subjects differ: Recommend is a numbered seven-rung ladder with paired figures (order *is* the content), Credit is a 300–850 score rail the sections anchor to, Tuition is a money ruler — one shared $0–$31,000 horizontal scale that every bar on the page is drawn against. When adding to a module page, extend that page's own language instead of copying another module's layout — a shared shell across the modules is explicitly not the goal.
 
 ## Delegation policy
 

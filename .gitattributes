@@ -1,0 +1,5 @@
+# This repo deliberately mixes line endings per file — css/style.css and
+# DESIGN.md are CRLF, everything else is LF (see CLAUDE.md). Git's autocrlf
+# would rewrite them on checkout, so tell it to store and check out bytes
+# exactly as they are.
+* -text

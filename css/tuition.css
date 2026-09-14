@@ -1,0 +1,1109 @@
+/* ==================================================================
+   Tuition — "the money ruler"
+   ==================================================================
+   Credit is a 300–850 rail because a credit score is a position on a
+   scale. Tuition is a ruler because every number in this subject is a
+   quantity of dollars, and the whole topic goes wrong when people
+   compare quantities they have never seen side by side.
+
+   THE RULE OF THE PAGE: one horizontal scale, $0 → $31,000, and every
+   bar below the legend is drawn against it. $31,000 is not arbitrary —
+   it is simultaneously the four-year federal borrowing cap for a
+   dependent undergraduate and (to within $10) one year of published
+   cost at a public four-year. Those two bars come out the same length,
+   which is the single most useful thing this page has to say, and no
+   paragraph delivers it the way two matched bars do.
+
+   Percentages are hard-coded in the markup as `--w` because they are
+   facts, not state: $7,395 of $31,000 is 23.85%, today and next week.
+   Only the calculator's own split is computed at runtime.
+
+   COLOUR, four meanings, held all the way down:
+     ink                      money you or your family actually pay
+     --aid-tint (teal wash)   money you never repay
+     --teal                   subsidized borrowing — the good debt
+     mid ink (0.28)           unsubsidized, and the rest of the budget
+     outline, no fill         private lending: outside the federal
+                              system, and drawn as if it has no floor
+   The module pastel is NOT a data fill here (see DESIGN.md). Rose never
+   appears: a loan is a tool with a price, not a warning.
+
+   NO CARDS, NO PILLS, NO BOXED CALLOUTS. Sections sit on the cream and
+   separate with hairlines and air, the way Credit does. The single
+   exception is the calculator's input column, which is an instrument
+   rather than prose and earns a surface.
+   ================================================================== */
+
+.module-tuition {
+  /* $31,000 = 100% of every track on this page. */
+  --tu-aid: rgba(11, 90, 85, 0.16);
+  --tu-mid: rgba(17, 17, 17, 0.28);
+  /* The non-tuition half of a college budget is the same kind of money as
+     the tuition half, just less advertised — so it gets a lighter ink,
+     not the --tu-mid that means the costlier kind of debt. One colour,
+     one meaning: without this split, #tu-limits stacks the same grey
+     under two different taxonomies in adjacent bars. */
+  --tu-rest: rgba(17, 17, 17, 0.15);
+  --tu-ground: rgba(17, 17, 17, 0.05);
+  /* Stronger than any built-in curve. The CSS defaults are too weak to
+     read as deliberate. */
+  --tu-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ---------- Rhythm ---------- */
+/* Deliberately roomier than the shared .section (72px). This page is
+   long on purpose; the air is what keeps eleven figures from reading as
+   a wall. */
+.tu-section {
+  margin-top: 104px;
+}
+
+.tu-section:first-child {
+  margin-top: 0;
+}
+
+/* Prose is narrow, figures are full measure. That split is what makes
+   the ruler legible: every bar starts at the same left edge and ends
+   against the same right edge, all the way down the page. */
+.tu-measure {
+  max-width: 660px;
+}
+
+/* ---------- The spread ---------- */
+/* The measure has to stay at 660px to stay readable, and the tracks have
+   to stay at 1136px to stay comparable — which left 476px of nothing
+   down the right of every prose block. That column is now the margin:
+   sources, the rate-and-fee facts that used to be pills, and the answer
+   to the reader's obvious next question all live out there, where they
+   are scannable without interrupting the sentence they belong to. */
+.tu-spread {
+  display: grid;
+  grid-template-columns: minmax(0, 660px) minmax(0, 1fr);
+  gap: 88px;
+  align-items: start;
+}
+
+.tu-margin {
+  padding-top: 6px;
+  min-width: 0;
+}
+
+.tu-margin > * + * {
+  margin-top: 26px;
+}
+
+.tu-margin .tu-dated,
+.tu-margin .tu-caption {
+  max-width: none;
+}
+
+/* A grid item keeps its own margin, which would drop the prose column
+   below the margin column it is supposed to sit level with. */
+.tu-spread > .tu-caption,
+.tu-spread > .tu-body,
+.tu-spread > .tu-row-body,
+.tu-spread > .tu-order-body {
+  margin-top: 0;
+}
+
+.tu-margin-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.tu-margin-stat {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.tu-margin-note {
+  margin: 12px 0 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--slate);
+}
+
+.tu-margin-note a {
+  color: var(--blue);
+}
+
+/* The rate-and-fee facts that used to be pills. Typed and ruled: a term
+   on the left, its value right-aligned in the display face, hairlines
+   between. Same information, no bubbles. */
+.tu-facts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tu-facts > li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--slate);
+}
+
+.tu-facts > li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.tu-fact-value {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.tu-lede {
+  /* The shared .section-title carries no bottom margin, so without this
+     the lede sat on the baseline of a 36px heading. */
+  margin: 16px 0 8px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.tu-body {
+  margin: 0 0 14px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.tu-body:last-child {
+  margin-bottom: 0;
+}
+
+/* A caption carries content; only .tu-dated carries sourcing. Both were
+   slate and half a point apart, which read as one grey mush at the foot
+   of every section. The caption is ink now, and holds the measure — it
+   was the only text on the page running the full 1136px. */
+.tu-caption {
+  max-width: 660px;
+  margin: 16px 0 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+/* Sourcing. Every figure on this page expires; every one says when. */
+.tu-dated {
+  max-width: 660px;
+  margin: 18px 0 0;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--slate);
+}
+
+.tu-dated a {
+  color: var(--blue);
+}
+
+/* ---------- Part openers ---------- */
+/* Not Credit's numbered chapter marker — this page has two acts, not a
+   sequence of chapters, and the divider carries the ruler's own
+   endpoints so the instrument is restated where the subject turns. */
+.tu-part {
+  margin-top: 120px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ink);
+}
+
+.tu-part:first-of-type {
+  margin-top: 0;
+}
+
+.tu-part-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.tu-part-name {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* ---------- The ruler legend ---------- */
+/* Stated once, at the top, then obeyed silently by every bar. */
+.tu-ruler {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.tu-ruler-end {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.tu-ruler-line {
+  flex: 1;
+  height: 9px;
+  border-left: 1px solid var(--ink);
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+/* ---------- Bars ---------- */
+/* Square ends, not pills. A rounded cap rounds the value: it puts ink
+   where the quantity has already stopped. On a page whose entire claim
+   is that these lengths are comparable, that is a lie worth 3px. */
+.tu-bar {
+  margin-top: 26px;
+}
+
+.tu-bar:first-child {
+  margin-top: 0;
+}
+
+.tu-bar-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 9px;
+}
+
+.tu-bar-name {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.tu-bar-sub {
+  font-size: 13px;
+  color: var(--slate);
+}
+
+.tu-bar-value {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.tu-bar-value.is-lead {
+  font-size: 30px;
+}
+
+/* The ground is the whole $31,000. Seeing the empty remainder is half
+   the point — it is what makes a $7,395 Pell grant look like $7,395
+   rather than like "the maximum". */
+.tu-track {
+  display: flex;
+  height: 26px;
+  border-radius: 3px;
+  background: var(--tu-ground);
+  overflow: hidden;
+}
+
+.tu-track.is-tall {
+  height: 34px;
+}
+
+.tu-track.is-slim {
+  height: 18px;
+}
+
+.tu-seg {
+  width: var(--w, 0%);
+  height: 100%;
+}
+
+.tu-seg.is-ink { background: var(--ink); }
+.tu-seg.is-mid { background: var(--tu-mid); }
+.tu-seg.is-rest { background: var(--tu-rest); }
+.tu-seg.is-aid { background: var(--tu-aid); }
+.tu-seg.is-sub { background: var(--teal); }
+
+/* Private lending has no federal ceiling, so its bar has no fill and no
+   right edge — it runs to the end of the ruler and fades out rather
+   than stopping somewhere honest-looking. */
+.tu-seg.is-open {
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(17, 17, 17, 0.16) 0 1px,
+    transparent 1px 7px
+  );
+  border-top: 1px solid rgba(17, 17, 17, 0.22);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.22);
+  -webkit-mask-image: linear-gradient(90deg, #000 55%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 55%, transparent 100%);
+}
+
+/* Labels that sit under their own segment, at the segment's width, so
+   the name is under the thing it names. */
+.tu-legend {
+  display: flex;
+  margin-top: 10px;
+}
+
+.tu-legend-item {
+  width: var(--w, 0%);
+  padding-right: 14px;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  min-width: 0;
+}
+
+.tu-legend-name {
+  display: block;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--slate);
+}
+
+.tu-legend-value {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* ---------- The retracting bar ---------- */
+/* The page's one animation. The markup carries the true width, so the
+   figure is correct with JavaScript off or reduced motion on;
+   js/tuition.js adds .is-armed (which parks the fill at the published
+   price) only when motion is allowed. */
+/* The ink fill LAYERS over the aid region rather than sitting beside
+   it. As flex siblings the two widths add up, so the pre-animation
+   state drew 38.55% + 31.13% = 69.68% of the ruler — a length matching
+   no real number, on a page whose whole claim is that lengths are true.
+   Stacked, the bar is the published price at rest and the net price
+   after, and every frame in between is a real quantity. */
+.tu-retract .tu-track {
+  position: relative;
+}
+
+.tu-retract .tu-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--w, 0%);
+  background: var(--ink);
+}
+
+.tu-retract.is-armed .tu-fill {
+  width: var(--tu-from, 100%);
+  transition: width 0.9s var(--tu-ease-out) 0.1s;
+}
+
+.tu-retract.is-armed.is-revealed .tu-fill {
+  width: var(--w, 0%);
+}
+
+.tu-minus {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 20px 0;
+  padding-left: 22px;
+  position: relative;
+  font-size: 13.5px;
+  color: var(--slate);
+}
+
+.tu-minus::before {
+  content: "\2212";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.tu-minus-value {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* ---------- Key ---------- */
+.tu-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin: 24px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--slate);
+}
+
+.tu-key-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tu-key-swatch {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  flex: none;
+}
+
+.tu-key-swatch.is-ink { background: var(--ink); }
+.tu-key-swatch.is-mid { background: var(--tu-mid); }
+.tu-key-swatch.is-aid { background: var(--tu-aid); }
+.tu-key-swatch.is-sub { background: var(--teal); }
+.tu-key-swatch.is-base { background: var(--tu-ground); border: 1px solid var(--border); }
+.tu-key-swatch.is-open {
+  background: repeating-linear-gradient(135deg, rgba(17, 17, 17, 0.16) 0 1px, transparent 1px 5px);
+  border: 1px solid rgba(17, 17, 17, 0.22);
+}
+
+/* ---------- Two-column: prose beside a figure ---------- */
+.tu-split-cols {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 64px;
+  align-items: start;
+}
+
+.tu-aside-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: 8px;
+}
+
+.tu-aside-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* ---------- Timelines ---------- */
+/* Time, not dollars — so these are drawn as a line with marks rather
+   than as a filled bar, and never share the ruler's visual language. */
+.tu-time {
+  position: relative;
+  margin-top: 40px;
+  padding-bottom: 4px;
+}
+
+.tu-time-line {
+  position: relative;
+  height: 1px;
+  background: rgba(17, 17, 17, 0.22);
+}
+
+.tu-time-window {
+  position: absolute;
+  top: -13px;
+  left: var(--from);
+  width: var(--to);
+  height: 27px;
+  background: var(--tu-ground);
+  border-left: 1px dashed rgba(17, 17, 17, 0.28);
+  border-right: 1px dashed rgba(17, 17, 17, 0.28);
+}
+
+.tu-time-mark {
+  position: absolute;
+  top: -5px;
+  left: var(--at);
+  width: 11px;
+  height: 11px;
+  margin-left: -5.5px;
+  border-radius: 9999px;
+  background: var(--ink);
+}
+
+.tu-time-mark.is-open {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+
+.tu-time-labels {
+  position: relative;
+  height: 96px;
+  margin-top: 18px;
+  margin-bottom: 24px;
+}
+
+.tu-time-label {
+  position: absolute;
+  left: var(--at);
+  width: 168px;
+  margin-left: -12px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--slate);
+}
+
+.tu-time-label.is-end {
+  text-align: right;
+  /* -width, not -width+12, or the label overhangs the measure. */
+  margin-left: -168px;
+}
+
+.tu-time-when {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 3px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- SAI axis ---------- */
+.tu-axis {
+  margin-top: 32px;
+}
+
+.tu-axis-line {
+  position: relative;
+  height: 1px;
+  background: rgba(17, 17, 17, 0.22);
+}
+
+.tu-axis-tick {
+  position: absolute;
+  left: var(--at);
+  top: -6px;
+  width: 1px;
+  height: 13px;
+  background: var(--ink);
+}
+
+.tu-axis-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: var(--slate);
+}
+
+.tu-axis-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- The interest clock (inline SVG) ---------- */
+.tu-clock {
+  width: 100%;
+  height: auto;
+  margin-top: 32px;
+  overflow: visible;
+}
+
+.tu-clock-grid { stroke: rgba(17, 17, 17, 0.1); stroke-width: 1; }
+.tu-clock-axis { stroke: rgba(17, 17, 17, 0.28); stroke-width: 1; }
+.tu-clock-sub { stroke: var(--teal); stroke-width: 2.5; fill: none; }
+.tu-clock-unsub { stroke: var(--ink); stroke-width: 2.5; fill: none; }
+.tu-clock-gap { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 3; }
+.tu-clock-fill { fill: rgba(17, 17, 17, 0.06); }
+.tu-clock-base { fill: var(--tu-ground); }
+.tu-clock-wedge { fill: rgba(17, 17, 17, 0.13); }
+.tu-clock-tick {
+  font-family: var(--font-body);
+  font-size: 11px;
+  fill: var(--slate);
+}
+.tu-clock-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+}
+.tu-clock-name.is-sub { fill: var(--teal); }
+.tu-clock-name.is-unsub { fill: var(--ink); }
+
+/* ---------- Hairline row lists ---------- */
+/* The replacement for every pill and note card that used to be here:
+   facts carried by type and a rule, not by a container. */
+.tu-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Single column, not two. A two-column row would put every figure
+   inside it into a narrower track, and a bar drawn against a narrower
+   track is a different number of dollars per pixel — which is the one
+   thing this page cannot allow. */
+.tu-rows > li {
+  padding: 30px 0;
+  border-top: 1px solid var(--border);
+}
+
+.tu-row-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin-bottom: 10px;
+}
+
+.tu-rows > li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.tu-row-term {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.tu-row-vi {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate);
+}
+
+.tu-row-body {
+  max-width: 660px;
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.tu-row-fig {
+  margin-top: 16px;
+}
+
+/* ---------- The borrowing order ---------- */
+/* Order is the advice, and the order is a descent: each option steps
+   further from the margin than the one that beats it. The indent is the
+   whole device — no boxes, no numbers, just distance from the left. */
+.tu-order {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tu-order > li {
+  padding: 34px 0;
+  border-top: 1px solid var(--border);
+}
+
+.tu-order > li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+/* The indent steps the TEXT, never the bar. Every track on this page
+   has to start at the same left edge and end at the same right edge or
+   the ruler stops meaning anything — an indented bar would draw 17.74%
+   of a narrower track, which is a different number of dollars. */
+.tu-order > li { --step: 0px; }
+.tu-order > li:nth-child(2) { --step: 56px; }
+.tu-order > li:nth-child(3) { --step: 112px; }
+
+.tu-order-when {
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.tu-order-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.tu-order-vi {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate);
+}
+
+.tu-order-body {
+  max-width: 660px;
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+/* MUST come after the three rules above: each of them sets a margin
+   shorthand, which resets margin-left to 0 if this is declared first.
+   That is exactly how the staircase silently stopped indenting once. */
+.tu-order-when,
+.tu-order-name,
+.tu-order-body {
+  margin-left: var(--step, 0px);
+}
+
+/* ---------- The four-year ladder ---------- */
+.tu-ladder {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Label above, bar below — same reason as .tu-rows. A year column
+   beside the track would shorten every bar in this list by 112px. */
+.tu-ladder > li {
+  margin-top: 22px;
+}
+
+.tu-ladder-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 7px;
+}
+
+.tu-ladder > li:first-child {
+  margin-top: 0;
+}
+
+.tu-ladder-year {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--slate);
+}
+
+.tu-ladder-value {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* The two bars the whole page is built to put next to each other. */
+.tu-match {
+  margin-top: 44px;
+  padding-top: 30px;
+  border-top: 1px solid var(--ink);
+}
+
+.tu-match-note {
+  margin: 22px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-width: 660px;
+}
+
+/* ---------- Indented aside (replaces the boxed callout) ---------- */
+.tu-aside {
+  margin: 32px 0 0;
+  padding-left: 24px;
+  border-left: 2px solid var(--teal);
+  max-width: 660px;
+}
+
+.tu-aside-title {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+/* ---------- Repayment calculator ---------- */
+/* The one surface on the page. A tool is not prose; it earns an edge. */
+.tu-calc {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.tu-calc-inputs {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 26px;
+}
+
+.tu-calc-title {
+  margin: 0 0 20px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.tu-hint {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--slate);
+}
+
+/* The tier the balance falls into is marked, not announced in a
+   sentence, so nothing here needs rebuilding in two languages when a
+   number changes. */
+.seg-chip.is-match::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--teal);
+  margin-right: 7px;
+  vertical-align: 1px;
+}
+
+.seg-chip.is-match.active::before {
+  background: #ffffff;
+}
+
+.tu-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--teal);
+  margin-right: 6px;
+  vertical-align: 1px;
+}
+
+.tu-headline-label {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate);
+}
+
+.tu-headline {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6vw, 60px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--teal);
+  font-variant-numeric: tabular-nums;
+}
+
+.tu-headline-sub {
+  margin: 12px 0 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--slate);
+}
+
+.tu-result-block {
+  margin-top: 34px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.tu-result-block[hidden] {
+  display: none;
+}
+
+/* Typing a salary must not move anything. The rows are always in the
+   layout and always the same height; only the two values change, from an
+   em dash to a number. Swapping an empty paragraph for a filled block —
+   the first attempt — reflowed the page on every keystroke. */
+.tu-check-value.is-empty {
+  color: var(--stone);
+}
+
+/* This bar retargets on every keystroke, so it has to keep up with
+   typing. 250ms of plain "ease" lagged visibly behind the number
+   above it. */
+.tu-calc-track .tu-seg {
+  transition: width 140ms var(--tu-ease-out);
+}
+
+.tu-check-rows {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.tu-check-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.tu-check-value {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Repayment tiers ---------- */
+.tu-tiers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 660px;
+}
+
+.tu-tiers > li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.tu-tiers > li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.tu-tier-term {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .tu-spread {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .tu-margin {
+    padding-top: 0;
+  }
+
+  .tu-split-cols {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .tu-calc {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 760px) {
+  .tu-section { margin-top: 76px; }
+  .tu-part { margin-top: 88px; }
+
+  /* The ruler survives; the layout around it does not need to. */
+  /* The staircase indent is the argument, but below this width it costs
+     more line-breaks than it buys. The "take this first / then this /
+     only if you have to" labels carry the order alone. */
+  .tu-order > li:nth-child(2),
+  .tu-order > li:nth-child(3) {
+    --step: 0px;
+  }
+
+  .tu-bar-head,
+  .tu-minus,
+  .tu-check-row,
+  .tu-tiers > li {
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+
+  .tu-bar-value.is-lead { font-size: 26px; }
+
+  /* Segment-aligned labels stop working when a segment is 40px wide. */
+  .tu-legend {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .tu-legend-item {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  /* Absolutely-positioned marks cannot share a 311px line without
+     overlapping, so below this width the labels stop pointing at the
+     timeline and become a plain legend under it. The line still carries
+     the shape; the list carries the words. */
+  .tu-time-labels {
+    position: static;
+    height: auto;
+    display: grid;
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  .tu-time-label,
+  .tu-time-label.is-end {
+    position: static;
+    width: 100%;
+    margin-left: 0;
+    padding-left: 14px;
+    border-left: 2px solid var(--border);
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tu-retract.is-armed .tu-fill,
+  .tu-calc-track .tu-seg {
+    transition: none;
+  }
+}

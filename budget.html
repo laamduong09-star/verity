@@ -8,9 +8,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/budget.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body class="module-budget">
+<div class="bg-wash" aria-hidden="true"></div>
 
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
@@ -26,12 +28,12 @@
       <span class="logo-text">verity</span>
     </a>
     <nav class="nav-capsule">
-      <a href="actual%20website.html" class="nav-link">Calculator</a>
+      <a href="calculator.html" class="nav-link">Calculator</a>
       <a href="budget.html" class="nav-link active">Budget</a>
       <a href="recommend.html" class="nav-link">Recommend</a>
       <a href="jargon.html" class="nav-link">Jargon</a>
       <a href="credit.html" class="nav-link">Credit</a>
-      <a href="family-split.html" class="nav-link">Family Split</a>
+      <a href="tuition.html" class="nav-link">Tuition</a>
     </nav>
     <button class="lang-toggle" id="langToggle">
       <span class="lang-option active" data-lang="en">EN</span>
@@ -77,6 +79,21 @@
           <input type="number" id="amount" value="500" min="0" max="1000000" step="10">
         </div>
         <p class="clamp-note" id="amountClampNote">
+          <span class="en">Capped at <span class="clamp-note-value"></span></span>
+          <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span></span>
+        </p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="home">
+          <span class="en">Money that goes home</span>
+          <span class="vi">Tiền gửi về nhà</span>
+        </label>
+        <div class="input-wrap">
+          <span class="prefix">$</span>
+          <input type="number" id="home" value="0" min="0" max="1000000" step="10">
+        </div>
+        <p class="clamp-note" id="homeClampNote">
           <span class="en">Capped at <span class="clamp-note-value"></span></span>
           <span class="vi">Đã giới hạn ở <span class="clamp-note-value"></span></span>
         </p>
@@ -188,7 +205,12 @@
           <span class="donut-total" id="donutTotal">$0</span>
         </div>
       </div>
-      <div class="donut-legend" aria-hidden="true">
+      <div class="donut-legend" id="donutLegend" aria-hidden="true">
+        <span class="legend-item legend-home">
+          <span class="legend-dot dot-home"></span>
+          <span class="en">Goes home</span>
+          <span class="vi">Gửi về nhà</span>
+        </span>
         <span class="legend-item">
           <span class="legend-dot dot-needs"></span>
           <span class="en">Needs</span>
@@ -207,6 +229,8 @@
       </div>
     </div>
   </section>
+
+  <p class="bd-offtop" id="bdOffTop"></p>
 
   <section class="stats-row">
     <div class="card stat-card tint-blue" tabindex="0">
@@ -282,19 +306,241 @@
   </section>
 
   <p class="savings-cta">
-    <a class="savings-link" id="savingsLink" href="actual%20website.html#monthly=0">
+    <a class="savings-link" id="savingsLink" href="calculator.html#monthly=0">
       <span class="en">See what saving <span class="savings-monthly-value">$0</span>/month grows into →</span>
       <span class="vi">Xem <span class="savings-monthly-value">$0</span>/tháng tiết kiệm sẽ tăng trưởng thành bao nhiêu →</span>
     </a>
   </p>
 
+  <section class="bd-part">
+    <p class="bd-eyebrow">
+      <span class="en">The line that does the work</span>
+      <span class="vi">Ranh giới quyết định mọi thứ</span>
+    </p>
+    <h2 class="bd-title">
+      <span class="en">Needs and wants are not obvious categories.</span>
+      <span class="vi">Nhu cầu và mong muốn không phải hai nhóm hiển nhiên.</span>
+    </h2>
+    <p class="bd-lede">
+      <span class="en">50/30/20 sets the sizes but gives no test for which is which. Almost every disagreement about a budget is really a disagreement about this line, and at a first job the hard cases are nearly always the same five.</span>
+      <span class="vi">50/30/20 ấn định kích thước nhưng không đưa ra phép thử nào để biết đâu là đâu. Gần như mọi tranh cãi về ngân sách thực ra là tranh cãi về ranh giới này, và ở công việc đầu tiên, những trường hợp khó gần như luôn là năm trường hợp sau.</span>
+    </p>
+
+    <div class="bd-rows">
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">Your phone</span>
+          <span class="vi">Điện thoại của bạn</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">A need when it is how a manager reaches you about a shift and how your family reaches you. The plan costing $40 more than the one that already does both is a want sitting inside a need.</span>
+          <span class="vi">Là nhu cầu khi đó là cách quản lý báo ca cho bạn và cách gia đình liên lạc với bạn. Gói cước đắt hơn $40 so với gói đã làm được cả hai việc đó là một mong muốn nằm bên trong một nhu cầu.</span>
+        </p>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">Getting to work</span>
+          <span class="vi">Đi làm</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">A bus pass, gas, or a share of insurance is a need on the days you work. The same ride on a day off is not — which is why transport often lands in both columns in one week.</span>
+          <span class="vi">Vé xe buýt, tiền xăng hay phần đóng góp tiền bảo hiểm là nhu cầu vào những ngày bạn đi làm. Cũng chuyến đi đó vào ngày nghỉ thì không — và đó là lý do tiền đi lại thường rơi vào cả hai cột trong cùng một tuần.</span>
+        </p>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">Food</span>
+          <span class="vi">Đồ ăn</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">Groceries, and a meal on a shift long enough to need one, are needs. Eating out is the largest want for most first earners and the one that leaves the least evidence behind — a $9 charge four times a week is $144 a month that nobody remembers agreeing to.</span>
+          <span class="vi">Đi chợ, và một bữa ăn trong ca làm đủ dài để cần đến, là nhu cầu. Ăn ngoài là mong muốn lớn nhất với phần lớn người mới đi làm, và cũng là thứ để lại ít dấu vết nhất — $9 bốn lần một tuần là $144 mỗi tháng mà không ai nhớ mình đã đồng ý chi.</span>
+        </p>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">Clothes for the job</span>
+          <span class="vi">Quần áo đi làm</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">Non-slip shoes, a uniform, or anything an employer requires is a need, and in some states the employer has to pay for or reimburse part of it. Everything else is a want, whatever it gets worn to.</span>
+          <span class="vi">Giày chống trượt, đồng phục, hay bất cứ thứ gì công ty bắt buộc đều là nhu cầu, và ở một số bang công ty phải trả hoặc hoàn lại một phần. Mọi thứ còn lại là mong muốn, dù có mặc đi đâu chăng nữa.</span>
+        </p>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">Subscriptions</span>
+          <span class="vi">Dịch vụ thuê bao</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">Almost always wants, and the only category that keeps charging after you stop using it. They are why a budget that worked in September stops working by March with nothing visibly changing.</span>
+          <span class="vi">Hầu như luôn là mong muốn, và là nhóm duy nhất vẫn tiếp tục trừ tiền sau khi bạn ngừng dùng. Chúng là lý do một ngân sách chạy tốt hồi tháng Chín lại hỏng vào tháng Ba mà bề ngoài chẳng có gì thay đổi.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bd-part">
+    <p class="bd-eyebrow">
+      <span class="en">Irregular pay</span>
+      <span class="vi">Thu nhập thất thường</span>
+    </p>
+    <h2 class="bd-title">
+      <span class="en">Shift work does not produce the same number twice.</span>
+      <span class="vi">Làm theo ca thì không bao giờ ra cùng một con số hai lần.</span>
+    </h2>
+    <p class="bd-lede">
+      <span class="en">A percentage split recalculates itself every time the paycheck changes, which is its advantage over budgeting in fixed dollars. What it cannot do is hold a fixed obligation steady at the same time.</span>
+      <span class="vi">Cách chia theo tỷ lệ phần trăm tự tính lại mỗi khi kỳ lương thay đổi, và đó là ưu điểm của nó so với việc lập ngân sách bằng số tiền cố định. Điều nó không làm được là giữ cho một nghĩa vụ cố định đứng yên cùng lúc.</span>
+    </p>
+
+    <div class="bd-rows">
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">What moves</span>
+          <span class="vi">Cái gì thay đổi</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">The three shares are percentages, so a 20% savings share is $100 on a $500 check and $60 on a $300 one. Nothing needs adjusting for that — the arithmetic has already done it.</span>
+          <span class="vi">Ba phần đều là tỷ lệ phần trăm, nên phần tiết kiệm 20% là $100 với kỳ lương $500 và $60 với kỳ lương $300. Không cần chỉnh gì cả — phép tính đã tự làm điều đó.</span>
+        </p>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">What does not</span>
+          <span class="vi">Cái gì không đổi</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">A phone bill, a subscription, a share to the household: the same number in a slow week as a busy one. As the paycheck falls, these take a larger share of it without anyone changing them.</span>
+          <span class="vi">Tiền điện thoại, tiền thuê bao, phần đóng góp cho gia đình: vẫn ngần ấy dù tuần ít việc hay nhiều việc. Khi kỳ lương giảm, những khoản này chiếm tỷ trọng lớn hơn mà không ai thay đổi chúng cả.</span>
+        </p>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">Where that lands</span>
+          <span class="vi">Kết quả rơi vào đâu</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">Between a $500 week and a $300 week the paycheck falls 40%. If $150 of it is fixed, the savings share falls 57%. The smallest bucket absorbs most of the difference, because it is what is left after the fixed part is taken.</span>
+          <span class="vi">Giữa một tuần $500 và một tuần $300, kỳ lương giảm 40%. Nếu $150 trong đó là cố định, phần tiết kiệm giảm 57%. Nhóm nhỏ nhất hứng phần lớn chênh lệch, bởi nó là những gì còn lại sau khi phần cố định đã bị lấy đi.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bd-part">
+    <p class="bd-eyebrow">
+      <span class="en">What the split assumes</span>
+      <span class="vi">Cách chia này giả định điều gì</span>
+    </p>
+    <h2 class="bd-title">
+      <span class="en">Every budgeting rule is built on assumptions. These are 50/30/20's.</span>
+      <span class="vi">Mọi quy tắc lập ngân sách đều dựa trên giả định. Đây là những giả định của 50/30/20.</span>
+    </h2>
+    <p class="bd-lede">
+      <span class="en">The rule comes from Elizabeth Warren and Amelia Warren Tyagi's <em>All Your Worth</em> (2005), where it divides a household's own after-tax income. Three things are taken for granted in that sentence.</span>
+      <span class="vi">Quy tắc này xuất phát từ cuốn <em>All Your Worth</em> (2005) của Elizabeth Warren và Amelia Warren Tyagi, nơi nó chia thu nhập sau thuế của chính hộ gia đình. Có ba điều được mặc nhiên thừa nhận trong câu đó.</span>
+    </p>
+
+    <div class="bd-rows">
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">That all of it is yours to divide</span>
+          <span class="vi">Rằng tất cả là của bạn để chia</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">Money that leaves before the split — a share to the household, a phone plan someone else counts on — belongs to none of the three buckets. The rule has no name for it, which is why the calculator above takes it off the top before the three shares are worked out.</span>
+          <span class="vi">Khoản tiền ra đi trước khi chia — phần đóng góp cho gia đình, gói điện thoại mà người khác trông cậy — không thuộc nhóm nào trong ba nhóm. Quy tắc không có tên gọi cho nó, và đó là lý do công cụ bên trên trừ khoản này ra trước khi tính ba phần.</span>
+        </p>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">That everything scales together</span>
+          <span class="vi">Rằng mọi thứ co giãn cùng nhau</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">Percentages rise and fall with the paycheck. A fixed obligation does not move at all, so the same three percentages mean different things in a good month and a bad one.</span>
+          <span class="vi">Tỷ lệ phần trăm tăng giảm theo kỳ lương. Một nghĩa vụ cố định thì không nhúc nhích, nên cùng ba tỷ lệ ấy lại mang ý nghĩa khác nhau trong một tháng tốt và một tháng kém.</span>
+        </p>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">That needs and wants sort cleanly</span>
+          <span class="vi">Rằng nhu cầu và mong muốn phân loại rành mạch</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">The rule sets the sizes and stops. Where a given cost falls is a judgment the person budgeting makes, which is what the five cases at the top of this page are about.</span>
+          <span class="vi">Quy tắc ấn định kích thước rồi dừng lại. Một khoản chi thuộc nhóm nào là phán đoán của chính người lập ngân sách, và đó là điều mà năm trường hợp ở đầu trang này nói tới.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bd-part">
+    <p class="bd-eyebrow">
+      <span class="en">Gross and net</span>
+      <span class="vi">Lương gộp và lương thực nhận</span>
+    </p>
+    <h2 class="bd-title">
+      <span class="en">The number that goes in the box is the one that lands.</span>
+      <span class="vi">Con số điền vào ô là con số thực sự về tài khoản.</span>
+    </h2>
+    <p class="bd-lede">
+      <span class="en">Hours × wage is gross pay — what the job offer says. What arrives is net: gross minus withholding. Budgeting the larger number produces a plan that is short every single month by the difference.</span>
+      <span class="vi">Số giờ × mức lương là lương gộp — con số ghi trong lời mời làm việc. Thứ thực sự về tới là lương thực nhận: lương gộp trừ đi các khoản khấu trừ. Lập ngân sách theo con số lớn hơn sẽ tạo ra một kế hoạch tháng nào cũng thiếu đúng bằng khoản chênh lệch đó.</span>
+    </p>
+
+    <div class="bd-rows">
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">Always taken</span>
+          <span class="vi">Luôn bị trừ</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">Social Security and Medicare together take 7.65% of gross pay, at every income level, with no threshold to fall under. On a $500 paycheck that is $38 before anything else is withheld.</span>
+          <span class="vi">An sinh Xã hội và Medicare cộng lại lấy 7,65% lương gộp, ở mọi mức thu nhập, không có ngưỡng nào để được miễn. Với kỳ lương $500 thì đó là $38 trước khi bất kỳ khoản nào khác bị giữ lại.</span>
+        </p>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">Sometimes returned</span>
+          <span class="vi">Đôi khi được trả lại</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">Income-tax withholding is separate, and at a first job's earnings much of it can come back as a refund after filing. That makes it real money gone from this month's budget and possibly real money returning next spring — two different things worth not confusing.</span>
+          <span class="vi">Khoản giữ lại cho thuế thu nhập là chuyện riêng, và với mức thu nhập của công việc đầu tiên, phần lớn có thể được hoàn lại sau khi khai thuế. Nghĩa là tiền thật sự rời khỏi ngân sách tháng này và có thể là tiền thật sự quay lại vào mùa xuân năm sau — hai chuyện khác nhau, đừng lẫn lộn.</span>
+        </p>
+      </div>
+
+      <div class="bd-row">
+        <span class="bd-row-name">
+          <span class="en">Where to read it</span>
+          <span class="vi">Xem ở đâu</span>
+        </span>
+        <p class="bd-row-body">
+          <span class="en">Every pay stub lists gross, each deduction, and net. The <a href="jargon.html">Jargon</a> page defines each line; the figure this page wants is the one at the bottom.</span>
+          <span class="vi">Mỗi phiếu lương đều ghi lương gộp, từng khoản khấu trừ, và lương thực nhận. Trang <a href="jargon.html">Thuật ngữ</a> giải nghĩa từng dòng; con số trang này cần là con số ở dưới cùng.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  </div>
+  </div>
   <p class="disclaimer">
     <span class="en">Educational tool only. Not licensed financial advice.</span>
     <span class="vi">Chỉ là công cụ giáo dục. Không phải lời khuyên tài chính được cấp phép.</span>
   </p>
 
-  </div>
-  </div>
 </main>
 
 <footer class="site-footer">
@@ -320,12 +566,12 @@
       <span class="vi">Các mô-đun</span>
     </h2>
     <ul class="footer-links">
-      <li><a href="actual%20website.html">Calculator</a></li>
+      <li><a href="calculator.html">Calculator</a></li>
       <li><a href="budget.html">Budget</a></li>
       <li><a href="recommend.html">Recommend</a></li>
       <li><a href="jargon.html">Jargon</a></li>
       <li><a href="credit.html">Credit</a></li>
-      <li><a href="family-split.html">Family Split</a></li>
+      <li><a href="tuition.html">Tuition</a></li>
     </ul>
   </nav>
 

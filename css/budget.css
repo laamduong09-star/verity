@@ -1,0 +1,141 @@
+/* ==================================================================
+   Budget — the written sections under the splitter
+   ==================================================================
+   The three bucket colors and the doughnut are page-agnostic and live
+   in style.css. This file holds what belongs to Budget alone: the
+   off-the-top line under the calculator, the home item in the doughnut
+   legend, and the four content sections below.
+
+   This file used to carry a stacked-column figure — three paychecks as
+   small multiples on one $700 scale — which was removed on 2026-09-13.
+   Budget is a tool followed by reading, the way Credit and Jargon are;
+   a chart under the chart was a second graphic where the page needed
+   information. Nothing here draws a quantity any more. The doughnut is
+   the page's only figure, and it is interactive, which is what earns it
+   the space.
+
+   The device for the reading is a two-column row: a named case on the
+   left, what it means on the right, hairline between. No cards, no
+   pills, no boxed callouts — facts carried in type and rules.
+   ================================================================== */
+
+.module-budget {
+  --bd-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ---------- The off-the-top line ---------- */
+/* Permanently in the layout at both states (home > 0 and home === 0),
+   so typing a home amount for the first time shifts nothing below it.
+   Text is JS-generated — see the isViPrimary() + strings-table comment
+   in js/budget.js. */
+.bd-offtop {
+  margin: 32px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  text-align: center;
+}
+
+/* ---------- Doughnut legend: the home item ---------- */
+/* The chart draws a home arc only when there is a home amount, so the
+   legend names one only then. Kept out of the flow entirely rather than
+   hidden with visibility, because an empty gap between "Goes home" and
+   "Needs" reads as a missing swatch. The legend recentres horizontally
+   when it appears; nothing above or below it moves, which is what the
+   no-reflow rule protects. */
+.legend-home {
+  display: none;
+}
+
+.donut-legend.has-home .legend-home {
+  display: inline-flex;
+}
+
+/* ---------- Sections ---------- */
+.bd-part {
+  margin-top: 88px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ink);
+}
+
+.bd-eyebrow {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.bd-title {
+  margin: 20px 0 0;
+  max-width: 640px;
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.bd-lede {
+  max-width: 660px;
+  margin: 20px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+/* ---------- The rows ---------- */
+/* Name left, meaning right. The name column is fixed so every name in a
+   section starts on the same left edge and the bodies share one measure;
+   ragged name widths would make the section read as a list of unrelated
+   paragraphs rather than one table of cases. */
+.bd-rows {
+  margin-top: 44px;
+}
+
+.bd-row {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 0 56px;
+  padding: 22px 0;
+  border-top: 1px solid var(--border);
+}
+
+.bd-row:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.bd-row-name {
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.bd-row-body {
+  max-width: 660px;
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.bd-row-body a {
+  color: var(--blue);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .bd-title {
+    font-size: 27px;
+  }
+
+  .bd-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px 0;
+  }
+}

@@ -29,6 +29,25 @@ function toMonthly(amount, period) {
   return Math.round(amount * (PERIOD_TO_MONTHLY[period] || 1));
 }
 
+// Take a fixed dollar amount off the top before splitting the rest.
+// $150 to a household does not shrink when a shift gets cut, so it is
+// subtracted first rather than treated as a fourth percentage — the
+// asymmetry that creates (home's share of the paycheck rises as the
+// paycheck falls) is the point, not a bug.
+function splitAfterHome(amount, home, pctNeeds, pctWants, pctSavings) {
+  const safeAmount = Math.max(0, amount);
+  const sentHome = Math.min(Math.max(0, home), safeAmount);
+  const remainder = safeAmount - sentHome;
+  const split = splitPaycheck(remainder, pctNeeds, pctWants, pctSavings);
+  return {
+    ...split,
+    home: sentHome,
+    remainder,
+    homeShare: safeAmount > 0 ? sentHome / safeAmount : 0,
+    covered: sentHome === Math.max(0, home),
+  };
+}
+
 if (typeof module !== 'undefined') {
-  module.exports = { splitPaycheck, toMonthly };
+  module.exports = { splitPaycheck, toMonthly, splitAfterHome };
 }

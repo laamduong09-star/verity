@@ -12,6 +12,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body class="module-jar">
+<div class="bg-wash" aria-hidden="true"></div>
 
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
@@ -27,12 +28,12 @@
       <span class="logo-text">verity</span>
     </a>
     <nav class="nav-capsule">
-      <a href="actual%20website.html" class="nav-link">Calculator</a>
+      <a href="calculator.html" class="nav-link">Calculator</a>
       <a href="budget.html" class="nav-link">Budget</a>
       <a href="recommend.html" class="nav-link">Recommend</a>
       <a href="jargon.html" class="nav-link active">Jargon</a>
       <a href="credit.html" class="nav-link">Credit</a>
-      <a href="family-split.html" class="nav-link">Family Split</a>
+      <a href="tuition.html" class="nav-link">Tuition</a>
     </nav>
     <button class="lang-toggle" id="langToggle">
       <span class="lang-option active" data-lang="en">EN</span>
@@ -81,8 +82,8 @@
                role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="jargonSuggest">
         <span class="search-count" id="jargonCount" aria-live="polite">
           <span class="count-dot" aria-hidden="true"></span>
-          <span class="en"><span class="count-n">44</span> <span class="count-label-rest">terms</span><span class="count-label-search">matches</span></span>
-          <span class="vi"><span class="count-n">44</span> <span class="count-label-rest">thuật ngữ</span><span class="count-label-search">kết quả</span></span>
+          <span class="en"><span class="count-n">50</span> <span class="count-label-rest">terms</span><span class="count-label-search">matches</span></span>
+          <span class="vi"><span class="count-n">50</span> <span class="count-label-rest">thuật ngữ</span><span class="count-label-search">kết quả</span></span>
         </span>
       </div>
       <!-- Suggestion dropdown (adapted from the reference "action search
@@ -504,6 +505,104 @@
 
     <div class="jargon-group">
       <div class="jargon-group-head">
+        <span class="group-badge group-badge--college" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4 2.5 8.5 12 13l9.5-4.5L12 4Z"/>
+            <path d="M6 10.5v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>
+            <path d="M21.5 8.5v5.5"/>
+          </svg>
+        </span>
+        <h2 class="jargon-group-title">
+          <span class="en">Paying for college</span>
+          <span class="vi">Chi trả cho việc học đại học</span>
+        </h2>
+        <span class="group-count">6</span>
+      </div>
+      <div class="term-grid">
+
+        <div class="card term-card">
+          <h3 class="term-name">FAFSA</h3>
+          <span class="term-vi-name">Đơn xin hỗ trợ tài chính liên bang</span>
+          <p class="term-def">
+            <span class="en">The free federal form that decides your access to grants, work-study, and federal loans — and most college and state aid too. It asks for a parent&#39;s financial information and opens on October 1 each year.</span>
+            <span class="vi">Lá đơn liên bang miễn phí quyết định bạn có được trợ cấp, chương trình vừa học vừa làm và các khoản vay liên bang hay không — và cả phần lớn tiền hỗ trợ của trường và tiểu bang. Đơn hỏi thông tin tài chính của cha mẹ và mở vào ngày 1 tháng 10 hằng năm.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">Filing is free. Anyone charging you to submit one is not the government.</span>
+            <span class="vi">Nộp đơn là miễn phí. Ai thu tiền để nộp hộ thì không phải là chính phủ.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Cost of attendance</h3>
+          <span class="term-vi-name">Tổng chi phí theo học</span>
+          <p class="term-def">
+            <span class="en">A college&#39;s full one-year estimate: tuition and fees plus housing, food, books, transport, and personal costs. Aid is calculated against this whole number, not against tuition alone.</span>
+            <span class="vi">Mức ước tính trọn một năm của trường: học phí và lệ phí cộng với chỗ ở, ăn uống, sách vở, đi lại và chi tiêu cá nhân. Tiền hỗ trợ được tính trên con số tổng này, không phải chỉ trên học phí.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">Tuition and fees can be $11,950 while the cost of attendance is nearer $31,000.</span>
+            <span class="vi">Học phí và lệ phí có thể là $11,950 trong khi tổng chi phí theo học gần $31,000.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Net price</h3>
+          <span class="term-vi-name">Giá thực trả</span>
+          <p class="term-def">
+            <span class="en">Cost of attendance minus the grants and scholarships you never repay. This is the number a family actually has to cover, and it is often far below the published price.</span>
+            <span class="vi">Tổng chi phí theo học trừ đi trợ cấp và học bổng bạn không phải hoàn lại. Đây mới là số tiền gia đình thực sự phải lo, và thường thấp hơn giá niêm yết rất nhiều.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">Every college must post a Net Price Calculator — run it before you apply.</span>
+            <span class="vi">Mọi trường đều phải đăng Net Price Calculator — hãy dùng thử trước khi nộp đơn.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Student Aid Index (SAI)</h3>
+          <span class="term-vi-name">Chỉ số hỗ trợ sinh viên</span>
+          <p class="term-def">
+            <span class="en">The number the FAFSA produces from your family&#39;s finances, which colleges use to size need-based aid. It replaced the Expected Family Contribution in 2024–25. It is not a bill, and it can go as low as −$1,500.</span>
+            <span class="vi">Con số mà FAFSA tính ra từ tình hình tài chính gia đình bạn, được các trường dùng để định mức hỗ trợ theo nhu cầu. Nó thay thế Expected Family Contribution từ năm học 2024–25. Đây không phải hóa đơn, và có thể thấp đến −$1,500.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">A lower SAI means more demonstrated need, which is the direction you want.</span>
+            <span class="vi">SAI càng thấp nghĩa là nhu cầu được chứng minh càng lớn, và đó là hướng bạn muốn.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Subsidized vs. unsubsidized loan</h3>
+          <span class="term-vi-name">Khoản vay được trợ cấp lãi vs. không trợ cấp lãi</span>
+          <p class="term-def">
+            <span class="en">Two federal student loans at the same rate. On a subsidized loan the government pays the interest while you are enrolled and through the six-month grace period; on an unsubsidized loan interest builds from the day the money is disbursed.</span>
+            <span class="vi">Hai khoản vay sinh viên liên bang cùng lãi suất. Với khoản được trợ cấp, chính phủ trả lãi trong lúc bạn còn đi học và suốt sáu tháng ân hạn; với khoản không trợ cấp, lãi chạy ngay từ ngày tiền được giải ngân.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">Take every subsidized dollar you are offered before any unsubsidized one.</span>
+            <span class="vi">Nhận hết phần được trợ cấp lãi trước khi động đến phần không trợ cấp.</span>
+          </p>
+        </div>
+
+        <div class="card term-card">
+          <h3 class="term-name">Disbursement</h3>
+          <span class="term-vi-name">Giải ngân</span>
+          <p class="term-def">
+            <span class="en">The moment a loan or grant is actually paid out — usually straight to the college, once per term, against your bill. Anything left over after the bill is refunded to you.</span>
+            <span class="vi">Thời điểm khoản vay hay trợ cấp thực sự được chi ra — thường là chuyển thẳng cho trường, mỗi kỳ một lần, để trừ vào hóa đơn của bạn. Phần dư sau khi trừ hóa đơn sẽ được hoàn lại cho bạn.</span>
+          </p>
+          <p class="term-eg">
+            <span class="en">Interest on an unsubsidized loan starts at disbursement, not at graduation.</span>
+            <span class="vi">Lãi của khoản vay không trợ cấp bắt đầu từ lúc giải ngân, không phải từ lúc tốt nghiệp.</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="jargon-group">
+      <div class="jargon-group-head">
         <span class="group-badge group-badge--invest" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m3 17 6-6 4 4 8-8"/>
@@ -737,7 +836,7 @@
 
   <section class="section">
     <div class="next-links">
-      <a class="btn btn-ghost" href="actual%20website.html">
+      <a class="btn btn-ghost" href="calculator.html">
         <span class="en">See compound interest in action →</span>
         <span class="vi">Xem lãi kép vận hành →</span>
       </a>
@@ -750,6 +849,11 @@
 
   </div>
   </div>
+
+  <p class="disclaimer">
+    <span class="en">Educational tool only. Not licensed financial advice.</span>
+    <span class="vi">Chỉ là công cụ giáo dục. Không phải lời khuyên tài chính được cấp phép.</span>
+  </p>
 
 </main>
 
@@ -776,12 +880,12 @@
       <span class="vi">Các mô-đun</span>
     </h2>
     <ul class="footer-links">
-      <li><a href="actual%20website.html">Calculator</a></li>
+      <li><a href="calculator.html">Calculator</a></li>
       <li><a href="budget.html">Budget</a></li>
       <li><a href="recommend.html">Recommend</a></li>
       <li><a href="jargon.html">Jargon</a></li>
       <li><a href="credit.html">Credit</a></li>
-      <li><a href="family-split.html">Family Split</a></li>
+      <li><a href="tuition.html">Tuition</a></li>
     </ul>
   </nav>
 

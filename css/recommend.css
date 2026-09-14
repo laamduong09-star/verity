@@ -1,0 +1,79 @@
+/* ==================================================================
+   Recommend — the ladder's margin notes
+   ==================================================================
+   The ladder itself (.rung, .rung-num, .rung-figure…) lives in
+   style.css, where it has always been. This file holds only what is
+   Recommend's alone: the "watch out" note that fills the column beside
+   each figure.
+
+   This file used to also carry a four-question placement block that
+   named a starting rung for the reader. It was removed on 2026-09-05:
+   it was the one element on the site that issued a personal verdict,
+   which is at odds with the site being educational rather than
+   advisory, and it put 527px of interaction in front of a ladder that
+   explains itself. The ladder is the answer, and now it is the only
+   thing making a claim.
+   ================================================================== */
+
+/* ---------- The watch-out note ---------- */
+/* Fills the column under each figure, which was empty. Not a card and
+   not a pill — a rule and a label, same as everywhere else on the site. */
+.rec-watch {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.rec-watch-label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+.rec-watch-body {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+/* ---------- The first-gen note ---------- */
+/* Sits under the Common mistake note on the four rungs where a
+   first-generation reader hits something the ladder does not mention:
+   opening the account at all (1), family debt that carries no rate (3),
+   ITIN vs SSN on a custodial brokerage account (4), and being paid by
+   paper check or cash so there is no payday to automate (7).
+
+   In the margin rather than in a section of its own, deliberately. A
+   block at the end of the page would sit this material off to one side
+   instead of at the step where it actually bites, and it would repeat
+   the device Budget already uses.
+
+   The label is ink, not the rose of .rec-watch-label: rose is reserved
+   for caution and none of this is a warning. */
+.rec-firstgen {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.rec-firstgen-label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.rec-firstgen-body {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink);
+}

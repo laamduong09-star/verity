@@ -1,0 +1,954 @@
+/* ==================================================================
+   Credit — "the score rail"
+   ==================================================================
+   A credit score is a number on a 300–850 scale, so the page *is* that
+   scale. A rail runs down the left gutter, fills as you read, and
+   carries a readout of the score you're standing at. Sections anchor to
+   real positions on it, so reading top-to-bottom is the climb from
+   no-history to best-rates.
+
+   The ticks sit at their TRUE proportional positions (--at, set in the
+   markup), which is the point of drawing it to scale: 300→580 is a long
+   haul and 670→740 is a short hop, and the geometry says so before the
+   copy does.
+
+   js/credit-rail.js measures .cr-rail-scope and writes one custom
+   property, --cr-rail-progress (0..1), plus data-band on .cr-rail.
+   Everything that moves reads from those two.
+
+   The myths section is deliberately OFF the rail — a myth isn't a
+   position on a scale, and the one section that breaks the system is
+   the one that has to.
+   ================================================================== */
+
+/* ---------- Scope ---------- */
+/* The rail takes NO layout column. It's positioned in the page's outer
+   margin, so the content column lands exactly where every other module
+   page puts it and stays centred under the hero. Giving the rail a
+   gutter was the original mistake: it's an instrument reading the page,
+   not a sibling competing with it for width. */
+.cr-rail-scope {
+  position: relative;
+}
+
+.cr-rail-body {
+  min-width: 0;
+}
+
+/* ---------- The rail ---------- */
+/* Two parts, and the split is what makes the behaviour right:
+   .cr-rail is absolute and spans the FULL height of .cr-rail-scope, so
+   it is bounded by the climb itself; .cr-rail-inner is the sticky part
+   that rides the viewport inside those bounds. Sticky releases at its
+   container's end, which is precisely where the scale stops applying —
+   the rail hands off at "Myths, debunked" and never follows you in.
+   position: fixed could never do that; it has no end. */
+.cr-rail {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 148px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.cr-rail-inner {
+  position: sticky;
+  top: 88px;
+  height: calc(100vh - 128px);
+  min-height: 340px;
+}
+
+.cr-rail-track {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 68px;
+  width: 2px;
+  background: var(--border);
+  border-radius: 9999px;
+}
+
+.cr-rail-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(var(--cr-rail-progress, 0) * 100%);
+  background: var(--teal);
+  border-radius: 9999px;
+}
+
+/* Ticks: --at is (value - 300) / 550, written in the markup. */
+.cr-tick {
+  position: absolute;
+  top: var(--at, 0%);
+  left: 0;
+  width: 58px;
+  text-align: right;
+  translate: 0 -50%;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--slate);
+}
+
+.cr-tick::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -8px;
+  width: 5px;
+  height: 1px;
+  background: var(--border);
+}
+
+/* One dot per anchored section. --at is measured and written by
+   credit-rail.js, because it depends on where the sections actually
+   land — the only thing on this page the markup can't know up front. */
+.cr-dot {
+  position: absolute;
+  top: var(--at, 0%);
+  left: 68px;
+  width: 7px;
+  height: 7px;
+  translate: -2.5px -50%;
+  border-radius: 9999px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--stone);
+}
+
+/* The readout rides the fill head. */
+.cr-readout {
+  position: absolute;
+  top: calc(var(--cr-rail-progress, 0) * 100%);
+  left: 84px;
+  translate: 0 -50%;
+  white-space: nowrap;
+}
+
+.cr-readout-score {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+/* Only the band matching data-band is drawn. Note this sets display on
+   the .cr-band wrapper and never on .en/.vi — the language toggle keeps
+   full control of the spans inside. */
+.cr-band {
+  display: none;
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--slate);
+}
+
+.cr-rail[data-band="building"] .cr-band-building,
+.cr-rail[data-band="fair"] .cr-band-fair,
+.cr-rail[data-band="good"] .cr-band-good,
+.cr-rail[data-band="best"] .cr-band-best {
+  display: block;
+}
+
+.cr-rail[data-band="good"] .cr-band-good,
+.cr-rail[data-band="best"] .cr-band-best {
+  color: var(--teal);
+}
+
+/* ---------- Compact rail: the bar under the nav ---------- */
+/* Lives inside the sticky topbar so it stays pinned in both the resting
+   and compact header states, with no measured offset to go stale. */
+.cr-railbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 10px;
+}
+
+.cr-railbar-track {
+  flex: 1 1 auto;
+  height: 3px;
+  border-radius: 9999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.cr-railbar-fill {
+  display: block;
+  height: 100%;
+  width: calc(var(--cr-rail-progress, 0) * 100%);
+  border-radius: 9999px;
+  background: var(--teal);
+}
+
+.cr-railbar-score {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--slate);
+}
+
+/* ---------- Sections ---------- */
+/* This page reads as a left-anchored climb, so the shared centred
+   .section-head leaves every title floating over its own left-aligned
+   body copy. The whole column goes left instead — the one place Credit
+   departs from the site's centred heads, and the rail is the reason.
+   The hero above stays centred, matching the other module pages. */
+body.module-cred .section-head {
+  max-width: 640px;
+  margin: 0 0 28px;
+  text-align: left;
+}
+
+body.module-cred .section-sub {
+  max-width: 60ch;
+  margin: 12px 0 0;
+}
+
+.cr-section {
+  scroll-margin-top: 120px;
+}
+
+/* One rhythm for the climb. .content-shell's first-child reset now lands
+   on .cr-rail-scope rather than the section inside it, so the opening
+   section has to zero its own top margin or it inherits a stray 72px. */
+.cr-rail-body .cr-section {
+  margin-top: 104px;
+}
+
+.cr-rail-body .cr-section:first-child {
+  margin-top: 0;
+}
+
+.cr-measure {
+  max-width: 66ch;
+}
+
+.cr-lede {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--slate);
+}
+
+.cr-caption {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--slate);
+}
+
+/* ---------- The 300–850 range line ---------- */
+.cr-range {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.cr-range-num {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--slate);
+}
+
+/* The teal stretch is the part that changes what you pay: 670 upward,
+   which is (670-300)/550 = 67.3% along. */
+.cr-range-line {
+  flex: 1 1 auto;
+  height: 10px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    var(--stone) 0%,
+    var(--stone) 67.273%,
+    var(--teal) 67.273%,
+    var(--teal) 100%
+  );
+}
+
+.cr-range-caption {
+  margin-top: 12px;
+}
+
+/* ---------- The weights ---------- */
+/* One column whose parts sum to the whole score: each row's height IS
+   its weight. Height alone already carries that, so the two major rows
+   are marked with a teal edge rather than a filled block — a solid slab
+   would be saying the same thing twice, at volume, and this page has
+   only one thing that gets to be loud, and it's the rail. */
+/* Measure and left edge both match .cr-lede above it, so the figure
+   shares its column with the prose instead of floating indented and
+   over-wide. The brace moved to the right gutter for exactly that
+   reason: on the left it pushed every row off the text edge. */
+/* The section claims each block’s height is its weight, so the block
+   has to exist. This was five text rows separated by hairlines: the 35%
+   and 30% rows were merely tall, which reads as accidental whitespace
+   rather than as quantity, and two thirds of the width sat empty. Now a
+   single 100% column is cut into five filled segments with the labels
+   beside their own segment. Segments and label rows are flexed by the
+   same --w, so they cannot drift apart and nothing is hand-positioned. */
+.cr-stack {
+  display: grid;
+  /* The label column is capped rather than fluid: at 1fr the hairlines
+     ran ~290px past the end of the longest label, which is the dead
+     space that made the old version read as unfinished. 430px fits the
+     longest label with room and lands the whole stack at ~630px, the
+     same measure as the prose above it. */
+  /* 560, not 460. Row height is proportional, so the 10% rows are only
+     ever a tenth of this: at 460 they were 46px holding a 38px label,
+     8px of slack top and bottom combined, which is what read as
+     cramped. At 560 they are 56px, so the label sits in ~18px of air
+     and the two majors get room to feel like the majors. */
+  grid-template-columns: 60px minmax(0, 1fr) 104px;
+  gap: 0 30px;
+  height: 560px;
+  max-width: 640px;
+  margin-top: 32px;
+}
+
+/* Rounding the column, not each segment, so the five read as one bar
+   that has been divided rather than as five stacked chips. */
+.cr-stack-col {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* A tonal ramp, not a hue ramp. Hierarchy on this page is carried by
+   weight and size (see .cr-weight.is-major), and teal is spent once, on
+   the brace — so the segments step down in ink opacity instead. The two
+   dark blocks then read as exactly the 65% the brace marks. */
+.cr-seg {
+  flex: var(--w) 1 0;
+  background: rgba(17, 17, 17, var(--seg-a, 0.14));
+}
+
+.cr-stack-rows {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+/* Spans exactly the top 65% of the column height, opening leftward
+   toward the rows it groups. */
+.cr-weights-brace {
+  grid-column: 3;
+  grid-row: 1;
+  position: relative;
+  align-self: start;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 14px;
+  border-left: 2px solid var(--teal);
+}
+
+.cr-weights-brace::before,
+.cr-weights-brace::after {
+  content: "";
+  position: absolute;
+  left: -9px;
+  width: 9px;
+  height: 2px;
+  background: var(--teal);
+}
+
+.cr-weights-brace::before { top: 0; }
+.cr-weights-brace::after { bottom: 0; }
+
+.cr-brace-pct {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--teal);
+}
+
+.cr-brace-note {
+  margin-top: 6px;
+  font-size: 11.5px;
+  line-height: 1.35;
+  color: var(--slate);
+}
+
+.cr-stack-rows {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+/* No left rule and no left padding: the percentage starts flush on the
+   text column's edge, so every row lines up with the prose above and
+   the note below. */
+.cr-weight {
+  flex: var(--w, 10) 1 0;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  min-height: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Hierarchy by weight and size, not by hue. Teal on cream reads lighter
+   than near-black, so colouring the two majors teal was making the ones
+   that matter most look like the quiet ones. Ink and a bigger size say
+   "major" honestly; teal stays on the brace, used once. */
+.cr-weight-pct {
+  flex: none;
+  width: 76px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--slate);
+}
+
+.cr-weight.is-major .cr-weight-pct {
+  font-size: 34px;
+  color: var(--ink);
+}
+
+.cr-weight-label {
+  min-width: 0;
+}
+
+.cr-weight-name {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.cr-weight-q {
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--slate);
+}
+
+.cr-weights-note {
+  margin-top: 40px;
+  max-width: 66ch;
+}
+
+
+
+
+/* ---------- Chapter dividers ---------- */
+/* Five equally-weighted sections on one flat cream surface read as a
+   single undifferentiated scroll — which is the "overwhelming" part, not
+   the amount of content. These group the five into three chapters so the
+   page has a shape and a visible end.
+
+   The site's usual sectioning device, a full-bleed .section-band, is not
+   available in the middle of this page: the four sections between the
+   hero and the myths live inside .cr-rail-scope, and going full-bleed
+   means breaking out of .page, which would split the scope that .cr-rail
+   is absolutely positioned against and break the rail. A divider inside
+   the column does the same job and leaves the rail alone.
+
+   The marker is deliberately not a heading. The document already has a
+   clean outline (one h1, an h2 per section, h3s for the items inside),
+   and inserting an h2 layer would mean demoting all five section titles
+   to h3 and their sixteen child headings to h4 — a lot of churn for a
+   device that is doing visual pacing, not adding content. */
+.cr-chapter {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 2px solid var(--ink);
+}
+
+.cr-rail-body .cr-chapter {
+  margin-top: 136px;
+}
+
+/* Chapter one opens straight under the hero, where 136px would read as a
+   hole rather than as a break. */
+.cr-rail-body .cr-chapter:first-child {
+  margin-top: 0;
+}
+
+/* The band already supplies the break before chapter three. */
+.section-band .cr-chapter {
+  margin-top: 0;
+}
+
+/* A chapter's opening section sits nearer its own divider than the 104px
+   that separates two sections inside one chapter. */
+.cr-rail-body .cr-chapter + .cr-section,
+.section-band .cr-chapter + .section {
+  margin-top: 36px;
+}
+
+.cr-chapter-num {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: var(--teal);
+}
+
+.cr-chapter-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+@media (max-width: 700px) {
+  .cr-rail-body .cr-chapter {
+    margin-top: 96px;
+  }
+
+  .cr-chapter-name {
+    font-size: 18px;
+  }
+}
+
+/* ---------- Opening section: prose + margin note ---------- */
+/* Same 1fr/232px rhythm as .cr-stage and the golden rules below. Before
+   this, the top two sections capped their content at 66ch and sat left
+   inside a 1136px section while everything below filled the measure —
+   which is what made the page read as skewed with a hole beside it. The
+   prose keeps its readable line length through .cr-measure on the body
+   column rather than by narrowing the whole section. */
+.cr-open {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 232px);
+  gap: 48px;
+  align-items: start;
+}
+
+.cr-open-body {
+  min-width: 0;
+}
+
+.cr-open-aside {
+  padding-top: 2px;
+}
+
+.cr-open-aside .cr-caption {
+  margin-top: 8px;
+}
+
+/* Spans both columns so the section closes on a full-width horizontal —
+   an echo of the vertical rail — instead of a short stub under the text. */
+.cr-open-range {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Factors section: chart + the actionable one ---------- */
+.cr-factors-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 640px) minmax(0, 1fr);
+  gap: 72px;
+  align-items: start;
+  margin-top: 48px;
+}
+
+.cr-factors-chart {
+  min-width: 0;
+}
+
+/* The stack already carries the section's top margin through this
+   wrapper, so it must not add its own on top. */
+.cr-factors-chart .cr-stack {
+  margin-top: 0;
+}
+
+.cr-factors-grid .cr-util {
+  margin-top: 0;
+  max-width: none;
+}
+
+/* One per row in this column: side by side inside ~440px would leave each
+   bar about 200px, too short to read a 30% mark against. */
+.cr-factors-grid .cr-util-cases {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px;
+}
+
+/* ---------- Utilisation meter ---------- */
+/* The one factor on the weights list with no waiting period, so it earns
+   the page's only worked example. Two tracks, identical limit, identical
+   30% mark; only the fill differs. Reading them against each other is
+   the lesson, which is why the mark is drawn on both rather than only on
+   the one that crosses it. Teal and rose are legitimate here: this is
+   data UI, which is exactly where the Two-Accent rule keeps them. */
+.cr-util {
+  margin-top: 60px;
+  max-width: 72ch;
+}
+
+.cr-util-lede {
+  margin-top: 14px;
+}
+
+.cr-util-cases {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 34px;
+  margin-top: 40px;
+}
+
+.cr-util-top {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cr-util-amt {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.cr-util-of {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--slate);
+}
+
+/* overflow stays visible so the 30% mark can run past the track's edges;
+   the fill carries its own radius, so nothing needs clipping. */
+.cr-util-track {
+  position: relative;
+  height: 16px;
+  margin-top: 18px;
+  border-radius: 9999px;
+  background: var(--pearl);
+}
+
+.cr-util-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(var(--u) * 1%);
+  border-radius: 9999px;
+  background: var(--teal);
+}
+
+.cr-util-case.is-high .cr-util-fill {
+  background: var(--rose);
+}
+
+/* Ink rather than either accent: the line is the rule being measured
+   against, not a verdict, and it has to stay legible where it crosses
+   pearl, teal and rose alike. */
+.cr-util-line {
+  position: absolute;
+  top: -7px;
+  bottom: -7px;
+  left: 30%;
+  border-left: 2px dotted rgba(17, 17, 17, 0.45);
+}
+
+.cr-util-verdict {
+  margin-top: 18px;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--teal);
+}
+
+.cr-util-case.is-high .cr-util-verdict {
+  color: var(--rose);
+}
+
+.cr-util-foot {
+  margin-top: 38px;
+  max-width: 66ch;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--slate);
+}
+
+/* ---------- Age stages ---------- */
+/* Ruled rows, not cards — and definitely not a card inside a card,
+   which is what this was. The steps are prose; a box around prose is
+   decoration, and the annotation on the right is a margin note, so it
+   reads as one. Hairlines do all the separating. */
+.cr-stages {
+  border-top: 1px solid var(--border);
+}
+
+.cr-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 232px);
+  gap: 48px;
+  align-items: start;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cr-stage-body {
+  min-width: 0;
+}
+
+.cr-stage-title {
+  margin: 0 0 16px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* A margin note, not a panel: it sits on the page surface and is held
+   in place by the column, not by a border. */
+.cr-aside {
+  padding-top: 4px;
+}
+
+.cr-aside-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: var(--module-pastel, var(--paper));
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.cr-aside-label {
+  display: block;
+  font-size: 13px;
+  color: var(--slate);
+}
+
+.cr-aside-value {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Golden rules ---------- */
+/* Unnumbered: unlike the climb above, these five have no order. */
+.cr-rules {
+  border-top: 1px solid var(--border);
+}
+
+.cr-rule {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: 40px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cr-rule-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.cr-rule-body {
+  min-width: 0;
+}
+
+.cr-rule-body p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--slate);
+}
+
+/* ---------- Myths: off the rail ---------- */
+.cr-myths {
+  border-top: 1px solid var(--border);
+}
+
+.cr-myth {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 40px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cr-myth-claim {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.cr-myth-body {
+  min-width: 0;
+}
+
+.cr-myth-body p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--slate);
+}
+
+/* Rose is the reserved caution role, and a myth is exactly that — the
+   only place it appears on this page. */
+.cr-verdict {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--rose);
+}
+
+/* ---------- Desktop: the rail appears ---------- */
+/* Only once the margin can hold it without stealing a pixel from the
+   text. (50vw - 600px) is the left edge of the 1200px page; + 32px for
+   its padding gives the content edge; - 180px parks the rail clear of
+   it. Below this the compact bar under the nav carries the same score,
+   so nothing is lost — the content column just never moves. */
+@media (min-width: 1520px) {
+  /* Back to hard against the viewport edge (user-directed 2026-08-29).
+     calc(600px - 50vw) resolves to a constant 32px inset at every width:
+     .cr-rail-scope's own left edge is 50vw - 568px, so the two terms
+     cancel and only the 32px survives. That is deliberate - the rail is
+     page furniture pinned to the edge, not a floating label chasing the
+     text. The gap it opens against the prose is closed by widening the
+     content instead: every section now fills the 1136px measure rather
+     than capping at 66ch and hugging the left. */
+  .cr-rail {
+    display: block;
+    /* The -20px is a hand nudge on top of the edge pin (user-directed):
+       the rail box starts 25px in, but its tick labels sit ~35px further
+       right again, so this reads as a small move rather than a relocation.
+       Leaves the rail box 15px off the viewport edge, measured at the
+       1520px lower bound; because the pin is a constant inset, that is
+       also the margin at every width above it. */
+    left: calc(600px - 50vw - 10px);
+  }
+
+  .cr-railbar {
+    display: none;
+  }
+}
+
+/* ---------- Narrow ---------- */
+@media (max-width: 900px) {
+  .cr-stage {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .cr-rule,
+  .cr-myth {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  /* The two-column sections at the top collapse on the same rule as
+     everything else on this page: one column, aside underneath. */
+  .cr-open,
+  .cr-factors-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  /* The column stops being a fixed height here, and a percentage brace
+     can't resolve against an auto-height parent — so the brace steps
+     out and the paragraph underneath carries the 65% instead. Rows keep
+     their proportional feel through min-height. */
+  .cr-stack {
+    display: block;
+    height: auto;
+  }
+
+  /* Height is auto here, so neither a flexed column nor a percentage
+     brace has anything to resolve against — both step out and the rows
+     carry the proportion through min-height instead. */
+  .cr-stack-col,
+  .cr-weights-brace {
+    display: none;
+  }
+
+  .cr-util-cases {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+  }
+
+  .cr-weight {
+    flex: none;
+    min-height: calc(var(--w, 10) * 2.6px + 56px);
+  }
+}
+
+@media (max-width: 700px) {
+  .cr-railbar {
+    padding: 0 16px 8px;
+  }
+
+  .cr-stage {
+    padding: 24px 0;
+  }
+
+  .cr-weight {
+    gap: 14px;
+  }
+
+  .cr-weight-pct {
+    width: 54px;
+    font-size: 24px;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+/* The rail stops being a moving part: the track and readout would be
+   reporting a scroll position nothing is animating, so they step aside
+   and the ticks keep the scale legible. credit-rail.js reads the same
+   media query and skips its scroll listener entirely. */
+@media (prefers-reduced-motion: reduce) {
+  .cr-rail-fill,
+  .cr-readout,
+  .cr-railbar {
+    display: none;
+  }
+}

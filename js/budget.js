@@ -4,6 +4,10 @@
 
 const amountInput = document.getElementById('amount');
 const amountClampNoteEl = document.getElementById('amountClampNote');
+const homeInput = document.getElementById('home');
+const homeClampNoteEl = document.getElementById('homeClampNote');
+const offTopEl = document.getElementById('bdOffTop');
+const donutLegendEl = document.getElementById('donutLegend');
 const periodChips = Array.from(document.querySelectorAll('#periodChips .seg-chip'));
 const presetChips = Array.from(document.querySelectorAll('#presetChips .seg-chip'));
 const customSplitEl = document.getElementById('customSplit');
@@ -99,18 +103,31 @@ function syncSplitFields() {
 // these strings are picked live off body's lang-vi-primary class instead
 // (same approach as js/calculator.js).
 const CHART_STRINGS = {
+  home: { en: 'Goes home', vi: 'Gửi về nhà' },
   needs: { en: 'Needs', vi: 'Nhu cầu' },
   wants: { en: 'Wants', vi: 'Mong muốn' },
   savings: { en: 'Savings', vi: 'Tiết kiệm' },
 };
 
-// Data-UI colors doing data jobs: needs = blue, wants = muted rose
-// (--rose-muted in style.css, written here as a literal since this file has
-// no access to CSS custom properties — same reason #2348ad and #0e7a72 are
-// literals), savings = teal (positive outcome). Mirrored by .legend-dot in
-// style.css — keep the two in sync.
-const SEGMENT_COLORS = ['#2348ad', '#9d3f5f', '#0e7a72'];
+// Separate from BUCKET_KEYS (which stays needs/wants/savings for the three
+// stat cards): the doughnut gains a fourth arc, home, but only when home > 0.
+// Arc order is home, needs, wants, savings.
+const CHART_KEYS = ['home', 'needs', 'wants', 'savings'];
+
+// Data-UI colors doing data jobs: home = ink (a subtraction, not a bucket),
+// needs = blue, wants = muted rose (--rose-muted in style.css, written here
+// as a literal since this file has no access to CSS custom properties — same
+// reason #111111, #2348ad and #0e7a72 are literals), savings = teal
+// (positive outcome). Mirrored by .legend-dot in style.css — keep the two in
+// sync.
+const SEGMENT_COLORS = ['#111111', '#2348ad', '#9d3f5f', '#0e7a72'];
 const EMPTY_COLOR = '#ecebea'; // pearl — muted single ring when there's nothing to split
+
+// Tracks which keys the doughnut is currently drawing (with or without the
+// home arc), so the tooltip callback below can look up the right label
+// without re-deriving it from chart.data.labels, which is already
+// language-translated text by the time the tooltip reads it.
+let currentChartKeys = BUCKET_KEYS;
 
 const chart = new Chart(chartCanvas, {
   type: 'doughnut',
@@ -119,7 +136,7 @@ const chart = new Chart(chartCanvas, {
     datasets: [
       {
         data: [50, 30, 20],
-        backgroundColor: SEGMENT_COLORS,
+        backgroundColor: SEGMENT_COLORS.slice(1),
         borderColor: '#ffffff',
         borderWidth: 2,
       },
@@ -136,7 +153,7 @@ const chart = new Chart(chartCanvas, {
         callbacks: {
           label: (item) => {
             const lang = isViPrimary() ? 'vi' : 'en';
-            const key = BUCKET_KEYS[item.dataIndex];
+            const key = currentChartKeys[item.dataIndex];
             return ` ${CHART_STRINGS[key][lang]}   ${formatCurrency(item.parsed)}`;
           },
         },
@@ -148,35 +165,86 @@ const chart = new Chart(chartCanvas, {
 function renderChart(amount, split) {
   const lang = isViPrimary() ? 'vi' : 'en';
   const isEmpty = amount <= 0;
+  // The fourth arc — home — only exists when there's a home figure to show.
+  // At home: 0 the doughnut is exactly what it was before this feature.
+  const showHome = split.home > 0;
+  const keys = showHome ? CHART_KEYS : CHART_KEYS.slice(1);
+  const colors = showHome ? SEGMENT_COLORS : SEGMENT_COLORS.slice(1);
+  currentChartKeys = keys;
 
-  chart.data.labels = BUCKET_KEYS.map((key) => CHART_STRINGS[key][lang]);
+  // The static legend mirrors the arcs — DESIGN.md keeps the two in sync,
+  // so a fourth arc without a fourth swatch is an unnamed colour.
+  donutLegendEl.classList.toggle('has-home', showHome && !isEmpty);
+
+  chart.data.labels = keys.map((key) => CHART_STRINGS[key][lang]);
   if (isEmpty) {
     // A zero paycheck has no shares to show — render one muted pearl ring
     // instead of letting Chart.js draw nothing at all.
     chart.data.datasets[0].data = [1];
     chart.data.datasets[0].backgroundColor = [EMPTY_COLOR];
   } else {
-    chart.data.datasets[0].data = [split.needs, split.wants, split.savings];
-    chart.data.datasets[0].backgroundColor = SEGMENT_COLORS;
+    chart.data.datasets[0].data = keys.map((key) => split[key]);
+    chart.data.datasets[0].backgroundColor = colors;
   }
   chart.options.plugins.tooltip.enabled = !isEmpty;
   chart.update();
 
+  // The centre total keeps showing the full paycheck, not the remainder —
+  // "amount" here is the clamped input, never split.remainder.
   donutTotalEl.textContent = formatCurrency(amount);
   chartCanvas.setAttribute(
     'aria-label',
     isViPrimary()
-      ? `Biểu đồ chia ${formatCurrency(amount)} thành ${formatCurrency(split.needs)} nhu cầu, ` +
-          `${formatCurrency(split.wants)} mong muốn và ${formatCurrency(split.savings)} tiết kiệm.`
-      : `Doughnut chart splitting ${formatCurrency(amount)} into ${formatCurrency(split.needs)} needs, ` +
-          `${formatCurrency(split.wants)} wants, and ${formatCurrency(split.savings)} savings.`
+      ? (showHome
+          ? `Biểu đồ chia ${formatCurrency(amount)} thành ${formatCurrency(split.home)} gửi về nhà, ` +
+              `${formatCurrency(split.needs)} nhu cầu, ${formatCurrency(split.wants)} mong muốn ` +
+              `và ${formatCurrency(split.savings)} tiết kiệm.`
+          : `Biểu đồ chia ${formatCurrency(amount)} thành ${formatCurrency(split.needs)} nhu cầu, ` +
+              `${formatCurrency(split.wants)} mong muốn và ${formatCurrency(split.savings)} tiết kiệm.`)
+      : (showHome
+          ? `Doughnut chart splitting ${formatCurrency(amount)} into ${formatCurrency(split.home)} for home, ` +
+              `${formatCurrency(split.needs)} needs, ${formatCurrency(split.wants)} wants, ` +
+              `and ${formatCurrency(split.savings)} savings.`
+          : `Doughnut chart splitting ${formatCurrency(amount)} into ${formatCurrency(split.needs)} needs, ` +
+              `${formatCurrency(split.wants)} wants, and ${formatCurrency(split.savings)} savings.`)
   );
+}
+
+// The off-the-top line between the calculator and the stats row. Permanently
+// in the layout at both states (home > 0 and home === 0) so entering a home
+// amount for the first time shifts nothing below it. JS-generated like the
+// chart strings above, not .en/.vi spans, because the numbers change.
+const OFFTOP_STRINGS = {
+  home: {
+    en: (home, remainder) => `${home} goes home first. The three buckets below divide the remaining ${remainder}.`,
+    vi: (home, remainder) => `${home} được gửi về nhà trước. Ba nhóm bên dưới chia ${remainder} còn lại.`,
+  },
+  none: {
+    en: (amount) => `Nothing goes out first. The three buckets below divide the whole ${amount}.`,
+    vi: (amount) => `Không có khoản nào đi ra trước. Ba nhóm bên dưới chia trọn ${amount}.`,
+  },
+  uncovered: {
+    en: (amount) => `You entered more than this paycheck. Capped at ${amount}, which leaves nothing to split.`,
+    vi: (amount) => `Bạn đã nhập nhiều hơn kỳ lương này. Đã giới hạn ở ${amount}, nên không còn gì để chia.`,
+  },
+};
+
+function renderOffTop(amount, split) {
+  const lang = isViPrimary() ? 'vi' : 'en';
+  if (!split.covered) {
+    offTopEl.textContent = OFFTOP_STRINGS.uncovered[lang](formatCurrency(amount));
+  } else if (split.home > 0) {
+    offTopEl.textContent = OFFTOP_STRINGS.home[lang](formatCurrency(split.home), formatCurrency(split.remainder));
+  } else {
+    offTopEl.textContent = OFFTOP_STRINGS.none[lang](formatCurrency(amount));
+  }
 }
 
 function update() {
   const amount = clampToInput(amountInput, parseFloat(amountInput.value) || 0, amountClampNoteEl);
+  const home = clampToInput(homeInput, parseFloat(homeInput.value) || 0, homeClampNoteEl);
   const pcts = currentPercentages();
-  const split = splitPaycheck(amount, pcts.needs, pcts.wants, pcts.savings);
+  const split = splitAfterHome(amount, home, pcts.needs, pcts.wants, pcts.savings);
 
   BUCKET_KEYS.forEach((key) => {
     bucketAmountEls[key].textContent = formatCurrency(split[key]);
@@ -199,12 +267,13 @@ function update() {
   // matches what js/calculator.js already reads — see the comment there
   // about clean-URL servers dropping query strings.
   const monthlySavings = toMonthly(split.savings, activePeriod);
-  savingsLinkEl.href = 'actual%20website.html#monthly=' + monthlySavings;
+  savingsLinkEl.href = 'calculator.html#monthly=' + monthlySavings;
   savingsLinkEl.querySelectorAll('.savings-monthly-value').forEach((el) => {
     el.textContent = formatCurrency(monthlySavings);
   });
 
   renderChart(amount, split);
+  renderOffTop(amount, split);
 }
 
 function debounce(fn, delay) {
@@ -218,6 +287,7 @@ function debounce(fn, delay) {
 const debouncedUpdate = debounce(update, 150);
 
 amountInput.addEventListener('input', debouncedUpdate);
+homeInput.addEventListener('input', debouncedUpdate);
 Object.values(pctInputs).forEach((input) => {
   input.addEventListener('input', debouncedUpdate);
 });
