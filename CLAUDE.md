@@ -56,7 +56,31 @@ There is no build step, package.json, linter, or test suite in this repo *yet* (
 - **Serve locally**: `npx serve -p 8743 .` from the project root, then open `http://localhost:8743/calculator.html`.
 - **Syntax-check the JS** after editing: `node --check js/<file>.js`
 - **Check CSS brace balance** after large edits (no CSS parser is wired up): count `{`/`}` are equal, e.g. via `grep -c` or a quick Node one-liner.
-- **Line endings are mixed and must be preserved per file.** Exactly five files are CRLF — `css/style.css`, `DESIGN.md`, `index.html`, `js/scroll-scale.js`, `tests/scroll-scale.test.js` — and everything else is LF. (This list was wrong until 2026-09-13: it named only the first two, so the three CRLF files that are also `.html`/`.js` were being described as LF. Verify with `grep -cU $'\r$' <file>` against `wc -l` rather than trusting the list.) `.gitattributes` sets `* -text` so git stores and checks out bytes exactly as they are; without it `core.autocrlf` rewrites them on checkout and a fresh clone silently differs from this machine. Check with `grep -qU $'\r' <file>` before and after editing. **`sed -i` silently rewrites a CRLF file as LF in this environment** — it converted all 310 lines of DESIGN.md on a one-line insert (2026-09-04). Use the Edit tool on CRLF files, or if you must use `sed -i`, restore afterwards with `sed -i 's/$/\r/' <file>` and verify with `grep -cUv $'\r$' <file>` returning 0 and `grep -cU $'\r\r$' <file>` returning 0.
+- **Line endings vary per file and must be preserved byte-for-byte.** Four files are pure CRLF — `css/style.css`, `DESIGN.md`, `js/scroll-scale.js`, `tests/scroll-scale.test.js`. **`index.html` is mixed**, not CRLF: 643 CRLF lines plus 28 LF-only ones. Everything else is pure LF. (This list has been wrong twice — until 2026-09-13 it named only the first two, and until 2026-09-16 it called `index.html` pure CRLF, which is what let the Edit tool quietly rewrite 28 of its lines.) `.gitattributes` sets `* -text` so git stores and checks out bytes exactly as they are; without it `core.autocrlf` rewrites them on checkout and a fresh clone silently differs from this machine. Because git preserves the bytes, any tool that normalises endings turns a one-line insert into a whole-file diff.
+
+  **Classify the file before editing it.** Don't trust the list above, and don't use `grep` — the `grep -cU $'\r$'` / `grep -cU $'\r\r$'` patterns this file used to recommend return nonsense here (on 2026-09-16 the double-CR pattern reported 671 matches in a file containing none). Count bytes:
+
+  ```bash
+  cr=$(tr -cd '\r' < "$f" | wc -c); lf=$(tr -cd '\n' < "$f" | wc -c)
+  # cr == 0  → pure LF · cr == lf → pure CRLF · 0 < cr < lf → mixed, (lf-cr) LF-only lines
+  ```
+
+  **Three tools silently rewrite endings, and only the byte counts catch them:**
+  - `sed -i` rewrites a CRLF file as LF — it converted all 310 lines of `DESIGN.md` on a one-line insert (2026-09-04).
+  - `awk` does the same — `awk '…' f > f.tmp && mv` took `index.html` from 639 CR to 3 (2026-09-16).
+  - **The Edit tool normalises a *mixed* file to uniform CRLF** — it rewrote `index.html`'s 28 LF-only lines, turning a 4-line insert into a 60-line diff (2026-09-16). It is safe on pure-LF and pure-CRLF files and is the right tool for those.
+
+  **So: pure LF → any tool. Pure CRLF → the Edit tool (never `sed -i`, never `awk`). Mixed (`index.html`) → byte-offset splice only**, which touches nothing outside the inserted bytes:
+
+  ```bash
+  OFF=$(grep -abo '</head>' index.html | head -1 | cut -d: -f1)
+  head -c "$OFF" index.html > /tmp/new
+  printf '<first line>\r\n<second line>\r\n' >> /tmp/new
+  tail -c +$((OFF+1)) index.html >> /tmp/new
+  mv /tmp/new index.html
+  ```
+
+  After any edit, confirm CR and LF each moved by exactly the number of lines added. **Never "repair" a file with `sed -i 's/$/\r/'`** — the advice this bullet used to give. On `index.html` that converts its 28 LF-only lines to CRLF, which is corruption wearing the costume of a fix. `git restore <file>` is the recovery path; the committed tree is the source of truth.
 - **Run unit tests**: from `website/`, `node --test tests/budget-math.test.js tests/scroll-scale.test.js tests/credit-rail.test.js tests/tuition-math.test.js` (39 tests as of 2026-09-05). Run them from `website/`, not the session root — each test requires its module via `../js/…`. List files explicitly rather than pointing `node --test` at the bare `tests/` directory; the directory form hits a path-resolution quirk in this environment's shell and fails with a misleading `Cannot find module 'tests'` error instead of discovering the files inside it. **Watch out:** `node --test` silently *passes* when handed a path that doesn't exist — it reports `pass N, fail 0` for whichever files it did find and says nothing about the missing ones. Check the reported test count matches what you expected before trusting a green run. `js/budget-math.js`, `js/scroll-scale.js`, `js/tuition-math.js` and `js/recommend-ladder.js` are plain browser scripts that also export via `if (typeof module !== 'undefined') module.exports = {...}`, which is what lets node:test `require()` them directly without a DOM.
 
 If a build step is ever added, document its commands here and keep the no-tooling workflow above working until every page is migrated.
