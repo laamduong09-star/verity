@@ -330,7 +330,14 @@ body {
   justify-self: end;
 }
 
-@media (max-width: 700px) {
+/* 940px, not 700: at rest the bar needs logo 79 + nav 673 + toggle 83
+   + two 20px gaps + 64px topbar padding = 939px. Below that the nav
+   drops to its own full-width scrolling row. The old 700px threshold was
+   measured against the shorter module names; the 2026-09-20 rename
+   (Recommendations / Glossary / College) grew the nav ~100px, so 700-939px
+   overflowed the container and gave the whole page a horizontal scrollbar.
+   Re-measure this and the compact cap above together on any rename. */
+@media (max-width: 940px) {
   .topbar-inner {
     grid-template-columns: 1fr auto;
   }
@@ -1229,14 +1236,14 @@ a.logo {
    inner gaps. The desktop grid is `auto 1fr auto` with the nav
    start-aligned, so every pixel the cap exceeds the content piles up in
    one place — between the last nav link and the language toggle. Sizing
-   the cap to the content instead (measured 2026-08-28: 20 + 28 logo +
-   20 + 573 nav + 20 + 83 toggle + 14 + 2 border = 760px, set to 761 for
+   the cap to the content instead (measured 2026-09-20: 20 + 28 logo +
+   20 + 637 nav + 20 + 83 toggle + 14 + 2 border = 824px, set to 825 for
    ~1.5px of sub-pixel headroom) leaves a 20px gap either side of the nav
    rather than 20px left / 60px right. Redistributing that slack any
    other way — justify-self, justify-content, auto margins — snaps,
    because none of those interpolate while max-width is still easing. */
 .topbar.is-compact .topbar-inner {
-  max-width: 761px;
+  max-width: 825px;
   padding: 6px 14px 6px 20px;
   background: rgba(255, 255, 255, 0.85);
   -webkit-backdrop-filter: blur(16px);
@@ -1274,7 +1281,7 @@ a.logo {
   opacity: 0;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 940px) {
   .topbar.is-compact .topbar-inner {
     border-radius: 12px;
   }
@@ -2006,9 +2013,9 @@ body.module-rec .plan-link:focus-visible {
   box-shadow: 0 12px 24px rgba(17, 17, 17, 0.06);
 }
 
-/* Below 700px the topbar wraps to two rows (logo + nav), so the docked
+/* Below 940px the topbar wraps to two rows (logo + nav), so the docked
    search pins lower to clear it. */
-@media (max-width: 700px) {
+@media (max-width: 940px) {
   .jargon-search-wrap {
     top: 120px;
   }
@@ -2493,9 +2500,9 @@ body.module-rec .plan-link:focus-visible {
 }
 
 /* At rest the nav packs left next to the logo (logo | nav | toggle)
-   instead of floating optically centered. Desktop only — the sub-700px
+   instead of floating optically centered. Desktop only — the sub-940px
    layout keeps the nav on its own full-width row. */
-@media (min-width: 701px) {
+@media (min-width: 941px) {
   .topbar-inner {
     grid-template-columns: auto 1fr auto;
     column-gap: 20px;
@@ -2557,11 +2564,11 @@ body.module-rec .plan-link:focus-visible {
 
 /* Slimmer side padding than at rest (38px text-to-text vs 44px —
    visually the same rhythm). This padding is what fixes the nav's
-   rendered width at ~573px for six items, and the compact cap above is
+   rendered width at ~637px for six items, and the compact cap above is
    sized to exactly that. Change this padding, rename a module, or add a
    seventh item and the cap must be re-measured or the two inner gaps go
    uneven again. Overflow is no longer the risk it was: the fallback
-   stack renders narrower than Lexend (Arial ~555px vs ~573px), so a
+   stack renders narrower than Lexend, so a
    font swap shrinks the nav rather than bursting the capsule. */
 .topbar.is-compact .nav-link {
   padding-left: 13px;
